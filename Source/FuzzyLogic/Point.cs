@@ -51,6 +51,150 @@ namespace FuzzyLogic
         public double Y { get; }
 
         /// <summary>
+        /// The addition operator.
+        /// </summary>
+        /// <param name="point1">
+        /// The point 1.
+        /// </param>
+        /// <param name="point2">
+        /// The point 2.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Point"/>
+        /// </returns>
+        public static Point operator +(Point point1, Point point2)
+        {
+            Contract.Requires(Condition.NotNull(point1, nameof(point1)));
+            Contract.Requires(Condition.NotNull(point2, nameof(point2)));
+
+            return new Point(point1.X + point2.X, point1.Y + point2.Y);
+        }
+
+        /// <summary>
+        /// The -.
+        /// </summary>
+        /// <param name="point1">
+        /// The point 1.
+        /// </param>
+        /// <param name="point2">
+        /// The point 2.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Point"/>.
+        /// </returns>
+        public static Point operator -(Point point1, Point point2)
+        {
+            Contract.Requires(Condition.NotNull(point1, nameof(point1)));
+            Contract.Requires(Condition.NotNull(point2, nameof(point2)));
+
+            return new Point(point1.X - point2.X, point1.Y - point2.Y);
+        }
+
+        /// <summary>
+        /// The product of two points.
+        /// </summary>
+        /// <param name="point">
+        /// The point.
+        /// </param>
+        /// <param name="factor">
+        /// The factor.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Point"/>.
+        /// </returns>
+        public static Point operator *(Point point, double factor)
+        {
+            Contract.Requires(Condition.NotNull(point, nameof(point)));
+            Contract.Requires(Condition.DoubleNotInvalidNumber(factor, nameof(factor)));
+
+            return new Point(point.X * factor, point.Y * factor);
+        }
+
+        /// <summary>
+        /// The /.
+        /// </summary>
+        /// <param name="point">
+        /// The point.
+        /// </param>
+        /// <param name="factor">
+        /// The factor.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Point"/>.
+        /// </returns>
+        public static Point operator /(Point point, double factor)
+        {
+            Contract.Requires(Condition.NotNull(point, nameof(point)));
+            Contract.Requires(Condition.DoubleNotInvalidNumber(factor, nameof(factor)));
+
+            return new Point(point.X / factor, point.Y / factor);
+        }
+
+        /// <summary>
+        /// Returns the sum of two points.
+        /// </summary>
+        /// <param name="otherPoint">
+        /// The other point to add.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Point"/>.
+        /// </returns>
+        public Point Add(Point otherPoint)
+        {
+            Contract.Requires(Condition.NotNull(otherPoint, nameof(otherPoint)));
+
+            return new Point(this.X + otherPoint.X, this.Y + otherPoint.Y);
+        }
+
+        /// <summary>
+        /// The subtract.
+        /// </summary>
+        /// <param name="otherPoint">
+        /// The other point to subtract.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Point"/>.
+        /// </returns>
+        public Point Subtract(Point otherPoint)
+        {
+            Contract.Requires(Condition.NotNull(otherPoint, nameof(otherPoint)));
+
+            return new Point(this.X - otherPoint.X, this.Y - otherPoint.Y);
+        }
+
+        /// <summary>
+        /// The multiply.
+        /// </summary>
+        /// <param name="factor">
+        /// The factor.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Point"/>.
+        /// </returns>
+        public Point Multiply(double factor)
+        {
+            Contract.Requires(Condition.DoubleNotInvalidNumber(factor, nameof(factor)));
+
+            return new Point(this.X * factor, this.Y * factor);
+        }
+
+        /// <summary>
+        /// The divide.
+        /// </summary>
+        /// <param name="factor">
+        /// The factor.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Point"/>.
+        /// </returns>
+        public Point Divide(double factor)
+        {
+            Contract.Requires(Condition.DoubleNotOutOfRange(factor, nameof(factor), 0, double.MaxValue, RangeEndPoints.LowerExclusive));
+
+            return new Point(this.X / factor, this.Y / factor);
+        }
+
+        /// <summary>
         /// The distance to another point.
         /// </summary>
         /// <param name="otherPoint">
@@ -97,245 +241,14 @@ namespace FuzzyLogic
         }
 
         /// <summary>
-        /// The addition operator.
+        /// The euclidean norm.
         /// </summary>
-        /// <param name="point1">
-        /// The point 1.
-        /// </param>
-        /// <param name="point2">
-        /// The point 2.
-        /// </param>
         /// <returns>
-        /// The <see cref="Point"/>
+        /// The <see cref="double"/>.
         /// </returns>
-        public static Point operator +(Point point1, Point point2)
+        public double EuclideanNorm()
         {
-            Contract.Requires(Condition.NotNull(point1, nameof(point1)));
-            Contract.Requires(Condition.NotNull(point2, nameof(point2)));
-
-            return new Point(point1.X + point2.X, point1.Y + point2.Y);
-        }
-
-        /// <summary>
-        /// Returns the sum of two points.
-        /// </summary>
-        /// <param name="point1">
-        /// The point 1.
-        /// </param>
-        /// <param name="point2">
-        /// The point 2.
-        /// </param>
-        /// <returns>
-        /// The <see cref="Point"/>.
-        /// </returns>
-        public static Point Add(Point point1, Point point2)
-        {
-            Contract.Requires(Condition.NotNull(point1, nameof(point1)));
-            Contract.Requires(Condition.NotNull(point2, nameof(point2)));
-
-            return new Point(point1.X + point2.X, point1.Y + point2.Y);
-        }
-
-
-
-        /// <summary>
-        /// The subtract.
-        /// </summary>
-        /// <param name="point1">
-        /// The point 1.
-        /// </param>
-        /// <param name="point2">
-        /// The point 2.
-        /// </param>
-        /// <returns>
-        /// The <see cref="Point"/>.
-        /// </returns>
-        public static Point Subtract(Point point1, Point point2)
-        {
-            Contract.Requires(Condition.NotNull(point1, nameof(point1)));
-            Contract.Requires(Condition.NotNull(point2, nameof(point2)));
-
-            return new Point(point1.X - point2.X, point1.Y - point2.Y);
-        }
-
-        /// <summary>
-        /// The -.
-        /// </summary>
-        /// <param name="point1">
-        /// The point 1.
-        /// </param>
-        /// <param name="point2">
-        /// The point 2.
-        /// </param>
-        /// <returns>
-        /// The <see cref="Point"/>.
-        /// </returns>
-        public static Point operator -(Point point1, Point point2)
-        {
-            Contract.Requires(Condition.NotNull(point1, nameof(point1)));
-            Contract.Requires(Condition.NotNull(point2, nameof(point2)));
-
-            return new Point(point1.X - point2.X, point1.Y - point2.Y);
-        }
-
-        /// <summary>
-        /// The +.
-        /// </summary>
-        /// <param name="point">
-        /// The point.
-        /// </param>
-        /// <param name="valueToAdd">
-        /// The value to add.
-        /// </param>
-        /// <returns>
-        /// The <see cref="Point"/>.
-        /// </returns>
-        public static Point operator +(Point point, double valueToAdd)
-        {
-            Contract.Requires(Condition.NotNull(point, nameof(point)));
-            Contract.Requires(Condition.DoubleNotInvalidNumber(valueToAdd, nameof(valueToAdd)));
-
-            return new Point(point.X + valueToAdd, point.Y + valueToAdd);
-        }
-
-        /// <summary>
-        /// The add.
-        /// </summary>
-        /// <param name="point">
-        /// The point.
-        /// </param>
-        /// <param name="valueToAdd">
-        /// The value to add.
-        /// </param>
-        /// <returns>
-        /// The <see cref="Point"/>.
-        /// </returns>
-        public static Point Add(Point point, double valueToAdd)
-        {
-            Contract.Requires(Condition.NotNull(point, nameof(point)));
-            Contract.Requires(Condition.DoubleNotInvalidNumber(valueToAdd, nameof(valueToAdd)));
-
-            return new Point(point.X + valueToAdd, point.Y + valueToAdd);
-        }
-
-        /// <summary>
-        /// The -.
-        /// </summary>
-        /// <param name="point">
-        /// The point.
-        /// </param>
-        /// <param name="valueToSubtract">
-        /// The value to subtract.
-        /// </param>
-        /// <returns>
-        /// The <see cref="Point"/>.
-        /// </returns>
-        public static Point operator -(Point point, double valueToSubtract)
-        {
-            Contract.Requires(Condition.NotNull(point, nameof(point)));
-            Contract.Requires(Condition.DoubleNotInvalidNumber(valueToSubtract, nameof(valueToSubtract)));
-
-            return new Point(point.X - valueToSubtract, point.Y - valueToSubtract);
-        }
-
-        /// <summary>
-        /// The subtract.
-        /// </summary>
-        /// <param name="point">
-        /// The point.
-        /// </param>
-        /// <param name="valueToSubtract">
-        /// The value to subtract.
-        /// </param>
-        /// <returns>
-        /// The <see cref="Point"/>.
-        /// </returns>
-        public static Point Subtract(Point point, double valueToSubtract)
-        {
-            Contract.Requires(Condition.NotNull(point, nameof(point)));
-            Contract.Requires(Condition.DoubleNotInvalidNumber(valueToSubtract, nameof(valueToSubtract)));
-
-            return new Point(point.X - valueToSubtract, point.Y - valueToSubtract);
-        }
-
-        /// <summary>
-        /// The product of two points.
-        /// </summary>
-        /// <param name="point">
-        /// The point.
-        /// </param>
-        /// <param name="factor">
-        /// The factor.
-        /// </param>
-        /// <returns>
-        /// The <see cref="Point"/>.
-        /// </returns>
-        public static Point operator *(Point point, double factor)
-        {
-            Contract.Requires(Condition.NotNull(point, nameof(point)));
-            Contract.Requires(Condition.DoubleNotInvalidNumber(factor, nameof(factor)));
-
-            return new Point(point.X * factor, point.Y * factor);
-        }
-
-        /// <summary>
-        /// The multiply.
-        /// </summary>
-        /// <param name="point">
-        /// The point.
-        /// </param>
-        /// <param name="factor">
-        /// The factor.
-        /// </param>
-        /// <returns>
-        /// The <see cref="Point"/>.
-        /// </returns>
-        public static Point Multiply(Point point, double factor)
-        {
-            Contract.Requires(Condition.NotNull(point, nameof(point)));
-            Contract.Requires(Condition.DoubleNotInvalidNumber(factor, nameof(factor)));
-
-            return new Point(point.X * factor, point.Y * factor);
-        }
-
-        /// <summary>
-        /// The /.
-        /// </summary>
-        /// <param name="point">
-        /// The point.
-        /// </param>
-        /// <param name="factor">
-        /// The factor.
-        /// </param>
-        /// <returns>
-        /// The <see cref="Point"/>.
-        /// </returns>
-        public static Point operator /(Point point, double factor)
-        {
-            Contract.Requires(Condition.NotNull(point, nameof(point)));
-            Contract.Requires(Condition.DoubleNotInvalidNumber(factor, nameof(factor)));
-
-            return new Point(point.X / factor, point.Y / factor);
-        }
-
-        /// <summary>
-        /// The divide.
-        /// </summary>
-        /// <param name="point">
-        /// The point.
-        /// </param>
-        /// <param name="factor">
-        /// The factor.
-        /// </param>
-        /// <returns>
-        /// The <see cref="Point"/>.
-        /// </returns>
-        public static Point Divide(Point point, double factor)
-        {
-            Contract.Requires(Condition.NotNull(point, nameof(point)));
-            Contract.Requires(Condition.DoubleNotInvalidNumber(factor, nameof(factor)));
-
-            return new Point(point.X / factor, point.Y / factor);
+            return Math.Sqrt((this.X * this.X) + (this.Y * this.Y));
         }
 
         /// <summary>
@@ -389,7 +302,7 @@ namespace FuzzyLogic
         /// </returns>
         public override bool Equals(object obj)
         {
-            return (obj is Point) ? (this == (Point)obj) : false;
+            return (obj is Point point) && (this == point);
         }
 
         /// <summary>
@@ -400,7 +313,7 @@ namespace FuzzyLogic
         /// </returns>
         public override int GetHashCode()
         {
-            return this.X.GetHashCode() + this.Y.GetHashCode();
+            return this.X.GetHashCode() + this.Y.GetHashCode() + 9;
         }
 
         /// <summary>
@@ -412,17 +325,6 @@ namespace FuzzyLogic
         public override string ToString()
         {
             return string.Format(System.Globalization.CultureInfo.InvariantCulture, $"{nameof(Point)}: {this.X}, {this.Y}");
-        }
-
-        /// <summary>
-        /// The euclidean norm.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="double"/>.
-        /// </returns>
-        public double EuclideanNorm()
-        {
-            return Math.Sqrt((this.X * this.X) + (this.Y * this.Y));
         }
     }
 }

@@ -12,7 +12,9 @@ namespace FuzzyLogic
     using CodeEssence.DesignByContract;
 
     /// <summary>
-    /// The fuzzy set class.
+    /// Fuzzy sets are sets whose elements have degrees of membership.
+    /// Fuzzy sets were introduced by Lotfi A. Zadeh and Dieter Klaua in 1965
+    /// as an extension of the classical notion of set.
     /// </summary>
     public class FuzzySet
     {
