@@ -36,10 +36,24 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FuzzySet.cs" />
+    <Compile Include="IMembershipFunction.cs" />
+    <Compile Include="Point.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="package.nuspec" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="CodeEssence.Annotations">
+      <Version>1.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="CodeEssence.DesignByContract">
+      <Version>1.0.6</Version>
+    </PackageReference>
+    <PackageReference Include="CodeEssence.Extensions">
+      <Version>1.0.1</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
