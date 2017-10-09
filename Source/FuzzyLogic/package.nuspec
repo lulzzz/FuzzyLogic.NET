@@ -3,7 +3,7 @@
   <metadata>
     <id>FuzzyLogic</id>
     <version>0.0.2.0</version>
-    <title>Fuzzy Logic Library .NET Framework</title>
+    <title>Fuzzy Logic Library .NET Framework (pre-release)</title>
     <language>C#</language>
     <authors>Christopher Sellers</authors>
     <owners>Christopher Sellers</owners>
@@ -11,8 +11,8 @@
     <projectUrl>https://github.com/cjdsellers/FuzzyLogic</projectUrl>
     <iconUrl>https://raw.githubusercontent.com/cjdsellers/FuzzyLogic/master/FuzzyLogicIcon.ico</iconUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
-    <description>A library to express fuzzy logic for the .NET framework. </description>
-    <summary>A library to express fuzzy logic for the .NET framework. </summary>
+    <description>A library to express fuzzy logic for the .NET framework. (work in progress)</description>
+    <summary>A library to express fuzzy logic for the .NET framework. (work in progress)</summary>
     <releaseNotes>Initial release for fuzzy set operations.</releaseNotes>
     <copyright>Copyright ©2017 Christopher Sellers</copyright>
     <tags>fuzzy logic</tags>
