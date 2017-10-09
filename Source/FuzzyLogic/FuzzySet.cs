@@ -9,12 +9,10 @@
 
 namespace FuzzyLogic
 {
-    using CodeEssence.DesignByContract;
+    using FuzzyLogic.Utility;
 
     /// <summary>
-    /// Fuzzy sets are sets whose elements have degrees of membership.
-    /// Fuzzy sets were introduced by Lotfi A. Zadeh and Dieter Klaua in 1965
-    /// as an extension of the classical notion of set.
+    /// The fuzzy set.
     /// </summary>
     public class FuzzySet
     {
@@ -31,15 +29,11 @@ namespace FuzzyLogic
         /// </param>
         public FuzzySet(string name, IMembershipFunction function)
         {
-            Contract.Requires(Condition.NotNull(name, nameof(name)));
-            Contract.Requires(Condition.NotNull(function, nameof(function)));
+            Validate.NotNull(name, nameof(name));
+            Validate.NotNull(function, nameof(function));
 
             this.Name = name;
             this.function = function;
-
-            Contract.Ensures(Condition.NotNull(this.Name, nameof(this.Name)));
-            Contract.Ensures(Condition.DoubleNotInvalidNumber(this.LeftLimit, nameof(this.LeftLimit)));
-            Contract.Ensures(Condition.DoubleNotInvalidNumber(this.RightLimit, nameof(this.RightLimit)));
         }
 
         /// <summary>
@@ -50,12 +44,12 @@ namespace FuzzyLogic
         /// <summary>
         /// The leftmost x value of the fuzzy set's membership function.
         /// </summary>
-        public double LeftLimit => this.function.LeftLimit;
+        public NonNegativeDouble LowerBound => this.function.LowerBound;
 
         /// <summary>
         /// The rightmost x value of the fuzzy set's membership function.
         /// </summary>
-        public double RightLimit => this.function.RightLimit;
+        public NonNegativeDouble UpperBound => this.function.UpperBound;
 
         /// <summary>
         /// The get membership.
@@ -68,13 +62,9 @@ namespace FuzzyLogic
         /// </returns>
         public double GetMembership(double x)
         {
-            Contract.Requires(Condition.DoubleNotInvalidNumber(x, nameof(x)));
+            Validate.NotInvalidNumber(x, nameof(x));
 
-            var membershipValue = this.function.GetMembership(x);
-
-            Contract.Ensures(Condition.DoubleNotOutOfRange(membershipValue, nameof(membershipValue), 0, 1));
-
-            return membershipValue;
+            return this.function.GetMembership(NonNegativeDouble.Create(x));
         }
     }
 }

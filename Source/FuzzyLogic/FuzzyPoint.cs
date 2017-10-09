@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Point.cs" author="Christopher Sellers">
+// <copyright file="FuzzyPoint.cs" author="Christopher Sellers">
 //   Copyright (C) 2017. All rights reserved.
 //   https://github.com/cjdsellers/FuzzyLogic
 //   the use of this source code is governed by the Apache 2.0 license
@@ -11,16 +11,16 @@ namespace FuzzyLogic
 {
     using System;
 
-    using CodeEssence.DesignByContract;
+    using FuzzyLogic.Utility;
 
     /// <summary>
     /// The point structure.
     /// </summary>
     [Serializable]
-    public struct Point
+    public struct FuzzyPoint
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Point"/> struct.
+        /// Initializes a new instance of the <see cref="FuzzyPoint"/> struct.
         /// </summary>
         /// <param name="x">
         /// The x co-ordinate.
@@ -28,27 +28,42 @@ namespace FuzzyLogic
         /// <param name="y">
         /// The y co-ordinate.
         /// </param>
-        public Point(double x, double y)
+        public FuzzyPoint(NonNegativeDouble x, MembershipValue y)
         {
-            Contract.Requires(Condition.DoubleNotInvalidNumber(x, nameof(x)));
-            Contract.Requires(Condition.DoubleNotInvalidNumber(y, nameof(x)));
+            Validate.NotNull(x, nameof(x));
+            Validate.NotNull(y, nameof(y));
 
             this.X = x;
             this.Y = y;
+        }
 
-            Contract.Ensures(Condition.DoubleNotInvalidNumber(this.X, nameof(this.X)));
-            Contract.Ensures(Condition.DoubleNotInvalidNumber(this.Y, nameof(this.Y)));
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FuzzyPoint"/> struct.
+        /// </summary>
+        /// <param name="x">
+        /// The x.
+        /// </param>
+        /// <param name="y">
+        /// The y.
+        /// </param>
+        public FuzzyPoint(double x, double y)
+        {
+            Validate.NotInvalidNumber(x, nameof(x));
+            Validate.NotInvalidNumber(y, nameof(y));
+
+            this.X = NonNegativeDouble.Create(x);
+            this.Y = MembershipValue.Create(y);
         }
 
         /// <summary>
         /// Gets the X coordinate.
         /// </summary>
-        public double X { get; }
+        public NonNegativeDouble X { get; }
 
         /// <summary>
         /// Gets the Y coordinate.
         /// </summary>
-        public double Y { get; }
+        public MembershipValue Y { get; }
 
         /// <summary>
         /// The addition operator.
@@ -60,14 +75,14 @@ namespace FuzzyLogic
         /// The point 2.
         /// </param>
         /// <returns>
-        /// The <see cref="Point"/>
+        /// The <see cref="FuzzyPoint"/>
         /// </returns>
-        public static Point operator +(Point point1, Point point2)
+        public static FuzzyPoint operator +(FuzzyPoint point1, FuzzyPoint point2)
         {
-            Contract.Requires(Condition.NotNull(point1, nameof(point1)));
-            Contract.Requires(Condition.NotNull(point2, nameof(point2)));
+            Validate.NotNull(point1, nameof(point1));
+            Validate.NotNull(point2, nameof(point2));
 
-            return new Point(point1.X + point2.X, point1.Y + point2.Y);
+            return new FuzzyPoint(point1.X + point2.X, point1.Y + point2.Y);
         }
 
         /// <summary>
@@ -80,14 +95,14 @@ namespace FuzzyLogic
         /// The point 2.
         /// </param>
         /// <returns>
-        /// The <see cref="Point"/>.
+        /// The <see cref="FuzzyPoint"/>.
         /// </returns>
-        public static Point operator -(Point point1, Point point2)
+        public static FuzzyPoint operator -(FuzzyPoint point1, FuzzyPoint point2)
         {
-            Contract.Requires(Condition.NotNull(point1, nameof(point1)));
-            Contract.Requires(Condition.NotNull(point2, nameof(point2)));
+            Validate.NotNull(point1, nameof(point1));
+            Validate.NotNull(point2, nameof(point2));
 
-            return new Point(point1.X - point2.X, point1.Y - point2.Y);
+            return new FuzzyPoint(point1.X - point2.X, point1.Y - point2.Y);
         }
 
         /// <summary>
@@ -100,14 +115,14 @@ namespace FuzzyLogic
         /// The factor.
         /// </param>
         /// <returns>
-        /// The <see cref="Point"/>.
+        /// The <see cref="FuzzyPoint"/>.
         /// </returns>
-        public static Point operator *(Point point, double factor)
+        public static FuzzyPoint operator *(FuzzyPoint point, double factor)
         {
-            Contract.Requires(Condition.NotNull(point, nameof(point)));
-            Contract.Requires(Condition.DoubleNotInvalidNumber(factor, nameof(factor)));
+            Validate.NotNull(point, nameof(point));
 
-            return new Point(point.X * factor, point.Y * factor);
+
+            return new FuzzyPoint(point.X * factor, point.Y * factor);
         }
 
         /// <summary>
@@ -120,46 +135,45 @@ namespace FuzzyLogic
         /// The factor.
         /// </param>
         /// <returns>
-        /// The <see cref="Point"/>.
+        /// The <see cref="FuzzyPoint"/>.
         /// </returns>
-        public static Point operator /(Point point, double factor)
+        public static FuzzyPoint operator /(FuzzyPoint point, double factor)
         {
-            Contract.Requires(Condition.NotNull(point, nameof(point)));
-            Contract.Requires(Condition.DoubleNotInvalidNumber(factor, nameof(factor)));
+            Validate.NotNull(point, nameof(point));
 
-            return new Point(point.X / factor, point.Y / factor);
+            return new FuzzyPoint(point.X.Divide(factor), point.Y.Divide(factor));
         }
 
         /// <summary>
         /// Returns the sum of two points.
         /// </summary>
-        /// <param name="otherPoint">
+        /// <param name="other">
         /// The other point to add.
         /// </param>
         /// <returns>
-        /// The <see cref="Point"/>.
+        /// The <see cref="FuzzyPoint"/>.
         /// </returns>
-        public Point Add(Point otherPoint)
+        public FuzzyPoint Add(FuzzyPoint other)
         {
-            Contract.Requires(Condition.NotNull(otherPoint, nameof(otherPoint)));
+            Validate.NotNull(other, nameof(other));
 
-            return new Point(this.X + otherPoint.X, this.Y + otherPoint.Y);
+            return new FuzzyPoint(this.X + other.X, this.Y + other.Y);
         }
 
         /// <summary>
         /// The subtract.
         /// </summary>
-        /// <param name="otherPoint">
+        /// <param name="other">
         /// The other point to subtract.
         /// </param>
         /// <returns>
-        /// The <see cref="Point"/>.
+        /// The <see cref="FuzzyPoint"/>.
         /// </returns>
-        public Point Subtract(Point otherPoint)
+        public FuzzyPoint Subtract(FuzzyPoint other)
         {
-            Contract.Requires(Condition.NotNull(otherPoint, nameof(otherPoint)));
+            Validate.NotNull(other, nameof(other));
 
-            return new Point(this.X - otherPoint.X, this.Y - otherPoint.Y);
+            return new FuzzyPoint(this.X - other.X, this.Y - other.Y);
         }
 
         /// <summary>
@@ -169,13 +183,13 @@ namespace FuzzyLogic
         /// The factor.
         /// </param>
         /// <returns>
-        /// The <see cref="Point"/>.
+        /// The <see cref="FuzzyPoint"/>.
         /// </returns>
-        public Point Multiply(double factor)
+        public FuzzyPoint Multiply(double factor)
         {
-            Contract.Requires(Condition.DoubleNotInvalidNumber(factor, nameof(factor)));
 
-            return new Point(this.X * factor, this.Y * factor);
+
+            return new FuzzyPoint(this.X * factor, this.Y * factor);
         }
 
         /// <summary>
@@ -185,34 +199,32 @@ namespace FuzzyLogic
         /// The factor.
         /// </param>
         /// <returns>
-        /// The <see cref="Point"/>.
+        /// The <see cref="FuzzyPoint"/>.
         /// </returns>
-        public Point Divide(double factor)
+        public FuzzyPoint Divide(double factor)
         {
-            Contract.Requires(Condition.DoubleNotOutOfRange(factor, nameof(factor), 0, double.MaxValue, RangeEndPoints.LowerExclusive));
 
-            return new Point(this.X / factor, this.Y / factor);
+
+            return new FuzzyPoint(this.X / factor, this.Y / factor);
         }
 
         /// <summary>
         /// The distance to another point.
         /// </summary>
-        /// <param name="otherPoint">
+        /// <param name="other">
         /// The other point.
         /// </param>
         /// <returns>
         /// The <see cref="double"/>.
         /// </returns>
-        public double DistanceTo(Point otherPoint)
+        public double DistanceTo(FuzzyPoint other)
         {
-            Contract.Requires(Condition.NotNull(otherPoint, nameof(otherPoint)));
+            Validate.NotNull(other, nameof(other));
 
-            var dx = this.X - otherPoint.X;
-            var dy = this.Y - otherPoint.Y;
+            var dx = this.X - other.X;
+            var dy = this.Y - other.Y;
 
             var distance = Math.Sqrt((dx * dx) + (dy * dy));
-
-            Contract.Ensures(Condition.DoubleNotInvalidNumber(distance, nameof(distance)));
 
             return distance;
         }
@@ -220,22 +232,21 @@ namespace FuzzyLogic
         /// <summary>
         /// Returns the squared distance to another point.
         /// </summary>
-        /// <param name="otherPoint">
+        /// <param name="other">
         /// The other point.
         /// </param>
         /// <returns>
         /// The <see cref="double"/>.
         /// </returns>
-        public double SquaredDistanceTo(Point otherPoint)
+        public double SquaredDistanceTo(FuzzyPoint other)
         {
-            Contract.Requires(Condition.NotNull(otherPoint, nameof(otherPoint)));
+            Validate.NotNull(other, nameof(other));
 
-            var dx = this.X - otherPoint.X;
-            var dy = this.Y - otherPoint.Y;
+            var dx = this.X - other.X;
+            var dy = this.Y - other.Y;
 
             var distance = (dx * dx) + (dy * dy);
 
-            Contract.Ensures(Condition.DoubleNotInvalidNumber(distance, nameof(distance)));
 
             return distance;
         }
@@ -261,12 +272,10 @@ namespace FuzzyLogic
         /// The point 2.
         /// </param>
         /// <returns>
-        /// The <see cref="Point"/>.
+        /// The <see cref="FuzzyPoint"/>.
         /// </returns>
-        public static bool operator ==(Point point1, Point point2)
+        public static bool operator ==(FuzzyPoint point1, FuzzyPoint point2)
         {
-            Contract.Requires(Condition.NotNull(point1, nameof(point1)));
-            Contract.Requires(Condition.NotNull(point2, nameof(point2)));
 
             return (point1.X == point2.X) && (point1.Y == point2.Y);
         }
@@ -281,12 +290,10 @@ namespace FuzzyLogic
         /// The point 2.
         /// </param>
         /// <returns>
-        /// The <see cref="Point"/>.
+        /// The <see cref="FuzzyPoint"/>.
         /// </returns>
-        public static bool operator !=(Point point1, Point point2)
+        public static bool operator !=(FuzzyPoint point1, FuzzyPoint point2)
         {
-            Contract.Requires(Condition.NotNull(point1, nameof(point1)));
-            Contract.Requires(Condition.NotNull(point2, nameof(point2)));
 
             return (point1.X != point2.X) || (point1.Y != point2.Y);
         }
@@ -302,7 +309,7 @@ namespace FuzzyLogic
         /// </returns>
         public override bool Equals(object obj)
         {
-            return (obj is Point point) && (this == point);
+            return (obj is FuzzyPoint point) && (this == point);
         }
 
         /// <summary>
@@ -324,7 +331,7 @@ namespace FuzzyLogic
         /// </returns>
         public override string ToString()
         {
-            return string.Format(System.Globalization.CultureInfo.InvariantCulture, $"{nameof(Point)}: {this.X}, {this.Y}");
+            return string.Format(System.Globalization.CultureInfo.InvariantCulture, $"{nameof(FuzzyPoint)}: {this.X.Value}, {this.Y.Value}");
         }
     }
 }
