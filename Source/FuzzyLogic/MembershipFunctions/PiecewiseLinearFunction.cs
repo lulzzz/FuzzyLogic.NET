@@ -33,12 +33,12 @@ namespace FuzzyLogic.MembershipFunctions
         }
 
         /// <summary>
-        /// Returns the left limit of the points vector.
+        /// Returns the lower bound of the <see cref="IMembershipFunction"/>.
         /// </summary>
         public NonNegativeDouble LowerBound => this.Points[0].X;
 
         /// <summary>
-        /// Returns the left limit of the points vector.
+        /// Returns the upper bound of the <see cref="IMembershipFunction"/>.
         /// </summary>
         public NonNegativeDouble UpperBound => this.Points[this.Points.Length - 1].X;
 
@@ -58,7 +58,6 @@ namespace FuzzyLogic.MembershipFunctions
         /// </returns>
         public MembershipValue GetMembership(NonNegativeDouble x)
         {
-            // no values belong to the fuzzy set, if there are no points in the piecewise function
             if (this.Points.Length == 0)
             {
                 return MembershipValue.Zero();
@@ -74,19 +73,19 @@ namespace FuzzyLogic.MembershipFunctions
             for (int i = 1, n = this.Points.Length; i < n; i++)
             {
                 // the line with X value starts in points[i-1].X and ends at points[i].X
-                if (x.Value < this.Points[i].X.Value)
+                if (x < this.Points[i].X)
                 {
                     // points to calculate line's equation
-                    var y1 = this.Points[i].Y.Value;
-                    var y0 = this.Points[i - 1].Y.Value;
-                    var x1 = this.Points[i].X.Value;
-                    var x0 = this.Points[i - 1].X.Value;
+                    var y1 = this.Points[i].Y;
+                    var y0 = this.Points[i - 1].Y;
+                    var x1 = this.Points[i].X;
+                    var x0 = this.Points[i - 1].X;
 
                     // angular coefficient
                     var m = (y1 - y0) / (x1 - x0);
 
                     // returning the membership - the Y value for this X
-                    return MembershipValue.Create(m * (x.Value - x0) + y0);
+                    return MembershipValue.Create(m * (x - x0) + y0);
                 }
             }
 
@@ -105,7 +104,7 @@ namespace FuzzyLogic.MembershipFunctions
 
                 if (points[i - 1].X > points[i].X)
                 {
-                    throw new ArgumentException("Points must be in crescent order on X axis.");
+                    throw new ArgumentException("Points must be in ascending order on X axis.");
                 }
             }
         }

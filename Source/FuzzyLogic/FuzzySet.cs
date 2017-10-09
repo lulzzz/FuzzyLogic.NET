@@ -62,8 +62,6 @@ namespace FuzzyLogic
         /// </returns>
         public double GetMembership(double x)
         {
-            Validate.NotInvalidNumber(x, nameof(x));
-
             return this.function.GetMembership(NonNegativeDouble.Create(x));
         }
     }

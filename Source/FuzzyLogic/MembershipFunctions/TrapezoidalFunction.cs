@@ -17,31 +17,37 @@ namespace FuzzyLogic.MembershipFunctions
         /// <summary>
         /// Initializes a new instance of the <see cref="TrapezoidalFunction"/> class.
         /// </summary>
-        /// <param name="m1">
+        /// <param name="x1">
         /// The m 1.
         /// </param>
-        /// <param name="m2">
+        /// <param name="x2">
         /// The m 2.
         /// </param>
-        /// <param name="m3">
+        /// <param name="x3">
         /// The m 3.
         /// </param>
-        /// <param name="m4">
+        /// <param name="x4">
         /// The m 4.
         /// </param>
-        /// <param name="max">
-        /// The max.
-        /// </param>
-        /// <param name="min">
+        /// <param name="minY">
         /// The min.
         /// </param>
-        public TrapezoidalFunction(double m1, double m2, double m3, double m4, double max = 1, double min = 0)
+        /// <param name="maxY">
+        /// The max.
+        /// </param>
+        public TrapezoidalFunction(
+            double x1,
+            double x2,
+            double x3,
+            double x4,
+            double minY = 0,
+            double maxY = 1)
             : base(new[]
                        {
-                           new FuzzyPoint(m1, min),
-                           new FuzzyPoint(m2, max),
-                           new FuzzyPoint(m3, max),
-                           new FuzzyPoint(m4, min)
+                           new FuzzyPoint(x1, minY),
+                           new FuzzyPoint(x2, maxY),
+                           new FuzzyPoint(x3, maxY),
+                           new FuzzyPoint(x4, minY)
                        })
         {
         }
@@ -58,46 +64,6 @@ namespace FuzzyLogic.MembershipFunctions
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TrapezoidalFunction"/> class.
-        /// </summary>
-        /// <param name="m1">
-        /// The m 1.
-        /// </param>
-        /// <param name="m2">
-        /// The m 2.
-        /// </param>
-        /// <param name="edge">
-        /// The edge.
-        /// </param>
-        /// <param name="max">
-        /// The max.
-        /// </param>
-        /// <param name="min">
-        /// The min.
-        /// </param>
-        public static TrapezoidalFunction Create(double m1, double m2, EdgeType edge, double max = 1, double min = 0)
-        {
-            if (edge == EdgeType.Left)
-            {
-                var points = new FuzzyPoint[]
-                                 {
-                                     new FuzzyPoint(m1, min),
-                                     new FuzzyPoint(m2, max),
-                                 };
-                return new TrapezoidalFunction(points);
-            }
-            else
-            {
-                var points = new FuzzyPoint[]
-                                 {
-                                     new FuzzyPoint(m1, max),
-                                     new FuzzyPoint(m2, min),
-                                 };
-                return new TrapezoidalFunction(points);
-            }
-        }
-
-        /// <summary>
         /// The edge type.
         /// </summary>
         public enum EdgeType
@@ -111,6 +77,60 @@ namespace FuzzyLogic.MembershipFunctions
             /// The fuzzy side of the trapezoid is at the right side.
             /// </summary>
             Right
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TrapezoidalFunction"/> class.
+        /// </summary>
+        /// <param name="x1">
+        /// The m 1.
+        /// </param>
+        /// <param name="x2">
+        /// The m 2.
+        /// </param>
+        /// <param name="x3">
+        /// The x 3.
+        /// </param>
+        /// <param name="edge">
+        /// The edge.
+        /// </param>
+        /// <param name="minY">
+        /// The min Y.
+        /// </param>
+        /// <param name="maxY">
+        /// The max Y.
+        /// </param>
+        /// <returns>
+        /// The <see cref="TrapezoidalFunction"/>.
+        /// </returns>
+        public static TrapezoidalFunction Create(
+            double x1,
+            double x2,
+            double x3,
+            EdgeType edge,
+            double minY = 0,
+            double maxY = 1)
+        {
+            if (edge == EdgeType.Left)
+            {
+                var points = new FuzzyPoint[]
+                                 {
+                                     new FuzzyPoint(x1, minY),
+                                     new FuzzyPoint(x2, maxY),
+                                     new FuzzyPoint(x3, maxY)
+                                 };
+                return new TrapezoidalFunction(points);
+            }
+            else
+            {
+                var points = new FuzzyPoint[]
+                                 {
+                                     new FuzzyPoint(x1, maxY),
+                                     new FuzzyPoint(x2, maxY),
+                                     new FuzzyPoint(x3, minY)
+                                 };
+                return new TrapezoidalFunction(points);
+            }
         }
     }
 }
