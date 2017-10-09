@@ -14,10 +14,10 @@ namespace FuzzyLogic
     using FuzzyLogic.Utility;
 
     /// <summary>
-    /// The fuzzy value structure. Fuzzy values are always within the range of [0, 1].
+    /// The non negative double class. The value is guaranteed to be within the range of [0, double.Max].
     /// </summary>
     [Serializable]
-    public class NonNegativeDouble : ValueObject<NonNegativeDouble>, IComparable<ValueObject<NonNegativeDouble>>
+    public class NonNegativeDouble : NumberObject<NonNegativeDouble>, IComparable<NumberObject<NonNegativeDouble>>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="NonNegativeDouble"/> class.
@@ -25,13 +25,13 @@ namespace FuzzyLogic
         /// <param name="value">
         /// The value.
         /// </param>
-        public NonNegativeDouble(double value) : base(value)
+        private NonNegativeDouble(double value) : base(value)
         {
             Validate.NotOutOfRange(value, nameof(value), 0, double.MaxValue);
         }
 
         /// <summary>
-        /// The create.
+        /// Creates a new <see cref="NonNegativeDouble"/>.
         /// </summary>
         /// <param name="value">
         /// The value.
@@ -45,7 +45,7 @@ namespace FuzzyLogic
         }
 
         /// <summary>
-        /// The create.
+        /// Creates a new <see cref="NonNegativeDouble"/> with a value of 0.
         /// </summary>
         /// <returns>
         /// The <see cref="NonNegativeDouble"/>.
@@ -56,10 +56,10 @@ namespace FuzzyLogic
         }
 
         /// <summary>
-        /// Adds the given fuzzy value.
+        /// Adds the given <see cref="NonNegativeDouble"/>.
         /// </summary>
         /// <param name="other">
-        /// The other value to add.
+        /// The other <see cref="NonNegativeDouble"/> to add.
         /// </param>
         /// <returns>
         /// The <see cref="NonNegativeDouble"/>.
@@ -72,10 +72,10 @@ namespace FuzzyLogic
         }
 
         /// <summary>
-        /// Subtracts the given fuzzy value.
+        /// Subtracts the given <see cref="NonNegativeDouble"/>.
         /// </summary>
         /// <param name="other">
-        /// The other value to add.
+        /// The other <see cref="NonNegativeDouble"/> to subtract.
         /// </param>
         /// <returns>
         /// The <see cref="NonNegativeDouble"/>.
@@ -88,7 +88,7 @@ namespace FuzzyLogic
         }
 
         /// <summary>
-        /// Multiplies the fuzzy value by the given factor.
+        /// Multiplies the <see cref="NonNegativeDouble"/> by the given factor.
         /// </summary>
         /// <param name="factor">
         /// The factor.
@@ -104,7 +104,7 @@ namespace FuzzyLogic
         }
 
         /// <summary>
-        /// Divides the fuzzy value by the given divisor.
+        /// Divides the <see cref="NonNegativeDouble"/> by the given divisor.
         /// </summary>
         /// <param name="divisor">
         /// The factor.

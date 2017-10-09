@@ -74,8 +74,7 @@ namespace FuzzyLogic.Tests
         [Theory]
         [InlineData(0, 0, 1, 0, 0)]
         [InlineData(1, 1, 1, 1, 1)]
-        [InlineData(1, 1, 2, 2, 2)]
-        [InlineData(-1, -1, 2, -2, -2)]
+        [InlineData(1, 1, 0.5, 0.5, 0.5)]
         internal void Multiply(
             double point1x,
             double point1y,
@@ -99,7 +98,6 @@ namespace FuzzyLogic.Tests
         [InlineData(0, 0, 1, 0, 0)]
         [InlineData(1, 1, 1, 1, 1)]
         [InlineData(1, 1, 2, 0.5, 0.5)]
-        [InlineData(-1, -1, 2, -0.5, -0.5)]
         internal void Divide(
             double point1x,
             double point1y,
@@ -119,40 +117,43 @@ namespace FuzzyLogic.Tests
             Assert.Equal(new FuzzyPoint(point2x, point2y), result2);
         }
 
-        [Fact]
-        internal void DistanceTo()
+        [Theory]
+        [InlineData(0, 0, 0, 0)]
+        internal void DistanceTo(
+            double point1x,
+            double point1y,
+            double point2x,
+            double point2y)
         {
             // Arrange
-            var point1 = new FuzzyPoint(1, 2);
-            var point2 = new FuzzyPoint(0, 0);
+            var point1 = new FuzzyPoint(point1x, point1y);
+            var point2 = new FuzzyPoint(point2x, point2y);
 
             // Act
             var result = point1.DistanceTo(point2);
 
             // Assert
-            Assert.Equal(2.23606797749979, result);
+            Assert.Equal(0, result);
         }
 
         [Fact]
         internal void SquaredDistanceTo()
         {
             // Arrange
-            var point1 = new FuzzyPoint(2, 4);
+            var point1 = new FuzzyPoint(1, 0);
             var point2 = new FuzzyPoint(0, 0);
 
             // Act
             var result = point1.SquaredDistanceTo(point2);
 
             // Assert
-            Assert.Equal(20, result);
+            Assert.Equal(1, result);
         }
 
         [Theory]
         [InlineData(0, 0, 0)]
         [InlineData(0, 1, 1)]
-        [InlineData(0, 10, 10)]
         [InlineData(10, 0, 10)]
-        [InlineData(3, 4, 5)]
         [InlineData(0.3, 0.4, 0.5)]
         internal void EuclideanNorm(double x, double y, double expectedNorm)
         {

@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ValueObject.cs" author="Christopher Sellers">
+// <copyright file="NumberObject.cs" author="Christopher Sellers">
 //   Copyright (C) 2017. All rights reserved.
 //   https://github.com/cjdsellers/FuzzyLogic
 //   the use of this source code is governed by the Apache 2.0 license
@@ -14,20 +14,20 @@ namespace FuzzyLogic
     using FuzzyLogic.Utility;
 
     /// <summary>
-    /// The value object base class.
+    /// The number object base class.
     /// </summary>
     /// <typeparam name="T">
-    /// Type of value object.
+    /// Type of number object.
     /// </typeparam>
-    public abstract class ValueObject<T> where T : ValueObject<T>, IComparable<ValueObject<T>>
+    public abstract class NumberObject<T> where T : NumberObject<T>, IComparable<NumberObject<T>>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ValueObject{T}"/> class.
+        /// Initializes a new instance of the <see cref="NumberObject{T}"/> class.
         /// </summary>
         /// <param name="value">
         /// The value.
         /// </param>
-        protected ValueObject(double value)
+        protected NumberObject(double value)
         {
             Validate.NotInvalidNumber(value, nameof(value));
 
@@ -35,12 +35,12 @@ namespace FuzzyLogic
         }
 
         /// <summary>
-        /// Gets the value.
+        /// Gets the value of the <see cref="NumberObject{T}"/>.
         /// </summary>
         public double Value { get; }
 
         /// <summary>
-        /// The +.
+        /// The + operator.
         /// </summary>
         /// <param name="left">
         /// The left.
@@ -49,8 +49,9 @@ namespace FuzzyLogic
         /// The right.
         /// </param>
         /// <returns>
+        /// A double.
         /// </returns>
-        public static double operator +(ValueObject<T> left, ValueObject<T> right)
+        public static double operator +(NumberObject<T> left, NumberObject<T> right)
         {
             Validate.NotNull(left, nameof(left));
             Validate.NotNull(right, nameof(right));
@@ -59,7 +60,7 @@ namespace FuzzyLogic
         }
 
         /// <summary>
-        /// The +.
+        /// The + operator.
         /// </summary>
         /// <param name="left">
         /// The left.
@@ -68,8 +69,9 @@ namespace FuzzyLogic
         /// The right.
         /// </param>
         /// <returns>
+        /// A double.
         /// </returns>
-        public static double operator +(double left, ValueObject<T> right)
+        public static double operator +(double left, NumberObject<T> right)
         {
             Validate.NotNull(left, nameof(right));
             Validate.NotNull(right, nameof(right));
@@ -78,7 +80,7 @@ namespace FuzzyLogic
         }
 
         /// <summary>
-        /// The +.
+        /// The + operator.
         /// </summary>
         /// <param name="left">
         /// The left.
@@ -87,8 +89,9 @@ namespace FuzzyLogic
         /// The right.
         /// </param>
         /// <returns>
+        /// A double.
         /// </returns>
-        public static double operator +(ValueObject<T> left, double right)
+        public static double operator +(NumberObject<T> left, double right)
         {
             Validate.NotNull(left, nameof(right));
             Validate.NotInvalidNumber(right, nameof(right));
@@ -97,7 +100,7 @@ namespace FuzzyLogic
         }
 
         /// <summary>
-        /// The -.
+        /// The - operator.
         /// </summary>
         /// <param name="left">
         /// The left.
@@ -106,17 +109,18 @@ namespace FuzzyLogic
         /// The right.
         /// </param>
         /// <returns>
+        /// A double.
         /// </returns>
-        public static double operator -(ValueObject<T> left, ValueObject<T> right)
+        public static double operator -(NumberObject<T> left, NumberObject<T> right)
         {
             Validate.NotNull(left, nameof(right));
             Validate.NotNull(right, nameof(right));
 
-            return left - right;
+            return left.Value - right.Value;
         }
 
         /// <summary>
-        /// The -.
+        /// The - operator.
         /// </summary>
         /// <param name="left">
         /// The left.
@@ -125,17 +129,18 @@ namespace FuzzyLogic
         /// The right.
         /// </param>
         /// <returns>
+        /// A double.
         /// </returns>
-        public static double operator -(double left, ValueObject<T> right)
+        public static double operator -(double left, NumberObject<T> right)
         {
             Validate.NotInvalidNumber(left, nameof(left));
             Validate.NotNull(right, nameof(right));
 
-            return left - right;
+            return left - right.Value;
         }
 
         /// <summary>
-        /// The -.
+        /// The - operator.
         /// </summary>
         /// <param name="left">
         /// The left.
@@ -144,17 +149,18 @@ namespace FuzzyLogic
         /// The right.
         /// </param>
         /// <returns>
+        /// A double.
         /// </returns>
-        public static double operator -(ValueObject<T> left, double right)
+        public static double operator -(NumberObject<T> left, double right)
         {
             Validate.NotNull(left, nameof(left));
             Validate.NotInvalidNumber(right, nameof(right));
 
-            return left - right;
+            return left.Value - right;
         }
 
         /// <summary>
-        /// The *.
+        /// The * operator.
         /// </summary>
         /// <param name="left">
         /// The left.
@@ -163,17 +169,18 @@ namespace FuzzyLogic
         /// The right.
         /// </param>
         /// <returns>
+        /// A double.
         /// </returns>
-        public static double operator *(ValueObject<T> left, ValueObject<T> right)
+        public static double operator *(NumberObject<T> left, NumberObject<T> right)
         {
             Validate.NotNull(left, nameof(left));
             Validate.NotNull(right, nameof(right));
 
-            return left * right;
+            return left.Value * right.Value;
         }
 
         /// <summary>
-        /// The *.
+        /// The * operator.
         /// </summary>
         /// <param name="left">
         /// The left.
@@ -182,17 +189,18 @@ namespace FuzzyLogic
         /// The right.
         /// </param>
         /// <returns>
+        /// A double.
         /// </returns>
-        public static double operator *(double left, ValueObject<T> right)
+        public static double operator *(double left, NumberObject<T> right)
         {
             Validate.NotInvalidNumber(left, nameof(left));
             Validate.NotNull(right, nameof(right));
 
-            return left * right;
+            return left * right.Value;
         }
 
         /// <summary>
-        /// The *.
+        /// The * operator.
         /// </summary>
         /// <param name="left">
         /// The left.
@@ -201,17 +209,18 @@ namespace FuzzyLogic
         /// The right.
         /// </param>
         /// <returns>
+        /// A double.
         /// </returns>
-        public static double operator *(ValueObject<T> left, double right)
+        public static double operator *(NumberObject<T> left, double right)
         {
             Validate.NotNull(left, nameof(left));
             Validate.NotInvalidNumber(right, nameof(right));
 
-            return left * right;
+            return left.Value * right;
         }
 
         /// <summary>
-        /// The /.
+        /// The / operator.
         /// </summary>
         /// <param name="left">
         /// The left.
@@ -220,17 +229,18 @@ namespace FuzzyLogic
         /// The right.
         /// </param>
         /// <returns>
+        /// A double.
         /// </returns>
-        public static double operator /(ValueObject<T> left, ValueObject<T> right)
+        public static double operator /(NumberObject<T> left, NumberObject<T> right)
         {
             Validate.NotNull(left, nameof(left));
             Validate.NotNull(right, nameof(right));
 
-            return left / right;
+            return left.Value / right.Value;
         }
 
         /// <summary>
-        /// The /.
+        /// The / operator.
         /// </summary>
         /// <param name="left">
         /// The left.
@@ -239,17 +249,18 @@ namespace FuzzyLogic
         /// The right.
         /// </param>
         /// <returns>
+        /// A double.
         /// </returns>
-        public static double operator /(double left, ValueObject<T> right)
+        public static double operator /(double left, NumberObject<T> right)
         {
             Validate.NotInvalidNumber(left, nameof(left));
             Validate.NotNull(right, nameof(right));
 
-            return left / right;
+            return left / right.Value;
         }
 
         /// <summary>
-        /// The /.
+        /// The / operator.
         /// </summary>
         /// <param name="left">
         /// The left.
@@ -258,17 +269,18 @@ namespace FuzzyLogic
         /// The right.
         /// </param>
         /// <returns>
+        /// A double.
         /// </returns>
-        public static double operator /(ValueObject<T> left, double right)
+        public static double operator /(NumberObject<T> left, double right)
         {
             Validate.NotNull(left, nameof(left));
             Validate.NotInvalidNumber(right, nameof(right));
 
-            return left / right;
+            return left.Value / right;
         }
 
         /// <summary>
-        /// The &gt;.
+        /// The > operator.
         /// </summary>
         /// <param name="left">
         /// The left.
@@ -277,8 +289,9 @@ namespace FuzzyLogic
         /// The right.
         /// </param>
         /// <returns>
+        /// A double.
         /// </returns>
-        public static bool operator >(ValueObject<T> left, ValueObject<T> right)
+        public static bool operator >(NumberObject<T> left, NumberObject<T> right)
         {
             Validate.NotNull(left, nameof(right));
             Validate.NotNull(right, nameof(right));
@@ -287,7 +300,7 @@ namespace FuzzyLogic
         }
 
         /// <summary>
-        /// The &gt;.
+        /// The > operator;.
         /// </summary>
         /// <param name="left">
         /// The left.
@@ -296,8 +309,9 @@ namespace FuzzyLogic
         /// The right.
         /// </param>
         /// <returns>
+        /// A double.
         /// </returns>
-        public static bool operator >(double left, ValueObject<T> right)
+        public static bool operator >(double left, NumberObject<T> right)
         {
             Validate.NotInvalidNumber(left, nameof(left));
             Validate.NotNull(right, nameof(right));
@@ -306,7 +320,7 @@ namespace FuzzyLogic
         }
 
         /// <summary>
-        /// The &gt;.
+        /// The > operator.
         /// </summary>
         /// <param name="left">
         /// The left.
@@ -315,8 +329,9 @@ namespace FuzzyLogic
         /// The right.
         /// </param>
         /// <returns>
+        /// A double.
         /// </returns>
-        public static bool operator >(ValueObject<T> left, double right)
+        public static bool operator >(NumberObject<T> left, double right)
         {
             Validate.NotNull(left, nameof(right));
             Validate.NotInvalidNumber(right, nameof(right));
@@ -325,7 +340,7 @@ namespace FuzzyLogic
         }
 
         /// <summary>
-        /// The &lt;.
+        /// The &lt; operator.
         /// </summary>
         /// <param name="left">
         /// The left.
@@ -334,8 +349,9 @@ namespace FuzzyLogic
         /// The right.
         /// </param>
         /// <returns>
+        /// A double.
         /// </returns>
-        public static bool operator <(ValueObject<T> left, ValueObject<T> right)
+        public static bool operator <(NumberObject<T> left, NumberObject<T> right)
         {
             Validate.NotNull(left, nameof(right));
             Validate.NotNull(right, nameof(right));
@@ -344,7 +360,7 @@ namespace FuzzyLogic
         }
 
         /// <summary>
-        /// The &lt;.
+        /// The &lt; operator.
         /// </summary>
         /// <param name="left">
         /// The left.
@@ -353,8 +369,9 @@ namespace FuzzyLogic
         /// The right.
         /// </param>
         /// <returns>
+        /// A double.
         /// </returns>
-        public static bool operator <(double left, ValueObject<T> right)
+        public static bool operator <(double left, NumberObject<T> right)
         {
             Validate.NotInvalidNumber(left, nameof(left));
             Validate.NotNull(right, nameof(right));
@@ -363,7 +380,7 @@ namespace FuzzyLogic
         }
 
         /// <summary>
-        /// The &lt;.
+        /// The &lt; operator.
         /// </summary>
         /// <param name="left">
         /// The left.
@@ -372,8 +389,9 @@ namespace FuzzyLogic
         /// The right.
         /// </param>
         /// <returns>
+        /// A double.
         /// </returns>
-        public static bool operator <(ValueObject<T> left, double right)
+        public static bool operator <(NumberObject<T> left, double right)
         {
             Validate.NotNull(left, nameof(right));
             Validate.NotInvalidNumber(right, nameof(right));
@@ -382,7 +400,7 @@ namespace FuzzyLogic
         }
 
         /// <summary>
-        /// The ==.
+        /// The == operator.
         /// </summary>
         /// <param name="left">
         /// The left.
@@ -391,8 +409,9 @@ namespace FuzzyLogic
         /// The right.
         /// </param>
         /// <returns>
+        /// A double.
         /// </returns>
-        public static bool operator ==(ValueObject<T> left, ValueObject<T> right)
+        public static bool operator ==(NumberObject<T> left, NumberObject<T> right)
         {
             Validate.NotNull(left, nameof(left));
             Validate.NotNull(right, nameof(right));
@@ -401,7 +420,7 @@ namespace FuzzyLogic
         }
 
         /// <summary>
-        /// The !=.
+        /// The != operator.
         /// </summary>
         /// <param name="left">
         /// The left.
@@ -411,7 +430,7 @@ namespace FuzzyLogic
         /// </param>
         /// <returns>
         /// </returns>
-        public static bool operator !=(ValueObject<T> left, ValueObject<T> right)
+        public static bool operator !=(NumberObject<T> left, NumberObject<T> right)
         {
             Validate.NotNull(left, nameof(left));
             Validate.NotNull(right, nameof(right));
@@ -420,29 +439,29 @@ namespace FuzzyLogic
         }
 
         /// <summary>
-        /// The equals.
+        /// The equals method.
         /// </summary>
         /// <param name="other">
         /// The other.
         /// </param>
         /// <returns>
-        /// The <see cref="bool"/>.
+        /// A <see cref="bool"/>.
         /// </returns>
         public override bool Equals(object other)
         {
-            return (other is ValueObject<T> otherValue) && (otherValue.Value == this.Value);
+            return (other is NumberObject<T> otherValue) && (otherValue.Value == this.Value);
         }
 
         /// <summary>
-        /// The compare to implementation.
+        /// The compare to method.
         /// </summary>
         /// <param name="other">
         /// The other fuzzy value.
         /// </param>
         /// <returns>
-        /// The <see cref="int"/>.
+        /// An <see cref="int"/>.
         /// </returns>
-        public int CompareTo(ValueObject<T> other)
+        public int CompareTo(NumberObject<T> other)
         {
             Validate.NotNull(other, nameof(other));
 
@@ -453,7 +472,7 @@ namespace FuzzyLogic
         /// The get hash code.
         /// </summary>
         /// <returns>
-        /// The <see cref="int"/>.
+        /// An <see cref="int"/>.
         /// </returns>
         public override int GetHashCode()
         {

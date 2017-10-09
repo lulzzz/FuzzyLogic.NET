@@ -75,6 +75,7 @@ namespace FuzzyLogic.Utility
         /// The param name.
         /// </param>
         /// <exception cref="ArgumentOutOfRangeException">
+        /// Throws if the input value is invalid.
         /// </exception>
         [DebuggerStepThrough]
         internal static void NotInvalidNumber(double value, string paramName)
@@ -103,9 +104,6 @@ namespace FuzzyLogic.Utility
         /// <param name="endPoints">
         /// The end points.
         /// </param>
-        /// <returns>
-        /// The <see cref="ArgumentException"/>.
-        /// </returns>
         [DebuggerStepThrough]
         internal static void NotOutOfRange(double value, string paramName, double lower, double upper, RangeEndPoints endPoints = RangeEndPoints.Inclusive)
         {
@@ -155,8 +153,8 @@ namespace FuzzyLogic.Utility
         private static bool IsInvalidNumber(this double value)
         {
             return double.IsNaN(value)
-                   || double.IsNegativeInfinity(value)
-                   || double.IsPositiveInfinity(value);
+                || double.IsNegativeInfinity(value)
+                || double.IsPositiveInfinity(value);
         }
     }
 }

@@ -141,7 +141,7 @@ namespace FuzzyLogic
         {
             Validate.NotNull(point, nameof(point));
 
-            return new FuzzyPoint(point.X.Divide(factor), point.Y.Divide(factor));
+            return new FuzzyPoint(point.X / factor, point.Y / factor);
         }
 
         /// <summary>

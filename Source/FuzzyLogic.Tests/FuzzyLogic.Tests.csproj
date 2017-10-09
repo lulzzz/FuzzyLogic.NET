@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="FuzzyPointTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="NumberObjectTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="xunit">
