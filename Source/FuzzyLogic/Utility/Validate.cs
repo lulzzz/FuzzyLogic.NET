@@ -50,14 +50,11 @@ namespace FuzzyLogic.Utility
         /// <param name="paramName">
         /// The param name.
         /// </param>
-        /// <typeparam name="T">
-        /// The type.
-        /// </typeparam>
         /// <exception cref="ArgumentNullException">
         /// Throws is string is null or white space.
         /// </exception>
         [DebuggerStepThrough]
-        internal static void NotNull<T>(string argument, string paramName)
+        internal static void NotNull(string argument, string paramName)
         {
             if (string.IsNullOrWhiteSpace(argument))
             {

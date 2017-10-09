@@ -35,14 +35,20 @@ namespace FuzzyLogic.Tests
             // Arrange
             var point1 = new FuzzyPoint(point1x, point1y);
             var point2 = new FuzzyPoint(point2x, point2y);
+            var point3 = new FuzzyPoint(NonNegativeDouble.Create(point1x), MembershipValue.Create(point1y));
+            var point4 = new FuzzyPoint(NonNegativeDouble.Create(point2x), MembershipValue.Create(point2y));
 
             // Act
             var result1 = point1.Add(point2);
             var result2 = point1 + point2;
+            var result3 = point3.Add(point4);
+            var result4 = point3 + point4;
 
             // Assert
             Assert.Equal(new FuzzyPoint(point3x, point3y), result1);
             Assert.Equal(new FuzzyPoint(point3x, point3y), result2);
+            Assert.Equal(new FuzzyPoint(point3x, point3y), result3);
+            Assert.Equal(new FuzzyPoint(point3x, point3y), result4);
         }
 
         [Theory]
@@ -61,14 +67,20 @@ namespace FuzzyLogic.Tests
             // Arrange
             var point1 = new FuzzyPoint(point1x, point1y);
             var point2 = new FuzzyPoint(point2x, point2y);
+            var point3 = new FuzzyPoint(NonNegativeDouble.Create(point1x), MembershipValue.Create(point1y));
+            var point4 = new FuzzyPoint(NonNegativeDouble.Create(point2x), MembershipValue.Create(point2y));
 
             // Act
             var result1 = point1.Subtract(point2);
             var result2 = point1 - point2;
+            var result3 = point3.Subtract(point4);
+            var result4 = point3 - point4;
 
             // Assert
             Assert.Equal(new FuzzyPoint(point3x, point3y), result1);
             Assert.Equal(new FuzzyPoint(point3x, point3y), result2);
+            Assert.Equal(new FuzzyPoint(point3x, point3y), result3);
+            Assert.Equal(new FuzzyPoint(point3x, point3y), result4);
         }
 
         [Theory]
@@ -188,7 +200,7 @@ namespace FuzzyLogic.Tests
         [InlineData(1.1f, 0.2f, 3.3f, 0.2f, true)]
         [InlineData(1.1f, 0.2f, 1.1f, 0.4f, true)]
         [InlineData(1.1f, 0.2f, 3.3f, 0.4f, true)]
-        internal void InequalityOperatorTest(double x1, double y1, double x2, double y2, bool areNotEqual)
+        internal void InequalityOperator(double x1, double y1, double x2, double y2, bool areNotEqual)
         {
             // Arrange
             // Act

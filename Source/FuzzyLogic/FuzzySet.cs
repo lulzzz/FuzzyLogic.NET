@@ -12,14 +12,14 @@ namespace FuzzyLogic
     using FuzzyLogic.Utility;
 
     /// <summary>
-    /// The fuzzy set.
+    /// The fuzzy set structure.
     /// </summary>
-    public class FuzzySet
+    public struct FuzzySet
     {
         private readonly IMembershipFunction function;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FuzzySet"/> class.
+        /// Initializes a new instance of the <see cref="FuzzySet"/> structure.
         /// </summary>
         /// <param name="name">
         /// The name.
