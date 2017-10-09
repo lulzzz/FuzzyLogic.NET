@@ -9,6 +9,7 @@
 
 namespace FuzzyLogic
 {
+    using FuzzyLogic.MembershipFunctions;
     using FuzzyLogic.Utility;
 
     /// <summary>
@@ -42,27 +43,27 @@ namespace FuzzyLogic
         public string Name { get; }
 
         /// <summary>
-        /// The leftmost x value of the fuzzy set's membership function.
+        /// The leftmost x value of the fuzzy set's <see cref="IMembershipFunction"/>.
         /// </summary>
-        public NonNegativeDouble LowerBound => this.function.LowerBound;
+        public double LowerBound => this.function.LowerBound.Value;
 
         /// <summary>
-        /// The rightmost x value of the fuzzy set's membership function.
+        /// The rightmost x value of the fuzzy set's <see cref="IMembershipFunction"/>.
         /// </summary>
-        public NonNegativeDouble UpperBound => this.function.UpperBound;
+        public double UpperBound => this.function.UpperBound.Value;
 
         /// <summary>
-        /// The get membership.
+        /// Returns the value of the membership for the given input. (double must not be negative)
         /// </summary>
         /// <param name="x">
-        /// The x.
+        /// The x input (must not be negative).
         /// </param>
         /// <returns>
         /// The <see cref="double"/>.
         /// </returns>
         public double GetMembership(double x)
         {
-            return this.function.GetMembership(NonNegativeDouble.Create(x));
+            return this.function.GetMembership(NonNegativeDouble.Create(x)).Value;
         }
     }
 }

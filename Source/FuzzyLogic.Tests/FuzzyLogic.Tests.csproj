@@ -47,6 +47,7 @@
     <Compile Include="FuzzySetTests.cs" />
     <Compile Include="MembershipFunctionTests\PiecewiseLinearFunctionTests.cs" />
     <Compile Include="MembershipFunctionTests\SingletonFunctionTests.cs" />
+    <Compile Include="MembershipFunctionTests\TriangularFunctionTests.cs" />
     <Compile Include="MembershipFunctionTests\TrapezoidalFunctionTests.cs" />
     <Compile Include="NonNegativeDoubleTests.cs" />
     <Compile Include="MembershipValueTests.cs" />

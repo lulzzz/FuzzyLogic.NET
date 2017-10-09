@@ -10,7 +10,7 @@
 namespace FuzzyLogic.MembershipFunctions
 {
     /// <summary>
-    /// The trapezoidal function.
+    /// The <see cref="TrapezoidalFunction"/> immutable class.
     /// </summary>
     public class TrapezoidalFunction : PiecewiseLinearFunction
     {

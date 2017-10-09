@@ -14,7 +14,7 @@ namespace FuzzyLogic.MembershipFunctions
     using FuzzyLogic.Utility;
 
     /// <summary>
-    /// The piecewise linear function.
+    /// The <see cref="PiecewiseLinearFunction"/> function immutable class.
     /// </summary>
     public class PiecewiseLinearFunction : IMembershipFunction
     {

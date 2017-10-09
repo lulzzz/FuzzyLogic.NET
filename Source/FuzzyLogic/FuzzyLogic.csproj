@@ -37,9 +37,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FuzzySet.cs" />
+    <Compile Include="MembershipFunctions\TriangularFunction.cs" />
     <Compile Include="NonNegativeDouble.cs" />
     <Compile Include="MembershipValue.cs" />
-    <Compile Include="IMembershipFunction.cs" />
     <Compile Include="MembershipFunctions\IMembershipFunction.cs" />
     <Compile Include="MembershipFunctions\PiecewiseLinearFunction.cs" />
     <Compile Include="MembershipFunctions\SingletonFunction.cs" />
