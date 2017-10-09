@@ -9,6 +9,8 @@
 
 namespace FuzzyLogic
 {
+    using System;
+
     using FuzzyLogic.MembershipFunctions;
     using FuzzyLogic.Utility;
 
@@ -64,6 +66,54 @@ namespace FuzzyLogic
         public double GetMembership(double x)
         {
             return this.function.GetMembership(NonNegativeDouble.Create(x)).Value;
+        }
+
+        /// <summary>
+        /// Returns the negation of the membership value for this fuzzy set.
+        /// </summary>
+        /// <param name="x">
+        /// The x.
+        /// </param>
+        /// <returns>
+        /// The <see cref="double"/>.
+        /// </returns>
+        public double Complement(double x)
+        {
+            return 1 - this.function.GetMembership(NonNegativeDouble.Create(x)).Value;
+        }
+
+        /// <summary>
+        /// Returns the union of the membership value (the maximum <see cref="MembershipValue"/> of the fuzzy sets).
+        /// </summary>
+        /// <param name="other">
+        /// The other.
+        /// </param>
+        /// <param name="x">
+        /// The x.
+        /// </param>
+        /// <returns>
+        /// The <see cref="double"/>.
+        /// </returns>
+        public double Union(FuzzySet other, double x)
+        {
+            return Math.Max(this.function.GetMembership(NonNegativeDouble.Create(x)).Value, other.GetMembership(x));
+        }
+
+        /// <summary>
+        /// Returns the intersection of the membership value (the minimum <see cref="MembershipValue"/> of the fuzzy sets).
+        /// </summary>
+        /// <param name="other">
+        /// The other.
+        /// </param>
+        /// <param name="x">
+        /// The x.
+        /// </param>
+        /// <returns>
+        /// The <see cref="double"/>.
+        /// </returns>
+        public double Intersection(FuzzySet other, double x)
+        {
+            return Math.Min(this.function.GetMembership(NonNegativeDouble.Create(x)).Value, other.GetMembership(x));
         }
     }
 }

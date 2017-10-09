@@ -45,7 +45,7 @@ namespace FuzzyLogic.MembershipFunctions
         /// <summary>
         /// Gets the points.
         /// </summary>
-        protected FuzzyPoint[] Points { get; }
+        public FuzzyPoint[] Points { get; }
 
         /// <summary>
         /// The get membership.
@@ -58,6 +58,8 @@ namespace FuzzyLogic.MembershipFunctions
         /// </returns>
         public MembershipValue GetMembership(NonNegativeDouble x)
         {
+            Validate.NotNull(x, nameof(x));
+
             if (this.Points.Length == 0)
             {
                 return MembershipValue.Zero();
@@ -95,6 +97,8 @@ namespace FuzzyLogic.MembershipFunctions
 
         private static void ValidatePointsSequence(FuzzyPoint[] points)
         {
+            Validate.NotNull(points, nameof(points));
+
             for (int i = 0, n = points.Length; i < n; i++)
             {
                 if (i == 0)

@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>FuzzyLogic</id>
-    <version>0.0.2.0</version>
+    <version>0.0.3.0</version>
     <title>Fuzzy Logic Library .NET Framework (pre-release)</title>
     <language>C#</language>
     <authors>Christopher Sellers</authors>

@@ -42,5 +42,69 @@ namespace FuzzyLogic.Tests
             // Assert
             Assert.Equal(expected, result);
         }
+
+        [Theory]
+        [InlineData(0, 1)]
+        [InlineData(3, 0)]
+        [InlineData(2.5, 0.5)]
+        [InlineData(3.5, 0.5)]
+        internal void Complement_VariousInputs_ReturnsExpectedResult(double input, double expected)
+        {
+            // Arrange
+            var function = new TriangularFunction(2, 3, 4);
+            var fuzzySet = new FuzzySet("fuzzySet", function);
+
+            // Act
+            var result = fuzzySet.Complement(input);
+
+            // Assert
+            Assert.Equal(expected, result);
+        }
+
+        [Theory]
+        [InlineData(0, 0)]
+        [InlineData(1, 0)]
+        [InlineData(2, 0)]
+        [InlineData(3, 1)]
+        [InlineData(4, 0.75)]
+        [InlineData(5, 0)]
+        [InlineData(6, 0)]
+        internal void Union_VariousInputs_ReturnsExpectedResult(double input, double expected)
+        {
+            // Arrange
+            var function1 = new TriangularFunction(2, 3, 4);
+            var function2 = new TriangularFunction(3, 4, 5, 0, 0.75);
+            var fuzzySet1 = new FuzzySet("fuzzySet1", function1);
+            var fuzzySet2 = new FuzzySet("fuzzySet2", function2);
+
+            // Act
+            var result = fuzzySet1.Union(fuzzySet2, input);
+
+            // Assert
+            Assert.Equal(expected, result);
+        }
+
+        [Theory]
+        [InlineData(0, 0)]
+        [InlineData(1, 0)]
+        [InlineData(2, 0)]
+        [InlineData(3, 0.375)]
+        [InlineData(4, 0.5)]
+        [InlineData(5, 0)]
+        [InlineData(6, 0)]
+        internal void Intersection_VariousInputs_ReturnsExpectedResult(double input, double expected)
+        {
+            // Arrange
+            var function1 = new TriangularFunction(1, 3, 5);
+            var function2 = new TriangularFunction(2, 4, 6, 0, 0.75);
+            var fuzzySet1 = new FuzzySet("fuzzySet1", function1);
+            var fuzzySet2 = new FuzzySet("fuzzySet2", function2);
+
+            // Act
+            var result = fuzzySet1.Intersection(fuzzySet2, input);
+
+            // Assert
+            Assert.Equal(expected, result);
+        }
     }
 }

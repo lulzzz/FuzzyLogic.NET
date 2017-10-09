@@ -30,6 +30,11 @@ namespace FuzzyLogic.MembershipFunctions
         NonNegativeDouble UpperBound { get; }
 
         /// <summary>
+        /// Gets the points.
+        /// </summary>
+        FuzzyPoint[] Points { get; }
+
+        /// <summary>
         /// Returns the value of the membership from the given input.
         /// </summary>
         /// <param name="x">

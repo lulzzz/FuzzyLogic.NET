@@ -9,35 +9,34 @@
 
 namespace FuzzyLogic.MembershipFunctions
 {
-    using FuzzyLogic.Utility;
-
     /// <summary>
     /// The singleton function.
     /// </summary>
     public class SingletonFunction : IMembershipFunction
     {
-        private readonly NonNegativeDouble support;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="SingletonFunction"/> class.
         /// </summary>
         /// <param name="support">Support is the only value of x where the membership function is 1.</param>
         public SingletonFunction(double support)
         {
-            Validate.NotNull(support, nameof(support));
-
-            this.support = NonNegativeDouble.Create(support);
+            this.Points = new FuzzyPoint[] { new FuzzyPoint(support, 1) };
         }
 
         /// <summary>
         /// The lower bound of the <see cref="IMembershipFunction"/>, the same value as the support.
         /// </summary>
-        public NonNegativeDouble LowerBound => NonNegativeDouble.Create(this.support.Value);
+        public NonNegativeDouble LowerBound => this.Points[0].X;
 
         /// <summary>
         /// The upper bound of the <see cref="IMembershipFunction"/>, the same value as the support.
         /// </summary>
-        public NonNegativeDouble UpperBound => NonNegativeDouble.Create(this.support.Value);
+        public NonNegativeDouble UpperBound => this.Points[0].X;
+
+        /// <summary>
+        /// Gets the points.
+        /// </summary>
+        public FuzzyPoint[] Points { get; }
 
         /// <summary>
         /// Returns the <see cref="MembershipValue"/> of a given value to the <see cref="SingletonFunction"/>.
@@ -46,7 +45,7 @@ namespace FuzzyLogic.MembershipFunctions
         /// <returns>Degree of membership {0,1} since singletons do not admit memberships different from 0 and 1. </returns>
         public MembershipValue GetMembership(NonNegativeDouble x)
         {
-            return MembershipValue.Create(this.support == x ? 1 : 0);
+            return MembershipValue.Create(this.Points[0].X == x ? 1 : 0);
         }
     }
 }
