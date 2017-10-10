@@ -118,5 +118,20 @@ namespace FuzzyLogic.Tests.UtilityTests
             Assert.Throws<ArgumentOutOfRangeException>(() => Validate.NotOutOfRange(number, nameof(number), 0, 1, RangeEndPoints.Exclusive));
         }
 
+        [Fact]
+        internal void PointsDequence_WithOutOfSequencePoints_Throws()
+        {
+            // Arrange
+            var points = new FuzzyPoint[]
+                             {
+                                 new FuzzyPoint(2, 0.5),
+                                 new FuzzyPoint(4, 0.5), // X out of sequence
+                                 new FuzzyPoint(3, 1)
+                             };
+
+            // Act
+            // Assert
+            Assert.Throws<ArgumentException>(() => Validate.PointsSequence(points, nameof(points)));
+        }
     }
 }

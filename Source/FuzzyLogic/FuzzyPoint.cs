@@ -14,7 +14,7 @@ namespace FuzzyLogic
     using FuzzyLogic.Utility;
 
     /// <summary>
-    /// The point structure.
+    /// The <see cref="FuzzyPoint"/> structure.
     /// </summary>
     [Serializable]
     public struct FuzzyPoint
@@ -48,9 +48,6 @@ namespace FuzzyLogic
         /// </param>
         public FuzzyPoint(double x, double y)
         {
-            Validate.NotInvalidNumber(x, nameof(x));
-            Validate.NotInvalidNumber(y, nameof(y));
-
             this.X = NonNegativeDouble.Create(x);
             this.Y = MembershipValue.Create(y);
         }
@@ -121,7 +118,6 @@ namespace FuzzyLogic
         {
             Validate.NotNull(point, nameof(point));
 
-
             return new FuzzyPoint(point.X * factor, point.Y * factor);
         }
 
@@ -187,8 +183,6 @@ namespace FuzzyLogic
         /// </returns>
         public FuzzyPoint Multiply(double factor)
         {
-
-
             return new FuzzyPoint(this.X * factor, this.Y * factor);
         }
 
@@ -203,8 +197,6 @@ namespace FuzzyLogic
         /// </returns>
         public FuzzyPoint Divide(double factor)
         {
-
-
             return new FuzzyPoint(this.X / factor, this.Y / factor);
         }
 
@@ -227,6 +219,34 @@ namespace FuzzyLogic
             var distance = Math.Sqrt((dx * dx) + (dy * dy));
 
             return distance;
+        }
+
+        /// <summary>
+        /// Returns the angular coefficient of the two points.
+        /// </summary>
+        /// <param name="other">
+        /// The other <see cref="FuzzyPoint"/>.
+        /// </param>
+        /// <returns>
+        /// The <see cref="double"/>.
+        /// </returns>
+        public double AngularCoefficient(FuzzyPoint other)
+        {
+            return (this.Y - other.Y) / Math.Abs(this.X - other.X);
+        }
+
+        /// <summary>
+        /// The slope.
+        /// </summary>
+        /// <param name="other">
+        /// The other.
+        /// </param>
+        /// <returns>
+        /// The <see cref="double"/>.
+        /// </returns>
+        public double Slope(FuzzyPoint other)
+        {
+            return 1 / this.AngularCoefficient(other);
         }
 
         /// <summary>

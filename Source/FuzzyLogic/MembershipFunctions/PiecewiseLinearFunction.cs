@@ -9,8 +9,6 @@
 
 namespace FuzzyLogic.MembershipFunctions
 {
-    using System;
-
     using FuzzyLogic.Utility;
 
     /// <summary>
@@ -27,7 +25,7 @@ namespace FuzzyLogic.MembershipFunctions
         public PiecewiseLinearFunction(FuzzyPoint[] points)
         {
             Validate.NotNull(points, nameof(points));
-            ValidatePointsSequence(points);
+            Validate.PointsSequence(points, nameof(points));
 
             this.Points = points;
         }
@@ -66,7 +64,7 @@ namespace FuzzyLogic.MembershipFunctions
             }
 
             // if X value is less than the first point, so first point's Y will be returned as membership
-            if (x < this.Points[0].X.Value)
+            if (x < this.Points[0].X)
             {
                 return this.Points[0].Y;
             }
@@ -77,40 +75,14 @@ namespace FuzzyLogic.MembershipFunctions
                 // the line with X value starts in points[i-1].X and ends at points[i].X
                 if (x < this.Points[i].X)
                 {
-                    // points to calculate line's equation
-                    var y1 = this.Points[i].Y;
-                    var y0 = this.Points[i - 1].Y;
-                    var x1 = this.Points[i].X;
-                    var x0 = this.Points[i - 1].X;
+                    var m = this.Points[i].AngularCoefficient(this.Points[i - 1]);
 
-                    // angular coefficient
-                    var m = (y1 - y0) / (x1 - x0);
-
-                    // returning the membership - the Y value for this X
-                    return MembershipValue.Create(m * (x - x0) + y0);
+                    return MembershipValue.Create(m * (x - this.Points[i - 1].X) + this.Points[i - 1].Y);
                 }
             }
 
             // X value is more than last point, so last point Y will be returned as membership
             return this.Points[this.Points.Length - 1].Y;
-        }
-
-        private static void ValidatePointsSequence(FuzzyPoint[] points)
-        {
-            Validate.NotNull(points, nameof(points));
-
-            for (int i = 0, n = points.Length; i < n; i++)
-            {
-                if (i == 0)
-                {
-                    continue;
-                }
-
-                if (points[i - 1].X > points[i].X)
-                {
-                    throw new ArgumentException("Points must be in ascending order on X axis.");
-                }
-            }
         }
     }
 }

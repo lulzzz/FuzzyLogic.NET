@@ -100,22 +100,5 @@ namespace FuzzyLogic.Tests.MembershipFunctionTests
             // Assert
             Assert.Equal(NonNegativeDouble.Create(3), result);
         }
-
-        [Fact]
-        internal void InitializeFunction_WithOutOfSequencePoints_Throws()
-        {
-            // Arrange
-            // Arrange
-            var points = new FuzzyPoint[]
-                             {
-                                 new FuzzyPoint(2, 0.5),
-                                 new FuzzyPoint(4, 0.5), // X out of sequence
-                                 new FuzzyPoint(3, 1)
-                             };
-
-            // Act
-            // Assert
-            Assert.Throws<ArgumentException>(() => new PiecewiseLinearFunction(points));
-        }
     }
 }

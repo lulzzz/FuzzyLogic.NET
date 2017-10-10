@@ -139,6 +139,37 @@ namespace FuzzyLogic.Utility
         }
 
         /// <summary>
+        /// The validate points sequence.
+        /// </summary>
+        /// <param name="points">
+        /// The points.
+        /// </param>
+        /// <param name="paramName">
+        /// The param Name.
+        /// </param>
+        /// <exception cref="ArgumentException">
+        /// Throws if points out of sequence.
+        /// </exception>
+        [DebuggerStepThrough]
+        internal static void PointsSequence(FuzzyPoint[] points, string paramName)
+        {
+            NotNull(points, nameof(points));
+
+            for (int i = 0, n = points.Length; i < n; i++)
+            {
+                if (i == 0)
+                {
+                    continue;
+                }
+
+                if (points[i - 1].X > points[i].X)
+                {
+                    throw new ArgumentException("Points out of sequence (must be in ascending order on X axis).", paramName);
+                }
+            }
+        }
+
+        /// <summary>
         /// Checks if the double is a valid number.
         /// </summary>
         /// <param name="value">
