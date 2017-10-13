@@ -1,11 +1,11 @@
-// --------------------------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------
 // <copyright file="FuzzySet.cs" author="Christopher Sellers">
 //   Copyright (C) 2017. All rights reserved.
 //   https://github.com/cjdsellers/FuzzyLogic
 //   the use of this source code is governed by the Apache 2.0 license
 //   as found in the LICENSE.txt file.
 // </copyright>
-// --------------------------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------
 
 namespace FuzzyLogic
 {
@@ -45,17 +45,12 @@ namespace FuzzyLogic
         public string Name { get; }
 
         /// <summary>
-        /// The leftmost x value of the fuzzy set's <see cref="IMembershipFunction"/>.
+        /// Returns a boolean indicating whether the <see cref="FuzzySet"/> is normal (max y = 1.0).
         /// </summary>
-        public double LowerBound => this.function.LowerBound.Value;
+        public bool IsNormal => this.function.MaxY.Value.Equals(1);
 
         /// <summary>
-        /// The rightmost x value of the fuzzy set's <see cref="IMembershipFunction"/>.
-        /// </summary>
-        public double UpperBound => this.function.UpperBound.Value;
-
-        /// <summary>
-        /// Returns the value of the membership for the given input. (double must not be negative)
+        /// Returns the value of the membership for the given input (input must not be negative).
         /// </summary>
         /// <param name="x">
         /// The x input (must not be negative).

@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="FuzzyPointTests.cs" />
     <Compile Include="FuzzySetTests.cs" />
+    <Compile Include="MathematicsTests\AlgebraicOperationsTests.cs" />
     <Compile Include="MembershipFunctionTests\PiecewiseLinearFunctionTests.cs" />
     <Compile Include="MembershipFunctionTests\SingletonFunctionTests.cs" />
     <Compile Include="MembershipFunctionTests\TriangularFunctionTests.cs" />
@@ -68,9 +69,7 @@
       <Name>FuzzyLogic</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="MathematicsTests\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

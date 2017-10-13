@@ -1,16 +1,17 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+﻿// -------------------------------------------------------------------------------------------------
 // <copyright file="Validate.cs" author="Christopher Sellers">
 //   Copyright (C) 2017. All rights reserved.
 //   https://github.com/cjdsellers/FuzzyLogic
 //   the use of this source code is governed by the Apache 2.0 license
 //   as found in the LICENSE.txt file.
 // </copyright>
-// --------------------------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------
 
 namespace FuzzyLogic.Utility
 {
     using System;
     using System.Diagnostics;
+    using System.Linq;
 
     /// <summary>
     /// The validate.
@@ -111,35 +112,35 @@ namespace FuzzyLogic.Utility
                 case RangeEndPoints.Inclusive:
                     if (value < lower || value > upper)
                     {
-                        throw new ArgumentOutOfRangeException(paramName, $"The {paramName} is not within the specified range of [{lower}, {upper}] inclusive. Value = {value}.");
+                        throw new ArgumentOutOfRangeException(paramName, $"The {paramName} is not within the specified range [{lower}, {upper}] inclusive. Value = {value}.");
                     }
                     break;
 
                 case RangeEndPoints.LowerExclusive:
                     if (value <= lower || value > upper)
                     {
-                        throw new ArgumentOutOfRangeException(paramName, $"The {paramName} is not within the specified range of [{lower}, {upper}] lower exclusive. Value = {value}.");
+                        throw new ArgumentOutOfRangeException(paramName, $"The {paramName} is not within the specified range [{lower}, {upper}] lower exclusive. Value = {value}.");
                     }
                     break;
 
                 case RangeEndPoints.UpperExclusive:
                     if (value < lower || value >= upper)
                     {
-                        throw new ArgumentOutOfRangeException(paramName, $"The {paramName} is not within the specified range of [{lower}, {upper}] upper exclusive. Value = {value}.");
+                        throw new ArgumentOutOfRangeException(paramName, $"The {paramName} is not within the specified range [{lower}, {upper}] upper exclusive. Value = {value}.");
                     }
                     break;
 
                 case RangeEndPoints.Exclusive:
                     if (value <= lower || value >= upper)
                     {
-                        throw new ArgumentOutOfRangeException(paramName, $"The {paramName} is not within the specified range of [{lower}, {upper}] exclusive. Value = {value}.");
+                        throw new ArgumentOutOfRangeException(paramName, $"The {paramName} is not within the specified range [{lower}, {upper}] exclusive. Value = {value}.");
                     }
                     break;
             }
         }
 
         /// <summary>
-        /// The validate points sequence.
+        /// Validates the points array.
         /// </summary>
         /// <param name="points">
         /// The points.
@@ -151,11 +152,16 @@ namespace FuzzyLogic.Utility
         /// Throws if points out of sequence.
         /// </exception>
         [DebuggerStepThrough]
-        internal static void PointsSequence(FuzzyPoint[] points, string paramName)
+        internal static void FuzzyPointArray(FuzzyPoint[] points, string paramName)
         {
             NotNull(points, nameof(points));
 
-            for (int i = 0, n = points.Length; i < n; i++)
+            if (points.Length == 0)
+            {
+                throw new ArgumentException("Points array cannot be empty.", paramName);
+            }
+
+            for (var i = 0; i < points.Length; i++)
             {
                 if (i == 0)
                 {
@@ -164,8 +170,16 @@ namespace FuzzyLogic.Utility
 
                 if (points[i - 1].X > points[i].X)
                 {
-                    throw new ArgumentException("Points out of sequence (must be in ascending order on X axis).", paramName);
+                    throw new ArgumentException("Points array out of sequence (must be in ascending order on X axis).", paramName);
                 }
+            }
+
+            var minY = points.Select(p => p.Y.Value).Min();
+            var maxY = points.Select(p => p.Y.Value).Max();
+
+            if (minY > maxY)
+            {
+                throw new ArgumentException("Points array min Y cannot be greater than max Y.");
             }
         }
 

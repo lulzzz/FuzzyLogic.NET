@@ -119,7 +119,18 @@ namespace FuzzyLogic.Tests.UtilityTests
         }
 
         [Fact]
-        internal void PointsDequence_WithOutOfSequencePoints_Throws()
+        internal void FuzzyPointArray_WithEmptyArray_Throws()
+        {
+            // Arrange
+            var points = new FuzzyPoint[] { };
+
+            // Act
+            // Assert
+            Assert.Throws<ArgumentException>(() => Validate.FuzzyPointArray(points, nameof(points)));
+        }
+
+        [Fact]
+        internal void FuzzyPointArray_WithOutOfSequencePoints_Throws()
         {
             // Arrange
             var points = new FuzzyPoint[]
@@ -131,7 +142,23 @@ namespace FuzzyLogic.Tests.UtilityTests
 
             // Act
             // Assert
-            Assert.Throws<ArgumentException>(() => Validate.PointsSequence(points, nameof(points)));
+            Assert.Throws<ArgumentException>(() => Validate.FuzzyPointArray(points, nameof(points)));
+        }
+
+        [Fact]
+        internal void FuzzyPointArray_WithMinYAboveMaxY_Throws()
+        {
+            // Arrange
+            var points = new FuzzyPoint[]
+                             {
+                                 new FuzzyPoint(2, 0.5),
+                                 new FuzzyPoint(4, 0.5), // X out of sequence
+                                 new FuzzyPoint(3, 1)
+                             };
+
+            // Act
+            // Assert
+            Assert.Throws<ArgumentException>(() => Validate.FuzzyPointArray(points, nameof(points)));
         }
     }
 }

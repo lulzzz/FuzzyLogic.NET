@@ -1,11 +1,11 @@
-// --------------------------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------
 // <copyright file="IMembershipFunction.cs" author="Christopher Sellers">
 //   Copyright (C) 2017. All rights reserved.
 //   https://github.com/cjdsellers/FuzzyLogic
 //   the use of this source code is governed by the Apache 2.0 license
 //   as found in the LICENSE.txt file.
 // </copyright>
-// --------------------------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------
 
 namespace FuzzyLogic.MembershipFunctions
 {
@@ -14,11 +14,22 @@ namespace FuzzyLogic.MembershipFunctions
     /// <see cref="FuzzySet"/> class to calculate the values membership to a particular fuzzy set.
     /// </summary>
     /// <remarks>
-    /// A membership function is a curve that defines how each point in the input space is mapped to a membership value
-    /// (or degree of membership) between 0 and 1. The input space is sometimes referred to as the universe of discourse
+    /// A membership function is a curve that defines how each point in the input space is mapped
+    /// to a membership value (or degree of membership) between 0 and 1.
+    /// The input space is sometimes referred to as the universe of discourse
     /// </remarks>
     public interface IMembershipFunction
     {
+        /// <summary>
+        /// Gets the min y value.
+        /// </summary>
+        MembershipValue MinY { get; }
+
+        /// <summary>
+        /// Gets the max y value.
+        /// </summary>
+        MembershipValue MaxY { get; }
+
         /// <summary>
         /// Gets the leftmost x value of the <see cref="IMembershipFunction"/>.
         /// </summary>

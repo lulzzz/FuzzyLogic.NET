@@ -14,7 +14,7 @@ namespace FuzzyLogic.Tests
     using Xunit;
 
     /// <summary>
-    /// The point tests.
+    /// The fuzzy point tests.
     /// </summary>
     [SuppressMessage("StyleCop.CSharp.NamingRules", "*", Justification = "Reviewed. Suppression is OK within the Test Suite.")]
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "*", Justification = "Reviewed. Suppression is OK within the Test Suite.")]

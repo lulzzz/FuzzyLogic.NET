@@ -1,16 +1,17 @@
-// --------------------------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------
 // <copyright file="FuzzyPoint.cs" author="Christopher Sellers">
 //   Copyright (C) 2017. All rights reserved.
 //   https://github.com/cjdsellers/FuzzyLogic
 //   the use of this source code is governed by the Apache 2.0 license
 //   as found in the LICENSE.txt file.
 // </copyright>
-// --------------------------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------
 
 namespace FuzzyLogic
 {
     using System;
 
+    using FuzzyLogic.Mathematics;
     using FuzzyLogic.Utility;
 
     /// <summary>
@@ -216,7 +217,7 @@ namespace FuzzyLogic
             var dx = this.X - other.X;
             var dy = this.Y - other.Y;
 
-            var distance = Math.Sqrt((dx * dx) + (dy * dy));
+            var distance = Math.Sqrt(dx.Square() + dy.Square());
 
             return distance;
         }
@@ -236,20 +237,6 @@ namespace FuzzyLogic
         }
 
         /// <summary>
-        /// The slope.
-        /// </summary>
-        /// <param name="other">
-        /// The other.
-        /// </param>
-        /// <returns>
-        /// The <see cref="double"/>.
-        /// </returns>
-        public double Slope(FuzzyPoint other)
-        {
-            return 1 / this.AngularCoefficient(other);
-        }
-
-        /// <summary>
         /// Returns the squared distance to another point.
         /// </summary>
         /// <param name="other">
@@ -265,7 +252,7 @@ namespace FuzzyLogic
             var dx = this.X - other.X;
             var dy = this.Y - other.Y;
 
-            var distance = (dx * dx) + (dy * dy);
+            var distance = dx.Square() + dy.Square();
 
 
             return distance;
@@ -279,7 +266,7 @@ namespace FuzzyLogic
         /// </returns>
         public double EuclideanNorm()
         {
-            return Math.Sqrt((this.X * this.X) + (this.Y * this.Y));
+            return Math.Sqrt(this.X.Value.Square() + this.Y.Value.Square());
         }
 
         /// <summary>
@@ -297,7 +284,7 @@ namespace FuzzyLogic
         public static bool operator ==(FuzzyPoint point1, FuzzyPoint point2)
         {
 
-            return (point1.X == point2.X) && (point1.Y == point2.Y);
+            return point1.X == point2.X && point1.Y == point2.Y;
         }
 
         /// <summary>

@@ -1,14 +1,16 @@
-// --------------------------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------
 // <copyright file="PiecewiseLinearFunction.cs" author="Christopher Sellers">
 //   Copyright (C) 2017. All rights reserved.
 //   https://github.com/cjdsellers/FuzzyLogic
 //   the use of this source code is governed by the Apache 2.0 license
 //   as found in the LICENSE.txt file.
 // </copyright>
-// --------------------------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------
 
 namespace FuzzyLogic.MembershipFunctions
 {
+    using System.Linq;
+
     using FuzzyLogic.Utility;
 
     /// <summary>
@@ -25,10 +27,20 @@ namespace FuzzyLogic.MembershipFunctions
         public PiecewiseLinearFunction(FuzzyPoint[] points)
         {
             Validate.NotNull(points, nameof(points));
-            Validate.PointsSequence(points, nameof(points));
+            Validate.FuzzyPointArray(points, nameof(points));
 
             this.Points = points;
         }
+
+        /// <summary>
+        /// Returns the minimum Y value.
+        /// </summary>
+        public MembershipValue MinY => MembershipValue.Create(this.Points.Select(p => p.Y.Value).Min());
+
+        /// <summary>
+        /// Returns the maximum Y value.
+        /// </summary>
+        public MembershipValue MaxY => MembershipValue.Create(this.Points.Select(p => p.Y.Value).Max());
 
         /// <summary>
         /// Returns the lower bound of the <see cref="IMembershipFunction"/>.
@@ -46,10 +58,10 @@ namespace FuzzyLogic.MembershipFunctions
         public FuzzyPoint[] Points { get; }
 
         /// <summary>
-        /// The get membership.
+        /// Returns the <see cref="MembershipValue"/> of a given input to the membership function.
         /// </summary>
         /// <param name="x">
-        /// The x.
+        /// The x value.
         /// </param>
         /// <returns>
         /// The <see cref="MembershipValue"/>.
@@ -58,11 +70,6 @@ namespace FuzzyLogic.MembershipFunctions
         {
             Validate.NotNull(x, nameof(x));
 
-            if (this.Points.Length == 0)
-            {
-                return MembershipValue.Zero();
-            }
-
             // if X value is less than the first point, so first point's Y will be returned as membership
             if (x < this.Points[0].X)
             {
@@ -70,7 +77,7 @@ namespace FuzzyLogic.MembershipFunctions
             }
 
             // looking for the line that contais the X value
-            for (int i = 1, n = this.Points.Length; i < n; i++)
+            for (int i = 1; i < this.Points.Length; i++)
             {
                 // the line with X value starts in points[i-1].X and ends at points[i].X
                 if (x < this.Points[i].X)

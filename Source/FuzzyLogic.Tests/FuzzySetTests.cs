@@ -41,6 +41,35 @@ namespace FuzzyLogic.Tests
 
             // Assert
             Assert.Equal(expected, result);
+            Assert.Equal("fuzzySet", fuzzySet.Name);
+        }
+
+        [Fact]
+        internal void IsNormal_WhenSetNormal_ReturnsTrue()
+        {
+            // Arrange
+            var function = new TriangularFunction(2, 3, 4);
+            var fuzzySet = new FuzzySet("fuzzySet", function);
+
+            // Act
+            var result = fuzzySet.IsNormal;
+
+            // Assert
+            Assert.True(result);
+        }
+
+        [Fact]
+        internal void IsNormal_WhenSetNotNormal_ReturnsFalse()
+        {
+            // Arrange
+            var function = new TriangularFunction(2, 3, 4, 0, 0.9);
+            var fuzzySet = new FuzzySet("fuzzySet", function);
+
+            // Act
+            var result = fuzzySet.IsNormal;
+
+            // Assert
+            Assert.False(result);
         }
 
         [Theory]

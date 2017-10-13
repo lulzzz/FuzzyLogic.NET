@@ -23,21 +23,6 @@ namespace FuzzyLogic.Tests.MembershipFunctionTests
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "*", Justification = "Reviewed. Suppression is OK within the Test Suite.")]
     public class PiecewiseLinearFunctionTests
     {
-        [Fact]
-        internal void GetMembership_WithEmptyArray_ReturnsZero()
-        {
-            // Arrange
-            var points = new FuzzyPoint[0];
-
-            var function = new PiecewiseLinearFunction(points);
-
-            // Act
-            var result = function.GetMembership(NonNegativeDouble.Create(1));
-
-            // Assert
-            Assert.Equal(MembershipValue.Zero(), result);
-        }
-
         [Theory]
         [InlineData(1, 0.5)]
         [InlineData(2, 0.5)]
