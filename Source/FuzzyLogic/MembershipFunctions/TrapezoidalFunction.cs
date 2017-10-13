@@ -51,16 +51,5 @@ namespace FuzzyLogic.MembershipFunctions
                        })
         {
         }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TrapezoidalFunction"/> class.
-        /// </summary>
-        /// <param name="points">
-        /// The points.
-        /// </param>
-        private TrapezoidalFunction(FuzzyPoint[] points)
-            : base(points)
-        {
-        }
     }
 }

@@ -73,7 +73,7 @@ namespace FuzzyLogic
         /// </returns>
         public static double operator +(double left, NumberObject<T> right)
         {
-            Validate.NotNull(left, nameof(right));
+            Validate.NotInvalidNumber(left, nameof(right));
             Validate.NotNull(right, nameof(right));
 
             return left + right.Value;

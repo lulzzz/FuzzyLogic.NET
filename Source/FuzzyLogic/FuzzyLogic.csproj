@@ -54,7 +54,10 @@
     <None Include="package.nuspec" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Control\" />
     <Folder Include="Defuzzification\" />
+    <Folder Include="Inference\" />
+    <Folder Include="Mathematics\" />
     <Folder Include="NormFunctions\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -51,6 +51,8 @@
     <Compile Include="MembershipFunctionTests\TrapezoidalFunctionTests.cs" />
     <Compile Include="NonNegativeDoubleTests.cs" />
     <Compile Include="MembershipValueTests.cs" />
+    <Compile Include="PerformanceTests\NonNegativeDoubleTests.cs" />
+    <Compile Include="PerformanceTests\PerformanceTimer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="NumberObjectTests.cs" />
     <Compile Include="UtilityTests\ValidateTests.cs" />
@@ -66,7 +68,9 @@
       <Name>FuzzyLogic</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="MathematicsTests\" />
+  </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
