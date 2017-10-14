@@ -12,7 +12,7 @@ namespace FuzzyLogic.MembershipFunctions
     using FuzzyLogic.Utility;
 
     /// <summary>
-    /// The singleton function.
+    /// The <see cref="SingletonFunction"/> immutable class.
     /// </summary>
     public class SingletonFunction : IMembershipFunction
     {

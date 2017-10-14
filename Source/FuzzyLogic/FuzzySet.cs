@@ -60,6 +60,8 @@ namespace FuzzyLogic
         /// </returns>
         public double GetMembership(double x)
         {
+            Validate.NotOutOfRange(x, nameof(x), 0);
+
             return this.function.GetMembership(x);
         }
 
@@ -74,6 +76,8 @@ namespace FuzzyLogic
         /// </returns>
         public double Complement(double x)
         {
+            Validate.NotOutOfRange(x, nameof(x), 0);
+
             return 1 - this.function.GetMembership(x);
         }
 
@@ -91,6 +95,9 @@ namespace FuzzyLogic
         /// </returns>
         public double Union(FuzzySet other, double x)
         {
+            Validate.NotNull(other, nameof(other));
+            Validate.NotOutOfRange(x, nameof(x), 0);
+
             return Math.Max(this.function.GetMembership(x), other.GetMembership(x));
         }
 
@@ -108,6 +115,9 @@ namespace FuzzyLogic
         /// </returns>
         public double Intersection(FuzzySet other, double x)
         {
+            Validate.NotNull(other, nameof(other));
+            Validate.NotOutOfRange(x, nameof(x), 0);
+
             return Math.Min(this.function.GetMembership(x), other.GetMembership(x));
         }
     }

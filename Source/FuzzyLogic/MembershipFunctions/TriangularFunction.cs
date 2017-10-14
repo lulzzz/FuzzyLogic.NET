@@ -22,20 +22,23 @@ namespace FuzzyLogic.MembershipFunctions
         /// Initializes a new instance of the <see cref="TriangularFunction"/> class.
         /// </summary>
         /// <param name="x1">
-        /// The m 1.
+        /// The x1.
         /// </param>
         /// <param name="x2">
-        /// The m 2.
+        /// The x2.
         /// </param>
         /// <param name="x3">
-        /// The m 3.
+        /// The x3.
         /// </param>
         /// <param name="minY">
-        /// The min.
+        /// The min y.
         /// </param>
         /// <param name="maxY">
-        /// The max.
+        /// The max y.
         /// </param>
+        /// <exception cref="ArgumentException">
+        /// Throws an exception if minimum y exceeds maximum y.
+        /// </exception>
         public TriangularFunction(
             double x1,
             double x2,

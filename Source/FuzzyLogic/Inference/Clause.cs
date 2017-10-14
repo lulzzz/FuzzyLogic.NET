@@ -55,6 +55,8 @@ namespace FuzzyLogic.Inference
         /// </returns>
         public double Evaluate(double input)
         {
+            Validate.NotOutOfRange(input, nameof(input), 0);
+
             return this.FuzzySet.GetMembership(input);
         }
 

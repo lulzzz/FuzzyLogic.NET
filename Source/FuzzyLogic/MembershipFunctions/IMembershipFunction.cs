@@ -10,14 +10,8 @@
 namespace FuzzyLogic.MembershipFunctions
 {
     /// <summary>
-    /// All membership functions must implement this interface, which is used by the
-    /// <see cref="FuzzySet"/> class to calculate the values membership to a particular fuzzy set.
+    /// The <see cref="IMembershipFunction"/> interface.
     /// </summary>
-    /// <remarks>
-    /// A membership function is a curve that defines how each point in the input space is mapped
-    /// to a membership value (or degree of membership) between 0 and 1.
-    /// The input space is sometimes referred to as the universe of discourse
-    /// </remarks>
     public interface IMembershipFunction
     {
         /// <summary>

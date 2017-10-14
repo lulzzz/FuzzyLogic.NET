@@ -70,16 +70,13 @@ namespace FuzzyLogic.MembershipFunctions
         {
             Validate.NotOutOfRange(x, nameof(x), 0);
 
-            // if X value is less than the first point, so first point's Y will be returned as membership
             if (x < this.Points[0].X)
             {
                 return this.Points[0].Y;
             }
 
-            // looking for the line that contais the X value
             for (int i = 1; i < this.Points.Length; i++)
             {
-                // the line with X value starts in points[i-1].X and ends at points[i].X
                 if (x < this.Points[i].X)
                 {
                     var m = this.Points[i].AngularCoefficient(this.Points[i - 1]);
@@ -88,7 +85,6 @@ namespace FuzzyLogic.MembershipFunctions
                 }
             }
 
-            // X value is more than last point, so last point Y will be returned as membership
             return this.Points[this.Points.Length - 1].Y;
         }
     }
