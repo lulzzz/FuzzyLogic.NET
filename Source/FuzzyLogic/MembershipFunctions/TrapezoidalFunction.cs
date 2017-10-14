@@ -9,6 +9,10 @@
 
 namespace FuzzyLogic.MembershipFunctions
 {
+    using System;
+
+    using FuzzyLogic.Utility;
+
     /// <summary>
     /// The <see cref="TrapezoidalFunction"/> immutable class.
     /// </summary>
@@ -50,6 +54,17 @@ namespace FuzzyLogic.MembershipFunctions
                            new FuzzyPoint(x4, minY)
                        })
         {
+            Validate.NotOutOfRange(x1, nameof(x1), 0);
+            Validate.NotOutOfRange(x2, nameof(x2), 0);
+            Validate.NotOutOfRange(x3, nameof(x3), 0);
+            Validate.NotOutOfRange(x4, nameof(x4), 0);
+            Validate.NotOutOfRange(minY, nameof(x1), 0, 1);
+            Validate.NotOutOfRange(maxY, nameof(x1), 0, 1);
+
+            if (minY > maxY)
+            {
+                throw new ArgumentException("MinY cannot be greater than MaxY.");
+            }
         }
     }
 }

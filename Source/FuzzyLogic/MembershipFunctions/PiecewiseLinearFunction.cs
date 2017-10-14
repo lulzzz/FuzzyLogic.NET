@@ -68,7 +68,7 @@ namespace FuzzyLogic.MembershipFunctions
         /// </returns>
         public double GetMembership(double x)
         {
-            Validate.NotNull(x, nameof(x));
+            Validate.NotOutOfRange(x, nameof(x), 0);
 
             // if X value is less than the first point, so first point's Y will be returned as membership
             if (x < this.Points[0].X)

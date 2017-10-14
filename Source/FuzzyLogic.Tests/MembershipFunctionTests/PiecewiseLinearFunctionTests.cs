@@ -46,6 +46,46 @@ namespace FuzzyLogic.Tests.MembershipFunctionTests
         }
 
         [Fact]
+        internal void MinY_ReturnsExpectedResult()
+        {
+            // Arrange
+            // Arrange
+            var points = new FuzzyPoint[]
+                             {
+                                 new FuzzyPoint(2, 0),
+                                 new FuzzyPoint(3, 1)
+                             };
+
+            var function = new PiecewiseLinearFunction(points);
+
+            // Act
+            var result = function.MinY;
+
+            // Assert
+            Assert.Equal(0, result);
+        }
+
+        [Fact]
+        internal void MaxY_ReturnsExpectedResult()
+        {
+            // Arrange
+            // Arrange
+            var points = new FuzzyPoint[]
+                             {
+                                 new FuzzyPoint(2, 0),
+                                 new FuzzyPoint(3, 1)
+                             };
+
+            var function = new PiecewiseLinearFunction(points);
+
+            // Act
+            var result = function.MaxY;
+
+            // Assert
+            Assert.Equal(1, result);
+        }
+
+        [Fact]
         internal void LowerBound_ReturnsExpectedResult()
         {
             // Arrange

@@ -178,14 +178,6 @@ namespace FuzzyLogic.Utility
                     throw new ArgumentException("Points array out of sequence (must be in ascending order on X axis).", paramName);
                 }
             }
-
-            var minY = points.Select(p => p.Y).Min();
-            var maxY = points.Select(p => p.Y).Max();
-
-            if (minY > maxY)
-            {
-                throw new ArgumentException("Points array min Y cannot be greater than max Y.");
-            }
         }
 
         /// <summary>

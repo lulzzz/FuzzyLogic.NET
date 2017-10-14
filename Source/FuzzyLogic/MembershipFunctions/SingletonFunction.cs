@@ -9,6 +9,8 @@
 
 namespace FuzzyLogic.MembershipFunctions
 {
+    using FuzzyLogic.Utility;
+
     /// <summary>
     /// The singleton function.
     /// </summary>
@@ -22,6 +24,8 @@ namespace FuzzyLogic.MembershipFunctions
         /// </param>
         public SingletonFunction(double x)
         {
+            Validate.NotOutOfRange(x, nameof(x), 0);
+
             this.Points = new[] { new FuzzyPoint(x, 1) };
         }
 
@@ -61,6 +65,8 @@ namespace FuzzyLogic.MembershipFunctions
         /// </returns>
         public double GetMembership(double x)
         {
+            Validate.NotOutOfRange(x, nameof(x), 0);
+
             return this.Points[0].X.Equals(x) ? 1 : 0;
         }
     }

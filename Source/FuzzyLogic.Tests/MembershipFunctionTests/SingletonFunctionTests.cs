@@ -23,9 +23,11 @@ namespace FuzzyLogic.Tests.MembershipFunctionTests
     public class SingletonFunctionTests
     {
         [Theory]
+        [InlineData(0, 0, 1)]
         [InlineData(1, 0, 0)]
         [InlineData(1, 2, 0)]
         [InlineData(1, 1, 1)]
+        [InlineData(double.MaxValue, double.MaxValue, 1)]
         internal void GetMembership_VariousInputs_ReturnsExpectedResult(double x, double input, double expected)
         {
             // Arrange
@@ -36,6 +38,32 @@ namespace FuzzyLogic.Tests.MembershipFunctionTests
 
             // Assert
             Assert.Equal(expected, result);
+        }
+
+        [Fact]
+        internal void MinY_ReturnsExpectedResult()
+        {
+            // Arrange
+            var function = new SingletonFunction(1);
+
+            // Act
+            var result = function.MinY;
+
+            // Assert
+            Assert.Equal(0, result);
+        }
+
+        [Fact]
+        internal void MaxY_ReturnsExpectedResult()
+        {
+            // Arrange
+            var function = new SingletonFunction(1);
+
+            // Act
+            var result = function.MaxY;
+
+            // Assert
+            Assert.Equal(1, result);
         }
 
         [Fact]
