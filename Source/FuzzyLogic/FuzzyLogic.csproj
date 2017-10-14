@@ -37,6 +37,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FuzzySet.cs" />
+    <Compile Include="Inference\Clause.cs" />
+    <Compile Include="Inference\FuzzyDatabase.cs" />
+    <Compile Include="Inference\LinguisticVariable.cs" />
     <Compile Include="Mathematics\AlgebraicOperations.cs" />
     <Compile Include="MembershipFunctions\TriangularFunction.cs" />
     <Compile Include="NonNegativeDouble.cs" />
@@ -57,7 +60,6 @@
   <ItemGroup>
     <Folder Include="Control\" />
     <Folder Include="Defuzzification\" />
-    <Folder Include="Inference\" />
     <Folder Include="NormFunctions\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
