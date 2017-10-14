@@ -111,17 +111,18 @@ namespace FuzzyLogic.Inference
         /// <param name="labelName">
         /// The set name.
         /// </param>
-        /// <param name="value">
-        /// The value.
+        /// <param name="input">
+        /// The input.
         /// </param>
         /// <returns>
         /// The <see cref="double"/>.
         /// </returns>
-        public double GetLabelMembership(string labelName, double value)
+        public double GetLabelMembership(string labelName, double input)
         {
             Validate.NotNull(labelName, nameof(labelName));
+            Validate.NotOutOfRange(input, nameof(input), 0);
 
-            return this.fuzzySets[labelName].GetMembership(value);
+            return this.fuzzySets[labelName].GetMembership(input);
         }
     }
 }
