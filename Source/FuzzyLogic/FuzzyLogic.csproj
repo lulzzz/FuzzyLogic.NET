@@ -1,7 +1,22 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Authors>Christopher Sellers</Authors>
+    <Company></Company>
+    <Version>0.1.0</Version>
+    <Description>A library to express fuzzy logic for .NET Standard (work in progress).</Description>
+    <AssemblyVersion>0.1.0.0</AssemblyVersion>
+    <Language>C#</Language>
+    <Copyright>Copyright ©2017 Christopher Sellers</Copyright>
+    <PackageLicenseUrl>https://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/cjdsellers/FuzzyLogic</PackageProjectUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/cjdsellers/FuzzyLogic/master/FuzzyLogicIcon.ico</PackageIconUrl>
+    <RepositoryUrl>https://github.com/cjdsellers/FuzzyLogic</RepositoryUrl>
+    <PackageTags>fuzzy logic</PackageTags>
+    <PackageReleaseNotes>Initial release for fuzzy set operations.</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -10,10 +25,6 @@
     <NoWarn></NoWarn>
     <DocumentationFile>bin\Debug\netstandard2.0\FuzzyLogic.xml</DocumentationFile>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Remove="nuget.exe" />
-  </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Control\" />

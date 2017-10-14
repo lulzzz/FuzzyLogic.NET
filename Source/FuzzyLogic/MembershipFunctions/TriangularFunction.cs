@@ -57,7 +57,7 @@ namespace FuzzyLogic.MembershipFunctions
 
             if (minY > maxY)
             {
-                throw new ArgumentException("MinY cannot be greater than MaxY.");
+                throw new ArgumentException("Minimum Y cannot be greater than Maximum Y.");
             }
         }
     }

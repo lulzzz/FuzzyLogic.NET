@@ -9,6 +9,7 @@
 
 namespace FuzzyLogic.Inference
 {
+    using System;
     using System.Collections.Generic;
 
     using FuzzyLogic.Utility;
@@ -26,25 +27,30 @@ namespace FuzzyLogic.Inference
         /// <param name="name">
         /// The name.
         /// </param>
+        /// <param name="fuzzySets">
+        /// The fuzzy sets.
+        /// </param>
         /// <param name="lowerBound">
         /// The lower bound.
         /// </param>
         /// <param name="upperBound">
         /// The upper bound.
         /// </param>
-        /// <param name="fuzzySets">
-        /// The fuzzy sets.
-        /// </param>
         public LinguisticVariable(
             string name,
-            double lowerBound,
-            double upperBound,
-            Dictionary<string, FuzzySet> fuzzySets)
+            Dictionary<string, FuzzySet> fuzzySets,
+            double lowerBound = 0,
+            double upperBound = double.MaxValue)
         {
             Validate.NotNull(name, nameof(name));
             Validate.NotOutOfRange(lowerBound, nameof(lowerBound), 0);
             Validate.NotOutOfRange(upperBound, nameof(upperBound), 0);
             Validate.NotNull(fuzzySets, nameof(fuzzySets));
+
+            if (lowerBound > upperBound)
+            {
+                throw new ArgumentException("Lower bound cannot be greater than upper bound.");
+            }
 
             this.Name = name;
             this.LowerBound = lowerBound;
