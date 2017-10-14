@@ -44,10 +44,10 @@ namespace FuzzyLogic.Tests.MembershipFunctionTests
             var function = new TrapezoidalFunction(x1, x2, x3, x4);
 
             // Act
-            var result = function.GetMembership(NonNegativeDouble.Create(input));
+            var result = function.GetMembership(input);
 
             // Assert
-            Assert.Equal(MembershipValue.Create(expected), result);
+            Assert.Equal(expected, result);
         }
     }
 }

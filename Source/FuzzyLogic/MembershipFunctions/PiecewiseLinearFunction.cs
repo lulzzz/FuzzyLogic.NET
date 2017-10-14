@@ -35,22 +35,22 @@ namespace FuzzyLogic.MembershipFunctions
         /// <summary>
         /// Returns the minimum Y value.
         /// </summary>
-        public MembershipValue MinY => MembershipValue.Create(this.Points.Select(p => p.Y.Value).Min());
+        public double MinY => this.Points.Select(p => p.Y).Min();
 
         /// <summary>
         /// Returns the maximum Y value.
         /// </summary>
-        public MembershipValue MaxY => MembershipValue.Create(this.Points.Select(p => p.Y.Value).Max());
+        public double MaxY => this.Points.Select(p => p.Y).Max();
 
         /// <summary>
         /// Returns the lower bound of the <see cref="IMembershipFunction"/>.
         /// </summary>
-        public NonNegativeDouble LowerBound => this.Points[0].X;
+        public double LowerBound => this.Points[0].X;
 
         /// <summary>
         /// Returns the upper bound of the <see cref="IMembershipFunction"/>.
         /// </summary>
-        public NonNegativeDouble UpperBound => this.Points[this.Points.Length - 1].X;
+        public double UpperBound => this.Points[this.Points.Length - 1].X;
 
         /// <summary>
         /// Gets the points.
@@ -58,15 +58,15 @@ namespace FuzzyLogic.MembershipFunctions
         public FuzzyPoint[] Points { get; }
 
         /// <summary>
-        /// Returns the <see cref="MembershipValue"/> of a given input to the membership function.
+        /// Returns the membership value of a given input to the membership function.
         /// </summary>
         /// <param name="x">
         /// The x value.
         /// </param>
         /// <returns>
-        /// The <see cref="MembershipValue"/>.
+        /// The <see cref="double"/>.
         /// </returns>
-        public MembershipValue GetMembership(NonNegativeDouble x)
+        public double GetMembership(double x)
         {
             Validate.NotNull(x, nameof(x));
 
@@ -84,7 +84,7 @@ namespace FuzzyLogic.MembershipFunctions
                 {
                     var m = this.Points[i].AngularCoefficient(this.Points[i - 1]);
 
-                    return MembershipValue.Create(m * (x - this.Points[i - 1].X) + this.Points[i - 1].Y);
+                    return m * (x - this.Points[i - 1].X) + this.Points[i - 1].Y;
                 }
             }
 

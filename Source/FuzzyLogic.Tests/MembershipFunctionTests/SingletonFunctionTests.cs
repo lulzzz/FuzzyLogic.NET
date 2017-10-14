@@ -32,10 +32,10 @@ namespace FuzzyLogic.Tests.MembershipFunctionTests
             var function = new SingletonFunction(x);
 
             // Act
-            var result = function.GetMembership(NonNegativeDouble.Create(input));
+            var result = function.GetMembership(input);
 
             // Assert
-            Assert.Equal(MembershipValue.Create(expected), result);
+            Assert.Equal(expected, result);
         }
 
         [Fact]
@@ -48,7 +48,7 @@ namespace FuzzyLogic.Tests.MembershipFunctionTests
             var result = function.LowerBound;
 
             // Assert
-            Assert.Equal(NonNegativeDouble.Create(1), result);
+            Assert.Equal(1, result);
         }
 
         [Fact]
@@ -61,7 +61,7 @@ namespace FuzzyLogic.Tests.MembershipFunctionTests
             var result = function.UpperBound;
 
             // Assert
-            Assert.Equal(NonNegativeDouble.Create(1), result);
+            Assert.Equal(1, result);
         }
     }
 }

@@ -103,7 +103,12 @@ namespace FuzzyLogic.Utility
         /// The end points.
         /// </param>
         [DebuggerStepThrough]
-        internal static void NotOutOfRange(double value, string paramName, double lower, double upper, RangeEndPoints endPoints = RangeEndPoints.Inclusive)
+        internal static void NotOutOfRange(
+            double value,
+            string paramName,
+            double lower = double.MinValue,
+            double upper = double.MaxValue,
+            RangeEndPoints endPoints = RangeEndPoints.Inclusive)
         {
             NotInvalidNumber(value, paramName);
 
@@ -174,8 +179,8 @@ namespace FuzzyLogic.Utility
                 }
             }
 
-            var minY = points.Select(p => p.Y.Value).Min();
-            var maxY = points.Select(p => p.Y.Value).Max();
+            var minY = points.Select(p => p.Y).Min();
+            var maxY = points.Select(p => p.Y).Max();
 
             if (minY > maxY)
             {

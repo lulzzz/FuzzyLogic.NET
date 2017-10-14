@@ -9,7 +9,6 @@
 
 namespace FuzzyLogic.Tests.MembershipFunctionTests
 {
-    using System;
     using System.Diagnostics.CodeAnalysis;
 
     using FuzzyLogic.MembershipFunctions;
@@ -40,10 +39,10 @@ namespace FuzzyLogic.Tests.MembershipFunctionTests
             var function = new PiecewiseLinearFunction(points);
 
             // Act
-            var result = function.GetMembership(NonNegativeDouble.Create(x));
+            var result = function.GetMembership(x);
 
             // Assert
-            Assert.Equal(MembershipValue.Create(expected), result);
+            Assert.Equal(expected, result);
         }
 
         [Fact]
@@ -63,7 +62,7 @@ namespace FuzzyLogic.Tests.MembershipFunctionTests
             var result = function.LowerBound;
 
             // Assert
-            Assert.Equal(NonNegativeDouble.Create(2), result);
+            Assert.Equal(2, result);
         }
 
         [Fact]
@@ -83,7 +82,7 @@ namespace FuzzyLogic.Tests.MembershipFunctionTests
             var result = function.UpperBound;
 
             // Assert
-            Assert.Equal(NonNegativeDouble.Create(3), result);
+            Assert.Equal(3, result);
         }
     }
 }

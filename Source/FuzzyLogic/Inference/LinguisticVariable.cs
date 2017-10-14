@@ -42,11 +42,13 @@ namespace FuzzyLogic.Inference
             Dictionary<string, FuzzySet> fuzzySets)
         {
             Validate.NotNull(name, nameof(name));
+            Validate.NotOutOfRange(lowerBound, nameof(lowerBound), 0);
+            Validate.NotOutOfRange(upperBound, nameof(upperBound), 0);
             Validate.NotNull(fuzzySets, nameof(fuzzySets));
 
             this.Name = name;
-            this.LowerBound = NonNegativeDouble.Create(lowerBound);
-            this.UpperBound = NonNegativeDouble.Create(upperBound);
+            this.LowerBound = lowerBound;
+            this.UpperBound = upperBound;
             this.fuzzySets = fuzzySets;
         }
 
@@ -58,12 +60,12 @@ namespace FuzzyLogic.Inference
         /// <summary>
         /// Gets the lower bound of the <see cref="LinguisticVariable"/>.
         /// </summary>
-        public NonNegativeDouble LowerBound { get; }
+        public double LowerBound { get; }
 
         /// <summary>
         /// Gets the upper bound of the <see cref="LinguisticVariable"/>.
         /// </summary>
-        public NonNegativeDouble UpperBound { get; }
+        public double UpperBound { get; }
 
         /// <summary>
         /// The is member.

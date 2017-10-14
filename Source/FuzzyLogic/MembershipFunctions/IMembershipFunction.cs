@@ -23,22 +23,22 @@ namespace FuzzyLogic.MembershipFunctions
         /// <summary>
         /// Gets the min y value.
         /// </summary>
-        MembershipValue MinY { get; }
+        double MinY { get; }
 
         /// <summary>
         /// Gets the max y value.
         /// </summary>
-        MembershipValue MaxY { get; }
+        double MaxY { get; }
 
         /// <summary>
         /// Gets the leftmost x value of the <see cref="IMembershipFunction"/>.
         /// </summary>
-        NonNegativeDouble LowerBound { get; }
+        double LowerBound { get; }
 
         /// <summary>
         /// Gets the rightmost x value of the <see cref="IMembershipFunction"/>.
         /// </summary>
-        NonNegativeDouble UpperBound { get; }
+        double UpperBound { get; }
 
         /// <summary>
         /// Gets the points.
@@ -52,8 +52,8 @@ namespace FuzzyLogic.MembershipFunctions
         /// The input.
         /// </param>
         /// <returns>
-        /// The <see cref="MembershipValue"/>.
+        /// A <see cref="double"/>.
         /// </returns>
-        MembershipValue GetMembership(NonNegativeDouble x);
+        double GetMembership(double x);
     }
 }

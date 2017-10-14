@@ -47,7 +47,7 @@ namespace FuzzyLogic
         /// <summary>
         /// Returns a boolean indicating whether the <see cref="FuzzySet"/> is normal (max y = 1.0).
         /// </summary>
-        public bool IsNormal => this.function.MaxY.Value.Equals(1);
+        public bool IsNormal => this.function.MaxY.Equals(1);
 
         /// <summary>
         /// Returns the value of the membership for the given input (input must not be negative).
@@ -60,7 +60,7 @@ namespace FuzzyLogic
         /// </returns>
         public double GetMembership(double x)
         {
-            return this.function.GetMembership(NonNegativeDouble.Create(x)).Value;
+            return this.function.GetMembership(x);
         }
 
         /// <summary>
@@ -74,11 +74,11 @@ namespace FuzzyLogic
         /// </returns>
         public double Complement(double x)
         {
-            return 1 - this.function.GetMembership(NonNegativeDouble.Create(x)).Value;
+            return 1 - this.function.GetMembership(x);
         }
 
         /// <summary>
-        /// Returns the union of the membership value (the maximum <see cref="MembershipValue"/> of the fuzzy sets).
+        /// Returns the union of the membership value (the maximum membership value of the fuzzy sets).
         /// </summary>
         /// <param name="other">
         /// The other.
@@ -91,11 +91,11 @@ namespace FuzzyLogic
         /// </returns>
         public double Union(FuzzySet other, double x)
         {
-            return Math.Max(this.function.GetMembership(NonNegativeDouble.Create(x)).Value, other.GetMembership(x));
+            return Math.Max(this.function.GetMembership(x), other.GetMembership(x));
         }
 
         /// <summary>
-        /// Returns the intersection of the membership value (the minimum <see cref="MembershipValue"/> of the fuzzy sets).
+        /// Returns the intersection of the membership value (the minimum membership value of the fuzzy sets).
         /// </summary>
         /// <param name="other">
         /// The other.
@@ -108,7 +108,7 @@ namespace FuzzyLogic
         /// </returns>
         public double Intersection(FuzzySet other, double x)
         {
-            return Math.Min(this.function.GetMembership(NonNegativeDouble.Create(x)).Value, other.GetMembership(x));
+            return Math.Min(this.function.GetMembership(x), other.GetMembership(x));
         }
     }
 }

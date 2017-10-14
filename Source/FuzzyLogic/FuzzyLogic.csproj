@@ -41,9 +41,8 @@
     <Compile Include="Inference\FuzzyDatabase.cs" />
     <Compile Include="Inference\LinguisticVariable.cs" />
     <Compile Include="Mathematics\AlgebraicOperations.cs" />
+    <Compile Include="Mathematics\Point.cs" />
     <Compile Include="MembershipFunctions\TriangularFunction.cs" />
-    <Compile Include="NonNegativeDouble.cs" />
-    <Compile Include="MembershipValue.cs" />
     <Compile Include="MembershipFunctions\IMembershipFunction.cs" />
     <Compile Include="MembershipFunctions\PiecewiseLinearFunction.cs" />
     <Compile Include="MembershipFunctions\SingletonFunction.cs" />
@@ -52,7 +51,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utility\RangeEndPoints.cs" />
     <Compile Include="Utility\Validate.cs" />
-    <Compile Include="NumberObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="package.nuspec" />

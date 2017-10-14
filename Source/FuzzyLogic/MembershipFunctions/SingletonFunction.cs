@@ -17,33 +17,33 @@ namespace FuzzyLogic.MembershipFunctions
         /// <summary>
         /// Initializes a new instance of the <see cref="SingletonFunction"/> class.
         /// </summary>
-        /// <param name="support">
-        /// The support.
+        /// <param name="x">
+        /// The support position on the x axis.
         /// </param>
-        public SingletonFunction(double support)
+        public SingletonFunction(double x)
         {
-            this.Points = new[] { new FuzzyPoint(support, 1) };
+            this.Points = new[] { new FuzzyPoint(x, 1) };
         }
 
         /// <summary>
         /// The minimum y value.
         /// </summary>
-        public MembershipValue MinY => MembershipValue.Zero();
+        public double MinY => 0;
 
         /// <summary>
         /// The maximum y value.
         /// </summary>
-        public MembershipValue MaxY => MembershipValue.Create(1);
+        public double MaxY => 1;
 
         /// <summary>
         /// The lower bound of the <see cref="IMembershipFunction"/>, the same value as the support.
         /// </summary>
-        public NonNegativeDouble LowerBound => this.Points[0].X;
+        public double LowerBound => this.Points[0].X;
 
         /// <summary>
         /// The upper bound of the <see cref="IMembershipFunction"/>, the same value as the support.
         /// </summary>
-        public NonNegativeDouble UpperBound => this.Points[0].X;
+        public double UpperBound => this.Points[0].X;
 
         /// <summary>
         /// Gets the points array.
@@ -51,17 +51,17 @@ namespace FuzzyLogic.MembershipFunctions
         public FuzzyPoint[] Points { get; }
 
         /// <summary>
-        /// Returns the <see cref="MembershipValue"/> of a given input to the <see cref="SingletonFunction"/>.
+        /// Returns the membership value of a given input to the <see cref="SingletonFunction"/>.
         /// </summary>
         /// <param name="x">
         /// The x.
         /// </param>
         /// <returns>
-        /// The <see cref="MembershipValue"/>.
+        /// The <see cref="double"/>.
         /// </returns>
-        public MembershipValue GetMembership(NonNegativeDouble x)
+        public double GetMembership(double x)
         {
-            return MembershipValue.Create(this.Points[0].X == x ? 1 : 0);
+            return this.Points[0].X.Equals(x) ? 1 : 0;
         }
     }
 }
