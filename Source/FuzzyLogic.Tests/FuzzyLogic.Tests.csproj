@@ -1,72 +1,22 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9D28F00D-4558-44DD-8790-A306E79E93C1}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FuzzyLogic.Tests</RootNamespace>
-    <AssemblyName>FuzzyLogic.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">15.0</VisualStudioVersion>
-    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
-    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
-    <IsCodedUITest>False</IsCodedUITest>
-    <TestProjectType>UnitTest</TestProjectType>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\FuzzyLogic.Tests.xml</DocumentationFile>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <NoWarn />
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors></WarningsAsErrors>
+    <DocumentationFile>bin\Debug\netstandard2.0\FuzzyLogic.Tests.xml</DocumentationFile>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
+    <PackageReference Include="xunit" Version="2.3.0" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="FuzzyPointTests.cs" />
-    <Compile Include="FuzzySetTests.cs" />
-    <Compile Include="MathematicsTests\AlgebraicOperationsTests.cs" />
-    <Compile Include="MathematicsTests\PointTests.cs" />
-    <Compile Include="MembershipFunctionTests\PiecewiseLinearFunctionTests.cs" />
-    <Compile Include="MembershipFunctionTests\SingletonFunctionTests.cs" />
-    <Compile Include="MembershipFunctionTests\TriangularFunctionTests.cs" />
-    <Compile Include="MembershipFunctionTests\TrapezoidalFunctionTests.cs" />
-    <Compile Include="PerformanceTests\PerformanceTimer.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UtilityTests\ValidateTests.cs" />
+    <ProjectReference Include="..\FuzzyLogic\FuzzyLogic.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="xunit">
-      <Version>2.3.0</Version>
-    </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\FuzzyLogic\FuzzyLogic.csproj">
-      <Project>{78abd822-85fe-4fcb-a34d-f7ac93668527}</Project>
-      <Name>FuzzyLogic</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
 </Project>
