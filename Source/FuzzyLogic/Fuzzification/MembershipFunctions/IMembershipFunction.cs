@@ -17,12 +17,12 @@ namespace FuzzyLogic.Fuzzification.MembershipFunctions
     public interface IMembershipFunction
     {
         /// <summary>
-        /// Gets the min y value.
+        /// Gets the minimum y value.
         /// </summary>
         double MinY { get; }
 
         /// <summary>
-        /// Gets the max y value.
+        /// Gets the maximum y value.
         /// </summary>
         double MaxY { get; }
 

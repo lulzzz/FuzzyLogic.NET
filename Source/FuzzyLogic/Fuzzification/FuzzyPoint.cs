@@ -129,6 +129,40 @@ namespace FuzzyLogic.Fuzzification
         }
 
         /// <summary>
+        /// The ==.
+        /// </summary>
+        /// <param name="point1">
+        /// The point 1.
+        /// </param>
+        /// <param name="point2">
+        /// The point 2.
+        /// </param>
+        /// <returns>
+        /// A <see cref="bool"/>.
+        /// </returns>
+        public static bool operator ==(FuzzyPoint point1, FuzzyPoint point2)
+        {
+            return point1.X.Equals(point2.X) && point1.Y.Equals(point2.Y);
+        }
+
+        /// <summary>
+        /// The !=.
+        /// </summary>
+        /// <param name="point1">
+        /// The point 1.
+        /// </param>
+        /// <param name="point2">
+        /// The point 2.
+        /// </param>
+        /// <returns>
+        /// A <see cref="bool"/>.
+        /// </returns>
+        public static bool operator !=(FuzzyPoint point1, FuzzyPoint point2)
+        {
+            return !point1.X.Equals(point2.X) || !point1.Y.Equals(point2.Y);
+        }
+
+        /// <summary>
         /// Returns the sum of two points.
         /// </summary>
         /// <param name="other">
@@ -258,42 +292,6 @@ namespace FuzzyLogic.Fuzzification
         public double EuclideanNorm()
         {
             return Math.Sqrt(this.X + this.Y);
-        }
-
-        /// <summary>
-        /// The ==.
-        /// </summary>
-        /// <param name="point1">
-        /// The point 1.
-        /// </param>
-        /// <param name="point2">
-        /// The point 2.
-        /// </param>
-        /// <returns>
-        /// A <see cref="bool"/>.
-        /// </returns>
-        public static bool operator ==(FuzzyPoint point1, FuzzyPoint point2)
-        {
-
-            return point1.X == point2.X && point1.Y == point2.Y;
-        }
-
-        /// <summary>
-        /// The !=.
-        /// </summary>
-        /// <param name="point1">
-        /// The point 1.
-        /// </param>
-        /// <param name="point2">
-        /// The point 2.
-        /// </param>
-        /// <returns>
-        /// A <see cref="bool"/>.
-        /// </returns>
-        public static bool operator !=(FuzzyPoint point1, FuzzyPoint point2)
-        {
-
-            return (point1.X != point2.X) || (point1.Y != point2.Y);
         }
 
         /// <summary>
