@@ -34,7 +34,7 @@ namespace FuzzyLogic.Tests.FuzzificationTests
         internal void GetMembership_VariousInputs_ReturnsExpectedResult(double input, double expected)
         {
             // Arrange
-            var function = new TriangularFunction(2, 3, 4);
+            var function = TriangularFunction.Create(2, 3, 4);
             var fuzzySet = new FuzzySet("fuzzySet", function);
 
             // Act
@@ -49,7 +49,7 @@ namespace FuzzyLogic.Tests.FuzzificationTests
         internal void IsNormal_WhenSetNormal_ReturnsTrue()
         {
             // Arrange
-            var function = new TriangularFunction(2, 3, 4);
+            var function = TriangularFunction.Create(2, 3, 4);
             var fuzzySet = new FuzzySet("fuzzySet", function);
 
             // Act
@@ -63,7 +63,7 @@ namespace FuzzyLogic.Tests.FuzzificationTests
         internal void IsNormal_WhenSetNotNormal_ReturnsFalse()
         {
             // Arrange
-            var function = new TriangularFunction(2, 3, 4, 0, 0.9);
+            var function = TriangularFunction.Create(2, 3, 4, 0, 0.9);
             var fuzzySet = new FuzzySet("fuzzySet", function);
 
             // Act
@@ -81,7 +81,7 @@ namespace FuzzyLogic.Tests.FuzzificationTests
         internal void Complement_VariousInputs_ReturnsExpectedResult(double input, double expected)
         {
             // Arrange
-            var function = new TriangularFunction(2, 3, 4);
+            var function = TriangularFunction.Create(2, 3, 4);
             var fuzzySet = new FuzzySet("fuzzySet", function);
 
             // Act
@@ -102,8 +102,8 @@ namespace FuzzyLogic.Tests.FuzzificationTests
         internal void Union_VariousInputs_ReturnsExpectedResult(double input, double expected)
         {
             // Arrange
-            var function1 = new TriangularFunction(2, 3, 4);
-            var function2 = new TriangularFunction(3, 4, 5, 0, 0.75);
+            var function1 = TriangularFunction.Create(2, 3, 4);
+            var function2 = TriangularFunction.Create(3, 4, 5, 0, 0.75);
             var fuzzySet1 = new FuzzySet("fuzzySet1", function1);
             var fuzzySet2 = new FuzzySet("fuzzySet2", function2);
 
@@ -125,8 +125,8 @@ namespace FuzzyLogic.Tests.FuzzificationTests
         internal void Intersection_VariousInputs_ReturnsExpectedResult(double input, double expected)
         {
             // Arrange
-            var function1 = new TriangularFunction(1, 3, 5);
-            var function2 = new TriangularFunction(2, 4, 6, 0, 0.75);
+            var function1 = TriangularFunction.Create(1, 3, 5);
+            var function2 = TriangularFunction.Create(2, 4, 6, 0, 0.75);
             var fuzzySet1 = new FuzzySet("fuzzySet1", function1);
             var fuzzySet2 = new FuzzySet("fuzzySet2", function2);
 

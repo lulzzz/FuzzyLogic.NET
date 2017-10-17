@@ -29,7 +29,7 @@ namespace FuzzyLogic.Tests.FuzzificationTests.MembershipFunctionTests
             // Arrange
             // Act
             // Assert
-            Assert.Throws<ArgumentException>(() => new TrapezoidalFunction(1, 2, 3, 4, 1, 0.5));
+            Assert.Throws<ArgumentException>(() => TrapezoidalFunction.Create(1, 2, 3, 4, 1, 0.5));
         }
 
         [Theory]
@@ -43,7 +43,7 @@ namespace FuzzyLogic.Tests.FuzzificationTests.MembershipFunctionTests
         [InlineData(2, 3, 4, 5, 2.5, 0.5)]
         [InlineData(2, 3, 4, 5, 4.5, 0.5)]
         [InlineData(2, 3, 4, 5, double.MaxValue, 0)]
-        internal void GetMembership_VariousInputs_ReturnsExpectedResult(
+        internal void Create_GetMembershipWithVariousInputs_ReturnsExpectedResult(
             double x1,
             double x2,
             double x3,
@@ -52,7 +52,55 @@ namespace FuzzyLogic.Tests.FuzzificationTests.MembershipFunctionTests
             double expected)
         {
             // Arrange
-            var function = new TrapezoidalFunction(x1, x2, x3, x4);
+            var function = TrapezoidalFunction.Create(x1, x2, x3, x4);
+
+            // Act
+            var result = function.GetMembership(input);
+
+            // Assert
+            Assert.Equal(expected, result);
+        }
+
+        [Theory]
+        [InlineData(2, 3, 0, 0)]
+        [InlineData(2, 3, 1, 0)]
+        [InlineData(2, 3, 2, 0)]
+        [InlineData(2, 3, 3, 1)]
+        [InlineData(2, 3, 4, 1)]
+        [InlineData(2, 3, 2.5, 0.5)]
+        [InlineData(2, 3, double.MaxValue, 1)]
+        internal void CreateWithLeftEdge_GetMembershipWithVariousInputs_ReturnsExpectedResult(
+            double x1,
+            double x2,
+            double input,
+            double expected)
+        {
+            // Arrange
+            var function = TrapezoidalFunction.CreateWithLeftEdge(x1, x2);
+
+            // Act
+            var result = function.GetMembership(input);
+
+            // Assert
+            Assert.Equal(expected, result);
+        }
+
+        [Theory]
+        [InlineData(2, 3, 0, 1)]
+        [InlineData(2, 3, 1, 1)]
+        [InlineData(2, 3, 2, 1)]
+        [InlineData(2, 3, 3, 0)]
+        [InlineData(2, 3, 4, 0)]
+        [InlineData(2, 3, 2.5, 0.5)]
+        [InlineData(2, 3, double.MaxValue, 0)]
+        internal void CreateWithRightEdge_GetMembershipWithVariousInputs_ReturnsExpectedResult(
+            double x1,
+            double x2,
+            double input,
+            double expected)
+        {
+            // Arrange
+            var function = TrapezoidalFunction.CreateWithRightEdge(x1, x2);
 
             // Act
             var result = function.GetMembership(input);

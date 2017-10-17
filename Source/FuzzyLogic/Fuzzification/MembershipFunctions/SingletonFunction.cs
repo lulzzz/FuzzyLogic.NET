@@ -20,14 +20,14 @@ namespace FuzzyLogic.Fuzzification.MembershipFunctions
         /// <summary>
         /// Initializes a new instance of the <see cref="SingletonFunction"/> class.
         /// </summary>
-        /// <param name="x">
-        /// The support position on the x axis.
+        /// <param name="point">
+        /// The point.
         /// </param>
-        public SingletonFunction(double x)
+        private SingletonFunction(FuzzyPoint point)
         {
-            Validate.NotOutOfRange(x, nameof(x), 0);
+            Validate.NotNull(point, nameof(point));
 
-            this.Points = new[] { new FuzzyPoint(x, 1) };
+            this.Points = new FuzzyPoint[] { point };
         }
 
         /// <summary>
@@ -54,6 +54,22 @@ namespace FuzzyLogic.Fuzzification.MembershipFunctions
         /// Gets the points array.
         /// </summary>
         public FuzzyPoint[] Points { get; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SingletonFunction"/> class.
+        /// </summary>
+        /// <param name="x">
+        /// The support position on the x axis.
+        /// </param>
+        /// <returns>
+        /// The <see cref="SingletonFunction"/>.
+        /// </returns>
+        public static SingletonFunction Create(double x)
+        {
+            Validate.NotOutOfRange(x, nameof(x), 0);
+
+            return new SingletonFunction(new FuzzyPoint(x, 1));
+        }
 
         /// <summary>
         /// Returns the membership value of a given input to the <see cref="SingletonFunction"/>.

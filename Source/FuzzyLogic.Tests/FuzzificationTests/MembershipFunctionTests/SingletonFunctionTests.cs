@@ -31,7 +31,7 @@ namespace FuzzyLogic.Tests.FuzzificationTests.MembershipFunctionTests
         internal void GetMembership_VariousInputs_ReturnsExpectedResult(double x, double input, double expected)
         {
             // Arrange
-            var function = new SingletonFunction(x);
+            var function = SingletonFunction.Create(x);
 
             // Act
             var result = function.GetMembership(input);
@@ -44,7 +44,7 @@ namespace FuzzyLogic.Tests.FuzzificationTests.MembershipFunctionTests
         internal void MinY_ReturnsExpectedResult()
         {
             // Arrange
-            var function = new SingletonFunction(1);
+            var function = SingletonFunction.Create(1);
 
             // Act
             var result = function.MinY;
@@ -57,7 +57,7 @@ namespace FuzzyLogic.Tests.FuzzificationTests.MembershipFunctionTests
         internal void MaxY_ReturnsExpectedResult()
         {
             // Arrange
-            var function = new SingletonFunction(1);
+            var function = SingletonFunction.Create(1);
 
             // Act
             var result = function.MaxY;
@@ -70,7 +70,7 @@ namespace FuzzyLogic.Tests.FuzzificationTests.MembershipFunctionTests
         internal void LowerBound_ReturnsExpectedResult()
         {
             // Arrange
-            var function = new SingletonFunction(1);
+            var function = SingletonFunction.Create(1);
 
             // Act
             var result = function.LowerBound;
@@ -83,7 +83,7 @@ namespace FuzzyLogic.Tests.FuzzificationTests.MembershipFunctionTests
         internal void UpperBound_ReturnsExpectedResult()
         {
             // Arrange
-            var function = new SingletonFunction(1);
+            var function = SingletonFunction.Create(1);
 
             // Act
             var result = function.UpperBound;

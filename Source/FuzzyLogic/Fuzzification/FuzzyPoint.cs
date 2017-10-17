@@ -11,12 +11,14 @@ namespace FuzzyLogic.Fuzzification
 {
     using System;
 
+    using FuzzyLogic.Annotations;
     using FuzzyLogic.Mathematics;
     using FuzzyLogic.Utility;
 
     /// <summary>
-    /// The <see cref="FuzzyPoint"/> immutable class.
+    /// The <see cref="FuzzyPoint"/> class.
     /// </summary>
+    [Immutable]
     [Serializable]
     public struct FuzzyPoint
     {

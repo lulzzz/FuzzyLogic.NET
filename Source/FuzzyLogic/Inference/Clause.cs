@@ -9,12 +9,14 @@
 
 namespace FuzzyLogic.Inference
 {
+    using FuzzyLogic.Annotations;
     using FuzzyLogic.Fuzzification;
     using FuzzyLogic.Utility;
 
     /// <summary>
-    /// The <see cref="Clause"/> immutable class.
+    /// The <see cref="Clause"/> class.
     /// </summary>
+    [Immutable]
     public class Clause
     {
         /// <summary>

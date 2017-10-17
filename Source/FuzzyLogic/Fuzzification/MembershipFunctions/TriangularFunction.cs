@@ -11,14 +11,28 @@ namespace FuzzyLogic.Fuzzification.MembershipFunctions
 {
     using System;
 
+    using FuzzyLogic.Annotations;
     using FuzzyLogic.Fuzzification;
     using FuzzyLogic.Utility;
 
     /// <summary>
-    /// The <see cref="TriangularFunction" /> immutable class.
+    /// The <see cref="TriangularFunction" /> class.
     /// </summary>
+    [Immutable]
     public class TriangularFunction : PiecewiseLinearFunction
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TriangularFunction"/> class.
+        /// </summary>
+        /// <param name="points">
+        /// The points.
+        /// </param>
+        private TriangularFunction(FuzzyPoint[] points)
+            : base(points)
+        {
+            Validate.NotNull(points, nameof(points));
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="TriangularFunction"/> class.
         /// </summary>
@@ -40,18 +54,15 @@ namespace FuzzyLogic.Fuzzification.MembershipFunctions
         /// <exception cref="ArgumentException">
         /// Throws an exception if minimum y exceeds maximum y.
         /// </exception>
-        public TriangularFunction(
+        /// <returns>
+        /// The <see cref="TriangularFunction"/>.
+        /// </returns>
+        public static TriangularFunction Create(
             double x1,
             double x2,
             double x3,
             double minY = 0,
             double maxY = 1)
-            : base(new[]
-                       {
-                           new FuzzyPoint(x1, minY),
-                           new FuzzyPoint(x2, maxY),
-                           new FuzzyPoint(x3, minY)
-                       })
         {
             Validate.NotOutOfRange(x1, nameof(x1), 0);
             Validate.NotOutOfRange(x2, nameof(x2), 0);
@@ -63,6 +74,15 @@ namespace FuzzyLogic.Fuzzification.MembershipFunctions
             {
                 throw new ArgumentException("Minimum Y cannot be greater than Maximum Y.");
             }
+
+            var fuzzyPoints = new[]
+                                  {
+                                      new FuzzyPoint(x1, minY),
+                                      new FuzzyPoint(x2, maxY),
+                                      new FuzzyPoint(x3, minY),
+                                  };
+
+            return new TriangularFunction(fuzzyPoints);
         }
     }
 }

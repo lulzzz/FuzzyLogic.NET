@@ -12,10 +12,10 @@ namespace FuzzyLogic.Annotations
     using System;
 
     /// <summary>
-    /// This decoration indicates that the annotated class should be completely immutable
-    /// (to fulfill its design by contract specification).
+    /// This decoration indicates that the annotated class or structure should be completely immutable.
+    /// Once instantiated the objects public properties should not change.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class)]
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
     internal sealed class ImmutableAttribute : Attribute
     {
     }

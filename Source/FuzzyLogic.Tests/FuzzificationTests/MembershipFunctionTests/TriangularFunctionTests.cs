@@ -29,7 +29,7 @@ namespace FuzzyLogic.Tests.FuzzificationTests.MembershipFunctionTests
             // Arrange
             // Act
             // Assert
-            Assert.Throws<ArgumentException>(() => new TriangularFunction(1, 2, 3, 1, 0));
+            Assert.Throws<ArgumentException>(() => TriangularFunction.Create(1, 2, 3, 1, 0));
         }
 
         [Theory]
@@ -49,7 +49,7 @@ namespace FuzzyLogic.Tests.FuzzificationTests.MembershipFunctionTests
             double expected)
         {
             // Arrange
-            var function = new TriangularFunction(x1, x2, x3);
+            var function = TriangularFunction.Create(x1, x2, x3);
 
             // Act
             var result = function.GetMembership(input);
