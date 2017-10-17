@@ -6,9 +6,9 @@
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <Authors>Christopher Sellers</Authors>
     <Company></Company>
-    <Version>0.1.0</Version>
+    <Version>0.2.0</Version>
     <Description>A library to express fuzzy logic for .NET Standard (work in progress).</Description>
-    <AssemblyVersion>0.1.0.0</AssemblyVersion>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
     <Language>C#</Language>
     <Copyright>Copyright ©2017 Christopher Sellers</Copyright>
     <PackageLicenseUrl>https://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
