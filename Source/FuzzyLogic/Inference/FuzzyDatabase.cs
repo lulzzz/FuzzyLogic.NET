@@ -18,7 +18,7 @@ namespace FuzzyLogic.Inference
     /// <summary>
     /// The <see cref="FuzzyDatabase"/> class.
     /// </summary>
-    public class FuzzyDatabase
+    public sealed class FuzzyDatabase
     {
         private readonly IDictionary<string, LinguisticVariable> variables = new Dictionary<string, LinguisticVariable>();
 
@@ -54,7 +54,7 @@ namespace FuzzyLogic.Inference
         {
             if (this.variables.ContainsKey(variable.Name))
             {
-                throw new ArgumentException($"Cannot add linguistic variable. Fuzzy database already contains a rule named {variable.Name}");
+                throw new ArgumentException($"Cannot add linguistic variable (Fuzzy database already contains a rule named {variable.Name}).");
             }
 
             this.variables.Add(variable.Name, variable);
@@ -74,7 +74,7 @@ namespace FuzzyLogic.Inference
         {
             if (!this.variables.ContainsKey(variable.Name))
             {
-                throw new ArgumentException($"Cannot update linguistic variable. Fuzzy database does not contain a variable named {variable.Name}.");
+                throw new ArgumentException($"Cannot update linguistic variable (Fuzzy database does not contain a variable named {variable.Name}).");
             }
 
             this.variables[variable.Name] = variable;
@@ -93,7 +93,7 @@ namespace FuzzyLogic.Inference
         {
             if (!this.variables.ContainsKey(variable.Name))
             {
-                throw new ArgumentException($"Cannot delete linguistic variable. Fuzzy database does not contain a variable named {variable.Name}.");
+                throw new ArgumentException($"Cannot delete linguistic variable (Fuzzy database does not contain a variable named {variable.Name}).");
             }
 
             this.variables.Remove(variable.Name);
@@ -141,7 +141,7 @@ namespace FuzzyLogic.Inference
 
             if (!this.variables.ContainsKey(variableName))
             {
-                throw new ArgumentException($"Cannot get linguistic variable. Fuzzy database does not contain a variable named {variableName}");
+                throw new ArgumentException($"Cannot get linguistic variable (Fuzzy database does not contain a variable named {variableName}).");
             }
 
             return this.variables[variableName];

@@ -1,17 +1,17 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="PointTests.cs" author="Christopher Sellers">
+﻿// -------------------------------------------------------------------------------------------------
+// <copyright file="FuzzyPointTests.cs" author="Christopher Sellers">
 //   Copyright (C) 2017. All rights reserved.
 //   https://github.com/cjdsellers/FuzzyLogic
 //   the use of this source code is governed by the Apache 2.0 license
 //   as found in the LICENSE.txt file.
 // </copyright>
-// --------------------------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------
 
-namespace FuzzyLogic.Tests.MathematicsTests
+namespace FuzzyLogic.Tests.FuzzificationTests
 {
     using System.Diagnostics.CodeAnalysis;
 
-    using FuzzyLogic.Mathematics;
+    using FuzzyLogic.Fuzzification;
 
     using Xunit;
 
@@ -20,7 +20,7 @@ namespace FuzzyLogic.Tests.MathematicsTests
     /// </summary>
     [SuppressMessage("StyleCop.CSharp.NamingRules", "*", Justification = "Reviewed. Suppression is OK within the Test Suite.")]
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "*", Justification = "Reviewed. Suppression is OK within the Test Suite.")]
-    public class PointTests
+    public class FuzzyPointTests
     {
         [Theory]
         [InlineData(0, 0, 0, 0, 0, 0)]
@@ -35,16 +35,16 @@ namespace FuzzyLogic.Tests.MathematicsTests
             double point3y)
         {
             // Arrange
-            var point1 = new Point(point1x, point1y);
-            var point2 = new Point(point2x, point2y);
+            var point1 = new FuzzyPoint(point1x, point1y);
+            var point2 = new FuzzyPoint(point2x, point2y);
 
             // Act
             var result1 = point1.Add(point2);
             var result2 = point1 + point2;
 
             // Assert
-            Assert.Equal(new Point(point3x, point3y), result1);
-            Assert.Equal(new Point(point3x, point3y), result2);
+            Assert.Equal(new FuzzyPoint(point3x, point3y), result1);
+            Assert.Equal(new FuzzyPoint(point3x, point3y), result2);
         }
 
         [Theory]
@@ -61,16 +61,16 @@ namespace FuzzyLogic.Tests.MathematicsTests
             double point3y)
         {
             // Arrange
-            var point1 = new Point(point1x, point1y);
-            var point2 = new Point(point2x, point2y);
+            var point1 = new FuzzyPoint(point1x, point1y);
+            var point2 = new FuzzyPoint(point2x, point2y);
 
             // Act
             var result1 = point1.Subtract(point2);
             var result2 = point1 - point2;
 
             // Assert
-            Assert.Equal(new Point(point3x, point3y), result1);
-            Assert.Equal(new Point(point3x, point3y), result2);
+            Assert.Equal(new FuzzyPoint(point3x, point3y), result1);
+            Assert.Equal(new FuzzyPoint(point3x, point3y), result2);
         }
 
         [Theory]
@@ -85,15 +85,15 @@ namespace FuzzyLogic.Tests.MathematicsTests
             double point2y)
         {
             // Arrange
-            var point = new Point(point1x, point1y);
+            var point = new FuzzyPoint(point1x, point1y);
 
             // Act
             var result1 = point.Multiply(factor);
             var result2 = point * factor;
 
             // Assert
-            Assert.Equal(new Point(point2x, point2y), result1);
-            Assert.Equal(new Point(point2x, point2y), result2);
+            Assert.Equal(new FuzzyPoint(point2x, point2y), result1);
+            Assert.Equal(new FuzzyPoint(point2x, point2y), result2);
         }
 
         [Theory]
@@ -108,15 +108,15 @@ namespace FuzzyLogic.Tests.MathematicsTests
             double point2y)
         {
             // Arrange
-            var point = new Point(point1x, point1y);
+            var point = new FuzzyPoint(point1x, point1y);
 
             // Act
             var result1 = point.Divide(factor);
             var result2 = point / factor;
 
             // Assert
-            Assert.Equal(new Point(point2x, point2y), result1);
-            Assert.Equal(new Point(point2x, point2y), result2);
+            Assert.Equal(new FuzzyPoint(point2x, point2y), result1);
+            Assert.Equal(new FuzzyPoint(point2x, point2y), result2);
         }
 
         [Theory]
@@ -128,8 +128,8 @@ namespace FuzzyLogic.Tests.MathematicsTests
             double point2y)
         {
             // Arrange
-            var point1 = new Point(point1x, point1y);
-            var point2 = new Point(point2x, point2y);
+            var point1 = new FuzzyPoint(point1x, point1y);
+            var point2 = new FuzzyPoint(point2x, point2y);
 
             // Act
             var result = point1.DistanceTo(point2);
@@ -142,8 +142,8 @@ namespace FuzzyLogic.Tests.MathematicsTests
         internal void SquaredDistanceTo()
         {
             // Arrange
-            var point1 = new Point(1, 0);
-            var point2 = new Point(0, 0);
+            var point1 = new FuzzyPoint(1, 0);
+            var point2 = new FuzzyPoint(0, 0);
 
             // Act
             var result = point1.SquaredDistanceTo(point2);
@@ -155,18 +155,17 @@ namespace FuzzyLogic.Tests.MathematicsTests
         [Theory]
         [InlineData(0, 0, 0)]
         [InlineData(0, 1, 1)]
-        [InlineData(10, 0, 10)]
-        [InlineData(0.3, 0.4, 0.5)]
+        [InlineData(0.5, 0.5, 1)]
         internal void EuclideanNorm(double x, double y, double expectedNorm)
         {
             // Arrange
-            var point = new Point(x, y);
+            var point = new FuzzyPoint(x, y);
 
             // Act
             var result = point.EuclideanNorm();
 
             // Assert
-            Assert.Equal(result, expectedNorm);
+            Assert.Equal(expectedNorm, result);
         }
 
         [Theory]
@@ -178,8 +177,8 @@ namespace FuzzyLogic.Tests.MathematicsTests
         {
             // Arrange
             // Act
-            var point1 = new Point(x1, y1);
-            var point2 = new Point(x2, y2);
+            var point1 = new FuzzyPoint(x1, y1);
+            var point2 = new FuzzyPoint(x2, y2);
 
             // Assert
             Assert.Equal(point1 == point2, areEqual);
@@ -194,8 +193,8 @@ namespace FuzzyLogic.Tests.MathematicsTests
         {
             // Arrange
             // Act
-            var point1 = new Point(x1, y1);
-            var point2 = new Point(x2, y2);
+            var point1 = new FuzzyPoint(x1, y1);
+            var point2 = new FuzzyPoint(x2, y2);
 
             // Assert
             Assert.Equal(point1 != point2, areNotEqual);
@@ -205,8 +204,8 @@ namespace FuzzyLogic.Tests.MathematicsTests
         internal void GetHashCodeTest()
         {
             // Arrange
-            var point1 = new Point(0, 0);
-            var point2 = new Point(1, 1);
+            var point1 = new FuzzyPoint(0, 0);
+            var point2 = new FuzzyPoint(1, 1);
 
             // Act
             var result1 = point1.GetHashCode();
@@ -221,13 +220,13 @@ namespace FuzzyLogic.Tests.MathematicsTests
         internal void ToStringTest()
         {
             // Arrange
-            var point1 = new Point(1, 1);
+            var point1 = new FuzzyPoint(1, 1);
 
             // Act
             var result = point1.ToString();
 
             // Assert
-            Assert.Equal("Point: 1, 1", result);
+            Assert.Equal("FuzzyPoint: 1, 1", result);
         }
     }
 }

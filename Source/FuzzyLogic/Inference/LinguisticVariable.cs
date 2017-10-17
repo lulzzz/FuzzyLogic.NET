@@ -12,6 +12,7 @@ namespace FuzzyLogic.Inference
     using System;
     using System.Collections.Generic;
 
+    using FuzzyLogic.Fuzzification;
     using FuzzyLogic.Utility;
 
     /// <summary>

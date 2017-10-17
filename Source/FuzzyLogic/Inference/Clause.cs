@@ -9,6 +9,7 @@
 
 namespace FuzzyLogic.Inference
 {
+    using FuzzyLogic.Fuzzification;
     using FuzzyLogic.Utility;
 
     /// <summary>
@@ -40,7 +41,7 @@ namespace FuzzyLogic.Inference
         public LinguisticVariable Variable { get; }
 
         /// <summary>
-        /// Gets the <see cref="FuzzyLogic.FuzzySet"/> of the <see cref="Clause"/>.
+        /// Gets the <see cref="Fuzzification.FuzzySet"/> of the <see cref="Clause"/>.
         /// </summary>
         public FuzzySet FuzzySet { get; }
 

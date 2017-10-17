@@ -7,10 +7,11 @@
 // </copyright>
 // -------------------------------------------------------------------------------------------------
 
-namespace FuzzyLogic.MembershipFunctions
+namespace FuzzyLogic.Fuzzification.MembershipFunctions
 {
     using System.Linq;
 
+    using FuzzyLogic.Fuzzification;
     using FuzzyLogic.Utility;
 
     /// <summary>

@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------------------------------
-// <copyright file="Point.cs" author="Christopher Sellers">
+// <copyright file="FuzzyPoint.cs" author="Christopher Sellers">
 //   Copyright (C) 2017. All rights reserved.
 //   https://github.com/cjdsellers/FuzzyLogic
 //   the use of this source code is governed by the Apache 2.0 license
@@ -7,20 +7,21 @@
 // </copyright>
 // -------------------------------------------------------------------------------------------------
 
-namespace FuzzyLogic.Mathematics
+namespace FuzzyLogic.Fuzzification
 {
     using System;
 
+    using FuzzyLogic.Mathematics;
     using FuzzyLogic.Utility;
 
     /// <summary>
-    /// The <see cref="Point"/> immutable class.
+    /// The <see cref="FuzzyPoint"/> immutable class.
     /// </summary>
     [Serializable]
-    public class Point
+    public struct FuzzyPoint
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Point"/> class.
+        /// Initializes a new instance of the <see cref="FuzzyPoint"/> struct.
         /// </summary>
         /// <param name="x">
         /// The x co-ordinate.
@@ -28,10 +29,10 @@ namespace FuzzyLogic.Mathematics
         /// <param name="y">
         /// The y co-ordinate.
         /// </param>
-        public Point(double x, double y)
+        public FuzzyPoint(double x, double y)
         {
-            Validate.NotOutOfRange(x, nameof(x));
-            Validate.NotOutOfRange(y, nameof(y));
+            Validate.NotOutOfRange(x, nameof(x), 0);
+            Validate.NotOutOfRange(y, nameof(y), 0, 1);
 
             this.X = x;
             this.Y = y;
@@ -57,14 +58,14 @@ namespace FuzzyLogic.Mathematics
         /// The point 2.
         /// </param>
         /// <returns>
-        /// The <see cref="Point"/>
+        /// The <see cref="FuzzyPoint"/>
         /// </returns>
-        public static Point operator +(Point point1, Point point2)
+        public static FuzzyPoint operator +(FuzzyPoint point1, FuzzyPoint point2)
         {
             Validate.NotNull(point1, nameof(point1));
             Validate.NotNull(point2, nameof(point2));
 
-            return new Point(point1.X + point2.X, point1.Y + point2.Y);
+            return new FuzzyPoint(point1.X + point2.X, point1.Y + point2.Y);
         }
 
         /// <summary>
@@ -77,14 +78,14 @@ namespace FuzzyLogic.Mathematics
         /// The point 2.
         /// </param>
         /// <returns>
-        /// The <see cref="Point"/>.
+        /// The <see cref="FuzzyPoint"/>.
         /// </returns>
-        public static Point operator -(Point point1, Point point2)
+        public static FuzzyPoint operator -(FuzzyPoint point1, FuzzyPoint point2)
         {
             Validate.NotNull(point1, nameof(point1));
             Validate.NotNull(point2, nameof(point2));
 
-            return new Point(point1.X - point2.X, point1.Y - point2.Y);
+            return new FuzzyPoint(point1.X - point2.X, point1.Y - point2.Y);
         }
 
         /// <summary>
@@ -97,14 +98,14 @@ namespace FuzzyLogic.Mathematics
         /// The factor.
         /// </param>
         /// <returns>
-        /// The <see cref="Point"/>.
+        /// The <see cref="FuzzyPoint"/>.
         /// </returns>
-        public static Point operator *(Point point, double factor)
+        public static FuzzyPoint operator *(FuzzyPoint point, double factor)
         {
             Validate.NotNull(point, nameof(point));
             Validate.NotInvalidNumber(factor, nameof(factor));
 
-            return new Point(point.X * factor, point.Y * factor);
+            return new FuzzyPoint(point.X * factor, point.Y * factor);
         }
 
         /// <summary>
@@ -117,14 +118,14 @@ namespace FuzzyLogic.Mathematics
         /// The factor.
         /// </param>
         /// <returns>
-        /// The <see cref="Point"/>.
+        /// The <see cref="FuzzyPoint"/>.
         /// </returns>
-        public static Point operator /(Point point, double factor)
+        public static FuzzyPoint operator /(FuzzyPoint point, double factor)
         {
             Validate.NotNull(point, nameof(point));
             Validate.NotOutOfRange(factor, nameof(factor), 0, double.MaxValue, RangeEndPoints.LowerExclusive);
 
-            return new Point(point.X / factor, point.Y / factor);
+            return new FuzzyPoint(point.X / factor, point.Y / factor);
         }
 
         /// <summary>
@@ -134,13 +135,13 @@ namespace FuzzyLogic.Mathematics
         /// The other point to add.
         /// </param>
         /// <returns>
-        /// The <see cref="Point"/>.
+        /// The <see cref="FuzzyPoint"/>.
         /// </returns>
-        public Point Add(Point other)
+        public FuzzyPoint Add(FuzzyPoint other)
         {
             Validate.NotNull(other, nameof(other));
 
-            return new Point(this.X + other.X, this.Y + other.Y);
+            return new FuzzyPoint(this.X + other.X, this.Y + other.Y);
         }
 
         /// <summary>
@@ -150,13 +151,13 @@ namespace FuzzyLogic.Mathematics
         /// The other point to subtract.
         /// </param>
         /// <returns>
-        /// The <see cref="Point"/>.
+        /// The <see cref="FuzzyPoint"/>.
         /// </returns>
-        public Point Subtract(Point other)
+        public FuzzyPoint Subtract(FuzzyPoint other)
         {
             Validate.NotNull(other, nameof(other));
 
-            return new Point(this.X - other.X, this.Y - other.Y);
+            return new FuzzyPoint(this.X - other.X, this.Y - other.Y);
         }
 
         /// <summary>
@@ -166,13 +167,13 @@ namespace FuzzyLogic.Mathematics
         /// The factor.
         /// </param>
         /// <returns>
-        /// The <see cref="Point"/>.
+        /// The <see cref="FuzzyPoint"/>.
         /// </returns>
-        public Point Multiply(double factor)
+        public FuzzyPoint Multiply(double factor)
         {
             Validate.NotOutOfRange(factor, nameof(factor));
 
-            return new Point(this.X * factor, this.Y * factor);
+            return new FuzzyPoint(this.X * factor, this.Y * factor);
         }
 
         /// <summary>
@@ -182,13 +183,13 @@ namespace FuzzyLogic.Mathematics
         /// The factor.
         /// </param>
         /// <returns>
-        /// The <see cref="Point"/>.
+        /// The <see cref="FuzzyPoint"/>.
         /// </returns>
-        public Point Divide(double factor)
+        public FuzzyPoint Divide(double factor)
         {
             Validate.NotOutOfRange(factor, nameof(factor));
 
-            return new Point(this.X / factor, this.Y / factor);
+            return new FuzzyPoint(this.X / factor, this.Y / factor);
         }
 
         /// <summary>
@@ -200,7 +201,7 @@ namespace FuzzyLogic.Mathematics
         /// <returns>
         /// The <see cref="double"/>.
         /// </returns>
-        public double DistanceTo(Point other)
+        public double DistanceTo(FuzzyPoint other)
         {
             Validate.NotNull(other, nameof(other));
 
@@ -216,12 +217,12 @@ namespace FuzzyLogic.Mathematics
         /// Returns the angular coefficient of the two points.
         /// </summary>
         /// <param name="other">
-        /// The other <see cref="Point"/>.
+        /// The other <see cref="FuzzyPoint"/>.
         /// </param>
         /// <returns>
         /// The <see cref="double"/>.
         /// </returns>
-        public double AngularCoefficient(Point other)
+        public double AngularCoefficient(FuzzyPoint other)
         {
             return (this.Y - other.Y) / Math.Abs(this.X - other.X);
         }
@@ -235,7 +236,7 @@ namespace FuzzyLogic.Mathematics
         /// <returns>
         /// The <see cref="double"/>.
         /// </returns>
-        public double SquaredDistanceTo(Point other)
+        public double SquaredDistanceTo(FuzzyPoint other)
         {
             Validate.NotNull(other, nameof(other));
 
@@ -256,7 +257,7 @@ namespace FuzzyLogic.Mathematics
         /// </returns>
         public double EuclideanNorm()
         {
-            return Math.Sqrt(this.X.Square() + this.Y.Square());
+            return Math.Sqrt(this.X + this.Y);
         }
 
         /// <summary>
@@ -271,7 +272,7 @@ namespace FuzzyLogic.Mathematics
         /// <returns>
         /// A <see cref="bool"/>.
         /// </returns>
-        public static bool operator ==(Point point1, Point point2)
+        public static bool operator ==(FuzzyPoint point1, FuzzyPoint point2)
         {
 
             return point1.X == point2.X && point1.Y == point2.Y;
@@ -289,7 +290,7 @@ namespace FuzzyLogic.Mathematics
         /// <returns>
         /// A <see cref="bool"/>.
         /// </returns>
-        public static bool operator !=(Point point1, Point point2)
+        public static bool operator !=(FuzzyPoint point1, FuzzyPoint point2)
         {
 
             return (point1.X != point2.X) || (point1.Y != point2.Y);
@@ -306,7 +307,7 @@ namespace FuzzyLogic.Mathematics
         /// </returns>
         public override bool Equals(object obj)
         {
-            return (obj is Point point) && (this == point);
+            return (obj is FuzzyPoint point) && (this == point);
         }
 
         /// <summary>
@@ -328,7 +329,7 @@ namespace FuzzyLogic.Mathematics
         /// </returns>
         public override string ToString()
         {
-            return string.Format(System.Globalization.CultureInfo.InvariantCulture, $"{nameof(Point)}: {this.X}, {this.Y}");
+            return string.Format(System.Globalization.CultureInfo.InvariantCulture, $"{nameof(FuzzyPoint)}: {this.X}, {this.Y}");
         }
     }
 }

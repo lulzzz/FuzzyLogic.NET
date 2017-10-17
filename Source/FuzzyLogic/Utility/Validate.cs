@@ -12,6 +12,8 @@ namespace FuzzyLogic.Utility
     using System;
     using System.Diagnostics;
 
+    using FuzzyLogic.Fuzzification;
+
     /// <summary>
     /// The validate.
     /// </summary>

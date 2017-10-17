@@ -7,22 +7,24 @@
 // </copyright>
 // -------------------------------------------------------------------------------------------------
 
-namespace FuzzyLogic
+namespace FuzzyLogic.Fuzzification
 {
     using System;
 
-    using FuzzyLogic.MembershipFunctions;
+    using FuzzyLogic.Annotations;
+    using FuzzyLogic.Fuzzification.MembershipFunctions;
     using FuzzyLogic.Utility;
 
     /// <summary>
     /// The fuzzy set structure.
     /// </summary>
-    public struct FuzzySet
+    [Immutable]
+    public sealed class FuzzySet
     {
         private readonly IMembershipFunction function;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FuzzySet"/> structure.
+        /// Initializes a new instance of the <see cref="FuzzySet"/> class.
         /// </summary>
         /// <param name="name">
         /// The name.
