@@ -12,8 +12,6 @@ namespace FuzzyLogic.Utility
     using System;
     using System.Diagnostics;
 
-    using FuzzyLogic.Fuzzification;
-
     /// <summary>
     /// The validate.
     /// </summary>
@@ -61,27 +59,6 @@ namespace FuzzyLogic.Utility
             if (string.IsNullOrWhiteSpace(argument))
             {
                 throw new ArgumentNullException(paramName);
-            }
-        }
-
-        /// <summary>
-        /// The not invalid number.
-        /// </summary>
-        /// <param name="value">
-        /// The value.
-        /// </param>
-        /// <param name="paramName">
-        /// The param name.
-        /// </param>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// Throws if the input value is invalid.
-        /// </exception>
-        [DebuggerStepThrough]
-        internal static void NotInvalidNumber(double value, string paramName)
-        {
-            if (value.IsInvalidNumber())
-            {
-                throw new ArgumentOutOfRangeException(paramName, $"The {paramName} is an invalid number.");
             }
         }
 
@@ -182,19 +159,26 @@ namespace FuzzyLogic.Utility
         }
 
         /// <summary>
-        /// Checks if the double is a valid number.
+        /// The not invalid number.
         /// </summary>
         /// <param name="value">
-        /// The value to be checked.
+        /// The value.
         /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        private static bool IsInvalidNumber(this double value)
+        /// <param name="paramName">
+        /// The param name.
+        /// </param>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Throws if the input value is invalid.
+        /// </exception>
+        [DebuggerStepThrough]
+        private static void NotInvalidNumber(double value, string paramName)
         {
-            return double.IsNaN(value)
-                || double.IsNegativeInfinity(value)
-                || double.IsPositiveInfinity(value);
+            if (double.IsNaN(value)
+             || double.IsNegativeInfinity(value)
+             || double.IsPositiveInfinity(value))
+            {
+                throw new ArgumentOutOfRangeException(paramName, $"The {paramName} is an invalid number.");
+            }
         }
     }
 }

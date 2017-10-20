@@ -11,10 +11,7 @@ namespace FuzzyLogic.Tests.UtilityTests
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-
-    using FuzzyLogic.Fuzzification;
     using FuzzyLogic.Utility;
-
     using Xunit;
 
     /// <summary>
@@ -50,24 +47,12 @@ namespace FuzzyLogic.Tests.UtilityTests
         [InlineData(double.NaN)]
         [InlineData(double.NegativeInfinity)]
         [InlineData(double.PositiveInfinity)]
-        internal void NotNull_WithVariousInvalidNumbers_Throws(double number)
-        {
-            // Arrange
-            // Act (ignore expression is always null)
-            // Assert
-            Assert.Throws<ArgumentOutOfRangeException>(() => Validate.NotInvalidNumber(number, nameof(number)));
-        }
-
-        [Theory]
-        [InlineData(double.NaN)]
-        [InlineData(double.NegativeInfinity)]
-        [InlineData(double.PositiveInfinity)]
         internal void NotOutOfRange_VariousInvalidNumbers_Throws(double number)
         {
             // Arrange
             // Act
             // Assert
-            Assert.Throws<ArgumentOutOfRangeException>(() => Validate.NotOutOfRange(number, nameof(number), 0, 1));
+            Assert.Throws<ArgumentOutOfRangeException>(() => Validate.NotOutOfRange(number, nameof(number)));
         }
 
         [Theory]

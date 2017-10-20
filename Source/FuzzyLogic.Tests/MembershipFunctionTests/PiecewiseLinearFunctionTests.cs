@@ -7,13 +7,10 @@
 // </copyright>
 // -------------------------------------------------------------------------------------------------
 
-namespace FuzzyLogic.Tests.FuzzificationTests.MembershipFunctionTests
+namespace FuzzyLogic.Tests.MembershipFunctionTests
 {
     using System.Diagnostics.CodeAnalysis;
-
-    using FuzzyLogic.Fuzzification;
-    using FuzzyLogic.Fuzzification.MembershipFunctions;
-
+    using FuzzyLogic.MembershipFunctions;
     using Xunit;
 
     /// <summary>

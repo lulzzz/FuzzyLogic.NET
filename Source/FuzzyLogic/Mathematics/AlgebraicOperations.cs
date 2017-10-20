@@ -10,7 +10,6 @@
 namespace FuzzyLogic.Mathematics
 {
     using System;
-
     using FuzzyLogic.Utility;
 
     /// <summary>
@@ -29,7 +28,7 @@ namespace FuzzyLogic.Mathematics
         /// </returns>
         public static double Square(this double input)
         {
-            Validate.NotInvalidNumber(input, nameof(input));
+            Validate.NotOutOfRange(input, nameof(input));
 
             return input * input;
         }
@@ -45,7 +44,7 @@ namespace FuzzyLogic.Mathematics
         /// </returns>
         public static double SquareRoot(this double input)
         {
-            Validate.NotInvalidNumber(input, nameof(input));
+            Validate.NotOutOfRange(input, nameof(input));
 
             return Math.Sqrt(input);
         }

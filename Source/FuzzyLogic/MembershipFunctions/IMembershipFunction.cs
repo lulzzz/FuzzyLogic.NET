@@ -7,10 +7,8 @@
 // </copyright>
 // -------------------------------------------------------------------------------------------------
 
-namespace FuzzyLogic.Fuzzification.MembershipFunctions
+namespace FuzzyLogic.MembershipFunctions
 {
-    using FuzzyLogic.Fuzzification;
-
     /// <summary>
     /// The <see cref="IMembershipFunction"/> interface.
     /// </summary>

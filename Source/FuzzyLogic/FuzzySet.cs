@@ -7,12 +7,11 @@
 // </copyright>
 // -------------------------------------------------------------------------------------------------
 
-namespace FuzzyLogic.Fuzzification
+namespace FuzzyLogic
 {
     using System;
-
     using FuzzyLogic.Annotations;
-    using FuzzyLogic.Fuzzification.MembershipFunctions;
+    using FuzzyLogic.MembershipFunctions;
     using FuzzyLogic.Utility;
 
     /// <summary>
@@ -45,6 +44,16 @@ namespace FuzzyLogic.Fuzzification
         /// Gets the name of the fuzzy set.
         /// </summary>
         public string Name { get; }
+
+        /// <summary>
+        /// The lower bound.
+        /// </summary>
+        public double LowerBound => this.function.LowerBound;
+
+        /// <summary>
+        /// The upper bound.
+        /// </summary>
+        public double UpperBound => this.function.UpperBound;
 
         /// <summary>
         /// Returns a boolean indicating whether the <see cref="FuzzySet"/> is normal (max y = 1.0).

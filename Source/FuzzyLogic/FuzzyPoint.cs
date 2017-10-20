@@ -7,10 +7,9 @@
 // </copyright>
 // -------------------------------------------------------------------------------------------------
 
-namespace FuzzyLogic.Fuzzification
+namespace FuzzyLogic
 {
     using System;
-
     using FuzzyLogic.Annotations;
     using FuzzyLogic.Mathematics;
     using FuzzyLogic.Utility;
@@ -33,7 +32,7 @@ namespace FuzzyLogic.Fuzzification
         /// </param>
         public FuzzyPoint(double x, double y)
         {
-            Validate.NotOutOfRange(x, nameof(x), 0);
+            Validate.NotOutOfRange(x, nameof(x));
             Validate.NotOutOfRange(y, nameof(y), 0, 1);
 
             this.X = x;
@@ -105,7 +104,7 @@ namespace FuzzyLogic.Fuzzification
         public static FuzzyPoint operator *(FuzzyPoint point, double factor)
         {
             Validate.NotNull(point, nameof(point));
-            Validate.NotInvalidNumber(factor, nameof(factor));
+            Validate.NotOutOfRange(factor, nameof(factor));
 
             return new FuzzyPoint(point.X * factor, point.Y * factor);
         }

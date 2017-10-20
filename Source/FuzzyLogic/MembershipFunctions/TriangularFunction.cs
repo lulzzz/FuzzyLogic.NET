@@ -7,12 +7,10 @@
 // </copyright>
 // -------------------------------------------------------------------------------------------------
 
-namespace FuzzyLogic.Fuzzification.MembershipFunctions
+namespace FuzzyLogic.MembershipFunctions
 {
     using System;
-
     using FuzzyLogic.Annotations;
-    using FuzzyLogic.Fuzzification;
     using FuzzyLogic.Utility;
 
     /// <summary>

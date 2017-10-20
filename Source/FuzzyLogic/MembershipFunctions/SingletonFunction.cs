@@ -7,14 +7,15 @@
 // </copyright>
 // -------------------------------------------------------------------------------------------------
 
-namespace FuzzyLogic.Fuzzification.MembershipFunctions
+namespace FuzzyLogic.MembershipFunctions
 {
-    using FuzzyLogic.Fuzzification;
+    using FuzzyLogic.Annotations;
     using FuzzyLogic.Utility;
 
     /// <summary>
     /// The <see cref="SingletonFunction"/> immutable class.
     /// </summary>
+    [Immutable]
     public class SingletonFunction : IMembershipFunction
     {
         /// <summary>

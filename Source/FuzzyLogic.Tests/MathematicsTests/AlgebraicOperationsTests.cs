@@ -10,9 +10,7 @@
 namespace FuzzyLogic.Tests.MathematicsTests
 {
     using System.Diagnostics.CodeAnalysis;
-
     using FuzzyLogic.Mathematics;
-
     using Xunit;
 
     /// <summary>
