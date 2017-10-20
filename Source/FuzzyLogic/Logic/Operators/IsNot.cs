@@ -1,5 +1,5 @@
 ﻿// -------------------------------------------------------------------------------------------------
-// <copyright file="ILogicOperator.cs" author="Christopher Sellers">
+// <copyright file="IsNot.cs" author="Christopher Sellers">
 //   Copyright (C) 2017. All rights reserved.
 //   https://github.com/cjdsellers/FuzzyLogic
 //   the use of this source code is governed by the Apache 2.0 license
@@ -10,9 +10,9 @@
 namespace FuzzyLogic.Logic.Operators
 {
     /// <summary>
-    /// The logic operator.
+    /// The is.
     /// </summary>
-    public interface ILogicOperator
+    public class IsNot : ILogicOperator
     {
         /// <summary>
         /// The evaluate.
@@ -26,6 +26,17 @@ namespace FuzzyLogic.Logic.Operators
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        bool Evaluate(LinguisticVariable variable, string condition);
+        public bool Evaluate(LinguisticVariable variable, string condition)
+        {
+            return variable.GetFuzzyMembership() != condition;
+        }
+
+        /// <summary>
+        /// The to string.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public override string ToString() => nameof(Is).ToUpper();
     }
 }

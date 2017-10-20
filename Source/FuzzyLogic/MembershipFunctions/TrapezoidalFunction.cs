@@ -154,8 +154,8 @@ namespace FuzzyLogic.MembershipFunctions
             double minY = 0,
             double maxY = 1)
         {
-            Validate.NotOutOfRange(x1, nameof(x1), 0);
-            Validate.NotOutOfRange(x2, nameof(x2), 0);
+            Validate.NotOutOfRange(x1, nameof(x1));
+            Validate.NotOutOfRange(x2, nameof(x2));
             Validate.NotOutOfRange(minY, nameof(x1), 0, 1);
             Validate.NotOutOfRange(maxY, nameof(x1), 0, 1);
             ValidateMinLessThanMax(minY, maxY);

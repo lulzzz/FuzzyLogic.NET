@@ -9,6 +9,8 @@
 
 namespace FuzzyLogic.Logic.Operators
 {
+    using System;
+
     /// <summary>
     /// The is.
     /// </summary>
@@ -28,7 +30,7 @@ namespace FuzzyLogic.Logic.Operators
         /// </returns>
         public bool Evaluate(LinguisticVariable variable, string condition)
         {
-            return variable.GetFuzzyMembership() == condition;
+            throw new ArgumentException("Invalid evaluation (cannot evaluate an IF statement).");
         }
 
         /// <summary>

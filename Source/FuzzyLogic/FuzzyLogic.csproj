@@ -32,7 +32,6 @@
     <Folder Include="Control\" />
     <Folder Include="Defuzzification\" />
     <Folder Include="Annotations\" />
-    <Folder Include="Rule\" />
   </ItemGroup>
 
 </Project>

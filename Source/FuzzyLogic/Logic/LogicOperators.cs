@@ -39,6 +39,17 @@ namespace FuzzyLogic.Logic
         }
 
         /// <summary>
+        /// The is not.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="IsNot"/>.
+        /// </returns>
+        public static IsNot IsNot()
+        {
+            return new IsNot();
+        }
+
+        /// <summary>
         /// The then.
         /// </summary>
         /// <returns>

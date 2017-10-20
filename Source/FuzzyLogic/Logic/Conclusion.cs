@@ -10,7 +10,7 @@
 namespace FuzzyLogic.Logic
 {
     using FuzzyLogic.Annotations;
-
+    using FuzzyLogic.Logic.Operators;
     using static Logic.LogicOperators;
 
     /// <summary>
@@ -25,11 +25,14 @@ namespace FuzzyLogic.Logic
         /// <param name="variable">
         /// The variable.
         /// </param>
+        /// <param name="connectiveB">
+        /// The connective B.
+        /// </param>
         /// <param name="condition">
         /// The condition.
         /// </param>
-        public Conclusion(LinguisticVariable variable, string condition)
-            : base(Then(), variable, Is(), condition)
+        public Conclusion(LinguisticVariable variable, ILogicOperator connectiveB, string condition)
+            : base(Then(), variable, connectiveB, condition)
         {
         }
     }

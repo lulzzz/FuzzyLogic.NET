@@ -67,7 +67,7 @@ namespace FuzzyLogic.MembershipFunctions
         /// </returns>
         public static SingletonFunction Create(double x)
         {
-            Validate.NotOutOfRange(x, nameof(x), 0);
+            Validate.NotOutOfRange(x, nameof(x));
 
             return new SingletonFunction(new FuzzyPoint(x, 1));
         }

@@ -9,10 +9,14 @@
 
 namespace FuzzyLogic.Inference
 {
+    using System;
     using System.Collections.Generic;
+    using System.Linq;
     using FuzzyLogic.Annotations;
     using FuzzyLogic.Logic;
     using FuzzyLogic.Utility;
+
+    using static Logic.LogicOperators;
 
     /// <summary>
     /// The fuzzy rule.
@@ -20,8 +24,7 @@ namespace FuzzyLogic.Inference
     [Immutable]
     public class FuzzyRule
     {
-        private readonly IList<Premise> premises;
-        private readonly Conclusion conclusion;
+        private readonly IList<ICondition> premises;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FuzzyRule"/> class.
@@ -35,15 +38,17 @@ namespace FuzzyLogic.Inference
         /// <param name="conclusion">
         /// The conclusion.
         /// </param>
-        private FuzzyRule(string name, Premise premise, Conclusion conclusion)
+        public FuzzyRule(string name, ICondition premise, Conclusion conclusion)
         {
             Validate.NotNull(name, nameof(name));
             Validate.NotNull(premise, nameof(premise));
             Validate.NotNull(conclusion, nameof(conclusion));
 
             this.Name = name;
-            this.premises = new List<Premise> { premise };
-            this.conclusion = conclusion;
+            this.premises = new List<ICondition> { premise };
+            this.Conclusion = conclusion;
+
+            this.ValidateFuzzyRule();
         }
 
         /// <summary>
@@ -58,7 +63,7 @@ namespace FuzzyLogic.Inference
         /// <param name="conclusion">
         /// The conclusion.
         /// </param>
-        private FuzzyRule(string name, IList<Premise> premises, Conclusion conclusion)
+        public FuzzyRule(string name, IList<ICondition> premises, Conclusion conclusion)
         {
             Validate.NotNull(name, nameof(name));
             Validate.NotNull(premises, nameof(premises));
@@ -66,12 +71,45 @@ namespace FuzzyLogic.Inference
 
             this.Name = name;
             this.premises = premises;
-            this.conclusion = conclusion;
+            this.Conclusion = conclusion;
         }
 
         /// <summary>
         /// Gets the rule name.
         /// </summary>
         public string Name { get; }
+
+        /// <summary>
+        /// The premises.
+        /// </summary>
+        public IReadOnlyCollection<ICondition> Premises => this.premises.ToList().AsReadOnly();
+
+        /// <summary>
+        /// Gets the conclusion.
+        /// </summary>
+        public Conclusion Conclusion { get; }
+
+        /// <summary>
+        /// The evaluate.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool Evaluate() => this.premises.All(p => p.Evaluate());
+
+        private void ValidateFuzzyRule()
+        {
+            if (this.premises.Count == 0)
+            {
+                throw new ArgumentException(
+                    "Invalid premises (the list of premise cannot be empty).");
+            }
+
+            if (this.premises[0].Connective != If())
+            {
+                throw new ArgumentException(
+                    $"Invalid connective (the first premise must be an IF) = {this.premises[0].Connective}.");
+            }
+        }
     }
 }

@@ -173,8 +173,8 @@ namespace FuzzyLogic
             double upperBound)
         {
             Validate.NotNull(inputSets, nameof(inputSets));
-            Validate.NotOutOfRange(lowerBound, nameof(lowerBound), 0);
-            Validate.NotOutOfRange(lowerBound, nameof(upperBound), 0);
+            Validate.NotOutOfRange(lowerBound, nameof(lowerBound));
+            Validate.NotOutOfRange(lowerBound, nameof(upperBound));
 
             if (lowerBound > upperBound)
             {

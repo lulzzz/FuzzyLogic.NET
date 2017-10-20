@@ -12,13 +12,11 @@ namespace FuzzyLogic.Logic
     using FuzzyLogic.Annotations;
     using FuzzyLogic.Logic.Operators;
 
-    using static FuzzyLogic.Logic.LogicOperators;
-
     /// <summary>
     /// The premise.
     /// </summary>
     [Immutable]
-    public class Premise : Proposition
+    public class Premise : Proposition, ICondition
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Premise"/> class.
@@ -35,7 +33,7 @@ namespace FuzzyLogic.Logic
         /// <param name="condition">
         /// The condition.
         /// </param>
-        private Premise(
+        public Premise(
             ILogicOperator connectiveA,
             LinguisticVariable variable,
             ILogicOperator connectiveB,
@@ -45,23 +43,19 @@ namespace FuzzyLogic.Logic
         }
 
         /// <summary>
-        /// The if.
-        /// </summary>
-        /// <param name="variable">
-        /// The variable.
-        /// </param>
-        /// <param name="connective">
         /// The connective.
-        /// </param>
-        /// <param name="condition">
-        /// The condition.
-        /// </param>
+        /// </summary>
+        public ILogicOperator Connective => this.ConnectiveA;
+
+        /// <summary>
+        /// The evaluate.
+        /// </summary>
         /// <returns>
-        /// The <see cref="Premise"/>.
+        /// The <see cref="bool"/>.
         /// </returns>
-        public static Premise If(LinguisticVariable variable, ILogicOperator connective, string condition)
+        public bool Evaluate()
         {
-            return new Premise(LogicOperators.If(), variable, connective, condition);
+            return this.ConnectiveB.Evaluate(this.Variable, this.Condition);
         }
 
         /// <summary>

@@ -14,6 +14,8 @@ namespace FuzzyLogic.Logic
     using FuzzyLogic.Logic.Operators;
     using FuzzyLogic.Utility;
 
+    using static LogicOperators;
+
     /// <summary>
     /// The fuzzy rule proposition.
     /// </summary>
@@ -78,6 +80,11 @@ namespace FuzzyLogic.Logic
             if (!this.Variable.IsMember(this.Condition))
             {
                 throw new ArgumentException($"Invalid condition (the condition '{this.Condition}' is not a member of the variable '{this.Variable.Name}').");
+            }
+
+            if (this.ConnectiveB == Is())
+            {
+                throw new ArgumentException($"Invalid operator (the antecadent connective cannot be an '{this.ConnectiveB}').");
             }
         }
     }
