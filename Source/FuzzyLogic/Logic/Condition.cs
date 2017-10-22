@@ -18,7 +18,7 @@ namespace FuzzyLogic.Logic
     /// The condition.
     /// </summary>
     [Immutable]
-    public class Condition : ICondition
+    public class Condition
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Condition"/> class.

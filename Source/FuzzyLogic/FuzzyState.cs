@@ -13,7 +13,7 @@ namespace FuzzyLogic
     using FuzzyLogic.Utility;
 
     /// <summary>
-    /// The immutable <see cref="Label"/>.
+    /// The immutable <see cref="FuzzyState"/> structure.
     /// </summary>
     [Immutable]
     public struct FuzzyState
