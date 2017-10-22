@@ -10,7 +10,6 @@
 namespace FuzzyLogic.Logic
 {
     using FuzzyLogic.Annotations;
-    using FuzzyLogic.Inference;
     using FuzzyLogic.Logic.Interfaces;
     using FuzzyLogic.Utility;
 
@@ -32,22 +31,22 @@ namespace FuzzyLogic.Logic
         /// <param name="evaluator">
         /// The evaluator.
         /// </param>
-        /// <param name="query">
+        /// <param name="state">
         /// The query.
         /// </param>
         public Premise(
             IConnectiveOperator connective,
             LinguisticVariable variable,
             IEvaluationOperator evaluator,
-            FuzzyQuery query)
-            : base(variable, evaluator, query.QueriedState)
+            FuzzyState state)
+            : base(variable, evaluator, state)
         {
             Validate.NotNull(connective, nameof(connective));
             Validate.NotNull(variable, nameof(variable));
-            Validate.NotNull(query, nameof(query));
+            Validate.NotNull(state, nameof(state));
 
             this.Connective = connective;
-            this.Query = query;
+            this.Subject = variable.Label;
         }
 
         /// <summary>
@@ -56,17 +55,25 @@ namespace FuzzyLogic.Logic
         public IConnectiveOperator Connective { get; }
 
         /// <summary>
-        /// Gets the query.
+        /// Gets the subject.
         /// </summary>
-        public FuzzyQuery Query { get; }
+        public Label Subject { get; }
 
         /// <summary>
         /// The evaluate.
         /// </summary>
+        /// <param name="input">
+        /// The input.
+        /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool Evaluate() => this.Query.Evaluate();
+        public Evaluation Evaluate(double input)
+        {
+            Validate.NotOutOfRange(input, nameof(input));
+
+            return new Evaluation(this.Connective, this.Evaluator.Evaluate(this.State, this.Variable.GetState(input)));
+        }
 
         /// <summary>
         /// The to string.

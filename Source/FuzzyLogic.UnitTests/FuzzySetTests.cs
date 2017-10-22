@@ -70,6 +70,48 @@ namespace FuzzyLogic.UnitTests
             Assert.False(result);
         }
 
+        [Fact]
+        internal void IsConvex_WhenPointsAllDecreasing_ReturnsTrue()
+        {
+            // Arrange
+            var function = TrapezoidalFunction.CreateWithLeftEdge(0, 3);
+            var fuzzySet = new FuzzySet("fuzzySet", function);
+
+            // Act
+            var result = fuzzySet.IsConvex;
+
+            // Assert
+            Assert.True(result);
+        }
+
+        [Fact]
+        internal void IsConvex_WhenPointsAllIncreasing_ReturnsTrue()
+        {
+            // Arrange
+            var function = TrapezoidalFunction.CreateWithRightEdge(0, 3);
+            var fuzzySet = new FuzzySet("fuzzySet", function);
+
+            // Act
+            var result = fuzzySet.IsConvex;
+
+            // Assert
+            Assert.True(result);
+        }
+
+        [Fact]
+        internal void IsConvex_WhenPointsNotConvex_ReturnsFalse()
+        {
+            // Arrange
+            var function = TrapezoidalFunction.Create(0, 1, 2, 3);
+            var fuzzySet = new FuzzySet("fuzzySet", function);
+
+            // Act
+            var result = fuzzySet.IsConvex;
+
+            // Assert
+            Assert.False(result);
+        }
+
         [Theory]
         [InlineData(0, 1)]
         [InlineData(3, 0)]

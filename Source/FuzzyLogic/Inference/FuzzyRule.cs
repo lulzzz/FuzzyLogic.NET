@@ -68,9 +68,12 @@ namespace FuzzyLogic.Inference
         /// <summary>
         /// The evaluate.
         /// </summary>
+        /// <param name="data">
+        /// The data.
+        /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool Evaluate() => true;
+        public bool Evaluate(IDictionary<Label, double> data) => this.Conditions.All(c => c.Evaluate(data));
     }
 }

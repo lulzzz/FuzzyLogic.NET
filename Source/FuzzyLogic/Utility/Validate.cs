@@ -12,7 +12,6 @@ namespace FuzzyLogic.Utility
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Net;
 
     /// <summary>
     /// The validate.

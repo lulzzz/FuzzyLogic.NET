@@ -9,16 +9,15 @@
 
 namespace FuzzyLogic.Logic
 {
+    using System;
     using System.Collections.Generic;
-    using FuzzyLogic.Annotations;
-    using FuzzyLogic.Inference;
+    using System.Linq;
     using FuzzyLogic.Logic.Interfaces;
     using FuzzyLogic.Utility;
 
     /// <summary>
     /// The condition.
     /// </summary>
-    [Immutable]
     public class Condition
     {
         /// <summary>
@@ -49,9 +48,7 @@ namespace FuzzyLogic.Logic
 
             this.Connective = connective;
 
-            var query = new FuzzyQuery(variable, evaluator, new FuzzyState(state));
-
-            this.Premises.Add(new Premise(LogicOperators.If, variable, evaluator, query));
+            this.Premises.Add(new Premise(LogicOperators.If, variable, evaluator, new FuzzyState(state)));
         }
 
         /// <summary>
@@ -67,12 +64,33 @@ namespace FuzzyLogic.Logic
         /// <summary>
         /// The evaluate.
         /// </summary>
+        /// <param name="data">
+        /// The data.
+        /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool Evaluate()
+        public bool Evaluate(IDictionary<Label, double> data)
         {
-            return true; // TODO
+            var truthTable = new List<Evaluation>();
+
+            foreach (var premise in this.Premises)
+            {
+                if (data.ContainsKey(premise.Subject))
+                {
+                    var input = data[premise.Subject];
+
+                    truthTable.Add(premise.Evaluate(input));
+                }
+                else
+                {
+                    throw new ArgumentException(
+                        $"Evaluation Failed (cannot evaluate premise '{premise.Subject}' with provided data).");
+                }
+            }
+
+            return truthTable.All(p => p.Result)
+                || truthTable.Any(p => p.Connective == LogicOperators.Or && p.Result);
         }
 
         /// <summary>
@@ -99,9 +117,7 @@ namespace FuzzyLogic.Logic
             Validate.NotNull(evaluator, nameof(evaluator));
             Validate.NotNull(state, nameof(state));
 
-            var query = new FuzzyQuery(variable, evaluator, new FuzzyState(state));
-
-            this.Premises.Add(new Premise(LogicOperators.And, variable, evaluator, query));
+            this.Premises.Add(new Premise(LogicOperators.And, variable, evaluator, new FuzzyState(state)));
 
             return this;
         }
@@ -130,9 +146,7 @@ namespace FuzzyLogic.Logic
             Validate.NotNull(evaluator, nameof(evaluator));
             Validate.NotNull(state, nameof(state));
 
-            var query = new FuzzyQuery(variable, evaluator, new FuzzyState(state));
-
-            this.Premises.Add(new Premise(LogicOperators.Or, variable, evaluator, query));
+            this.Premises.Add(new Premise(LogicOperators.Or, variable, evaluator, new FuzzyState(state)));
 
             return this;
         }

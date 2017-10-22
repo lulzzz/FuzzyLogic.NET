@@ -10,6 +10,7 @@
 namespace FuzzyLogic
 {
     using System;
+    using System.Linq;
     using FuzzyLogic.Annotations;
     using FuzzyLogic.MembershipFunctions;
     using FuzzyLogic.Utility;
@@ -59,6 +60,11 @@ namespace FuzzyLogic
         /// Returns a boolean indicating whether the <see cref="FuzzySet"/> is normal (max y = 1.0).
         /// </summary>
         public bool IsNormal => this.function.MaxY.Equals(1);
+
+        /// <summary>
+        /// Returns a boolean indicating whether the <see cref="FuzzySet"/> is convex (all points either increasing or decreasing).
+        /// </summary>
+        public bool IsConvex => this.CalculateIsConvex();
 
         /// <summary>
         /// Returns the value of the membership for the given input (input must not be negative).
@@ -130,6 +136,31 @@ namespace FuzzyLogic
             Validate.NotOutOfRange(x, nameof(x));
 
             return Math.Min(this.function.GetMembership(x), other.GetMembership(x));
+        }
+
+        private bool CalculateIsConvex()
+        {
+            var points = this.function.Points;
+            var increasing = true;
+            var decreasing = true;
+
+            for (int i = 0; i < points.Length - 1; i++)
+            {
+                if (points[i].Y >= points[i + 1].Y)
+                {
+                    increasing = false;
+                }
+            }
+
+            for (int i = 0; i < points.Length - 1; i++)
+            {
+                if (points[i].Y <= points[i + 1].Y)
+                {
+                    decreasing = false;
+                }
+            }
+
+            return increasing || decreasing;
         }
     }
 }
