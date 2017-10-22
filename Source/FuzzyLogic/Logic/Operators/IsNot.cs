@@ -19,22 +19,16 @@ namespace FuzzyLogic.Logic.Operators
         /// <summary>
         /// The evaluate.
         /// </summary>
-        /// <param name="variable">
-        /// The variable.
+        /// <param name="expected">
+        /// The expected.
         /// </param>
-        /// <param name="state">
-        /// The state.
-        /// </param>
-        /// <param name="input">
-        /// The input.
+        /// <param name="result">
+        /// The result.
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool Evaluate(LinguisticVariable variable, FuzzyState state, double input)
-        {
-            return variable.GetFuzzyMembership(input) != state;
-        }
+        public bool Evaluate(FuzzyState expected, FuzzyState result) => expected != result;
 
         /// <summary>
         /// The to string.

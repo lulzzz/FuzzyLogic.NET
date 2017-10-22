@@ -11,6 +11,7 @@ namespace FuzzyLogic.Logic
 {
     using System.Collections.Generic;
     using FuzzyLogic.Annotations;
+    using FuzzyLogic.Inference;
     using FuzzyLogic.Logic.Interfaces;
     using FuzzyLogic.Utility;
 
@@ -47,7 +48,10 @@ namespace FuzzyLogic.Logic
             Validate.NotNull(state, nameof(state));
 
             this.Connective = connective;
-            this.Premises.Add(new Premise(LogicOperators.If, variable, evaluator, new FuzzyState(state)));
+
+            var query = new FuzzyQuery(variable, evaluator, new FuzzyState(state));
+
+            this.Premises.Add(new Premise(LogicOperators.If, variable, evaluator, query));
         }
 
         /// <summary>
@@ -95,7 +99,9 @@ namespace FuzzyLogic.Logic
             Validate.NotNull(evaluator, nameof(evaluator));
             Validate.NotNull(state, nameof(state));
 
-            this.Premises.Add(new Premise(LogicOperators.And, variable, evaluator, new FuzzyState(state)));
+            var query = new FuzzyQuery(variable, evaluator, new FuzzyState(state));
+
+            this.Premises.Add(new Premise(LogicOperators.And, variable, evaluator, query));
 
             return this;
         }
@@ -110,7 +116,7 @@ namespace FuzzyLogic.Logic
         /// The evaluator.
         /// </param>
         /// <param name="state">
-        /// The state.
+        /// The expected state.
         /// </param>
         /// <returns>
         /// The <see cref="Condition"/>.
@@ -120,7 +126,13 @@ namespace FuzzyLogic.Logic
             IEvaluationOperator evaluator,
             string state)
         {
-            this.Premises.Add(new Premise(LogicOperators.Or, variable, evaluator, new FuzzyState(state)));
+            Validate.NotNull(variable, nameof(variable));
+            Validate.NotNull(evaluator, nameof(evaluator));
+            Validate.NotNull(state, nameof(state));
+
+            var query = new FuzzyQuery(variable, evaluator, new FuzzyState(state));
+
+            this.Premises.Add(new Premise(LogicOperators.Or, variable, evaluator, query));
 
             return this;
         }

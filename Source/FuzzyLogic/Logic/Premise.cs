@@ -10,7 +10,9 @@
 namespace FuzzyLogic.Logic
 {
     using FuzzyLogic.Annotations;
+    using FuzzyLogic.Inference;
     using FuzzyLogic.Logic.Interfaces;
+    using FuzzyLogic.Utility;
 
     /// <summary>
     /// The premise.
@@ -30,17 +32,22 @@ namespace FuzzyLogic.Logic
         /// <param name="evaluator">
         /// The evaluator.
         /// </param>
-        /// <param name="state">
-        /// The state.
+        /// <param name="query">
+        /// The query.
         /// </param>
         public Premise(
             IConnectiveOperator connective,
             LinguisticVariable variable,
             IEvaluationOperator evaluator,
-            FuzzyState state)
-            : base(variable, evaluator, state)
+            FuzzyQuery query)
+            : base(variable, evaluator, query.QueriedState)
         {
+            Validate.NotNull(connective, nameof(connective));
+            Validate.NotNull(variable, nameof(variable));
+            Validate.NotNull(query, nameof(query));
+
             this.Connective = connective;
+            this.Query = query;
         }
 
         /// <summary>
@@ -49,18 +56,17 @@ namespace FuzzyLogic.Logic
         public IConnectiveOperator Connective { get; }
 
         /// <summary>
+        /// Gets the query.
+        /// </summary>
+        public FuzzyQuery Query { get; }
+
+        /// <summary>
         /// The evaluate.
         /// </summary>
-        /// <param name="input">
-        /// The input.
-        /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool Evaluate(double input)
-        {
-            return this.Evaluator.Evaluate(this.Variable, this.State, input);
-        }
+        public bool Evaluate() => this.Query.Evaluate();
 
         /// <summary>
         /// The to string.
@@ -68,6 +74,6 @@ namespace FuzzyLogic.Logic
         /// <returns>
         /// The <see cref="string"/>.
         /// </returns>
-        public override string ToString() => $"{this.Variable.Label} {this.Evaluator} {this.State}";
+        public override string ToString() => $"{this.Connective} {this.Variable.Label} {this.Evaluator} {this.State}";
     }
 }

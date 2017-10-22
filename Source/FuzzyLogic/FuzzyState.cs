@@ -10,16 +10,17 @@
 namespace FuzzyLogic
 {
     using FuzzyLogic.Annotations;
+    using FuzzyLogic.Logic.Interfaces;
     using FuzzyLogic.Utility;
 
     /// <summary>
     /// The immutable <see cref="FuzzyState"/> structure.
     /// </summary>
     [Immutable]
-    public struct FuzzyState
+    public sealed class FuzzyState : IState<string>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="FuzzyState"/> struct.
+        /// Initializes a new instance of the <see cref="FuzzyState"/> class.
         /// </summary>
         /// <param name="value">
         /// The value.
@@ -48,7 +49,20 @@ namespace FuzzyLogic
         /// <returns>
         /// A boolean.
         /// </returns>
-        public static bool operator ==(FuzzyState left, FuzzyState right) => left.Equals(right);
+        public static bool operator ==(FuzzyState left, FuzzyState right)
+        {
+            if (ReferenceEquals(left, null) && ReferenceEquals(right, null))
+            {
+                return true;
+            }
+
+            if (ReferenceEquals(left, null) || ReferenceEquals(right, null))
+            {
+                return false;
+            }
+
+            return left.Equals(right);
+        }
 
         /// <summary>
         /// The !=.
@@ -92,7 +106,7 @@ namespace FuzzyLogic
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool Equals(FuzzyState other) => this.Value == other.Value;
+        public bool Equals(FuzzyState other) => other != null && this.Value == other.Value;
 
         /// <summary>
         /// The get hash code.

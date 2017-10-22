@@ -13,13 +13,14 @@ namespace FuzzyLogic
     using System.Collections.Generic;
     using System.Linq;
     using FuzzyLogic.Annotations;
+    using FuzzyLogic.Logic.Interfaces;
     using FuzzyLogic.Utility;
 
     /// <summary>
     /// The linguistic variable immutable class.
     /// </summary>
     [Immutable]
-    public class LinguisticVariable
+    public class LinguisticVariable : ISubject<Label, FuzzyState, double>
     {
         private readonly Dictionary<Label, FuzzySet> fuzzySets = new Dictionary<Label, FuzzySet>();
 
@@ -144,7 +145,7 @@ namespace FuzzyLogic
         /// <returns>
         /// The <see cref="string"/>.
         /// </returns>
-        public FuzzyState GetFuzzyMembership(double input)
+        public FuzzyState GetState(double input)
         {
             Validate.NotOutOfRange(input, nameof(input));
 

@@ -1,5 +1,5 @@
 ﻿// -------------------------------------------------------------------------------------------------
-// <copyright file="IEvaluationOperator.cs" author="Christopher Sellers">
+// <copyright file="IState.cs" author="Christopher Sellers">
 //   Copyright (C) 2017. All rights reserved.
 //   https://github.com/cjdsellers/FuzzyLogic
 //   the use of this source code is governed by the Apache 2.0 license
@@ -10,22 +10,16 @@
 namespace FuzzyLogic.Logic.Interfaces
 {
     /// <summary>
-    /// The <see cref="IEvaluationOperator"/> interface.
+    /// The <see cref="IState{T}"/> interface.
     /// </summary>
-    public interface IEvaluationOperator : ILogicOperator
+    /// <typeparam name="T">
+    /// The states type.
+    /// </typeparam>
+    internal interface IState<out T>
     {
         /// <summary>
-        /// The evaluate.
+        /// Gets the value.
         /// </summary>
-        /// <param name="expected">
-        /// The expected.
-        /// </param>
-        /// <param name="result">
-        /// The result.
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        bool Evaluate(FuzzyState expected, FuzzyState result);
+        T Value { get; }
     }
 }

@@ -122,28 +122,28 @@ namespace FuzzyLogic.Utility
                 case RangeEndPoints.Inclusive:
                     if (value < lower || value > upper)
                     {
-                        throw new ArgumentOutOfRangeException(paramName, $"The {paramName} is not within the specified range [{lower}, {upper}] inclusive. Value = {value}.");
+                        throw new ArgumentOutOfRangeException(paramName, $"The {paramName} is not within the specified range [{lower}, {upper}] inclusive. InputValue = {value}.");
                     }
                     break;
 
                 case RangeEndPoints.LowerExclusive:
                     if (value <= lower || value > upper)
                     {
-                        throw new ArgumentOutOfRangeException(paramName, $"The {paramName} is not within the specified range [{lower}, {upper}] lower exclusive. Value = {value}.");
+                        throw new ArgumentOutOfRangeException(paramName, $"The {paramName} is not within the specified range [{lower}, {upper}] lower exclusive. InputValue = {value}.");
                     }
                     break;
 
                 case RangeEndPoints.UpperExclusive:
                     if (value < lower || value >= upper)
                     {
-                        throw new ArgumentOutOfRangeException(paramName, $"The {paramName} is not within the specified range [{lower}, {upper}] upper exclusive. Value = {value}.");
+                        throw new ArgumentOutOfRangeException(paramName, $"The {paramName} is not within the specified range [{lower}, {upper}] upper exclusive. InputValue = {value}.");
                     }
                     break;
 
                 case RangeEndPoints.Exclusive:
                     if (value <= lower || value >= upper)
                     {
-                        throw new ArgumentOutOfRangeException(paramName, $"The {paramName} is not within the specified range [{lower}, {upper}] exclusive. Value = {value}.");
+                        throw new ArgumentOutOfRangeException(paramName, $"The {paramName} is not within the specified range [{lower}, {upper}] exclusive. InputValue = {value}.");
                     }
                     break;
             }
