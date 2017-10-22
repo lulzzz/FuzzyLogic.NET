@@ -33,12 +33,12 @@ namespace FuzzyLogic.Tests.InferenceTests
             var hot = new FuzzySet("hot", TrapezoidalFunction.CreateWithRightEdge(30, 60, 1));
             var boiling = new FuzzySet("boiling", TrapezoidalFunction.CreateWithRightEdge(90, 100));
 
-            var water = new LinguisticVariable("Temperature", new List<FuzzySet> { frozen, freezing, cold, warm, hot, boiling });
+            var water = new LinguisticVariable("Temperature", new List<FuzzySet> { frozen, freezing, cold, warm, hot, boiling }, -20, 200);
 
             // Act
             var rule1 = new FuzzyRuleBuilder("Rule1")
-                .Add(new Condition(If, water, Is, "cold").And(water, IsNot, "freezing").Or(water, Is, "frozen"))
-                .Add(new Condition(And, water, Is, "warm").And(water, IsNot, "hot").Or(water, Is, "boiling"))
+                .Add(new Condition(If, water, Is, "cold").And(water, IsNot, "freezing").Or(water, IsNot, "frozen"))
+                .Add(new Condition(And, water, Is, "warm").And(water, IsNot, "hot").Or(water, IsNot, "boiling"))
                 .Add(new Condition(Or, water, Is, "frozen"))
                 .Then(water, Is, "warm")
                 .Then(water, IsNot, "frozen")
