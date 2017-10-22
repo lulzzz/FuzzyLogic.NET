@@ -7,7 +7,7 @@
 // </copyright>
 // -------------------------------------------------------------------------------------------------
 
-namespace FuzzyLogic.Tests.InferenceTests
+namespace FuzzyLogic.UnitTests.InferenceTests
 {
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;

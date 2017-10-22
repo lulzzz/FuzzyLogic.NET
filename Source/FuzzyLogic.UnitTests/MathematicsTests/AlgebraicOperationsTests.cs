@@ -7,7 +7,7 @@
 // </copyright>
 // -------------------------------------------------------------------------------------------------
 
-namespace FuzzyLogic.Tests.MathematicsTests
+namespace FuzzyLogic.UnitTests.MathematicsTests
 {
     using System.Diagnostics.CodeAnalysis;
     using FuzzyLogic.Mathematics;

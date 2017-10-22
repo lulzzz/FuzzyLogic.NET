@@ -7,7 +7,7 @@
 // </copyright>
 // -------------------------------------------------------------------------------------------------
 
-namespace FuzzyLogic.Tests.MembershipFunctionTests
+namespace FuzzyLogic.UnitTests.MembershipFunctionTests
 {
     using System;
     using System.Diagnostics.CodeAnalysis;

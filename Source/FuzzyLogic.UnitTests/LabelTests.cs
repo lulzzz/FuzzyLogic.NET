@@ -7,24 +7,24 @@
 // </copyright>
 // -------------------------------------------------------------------------------------------------
 
-namespace FuzzyLogic.Tests
+namespace FuzzyLogic.UnitTests
 {
     using System.Diagnostics.CodeAnalysis;
     using Xunit;
 
     [SuppressMessage("StyleCop.CSharp.NamingRules", "*", Justification = "Reviewed. Suppression is OK within the Test Suite.")]
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "*", Justification = "Reviewed. Suppression is OK within the Test Suite.")]
-    public class FuzzyStateTests
+    public class LabelTests
     {
         [Fact]
         internal void Value_WithString_ReturnsExpectedValue()
         {
             // Arrange
             // Act
-            var fuzzyState = new FuzzyState("Low");
+            var label = new Label("Temperature");
 
             // Assert
-            Assert.Equal("Low", fuzzyState.Value);
+            Assert.Equal("Temperature", label.Value);
         }
 
         [Fact]
@@ -32,11 +32,11 @@ namespace FuzzyLogic.Tests
         {
             // Arrange
             // Act
-            var fuzzyState1 = new FuzzyState("Low");
-            var fuzzyState2 = new FuzzyState("Low");
+            var label1 = new Label("Temperature");
+            var label2 = new Label("Temperature");
 
             // Assert
-            Assert.True(fuzzyState1.Equals(fuzzyState2));
+            Assert.True(label1.Equals(label2));
         }
 
         [Fact]
@@ -44,10 +44,10 @@ namespace FuzzyLogic.Tests
         {
             // Arrange
             // Act
-            var fuzzyState = new FuzzyState("Low");
+            var label = new Label("Temperature");
 
             // Assert
-            Assert.False(fuzzyState.Equals(null));
+            Assert.False(label.Equals(null));
         }
 
         [Fact]
@@ -55,11 +55,11 @@ namespace FuzzyLogic.Tests
         {
             // Arrange
             // Act
-            var fuzzyState1 = new FuzzyState("Low");
-            var fuzzyState2 = new FuzzyState("Low");
+            var label1 = new Label("Temperature");
+            var label2 = new Label("Temperature");
 
             // Assert
-            Assert.True(fuzzyState1.Equals(fuzzyState2));
+            Assert.True(label1.Equals(label2));
         }
 
         [Fact]
@@ -67,11 +67,11 @@ namespace FuzzyLogic.Tests
         {
             // Arrange
             // Act
-            var fuzzyState1 = new FuzzyState("Low");
-            var fuzzyState2 = new FuzzyState("Low");
+            var label1 = new Label("Temperature");
+            var label2 = new Label("Temperature");
 
             // Assert
-            Assert.True(fuzzyState1 == fuzzyState2);
+            Assert.True(label1 == label2);
         }
 
         [Fact]
@@ -79,11 +79,11 @@ namespace FuzzyLogic.Tests
         {
             // Arrange
             // Act
-            var fuzzyState1 = new FuzzyState("High");
-            var fuzzyState2 = new FuzzyState("Low");
+            var label1 = new Label("Pressure");
+            var label2 = new Label("Temperature");
 
             // Assert
-            Assert.False(fuzzyState1 == fuzzyState2);
+            Assert.False(label1 == label2);
         }
 
         [Fact]
@@ -91,11 +91,11 @@ namespace FuzzyLogic.Tests
         {
             // Arrange
             // Act
-            var fuzzyState1 = new FuzzyState("Low");
-            var fuzzyState2 = new FuzzyState("Low");
+            var label1 = new Label("Temperature");
+            var label2 = new Label("Temperature");
 
             // Assert
-            Assert.False(fuzzyState1 != fuzzyState2);
+            Assert.False(label1 != label2);
         }
 
         [Fact]
@@ -103,37 +103,37 @@ namespace FuzzyLogic.Tests
         {
             // Arrange
             // Act
-            var fuzzyState1 = new FuzzyState("High");
-            var fuzzyState2 = new FuzzyState("Low");
+            var label1 = new Label("Pressure");
+            var label2 = new Label("Temperature");
 
             // Assert
-            Assert.True(fuzzyState1 != fuzzyState2);
+            Assert.True(label1 != label2);
         }
 
         [Fact]
         internal void GetHashcode_ReturnsExpectedValue()
         {
             // Arrange
-            var fuzzyState = new FuzzyState("High");
+            var label = new Label("Pressure");
 
             // Act
-            var result = fuzzyState.GetHashCode();
+            var result = label.GetHashCode();
 
             // Assert
-            Assert.Equal(-77932258, result);
+            Assert.Equal(1026080277, result);
         }
 
         [Fact]
         internal void ToString_ReturnsExpectedString()
         {
             // Arrange
-            var fuzzyState = new FuzzyState("High");
+            var label = new Label("Pressure");
 
             // Act
-            var result = fuzzyState.ToString();
+            var result = label.ToString();
 
             // Assert
-            Assert.Equal("High", result);
+            Assert.Equal("Pressure", result);
         }
     }
 }

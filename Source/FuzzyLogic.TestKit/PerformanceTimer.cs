@@ -7,7 +7,7 @@
 // </copyright>
 // -------------------------------------------------------------------------------------------------
 
-namespace FuzzyLogic.Tests.PerformanceTests
+namespace FuzzyLogic.TestKit
 {
     using System;
     using System.Diagnostics;
