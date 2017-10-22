@@ -10,7 +10,9 @@
 namespace FuzzyLogic.UnitTests.UtilityTests
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using FuzzyLogic.MembershipFunctions;
     using FuzzyLogic.Utility;
     using Xunit;
 
@@ -27,8 +29,8 @@ namespace FuzzyLogic.UnitTests.UtilityTests
             // Arrange
             object nullObject = null;
 
-            // Act (ignore expression is always null)
-            // Assert
+            // Act
+            // Assert (ignore expression is always null)
             Assert.Throws<ArgumentNullException>(() => Validate.NotNull(nullObject, nameof(nullObject)));
         }
 
@@ -38,9 +40,31 @@ namespace FuzzyLogic.UnitTests.UtilityTests
             // Arrange
             string whiteSpace = " ";
 
-            // Act (ignore expression is always null)
+            // Act
             // Assert
             Assert.Throws<ArgumentNullException>(() => Validate.NotNull(whiteSpace, nameof(whiteSpace)));
+        }
+
+        [Fact]
+        internal void NotNullOrEmpty_WhenCollectionNull_Throws()
+        {
+            // Arrange
+            List<string> collection = null;
+
+            // Act
+            // Assert (ignore expression is always null)
+            Assert.Throws<ArgumentNullException>(() => Validate.NotNullOrEmpty(collection, nameof(collection)));
+        }
+
+        [Fact]
+        internal void NotNullOrEmpty_WhenCollectionEmpty_Throws()
+        {
+            // Arrange
+            List<string> collection = new List<string>();
+
+            // Act
+            // Assert
+            Assert.Throws<ArgumentException>(() => Validate.NotNullOrEmpty(collection, nameof(collection)));
         }
 
         [Theory]
@@ -145,6 +169,48 @@ namespace FuzzyLogic.UnitTests.UtilityTests
             // Act
             // Assert
             Assert.Throws<ArgumentException>(() => Validate.FuzzyPointArray(points, nameof(points)));
+        }
+
+        [Fact]
+        internal void FuzzySetCollection_WhenLowerBoundGreaterThanUpperBound_Throws()
+        {
+            // Arrange
+            var fuzzySet1 = new FuzzySet("set1", SingletonFunction.Create(1));
+            var fuzzySet2 = new FuzzySet("set1", SingletonFunction.Create(1));
+
+            var fuzzySetCollection = new List<FuzzySet> { fuzzySet1, fuzzySet2 };
+
+            // Act
+            // Assert
+            Assert.Throws<ArgumentException>(() => new LinguisticVariable("test", fuzzySetCollection, 1, 0));
+        }
+
+        [Fact]
+        internal void FuzzySetCollection_WhenLowerBoundGreaterThanLowestBoundOfFunctions_Throws()
+        {
+            // Arrange
+            var fuzzySet1 = new FuzzySet("set1", TrapezoidalFunction.Create(1, 2, 3, 4));
+            var fuzzySet2 = new FuzzySet("set1", SingletonFunction.Create(1));
+
+            var fuzzySetCollection = new List<FuzzySet> { fuzzySet1, fuzzySet2 };
+
+            // Act
+            // Assert
+            Assert.Throws<ArgumentException>(() => new LinguisticVariable("test", fuzzySetCollection, 2, 100));
+        }
+
+        [Fact]
+        internal void FuzzySetCollection_WhenUpperBoundLessThanHighestBoundOfFunctions_Throws()
+        {
+            // Arrange
+            var fuzzySet1 = new FuzzySet("set1", TrapezoidalFunction.Create(1, 2, 3, 4));
+            var fuzzySet2 = new FuzzySet("set1", SingletonFunction.Create(1));
+
+            var fuzzySetCollection = new List<FuzzySet> { fuzzySet1, fuzzySet2 };
+
+            // Act
+            // Assert
+            Assert.Throws<ArgumentException>(() => new LinguisticVariable("test", fuzzySetCollection, 1, 3));
         }
     }
 }

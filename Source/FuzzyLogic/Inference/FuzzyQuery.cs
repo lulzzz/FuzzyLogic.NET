@@ -15,7 +15,7 @@ namespace FuzzyLogic.Inference
     /// <summary>
     /// The fuzzy query.
     /// </summary>
-    public class FuzzyQuery : IQuery<FuzzyState, double>
+    public class FuzzyQuery
     {
         private readonly LinguisticVariable subject;
         private readonly IEvaluationOperator evaluator;

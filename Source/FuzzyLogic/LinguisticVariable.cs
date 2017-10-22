@@ -9,18 +9,16 @@
 
 namespace FuzzyLogic
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using FuzzyLogic.Annotations;
-    using FuzzyLogic.Logic.Interfaces;
     using FuzzyLogic.Utility;
 
     /// <summary>
     /// The linguistic variable immutable class.
     /// </summary>
     [Immutable]
-    public class LinguisticVariable : ISubject<Label, FuzzyState, double>
+    public class LinguisticVariable
     {
         private readonly Dictionary<Label, FuzzySet> fuzzySets = new Dictionary<Label, FuzzySet>();
 
@@ -46,10 +44,10 @@ namespace FuzzyLogic
             double upperBound = double.MaxValue)
         {
             Validate.NotNull(label, nameof(label));
-            Validate.NotNull(inputSets, nameof(inputSets));
+            Validate.NotNullOrEmpty(inputSets, nameof(inputSets));
             Validate.NotOutOfRange(lowerBound, nameof(lowerBound));
             Validate.NotOutOfRange(upperBound, nameof(upperBound));
-            ValidateFuzzySetsCollection(inputSets, lowerBound, upperBound);
+            Validate.FuzzySetCollection(inputSets, lowerBound, upperBound);
 
             this.Label = new Label(label);
             this.LowerBound = lowerBound;
@@ -156,37 +154,6 @@ namespace FuzzyLogic
                 .Label;
 
             return new FuzzyState(label.Value);
-        }
-
-        private static void ValidateFuzzySetsCollection(
-            ICollection<FuzzySet> inputSets,
-            double lowerBound,
-            double upperBound)
-        {
-            Validate.NotNull(inputSets, nameof(inputSets));
-            Validate.NotOutOfRange(lowerBound, nameof(lowerBound));
-            Validate.NotOutOfRange(lowerBound, nameof(upperBound));
-
-            if (lowerBound > upperBound)
-            {
-                throw new ArgumentException(
-                    $"Lower bound ({lowerBound}) cannot be greater than upper bound ({upperBound}).");
-            }
-
-            foreach (var set in inputSets)
-            {
-                if (set.LowerBound < lowerBound)
-                {
-                    throw new ArgumentException(
-                        $"Lower bound cannot be greater than lowest bound of input set ({set.Label} {lowerBound} < {set.LowerBound}).");
-                }
-
-                if (set.UpperBound > upperBound)
-                {
-                    throw new ArgumentException(
-                        $"Upper bound cannot be less than highest upper bound of input set ({set.Label}).");
-                }
-            }
         }
     }
 }

@@ -12,6 +12,7 @@ namespace FuzzyLogic.Utility
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Net;
 
     /// <summary>
     /// The validate.
@@ -181,6 +182,53 @@ namespace FuzzyLogic.Utility
                 if (points[i - 1].X > points[i].X)
                 {
                     throw new ArgumentException("Points array out of sequence (must be in ascending order on X axis).", paramName);
+                }
+            }
+        }
+
+        /// <summary>
+        /// The fuzzy set collection.
+        /// </summary>
+        /// <param name="inputSets">
+        /// The input sets.
+        /// </param>
+        /// <param name="lowerBound">
+        /// The lower bound.
+        /// </param>
+        /// <param name="upperBound">
+        /// The upper bound.
+        /// </param>
+        /// <exception cref="ArgumentException">
+        /// Throws an exception for various reasons.
+        /// </exception>
+        [DebuggerStepThrough]
+        internal static void FuzzySetCollection(
+            ICollection<FuzzySet> inputSets,
+            double lowerBound,
+            double upperBound)
+        {
+            NotNullOrEmpty(inputSets, nameof(inputSets));
+            NotOutOfRange(lowerBound, nameof(lowerBound));
+            NotOutOfRange(lowerBound, nameof(upperBound));
+
+            if (lowerBound > upperBound)
+            {
+                throw new ArgumentException(
+                    $"Lower bound ({lowerBound}) cannot be greater than upper bound ({upperBound}).");
+            }
+
+            foreach (var set in inputSets)
+            {
+                if (set.LowerBound < lowerBound)
+                {
+                    throw new ArgumentException(
+                        $"Lower bound cannot be greater than lowest bound of input set ({set.Label} {lowerBound} < {set.LowerBound}).");
+                }
+
+                if (set.UpperBound > upperBound)
+                {
+                    throw new ArgumentException(
+                        $"Upper bound cannot be less than highest upper bound of input set ({set.Label}).");
                 }
             }
         }
