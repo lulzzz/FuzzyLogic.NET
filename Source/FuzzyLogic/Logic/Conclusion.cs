@@ -37,5 +37,13 @@ namespace FuzzyLogic.Logic
             : base(variable, evaluator, state)
         {
         }
+
+        /// <summary>
+        /// The to string.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public override string ToString() => $"Then {this.Variable.Label} {this.Evaluator} {this.State}";
     }
 }
