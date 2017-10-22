@@ -9,10 +9,12 @@
 
 namespace FuzzyLogic.Logic.Operators
 {
+    using FuzzyLogic.Logic.Interfaces;
+
     /// <summary>
     /// The is.
     /// </summary>
-    public class IsNot : ILogicOperator
+    public class IsNot : IEvaluationOperator
     {
         /// <summary>
         /// The evaluate.
@@ -20,15 +22,18 @@ namespace FuzzyLogic.Logic.Operators
         /// <param name="variable">
         /// The variable.
         /// </param>
-        /// <param name="condition">
-        /// The condition.
+        /// <param name="state">
+        /// The state.
+        /// </param>
+        /// <param name="input">
+        /// The input.
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool Evaluate(LinguisticVariable variable, string condition)
+        public bool Evaluate(LinguisticVariable variable, FuzzyState state, double input)
         {
-            return variable.GetFuzzyMembership() != condition;
+            return variable.GetFuzzyMembership(input) != state;
         }
 
         /// <summary>
@@ -37,6 +42,6 @@ namespace FuzzyLogic.Logic.Operators
         /// <returns>
         /// The <see cref="string"/>.
         /// </returns>
-        public override string ToString() => nameof(Is).ToUpper();
+        public override string ToString() => nameof(IsNot).ToUpper();
     }
 }

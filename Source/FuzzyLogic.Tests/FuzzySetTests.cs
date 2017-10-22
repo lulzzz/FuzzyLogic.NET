@@ -39,7 +39,7 @@ namespace FuzzyLogic.Tests
 
             // Assert
             Assert.Equal(expected, result);
-            Assert.Equal("fuzzySet", fuzzySet.Name);
+            Assert.Equal("fuzzySet", fuzzySet.Label.Value);
         }
 
         [Fact]

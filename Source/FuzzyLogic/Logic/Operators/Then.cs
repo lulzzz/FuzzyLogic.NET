@@ -9,30 +9,13 @@
 
 namespace FuzzyLogic.Logic.Operators
 {
-    using System;
+    using FuzzyLogic.Logic.Interfaces;
 
     /// <summary>
     /// The is.
     /// </summary>
-    public class Then : ILogicOperator
+    public class Then : IConnectiveOperator
     {
-        /// <summary>
-        /// The evaluate.
-        /// </summary>
-        /// <param name="variable">
-        /// The variable.
-        /// </param>
-        /// <param name="condition">
-        /// The condition.
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        public bool Evaluate(LinguisticVariable variable, string condition)
-        {
-            throw new ArgumentException("Invalid evaluation (cannot evaluate a THEN operator)");
-        }
-
         /// <summary>
         /// The to string.
         /// </summary>

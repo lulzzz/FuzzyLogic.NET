@@ -12,6 +12,7 @@ namespace FuzzyLogic.Tests.InferenceTests
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using FuzzyLogic.Inference;
+    using FuzzyLogic.Logic;
     using FuzzyLogic.MembershipFunctions;
     using Xunit;
 
@@ -22,20 +23,30 @@ namespace FuzzyLogic.Tests.InferenceTests
     public class FuzzyRuleBuilderTests
     {
         [Fact]
-        internal void WithCondition_ValidCondition_ReturnsExpectedFuzzyRuleBuilder()
+        internal void Build_ValidConditionsAndConclusions_ReturnsExpectedFuzzyRule()
         {
             // Arrange
-            var function = TrapezoidalFunction.Create(1, 2, 3, 4);
-            var fuzzySets = new FuzzySet("cold", function);
-            var water = new LinguisticVariable("Temperature", new List<FuzzySet> { fuzzySets });
+            var frozen = new FuzzySet("frozen", SingletonFunction.Create(0));
+            var freezing = new FuzzySet("freezing", TrapezoidalFunction.CreateWithLeftEdge(0, 5));
+            var cold = new FuzzySet("cold", TrapezoidalFunction.Create(10, 15, 18, 20));
+            var warm = new FuzzySet("warm", TrapezoidalFunction.Create(15, 25, 35, 40));
+            var hot = new FuzzySet("hot", TrapezoidalFunction.CreateWithRightEdge(30, 60, 1));
+            var boiling = new FuzzySet("boiling", TrapezoidalFunction.CreateWithRightEdge(90, 100));
+
+            var water = new LinguisticVariable("Temperature", new List<FuzzySet> { frozen, freezing, cold, warm, hot, boiling });
 
             // Act
             var rule1 = new FuzzyRuleBuilder("Rule1")
-                .WithCondition(If(), water, Is(), "cold")
-                .WithConclusion(water, Is(), "cold")
+                .Add(new Condition(If, water, Is, "cold").And(water, IsNot, "freezing").Or(water, Is, "frozen"))
+                .Add(new Condition(And, water, Is, "warm").And(water, IsNot, "hot").Or(water, Is, "boiling"))
+                .Add(new Condition(Or, water, Is, "frozen"))
+                .Then(water, Is, "warm")
+                .Then(water, IsNot, "frozen")
                 .Build();
 
             // Assert
+            Assert.Equal(3, rule1.Conditions.Count);
+            Assert.Equal(2, rule1.Conclusions.Count);
         }
     }
 }

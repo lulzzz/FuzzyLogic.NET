@@ -67,14 +67,14 @@ namespace FuzzyLogic.Tests.MembershipFunctionTests
         [InlineData(2, 3, 4, 1)]
         [InlineData(2, 3, 2.5, 0.5)]
         [InlineData(2, 3, double.MaxValue, 1)]
-        internal void CreateWithLeftEdge_GetMembershipWithVariousInputs_ReturnsExpectedResult(
+        internal void CreateWithRightEdge_GetMembershipWithVariousInputs_ReturnsExpectedResult(
             double x1,
             double x2,
             double input,
             double expected)
         {
             // Arrange
-            var function = TrapezoidalFunction.CreateWithLeftEdge(x1, x2);
+            var function = TrapezoidalFunction.CreateWithRightEdge(x1, x2);
 
             // Act
             var result = function.GetMembership(input);
@@ -91,14 +91,14 @@ namespace FuzzyLogic.Tests.MembershipFunctionTests
         [InlineData(2, 3, 4, 0)]
         [InlineData(2, 3, 2.5, 0.5)]
         [InlineData(2, 3, double.MaxValue, 0)]
-        internal void CreateWithRightEdge_GetMembershipWithVariousInputs_ReturnsExpectedResult(
+        internal void CreateWithLeftEdge_GetMembershipWithVariousInputs_ReturnsExpectedResult(
             double x1,
             double x2,
             double input,
             double expected)
         {
             // Arrange
-            var function = TrapezoidalFunction.CreateWithRightEdge(x1, x2);
+            var function = TrapezoidalFunction.CreateWithLeftEdge(x1, x2);
 
             // Act
             var result = function.GetMembership(input);

@@ -12,21 +12,22 @@ namespace FuzzyLogic
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Threading;
+    using FuzzyLogic.Annotations;
     using FuzzyLogic.Utility;
 
     /// <summary>
     /// The linguistic variable immutable class.
     /// </summary>
+    [Immutable]
     public class LinguisticVariable
     {
-        private readonly Dictionary<string, FuzzySet> fuzzySets = new Dictionary<string, FuzzySet>();
+        private readonly Dictionary<Label, FuzzySet> fuzzySets = new Dictionary<Label, FuzzySet>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LinguisticVariable"/> class.
         /// </summary>
-        /// <param name="name">
-        /// The name.
+        /// <param name="label">
+        /// The label.
         /// </param>
         /// <param name="inputSets">
         /// The input Sets.
@@ -38,31 +39,31 @@ namespace FuzzyLogic
         /// The upper bound.
         /// </param>
         public LinguisticVariable(
-            string name,
+            string label,
             IList<FuzzySet> inputSets,
             double lowerBound = double.MinValue,
             double upperBound = double.MaxValue)
         {
-            Validate.NotNull(name, nameof(name));
+            Validate.NotNull(label, nameof(label));
             Validate.NotNull(inputSets, nameof(inputSets));
             Validate.NotOutOfRange(lowerBound, nameof(lowerBound));
             Validate.NotOutOfRange(upperBound, nameof(upperBound));
             ValidateFuzzySetsCollection(inputSets, lowerBound, upperBound);
 
-            this.Name = name;
+            this.Label = new Label(label);
             this.LowerBound = lowerBound;
             this.UpperBound = upperBound;
 
             foreach (var set in inputSets)
             {
-                this.fuzzySets.Add(set.Name, set);
+                this.fuzzySets.Add(set.Label, set);
             }
         }
 
         /// <summary>
-        /// Gets the name.
+        /// Gets the label of the <see cref="LinguisticVariable"/>.
         /// </summary>
-        public string Name { get; }
+        public Label Label { get; }
 
         /// <summary>
         /// Gets the lower bound of the <see cref="LinguisticVariable"/>.
@@ -75,96 +76,85 @@ namespace FuzzyLogic
         public double UpperBound { get; }
 
         /// <summary>
-        /// Gets or sets the input value.
-        /// </summary>
-        public double InputValue { get; set; } = 0;
-
-        /// <summary>
         /// The get members.
         /// </summary>
         /// <returns>
         /// The <see cref="IReadOnlyCollection{T}"/>.
         /// </returns>
-        public IReadOnlyCollection<string> GetMembers() => this.fuzzySets.Keys.ToList().AsReadOnly();
+        public IReadOnlyCollection<Label> GetMembers() => this.fuzzySets.Keys.ToList().AsReadOnly();
 
         /// <summary>
         /// The is member.
         /// </summary>
-        /// <param name="labelName">
-        /// The label name.
+        /// <param name="label">
+        /// The lingualExpression.
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool IsMember(string labelName)
+        public bool IsMember(Label label)
         {
-            Validate.NotNull(labelName, nameof(labelName));
+            Validate.NotNull(label, nameof(label));
 
-            return this.fuzzySets.ContainsKey(labelName);
-        }
-
-        /// <summary>
-        /// The is.
-        /// </summary>
-        /// <param name="labelName">
-        /// The label name.
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        public bool Is(string labelName)
-        {
-            return this.GetFuzzyMembership() == labelName;
+            return this.fuzzySets.ContainsKey(label);
         }
 
         /// <summary>
         /// The get set.
         /// </summary>
-        /// <param name="labelName">
-        /// The set name.
+        /// <param name="label">
+        /// The lingualExpression.
         /// </param>
         /// <returns>
         /// The <see cref="FuzzySet"/>.
         /// </returns>
-        public FuzzySet GetSet(string labelName)
+        public FuzzySet GetSet(Label label)
         {
-            Validate.NotNull(labelName, nameof(labelName));
+            Validate.NotNull(label, nameof(label));
 
-            return this.fuzzySets[labelName];
+            return this.fuzzySets[label];
         }
 
         /// <summary>
         /// The get set membership.
         /// </summary>
-        /// <param name="labelName">
+        /// <param name="label">
         /// The set name.
+        /// </param>
+        /// <param name="input">
+        /// The input.
         /// </param>
         /// <returns>
         /// The <see cref="double"/>.
         /// </returns>
-        public double GetLabelMembership(string labelName)
+        public double GetLabelMembership(Label label, double input)
         {
-            Validate.NotNull(labelName, nameof(labelName));
-            Validate.NotOutOfRange(this.InputValue, nameof(this.InputValue), 0);
+            Validate.NotNull(label, nameof(label));
+            Validate.NotOutOfRange(input, nameof(input));
 
-            return this.fuzzySets[labelName].GetMembership(this.InputValue);
+            return this.fuzzySets[label].GetMembership(input);
         }
 
         /// <summary>
         /// The get fuzzy membership.
         /// </summary>
+        /// <param name="input">
+        /// The input.
+        /// </param>
         /// <returns>
         /// The <see cref="string"/>.
         /// </returns>
-        public string GetFuzzyMembership()
+        public FuzzyState GetFuzzyMembership(double input)
         {
-            Validate.NotOutOfRange(this.InputValue, nameof(this.InputValue), 0);
+            Validate.NotOutOfRange(input, nameof(input));
 
-            return this.fuzzySets
-                .OrderByDescending(fs => fs.Value.GetMembership(this.InputValue))
+            var label = this.fuzzySets
+                .OrderByDescending(fs => fs.Value.GetMembership(input))
                 .FirstOrDefault()
                 .Value
-                .Name;
+                .Label;
+
+            return new FuzzyState(label.Value);
         }
 
         private static void ValidateFuzzySetsCollection(
@@ -187,13 +177,13 @@ namespace FuzzyLogic
                 if (set.LowerBound < lowerBound)
                 {
                     throw new ArgumentException(
-                        $"Lower bound cannot be greater than lowest bound of input set ({set.Name} {lowerBound} < {set.LowerBound}).");
+                        $"Lower bound cannot be greater than lowest bound of input set ({set.Label} {lowerBound} < {set.LowerBound}).");
                 }
 
                 if (set.UpperBound > upperBound)
                 {
                     throw new ArgumentException(
-                        $"Upper bound cannot be less than highest upper bound of input set ({set.Name}).");
+                        $"Upper bound cannot be less than highest upper bound of input set ({set.Label}).");
                 }
             }
         }

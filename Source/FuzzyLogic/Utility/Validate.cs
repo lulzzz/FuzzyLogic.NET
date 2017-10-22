@@ -10,6 +10,7 @@
 namespace FuzzyLogic.Utility
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics;
 
     /// <summary>
@@ -59,6 +60,32 @@ namespace FuzzyLogic.Utility
             if (string.IsNullOrWhiteSpace(argument))
             {
                 throw new ArgumentNullException(paramName);
+            }
+        }
+
+        /// <summary>
+        /// The not null or empty.
+        /// </summary>
+        /// <param name="collection">
+        /// The collection.
+        /// </param>
+        /// <param name="paramName">
+        /// The param name.
+        /// </param>
+        /// <typeparam name="T">
+        /// The type.
+        /// </typeparam>
+        [DebuggerStepThrough]
+        internal static void NotNullOrEmpty<T>(ICollection<T> collection, string paramName)
+        {
+            if (collection == null)
+            {
+                throw new ArgumentNullException(paramName, $"The {paramName} collection is null.");
+            }
+
+            if (collection.Count == 0)
+            {
+                throw new ArgumentException($"The {paramName} collection is empty.", paramName);
             }
         }
 

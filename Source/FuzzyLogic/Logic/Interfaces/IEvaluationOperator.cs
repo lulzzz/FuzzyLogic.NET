@@ -1,5 +1,5 @@
 ﻿// -------------------------------------------------------------------------------------------------
-// <copyright file="ILogicOperator.cs" author="Christopher Sellers">
+// <copyright file="IEvaluationOperator.cs" author="Christopher Sellers">
 //   Copyright (C) 2017. All rights reserved.
 //   https://github.com/cjdsellers/FuzzyLogic
 //   the use of this source code is governed by the Apache 2.0 license
@@ -7,12 +7,12 @@
 // </copyright>
 // -------------------------------------------------------------------------------------------------
 
-namespace FuzzyLogic.Logic
+namespace FuzzyLogic.Logic.Interfaces
 {
     /// <summary>
-    /// The logic operator.
+    /// The <see cref="IEvaluationOperator"/> interface.
     /// </summary>
-    public interface ILogicOperator
+    public interface IEvaluationOperator : ILogicOperator
     {
         /// <summary>
         /// The evaluate.
@@ -20,12 +20,15 @@ namespace FuzzyLogic.Logic
         /// <param name="variable">
         /// The variable.
         /// </param>
-        /// <param name="condition">
-        /// The condition.
+        /// <param name="state">
+        /// The state.
+        /// </param>
+        /// <param name="input">
+        /// The input.
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        bool Evaluate(LinguisticVariable variable, string condition);
+        bool Evaluate(LinguisticVariable variable, FuzzyState state, double input);
     }
 }

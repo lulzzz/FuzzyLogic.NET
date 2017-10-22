@@ -10,52 +10,56 @@
 namespace FuzzyLogic.Logic
 {
     using FuzzyLogic.Annotations;
-    using FuzzyLogic.Logic.Operators;
+    using FuzzyLogic.Logic.Interfaces;
 
     /// <summary>
     /// The premise.
     /// </summary>
     [Immutable]
-    public class Premise : Proposition, ICondition
+    public class Premise : Proposition
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Premise"/> class.
         /// </summary>
-        /// <param name="connectiveA">
-        /// The connective A.
+        /// <param name="connective">
+        /// The connective.
         /// </param>
         /// <param name="variable">
         /// The variable.
         /// </param>
-        /// <param name="connectiveB">
-        /// The connective B.
+        /// <param name="evaluator">
+        /// The evaluator.
         /// </param>
-        /// <param name="condition">
-        /// The condition.
+        /// <param name="state">
+        /// The state.
         /// </param>
         public Premise(
-            ILogicOperator connectiveA,
+            IConnectiveOperator connective,
             LinguisticVariable variable,
-            ILogicOperator connectiveB,
-            string condition)
-            : base(connectiveA, variable, connectiveB, condition)
+            IEvaluationOperator evaluator,
+            FuzzyState state)
+            : base(variable, evaluator, state)
         {
+            this.Connective = connective;
         }
 
         /// <summary>
-        /// The connective.
+        /// Gets the connective.
         /// </summary>
-        public ILogicOperator Connective => this.ConnectiveA;
+        public IConnectiveOperator Connective { get; }
 
         /// <summary>
         /// The evaluate.
         /// </summary>
+        /// <param name="input">
+        /// The input.
+        /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool Evaluate()
+        public bool Evaluate(double input)
         {
-            return this.ConnectiveB.Evaluate(this.Variable, this.Condition);
+            return this.Evaluator.Evaluate(this.Variable, this.State, input);
         }
 
         /// <summary>
@@ -64,6 +68,6 @@ namespace FuzzyLogic.Logic
         /// <returns>
         /// The <see cref="string"/>.
         /// </returns>
-        public override string ToString() => $"{base.ConnectiveA} {this.Variable.Name} {this.ConnectiveB} {this.Condition}";
+        public override string ToString() => $"{this.Variable.Label} {this.Evaluator} {this.State}";
     }
 }

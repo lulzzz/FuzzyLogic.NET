@@ -1,5 +1,5 @@
 ﻿// -------------------------------------------------------------------------------------------------
-// <copyright file="If.cs" author="Christopher Sellers">
+// <copyright file="And.cs" author="Christopher Sellers">
 //   Copyright (C) 2017. All rights reserved.
 //   https://github.com/cjdsellers/FuzzyLogic
 //   the use of this source code is governed by the Apache 2.0 license
@@ -14,7 +14,7 @@ namespace FuzzyLogic.Logic.Operators
     /// <summary>
     /// The is.
     /// </summary>
-    public class If : IConnectiveOperator
+    public class And : IConnectiveOperator
     {
         /// <summary>
         /// The to string.
@@ -22,6 +22,6 @@ namespace FuzzyLogic.Logic.Operators
         /// <returns>
         /// The <see cref="string"/>.
         /// </returns>
-        public override string ToString() => nameof(If).ToUpper();
+        public override string ToString() => nameof(And).ToUpper();
     }
 }

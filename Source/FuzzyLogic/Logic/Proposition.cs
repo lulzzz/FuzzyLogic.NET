@@ -11,10 +11,8 @@ namespace FuzzyLogic.Logic
 {
     using System;
     using FuzzyLogic.Annotations;
-    using FuzzyLogic.Logic.Operators;
+    using FuzzyLogic.Logic.Interfaces;
     using FuzzyLogic.Utility;
-
-    using static LogicOperators;
 
     /// <summary>
     /// The fuzzy rule proposition.
@@ -25,66 +23,51 @@ namespace FuzzyLogic.Logic
         /// <summary>
         /// Initializes a new instance of the <see cref="Proposition"/> class.
         /// </summary>
-        /// <param name="connectiveA">
-        /// The connective A.
-        /// </param>
         /// <param name="variable">
         /// The variable.
         /// </param>
-        /// <param name="connectiveB">
-        /// The connective B.
+        /// <param name="evaluator">
+        /// The evaluator.
         /// </param>
-        /// <param name="condition">
-        /// The condition.
+        /// <param name="state">
+        /// The state.
         /// </param>
         protected Proposition(
-            ILogicOperator connectiveA,
             LinguisticVariable variable,
-            ILogicOperator connectiveB,
-            string condition)
+            IEvaluationOperator evaluator,
+            FuzzyState state)
         {
-            Validate.NotNull(connectiveA, nameof(connectiveB));
             Validate.NotNull(variable, nameof(variable));
-            Validate.NotNull(condition, nameof(condition));
+            Validate.NotNull(evaluator, nameof(evaluator));
+            Validate.NotNull(state, nameof(state));
 
-            this.ConnectiveA = connectiveA;
             this.Variable = variable;
-            this.ConnectiveB = connectiveB;
-            this.Condition = condition.ToLower();
+            this.Evaluator = evaluator;
+            this.State = state;
 
             this.ValidateProposition();
         }
 
         /// <summary>
-        /// Gets the operator.
-        /// </summary>
-        public ILogicOperator ConnectiveA { get; }
-
-        /// <summary>
         /// Gets the variable.
         /// </summary>
-        public LinguisticVariable Variable { get; }
+        protected LinguisticVariable Variable { get; }
 
         /// <summary>
-        /// Gets the operator.
+        /// Gets the evaluator.
         /// </summary>
-        public ILogicOperator ConnectiveB { get; }
+        protected IEvaluationOperator Evaluator { get; }
 
         /// <summary>
-        /// Gets the label.
+        /// Gets the lingualExpression.
         /// </summary>
-        public string Condition { get; }
+        protected FuzzyState State { get; }
 
         private void ValidateProposition()
         {
-            if (!this.Variable.IsMember(this.Condition))
+            if (!this.Variable.IsMember(new Label(this.State.Value)))
             {
-                throw new ArgumentException($"Invalid condition (the condition '{this.Condition}' is not a member of the variable '{this.Variable.Name}').");
-            }
-
-            if (this.ConnectiveB == Is())
-            {
-                throw new ArgumentException($"Invalid operator (the antecadent connective cannot be an '{this.ConnectiveB}').");
+                throw new ArgumentException($"Invalid proposition (the state '{this.State}' is not a member of the linguistic variable '{this.Variable.Label}').");
             }
         }
     }

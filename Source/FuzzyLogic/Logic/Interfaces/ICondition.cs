@@ -7,20 +7,13 @@
 // </copyright>
 // -------------------------------------------------------------------------------------------------
 
-namespace FuzzyLogic.Logic
+namespace FuzzyLogic.Logic.Interfaces
 {
-    using FuzzyLogic.Logic.Operators;
-
     /// <summary>
     /// The Condition interface.
     /// </summary>
     public interface ICondition
     {
-        /// <summary>
-        /// Gets the connective.
-        /// </summary>
-        ILogicOperator Connective { get; }
-
         /// <summary>
         /// The evaluate.
         /// </summary>

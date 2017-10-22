@@ -10,8 +10,7 @@
 namespace FuzzyLogic.Logic
 {
     using FuzzyLogic.Annotations;
-    using FuzzyLogic.Logic.Operators;
-    using static Logic.LogicOperators;
+    using FuzzyLogic.Logic.Interfaces;
 
     /// <summary>
     /// The conclusion.
@@ -25,14 +24,17 @@ namespace FuzzyLogic.Logic
         /// <param name="variable">
         /// The variable.
         /// </param>
-        /// <param name="connectiveB">
-        /// The connective B.
+        /// <param name="evaluator">
+        /// The evaluator.
         /// </param>
-        /// <param name="condition">
-        /// The condition.
+        /// <param name="state">
+        /// The state.
         /// </param>
-        public Conclusion(LinguisticVariable variable, ILogicOperator connectiveB, string condition)
-            : base(Then(), variable, connectiveB, condition)
+        public Conclusion(
+            LinguisticVariable variable,
+            IEvaluationOperator evaluator,
+            FuzzyState state)
+            : base(variable, evaluator, state)
         {
         }
     }

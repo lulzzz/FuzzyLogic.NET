@@ -11,7 +11,7 @@ namespace FuzzyLogic.Inference
 {
     using System.Collections.Generic;
     using FuzzyLogic.Logic;
-    using static Logic.LogicOperators;
+    using FuzzyLogic.Logic.Interfaces;
 
     /// <summary>
     /// The fuzzy rule builder.
@@ -34,123 +34,22 @@ namespace FuzzyLogic.Inference
         /// </summary>
         private string Name { get; }
 
-        private IList<ICondition> Premises { get; set; } = new List<ICondition>();
+        private IList<Condition> Conditions { get; set; } = new List<Condition>();
 
-        private Conclusion Conclusion { get; set; }
+        private IList<Conclusion> Conclusions { get; set; } = new List<Conclusion>();
 
         /// <summary>
         /// The add condition.
         /// </summary>
-        /// <param name="connectiveA">
-        /// The connective A.
-        /// </param>
-        /// <param name="variable">
-        /// The variable.
-        /// </param>
-        /// <param name="connectiveB">
-        /// The connective B.
-        /// </param>
         /// <param name="condition">
         /// The condition.
         /// </param>
         /// <returns>
         /// The <see cref="FuzzyRuleBuilder"/>.
         /// </returns>
-        public FuzzyRuleBuilder WithCondition(
-            ILogicOperator connectiveA,
-            LinguisticVariable variable,
-            ILogicOperator connectiveB,
-            string condition)
+        public FuzzyRuleBuilder Add(Condition condition)
         {
-            this.Premises.Add(new Premise(connectiveA, variable, connectiveB, condition));
-
-            return this;
-        }
-
-        /// <summary>
-        /// The with conjunction.
-        /// </summary>
-        /// <param name="connective">
-        /// The connective.
-        /// </param>
-        /// <param name="variableA">
-        /// The variable A.
-        /// </param>
-        /// <param name="connectiveA">
-        /// The connective A.
-        /// </param>
-        /// <param name="conditionA">
-        /// The condition A.
-        /// </param>
-        /// <param name="variableB">
-        /// The variable B.
-        /// </param>
-        /// <param name="connectiveB">
-        /// The connective B.
-        /// </param>
-        /// <param name="conditionB">
-        /// The condition B.
-        /// </param>
-        /// <returns>
-        /// The <see cref="FuzzyRuleBuilder"/>.
-        /// </returns>
-        public FuzzyRuleBuilder WithConjunction(
-            ILogicOperator connective,
-            LinguisticVariable variableA,
-            ILogicOperator connectiveA,
-            string conditionA,
-            LinguisticVariable variableB,
-            ILogicOperator connectiveB,
-            string conditionB)
-        {
-            var premiseA = new Premise(If(), variableA, connectiveA, conditionA);
-            var premiseB = new Premise(If(), variableB, connectiveB, conditionB);
-
-            this.Premises.Add(new Conjunction(connective, premiseA, premiseB));
-
-            return this;
-        }
-
-        /// <summary>
-        /// The with disjunction.
-        /// </summary>
-        /// <param name="connective">
-        /// The connective.
-        /// </param>
-        /// <param name="variableA">
-        /// The variable a.
-        /// </param>
-        /// <param name="connectiveA">
-        /// The connective a.
-        /// </param>
-        /// <param name="conditionA">
-        /// The condition a.
-        /// </param>
-        /// <param name="variableB">
-        /// The variable b.
-        /// </param>
-        /// <param name="connectiveB">
-        /// The connective b.
-        /// </param>
-        /// <param name="conditionB">
-        /// The condition b.
-        /// </param>
-        /// <returns>
-        /// The <see cref="FuzzyRuleBuilder"/>.
-        /// </returns>
-        public FuzzyRuleBuilder WithDisjunction(
-            ILogicOperator connective,
-            LinguisticVariable variableA,
-            ILogicOperator connectiveA,
-            string conditionA,
-            LinguisticVariable variableB,
-            ILogicOperator connectiveB,
-            string conditionB)
-        {
-            var premiseA = new Premise(If(), variableA, connectiveA, conditionA);
-            var premiseB = new Premise(If(), variableB, connectiveB, conditionB);
-
-            this.Premises.Add(new Disjunction(connective, premiseA, premiseB));
+            this.Conditions.Add(condition);
 
             return this;
         }
@@ -161,21 +60,21 @@ namespace FuzzyLogic.Inference
         /// <param name="variable">
         /// The variable.
         /// </param>
-        /// <param name="connective">
-        /// The connective.
+        /// <param name="evaluator">
+        /// The evaluator.
         /// </param>
-        /// <param name="condition">
-        /// The condition.
+        /// <param name="state">
+        /// The state.
         /// </param>
         /// <returns>
         /// The <see cref="FuzzyRuleBuilder"/>.
         /// </returns>
-        public FuzzyRuleBuilder WithConclusion(
+        public FuzzyRuleBuilder Then(
             LinguisticVariable variable,
-            ILogicOperator connective,
-            string condition)
+            IEvaluationOperator evaluator,
+            string state)
         {
-            this.Conclusion = new Conclusion(variable, connective, condition);
+            this.Conclusions.Add(new Conclusion(variable, evaluator, new FuzzyState(state)));
 
             return this;
         }
@@ -188,7 +87,7 @@ namespace FuzzyLogic.Inference
         /// </returns>
         public FuzzyRule Build()
         {
-            return new FuzzyRule(this.Name, this.Premises, this.Conclusion);
+            return new FuzzyRule(this.Name, this.Conditions, this.Conclusions);
         }
     }
 }

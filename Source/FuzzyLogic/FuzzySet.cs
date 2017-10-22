@@ -25,25 +25,25 @@ namespace FuzzyLogic
         /// <summary>
         /// Initializes a new instance of the <see cref="FuzzySet"/> class.
         /// </summary>
-        /// <param name="name">
-        /// The name.
+        /// <param name="label">
+        /// The lingualExpression.
         /// </param>
         /// <param name="function">
         /// The function.
         /// </param>
-        public FuzzySet(string name, IMembershipFunction function)
+        public FuzzySet(string label, IMembershipFunction function)
         {
-            Validate.NotNull(name, nameof(name));
+            Validate.NotNull(label, nameof(label));
             Validate.NotNull(function, nameof(function));
 
-            this.Name = name;
+            this.Label = new Label(label);
             this.function = function;
         }
 
         /// <summary>
         /// Gets the name of the fuzzy set.
         /// </summary>
-        public string Name { get; }
+        public Label Label { get; }
 
         /// <summary>
         /// The lower bound.

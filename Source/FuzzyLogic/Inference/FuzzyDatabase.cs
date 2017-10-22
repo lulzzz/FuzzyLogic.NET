@@ -19,7 +19,7 @@ namespace FuzzyLogic.Inference
     /// </summary>
     public sealed class FuzzyDatabase
     {
-        private readonly IDictionary<string, LinguisticVariable> variables = new Dictionary<string, LinguisticVariable>();
+        private readonly IDictionary<Label, LinguisticVariable> variables = new Dictionary<Label, LinguisticVariable>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FuzzyDatabase"/> class.
@@ -32,7 +32,7 @@ namespace FuzzyLogic.Inference
         /// <summary>
         /// Returns an <see cref="IReadOnlyCollection{T}"/> of <see cref="LinguisticVariable"/> names.
         /// </summary>
-        public IReadOnlyCollection<string> VariableNames => this.variables.Keys.ToList().AsReadOnly();
+        public IReadOnlyCollection<Label> VariableNames => this.variables.Keys.ToList().AsReadOnly();
 
         /// <summary>
         /// Returns the count of <see cref="LinguisticVariable"/> in the <see cref="FuzzyDatabase"/>.
@@ -51,16 +51,18 @@ namespace FuzzyLogic.Inference
         /// </exception>
         public void Add(LinguisticVariable variable)
         {
-            if (this.variables.ContainsKey(variable.Name))
+            Validate.NotNull(variable, nameof(variable));
+
+            if (this.variables.ContainsKey(variable.Label))
             {
-                throw new ArgumentException($"Cannot add linguistic variable (Fuzzy database already contains a rule named {variable.Name}).");
+                throw new ArgumentException($"Cannot add linguistic variable (Fuzzy database already contains a rule named {variable.Label}).");
             }
 
-            this.variables.Add(variable.Name, variable);
+            this.variables.Add(variable.Label, variable);
         }
 
         /// <summary>
-        /// Updates the database with the input variable.
+        /// Replaces the input variable in the database with the input variable given.
         /// </summary>
         /// <param name="variable">
         /// The variable.
@@ -69,14 +71,40 @@ namespace FuzzyLogic.Inference
         /// Throws an exception if a variable with the input name is not contained
         /// within the database.
         /// </exception>
-        public void Update(LinguisticVariable variable)
+        public void Replace(LinguisticVariable variable)
         {
-            if (!this.variables.ContainsKey(variable.Name))
+            Validate.NotNull(variable, nameof(variable));
+
+            if (!this.variables.ContainsKey(variable.Label))
             {
-                throw new ArgumentException($"Cannot update linguistic variable (Fuzzy database does not contain a variable named {variable.Name}).");
+                throw new ArgumentException($"Cannot update linguistic variable (Fuzzy database does not contain a variable named {variable.Label}).");
             }
 
-            this.variables[variable.Name] = variable;
+            this.variables[variable.Label] = variable;
+        }
+
+        /// <summary>
+        /// The update.
+        /// </summary>
+        /// <param name="label">
+        /// The label.
+        /// </param>
+        /// <param name="input">
+        /// The input.
+        /// </param>
+        /// <exception cref="ArgumentException">
+        /// Throws an exception if a variable with the input name is not contained
+        /// within the database.
+        /// </exception>
+        public void Update(Label label, double input)
+        {
+            Validate.NotNull(label, nameof(label));
+            Validate.NotOutOfRange(input, nameof(input));
+
+            if (!this.variables.ContainsKey(label))
+            {
+                throw new ArgumentException($"Cannot update linguistic variable (Fuzzy database does not contain a variable named {label}).");
+            }
         }
 
         /// <summary>
@@ -90,12 +118,14 @@ namespace FuzzyLogic.Inference
         /// </exception>
         public void Delete(LinguisticVariable variable)
         {
-            if (!this.variables.ContainsKey(variable.Name))
+            Validate.NotNull(variable, nameof(variable));
+
+            if (!this.variables.ContainsKey(variable.Label))
             {
-                throw new ArgumentException($"Cannot delete linguistic variable (Fuzzy database does not contain a variable named {variable.Name}).");
+                throw new ArgumentException($"Cannot delete linguistic variable (Fuzzy database does not contain a variable named {variable.Label}).");
             }
 
-            this.variables.Remove(variable.Name);
+            this.variables.Remove(variable.Label);
         }
 
         /// <summary>
@@ -118,13 +148,15 @@ namespace FuzzyLogic.Inference
         /// </returns>
         public bool ContainsVariable(LinguisticVariable variable)
         {
-            return this.variables.ContainsKey(variable.Name);
+            Validate.NotNull(variable, nameof(variable));
+
+            return this.variables.ContainsKey(variable.Label);
         }
 
         /// <summary>
         /// Returns the <see cref="LinguisticVariable"/> from the <see cref="FuzzyDatabase"/>.
         /// </summary>
-        /// <param name="variableName">
+        /// <param name="label">
         /// The variable name.
         /// </param>
         /// <returns>
@@ -134,16 +166,16 @@ namespace FuzzyLogic.Inference
         /// Throws an exception if a variable with the input name is not contained
         /// within the database.
         /// </exception>
-        public LinguisticVariable GetVariable(string variableName)
+        public LinguisticVariable GetVariable(Label label)
         {
-            Validate.NotNull(variableName, nameof(variableName));
+            Validate.NotNull(label, nameof(label));
 
-            if (!this.variables.ContainsKey(variableName))
+            if (!this.variables.ContainsKey(label))
             {
-                throw new ArgumentException($"Cannot get linguistic variable (Fuzzy database does not contain a variable named {variableName}).");
+                throw new ArgumentException($"Cannot get linguistic variable (Fuzzy database does not contain a variable named {label}).");
             }
 
-            return this.variables[variableName];
+            return this.variables[label];
         }
     }
 }
