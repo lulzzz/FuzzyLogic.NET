@@ -35,21 +35,21 @@ namespace FuzzyLogic
         }
 
         /// <summary>
-        /// Gets the value.
+        /// Gets the <see cref="string"/> value.
         /// </summary>
         public string Value { get; }
 
         /// <summary>
-        /// The ==.
+        /// The == operator.
         /// </summary>
         /// <param name="left">
-        /// The left.
+        /// The left <see cref="ValidString{T}"/>.
         /// </param>
         /// <param name="right">
-        /// The right.
+        /// The right <see cref="ValidString{T}"/>.
         /// </param>
         /// <returns>
-        /// A boolean.
+        /// A <see cref="bool"/>.
         /// </returns>
         public static bool operator ==(ValidString<T> left, ValidString<T> right)
         {
@@ -67,21 +67,21 @@ namespace FuzzyLogic
         }
 
         /// <summary>
-        /// The !=.
+        /// The != operator.
         /// </summary>
         /// <param name="left">
-        /// The left.
+        /// The left <see cref="ValidString{T}"/>.
         /// </param>
         /// <param name="right">
-        /// The right.
+        /// The right <see cref="ValidString{T}"/>.
         /// </param>
         /// <returns>
-        /// A boolean.
+        /// A <see cref="bool"/>.
         /// </returns>
         public static bool operator !=(ValidString<T> left, ValidString<T> right) => !(left == right);
 
         /// <summary>
-        /// The equals.
+        /// The equals override.
         /// </summary>
         /// <param name="other">
         /// The other.
@@ -92,10 +92,10 @@ namespace FuzzyLogic
         public override bool Equals(object other) => this.Equals(other as ValidString<T>);
 
         /// <summary>
-        /// The equals.
+        /// Returns a <see cref="bool"/> indicating whether the input <see cref="ValidString{T}"/> equals this.
         /// </summary>
         /// <param name="other">
-        /// The other.
+        /// The other <see cref="ValidString{T}"/>.
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
@@ -103,7 +103,7 @@ namespace FuzzyLogic
         public bool Equals(ValidString<T> other) => other != null && this.Value == other.Value;
 
         /// <summary>
-        /// The get hash code.
+        /// Returns the hash code for this <see cref="ValidString{T}"/>.
         /// </summary>
         /// <returns>
         /// The <see cref="int"/>.
@@ -111,7 +111,7 @@ namespace FuzzyLogic
         public override int GetHashCode() => this.Value.GetHashCode();
 
         /// <summary>
-        /// The to string.
+        /// Returns a <see cref="string"/> representation of this <see cref="ValidString{T}"/>.
         /// </summary>
         /// <returns>
         /// The <see cref="string"/>.

@@ -12,14 +12,16 @@ namespace FuzzyLogic.Utility
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using FuzzyLogic.Annotations;
 
     /// <summary>
-    /// The validate.
+    /// The immutable static <see cref="Validate"/> class.
     /// </summary>
+    [Immutable]
     internal static class Validate
     {
         /// <summary>
-        /// The not null.
+        /// Validates that the given argument is not null.
         /// </summary>
         /// <param name="argument">
         /// The argument.
@@ -31,7 +33,7 @@ namespace FuzzyLogic.Utility
         /// The argument type.
         /// </typeparam>
         /// <exception cref="ArgumentNullException">
-        /// Throws if argument is null.
+        /// Throws if the argument is null.
         /// </exception>
         [DebuggerStepThrough]
         internal static void NotNull<T>(T argument, string paramName)
@@ -43,7 +45,7 @@ namespace FuzzyLogic.Utility
         }
 
         /// <summary>
-        /// The not null.
+        /// Validates that the given string is not null.
         /// </summary>
         /// <param name="argument">
         /// The argument.
@@ -52,7 +54,7 @@ namespace FuzzyLogic.Utility
         /// The param name.
         /// </param>
         /// <exception cref="ArgumentNullException">
-        /// Throws is string is null or white space.
+        /// Throws if the string is null or white space.
         /// </exception>
         [DebuggerStepThrough]
         internal static void NotNull(string argument, string paramName)
@@ -64,7 +66,7 @@ namespace FuzzyLogic.Utility
         }
 
         /// <summary>
-        /// The not null or empty.
+        /// Validates that the given collection is not null or empty.
         /// </summary>
         /// <param name="collection">
         /// The collection.
@@ -75,6 +77,12 @@ namespace FuzzyLogic.Utility
         /// <typeparam name="T">
         /// The type.
         /// </typeparam>
+        /// <exception cref="ArgumentNullException">
+        /// Throws if the collection is null.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// Throws if the collection is empty.
+        /// </exception>
         [DebuggerStepThrough]
         internal static void NotNullOrEmpty<T>(ICollection<T> collection, string paramName)
         {
@@ -90,16 +98,16 @@ namespace FuzzyLogic.Utility
         }
 
         /// <summary>
-        /// The min vs max validation.
+        /// Validates the minimum vs maximum arguments.
         /// </summary>
         /// <param name="min">
-        /// The min.
+        /// The min argument.
         /// </param>
         /// <param name="max">
-        /// The max.
+        /// The max argument.
         /// </param>
         /// <exception cref="ArgumentException">
-        /// If min is greater than max then throws.
+        /// Throws if min is greater than max.
         /// </exception>
         [DebuggerStepThrough]
         internal static void MinMax(double min, double max)
@@ -111,7 +119,7 @@ namespace FuzzyLogic.Utility
         }
 
         /// <summary>
-        /// The double not out of range.
+        /// Validates the the given <see cref="double"/> is not out of the specified range.
         /// </summary>
         /// <param name="value">
         /// The value.
@@ -119,21 +127,21 @@ namespace FuzzyLogic.Utility
         /// <param name="paramName">
         /// The param name.
         /// </param>
-        /// <param name="lower">
-        /// The lower.
+        /// <param name="lowerBound">
+        /// The lower bound of the range.
         /// </param>
-        /// <param name="upper">
-        /// The upper.
+        /// <param name="upperBound">
+        /// The upper bound of the range.
         /// </param>
         /// <param name="endPoints">
-        /// The end points.
+        /// The end point literal.
         /// </param>
         [DebuggerStepThrough]
         internal static void NotOutOfRange(
             double value,
             string paramName,
-            double lower = double.MinValue,
-            double upper = double.MaxValue,
+            double lowerBound = double.MinValue,
+            double upperBound = double.MaxValue,
             RangeEndPoints endPoints = RangeEndPoints.Inclusive)
         {
             NotInvalidNumber(value, paramName);
@@ -141,46 +149,46 @@ namespace FuzzyLogic.Utility
             switch (endPoints)
             {
                 case RangeEndPoints.Inclusive:
-                    if (value < lower || value > upper)
+                    if (value < lowerBound || value > upperBound)
                     {
-                        throw new ArgumentOutOfRangeException(paramName, $"The {paramName} is not within the specified range [{lower}, {upper}] inclusive. InputValue = {value}.");
+                        throw new ArgumentOutOfRangeException(paramName, $"The {paramName} is not within the specified range [{lowerBound}, {upperBound}] inclusive. InputValue = {value}.");
                     }
                     break;
 
                 case RangeEndPoints.LowerExclusive:
-                    if (value <= lower || value > upper)
+                    if (value <= lowerBound || value > upperBound)
                     {
-                        throw new ArgumentOutOfRangeException(paramName, $"The {paramName} is not within the specified range [{lower}, {upper}] lower exclusive. InputValue = {value}.");
+                        throw new ArgumentOutOfRangeException(paramName, $"The {paramName} is not within the specified range [{lowerBound}, {upperBound}] lower exclusive. InputValue = {value}.");
                     }
                     break;
 
                 case RangeEndPoints.UpperExclusive:
-                    if (value < lower || value >= upper)
+                    if (value < lowerBound || value >= upperBound)
                     {
-                        throw new ArgumentOutOfRangeException(paramName, $"The {paramName} is not within the specified range [{lower}, {upper}] upper exclusive. InputValue = {value}.");
+                        throw new ArgumentOutOfRangeException(paramName, $"The {paramName} is not within the specified range [{lowerBound}, {upperBound}] upper exclusive. InputValue = {value}.");
                     }
                     break;
 
                 case RangeEndPoints.Exclusive:
-                    if (value <= lower || value >= upper)
+                    if (value <= lowerBound || value >= upperBound)
                     {
-                        throw new ArgumentOutOfRangeException(paramName, $"The {paramName} is not within the specified range [{lower}, {upper}] exclusive. InputValue = {value}.");
+                        throw new ArgumentOutOfRangeException(paramName, $"The {paramName} is not within the specified range [{lowerBound}, {upperBound}] exclusive. InputValue = {value}.");
                     }
                     break;
             }
         }
 
         /// <summary>
-        /// Validates the points array.
+        /// Validates the <see cref="FuzzyPoint"/> array.
         /// </summary>
         /// <param name="points">
-        /// The points.
+        /// The points array.
         /// </param>
         /// <param name="paramName">
-        /// The param Name.
+        /// The parameter name.
         /// </param>
         /// <exception cref="ArgumentException">
-        /// Throws if points out of sequence.
+        /// Throws if points are out of sequence.
         /// </exception>
         [DebuggerStepThrough]
         internal static void FuzzyPointArray(FuzzyPoint[] points, string paramName)
@@ -207,7 +215,7 @@ namespace FuzzyLogic.Utility
         }
 
         /// <summary>
-        /// The fuzzy set collection.
+        /// Validates the collection of <see cref="FuzzySet"/>.
         /// </summary>
         /// <param name="inputSets">
         /// The input sets.
@@ -219,7 +227,7 @@ namespace FuzzyLogic.Utility
         /// The upper bound.
         /// </param>
         /// <exception cref="ArgumentException">
-        /// Throws an exception for various reasons.
+        /// Throws if elements of a set are out of bounds.
         /// </exception>
         [DebuggerStepThrough]
         internal static void FuzzySetCollection(
@@ -254,13 +262,13 @@ namespace FuzzyLogic.Utility
         }
 
         /// <summary>
-        /// The not invalid number.
+        /// Validates the given number.
         /// </summary>
         /// <param name="value">
         /// The value.
         /// </param>
         /// <param name="paramName">
-        /// The param name.
+        /// The parameter name.
         /// </param>
         /// <exception cref="ArgumentOutOfRangeException">
         /// Throws if the input value is invalid.

@@ -13,7 +13,7 @@ namespace FuzzyLogic.Logic
     using FuzzyLogic.Logic.Interfaces;
 
     /// <summary>
-    /// The conclusion.
+    /// The immutable <see cref="Conclusion"/> class.
     /// </summary>
     [Immutable]
     public class Conclusion : Proposition
@@ -22,13 +22,13 @@ namespace FuzzyLogic.Logic
         /// Initializes a new instance of the <see cref="Conclusion"/> class.
         /// </summary>
         /// <param name="variable">
-        /// The variable.
+        /// The linguistic variable.
         /// </param>
         /// <param name="evaluator">
-        /// The evaluator.
+        /// The evaluation operator.
         /// </param>
         /// <param name="state">
-        /// The state.
+        /// The fuzzy state.
         /// </param>
         public Conclusion(
             LinguisticVariable variable,
@@ -39,7 +39,7 @@ namespace FuzzyLogic.Logic
         }
 
         /// <summary>
-        /// The to string.
+        /// Returns a <see cref="string"/> representation of the conclusion.
         /// </summary>
         /// <returns>
         /// The <see cref="string"/>.

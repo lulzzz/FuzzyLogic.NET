@@ -9,18 +9,20 @@
 
 namespace FuzzyLogic.Logic.Operators
 {
+    using FuzzyLogic.Annotations;
     using FuzzyLogic.Logic.Interfaces;
 
     /// <summary>
-    /// The is.
+    /// The immutable <see cref="Then"/> class.
     /// </summary>
-    public class Then : IConnectiveOperator
+    [Immutable]
+    public sealed class Then : IConnectiveOperator
     {
         /// <summary>
-        /// The to string.
+        /// Returns a linguistic string representation of the logic operator.
         /// </summary>
         /// <returns>
-        /// The <see cref="string"/>.
+        /// A <see cref="string"/>.
         /// </returns>
         public override string ToString() => nameof(Then).ToUpper();
     }

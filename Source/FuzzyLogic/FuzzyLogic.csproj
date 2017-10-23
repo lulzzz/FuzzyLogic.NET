@@ -7,7 +7,7 @@
     <Authors>Christopher Sellers</Authors>
     <Company></Company>
     <Version>0.4.0</Version>
-    <Description>A library to express fuzzy logic for .NET Standard (work in progress).</Description>
+    <Description>A library to express fuzzy logic for .NET. Fuzzy set operations, fuzzification with linguistic varables and fuzzy inference.</Description>
     <AssemblyVersion>0.4.0.0</AssemblyVersion>
     <Language>C#</Language>
     <Copyright>Copyright ©2017 Christopher Sellers</Copyright>
@@ -16,7 +16,7 @@
     <PackageIconUrl>https://raw.githubusercontent.com/cjdsellers/FuzzyLogic/master/FuzzyLogicIcon.ico</PackageIconUrl>
     <RepositoryUrl>https://github.com/cjdsellers/FuzzyLogic</RepositoryUrl>
     <PackageTags>fuzzy logic</PackageTags>
-    <PackageReleaseNotes>Initial release for fuzzy set operations, fuzzification with linguistic varables and fuzzy inference.</PackageReleaseNotes>
+    <PackageReleaseNotes>Fuzzy set operations, fuzzification with linguistic varables and fuzzy inference.</PackageReleaseNotes>
     <Product />
     <FileVersion>0.4.0.0</FileVersion>
   </PropertyGroup>

@@ -12,55 +12,55 @@ namespace FuzzyLogic.Logic
     using FuzzyLogic.Logic.Operators;
 
     /// <summary>
-    /// The logic operators.
+    /// The immutable <see cref="LogicOperators"/> class.
     /// </summary>
     public static class LogicOperators
     {
         /// <summary>
-        /// The if.
+        /// The 'if' logic operator.
         /// </summary>
         /// <returns>
-        /// The <see cref="If"/>.
+        /// An <see cref="If"/>.
         /// </returns>
         public static If If => new If();
 
         /// <summary>
-        /// The is.
+        /// The 'is' logic operator.
         /// </summary>
         /// <returns>
-        /// The <see cref="Is"/>.
+        /// An <see cref="Is"/>.
         /// </returns>
         public static Is Is => new Is();
 
         /// <summary>
-        /// The is not.
+        /// The 'is' not logic operator.
         /// </summary>
         /// <returns>
-        /// The <see cref="IsNot"/>.
+        /// An <see cref="IsNot"/>.
         /// </returns>
         public static IsNot IsNot => new IsNot();
 
         /// <summary>
-        /// The then.
+        /// The 'then' logic operator.
         /// </summary>
         /// <returns>
-        /// The <see cref="Then"/>.
+        /// An <see cref="Then"/>.
         /// </returns>
         public static Then Then => new Then();
 
         /// <summary>
-        /// The and.
+        /// The 'and' logic operator.
         /// </summary>
         /// <returns>
-        /// The <see cref="And"/>.
+        /// An <see cref="And"/>.
         /// </returns>
         public static And And => new And();
 
         /// <summary>
-        /// The and.
+        /// The 'or' logic operator.
         /// </summary>
         /// <returns>
-        /// The <see cref="Or"/>.
+        /// An <see cref="Or"/>.
         /// </returns>
         public static Or Or => new Or();
     }

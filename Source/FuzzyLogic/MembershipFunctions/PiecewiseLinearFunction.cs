@@ -14,7 +14,7 @@ namespace FuzzyLogic.MembershipFunctions
     using FuzzyLogic.Utility;
 
     /// <summary>
-    /// The <see cref="PiecewiseLinearFunction"/> function immutable class.
+    /// The immutable <see cref="PiecewiseLinearFunction"/> class.
     /// </summary>
     [Immutable]
     public class PiecewiseLinearFunction : IMembershipFunction
@@ -62,10 +62,10 @@ namespace FuzzyLogic.MembershipFunctions
         /// Returns the membership value of a given input to the membership function.
         /// </summary>
         /// <param name="x">
-        /// The x value.
+        /// The given input.
         /// </param>
         /// <returns>
-        /// The <see cref="double"/>.
+        /// A <see cref="double"/>.
         /// </returns>
         public double GetMembership(double x)
         {

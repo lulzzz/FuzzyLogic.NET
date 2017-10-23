@@ -15,16 +15,16 @@ namespace FuzzyLogic.Logic.Interfaces
     public interface IEvaluationOperator : ILogicOperator
     {
         /// <summary>
-        /// The evaluate.
+        /// Returns a <see cref="bool"/> indicating the result of the evaluation.
         /// </summary>
         /// <param name="expected">
-        /// The expected.
+        /// The expected fuzzy state.
         /// </param>
         /// <param name="result">
-        /// The result.
+        /// The actual fuzzy state.
         /// </param>
         /// <returns>
-        /// The <see cref="bool"/>.
+        /// A <see cref="bool"/>.
         /// </returns>
         bool Evaluate(FuzzyState expected, FuzzyState result);
     }

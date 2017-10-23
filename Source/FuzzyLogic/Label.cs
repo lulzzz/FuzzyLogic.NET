@@ -12,10 +12,10 @@ namespace FuzzyLogic
     using FuzzyLogic.Annotations;
 
     /// <summary>
-    /// The immutable <see cref="Label"/>.
+    /// The immutable <see cref="Label"/> class.
     /// </summary>
     [Immutable]
-    public class Label : ValidString<Label>
+    public sealed class Label : ValidString<Label>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Label"/> class.

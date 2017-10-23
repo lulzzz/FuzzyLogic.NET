@@ -9,32 +9,34 @@
 
 namespace FuzzyLogic.Logic.Operators
 {
+    using FuzzyLogic.Annotations;
     using FuzzyLogic.Logic.Interfaces;
 
     /// <summary>
-    /// The is.
+    /// The immutable <see cref="Is"/> class.
     /// </summary>
-    public class Is : IEvaluationOperator
+    [Immutable]
+    public sealed class Is : IEvaluationOperator
     {
         /// <summary>
-        /// The evaluate.
+        /// Returns a <see cref="bool"/> indicating the result of the evaluation.
         /// </summary>
         /// <param name="expected">
-        /// The expected.
+        /// The expected fuzzy state.
         /// </param>
         /// <param name="result">
-        /// The result.
+        /// The actual fuzzy state.
         /// </param>
         /// <returns>
-        /// The <see cref="bool"/>.
+        /// A <see cref="bool"/>.
         /// </returns>
         public bool Evaluate(FuzzyState expected, FuzzyState result) => expected == result;
 
         /// <summary>
-        /// The to string.
+        /// Returns a linguistic string representation of the logic operator.
         /// </summary>
         /// <returns>
-        /// The <see cref="string"/>.
+        /// A <see cref="string"/>.
         /// </returns>
         public override string ToString() => nameof(Is).ToUpper();
     }

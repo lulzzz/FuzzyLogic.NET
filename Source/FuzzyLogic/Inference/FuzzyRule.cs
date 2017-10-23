@@ -27,8 +27,8 @@ namespace FuzzyLogic.Inference
         /// <summary>
         /// Initializes a new instance of the <see cref="FuzzyRule"/> class.
         /// </summary>
-        /// <param name="name">
-        /// The name.
+        /// <param name="label">
+        /// The label.
         /// </param>
         /// <param name="conditions">
         /// The conditions.
@@ -37,42 +37,42 @@ namespace FuzzyLogic.Inference
         /// The conclusions.
         /// </param>
         public FuzzyRule(
-            string name,
+            string label,
             IList<Condition> conditions,
             IList<Conclusion> conclusions)
         {
-            Validate.NotNull(name, nameof(name));
+            Validate.NotNull(label, nameof(label));
             Validate.NotNullOrEmpty(conditions, nameof(conditions));
             Validate.NotNullOrEmpty(conclusions, nameof(conclusions));
 
-            this.Name = name;
+            this.Label = Label.Create(label);
             this.conditions = conditions;
             this.conclusions = conclusions;
         }
 
         /// <summary>
-        /// Gets the rule name.
+        /// Gets the rule label.
         /// </summary>
-        public string Name { get; }
+        public Label Label { get; }
 
         /// <summary>
-        /// The premises.
+        /// Returns a collection of the premises.
         /// </summary>
         public IReadOnlyCollection<Condition> Conditions => this.conditions.ToList().AsReadOnly();
 
         /// <summary>
-        /// Gets the conclusions.
+        /// Returns a collection of the conclusions.
         /// </summary>
         public IReadOnlyCollection<Conclusion> Conclusions => this.conclusions.ToList().AsReadOnly();
 
         /// <summary>
-        /// The evaluate.
+        /// Returns the result of the rules evaluation.
         /// </summary>
         /// <param name="data">
         /// The data.
         /// </param>
         /// <returns>
-        /// The <see cref="bool"/>.
+        /// A <see cref="bool"/>.
         /// </returns>
         public bool Evaluate(IDictionary<Label, double> data) => this.Conditions.All(c => c.Evaluate(data));
     }

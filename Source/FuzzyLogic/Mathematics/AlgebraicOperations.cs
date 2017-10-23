@@ -10,11 +10,13 @@
 namespace FuzzyLogic.Mathematics
 {
     using System;
+    using FuzzyLogic.Annotations;
     using FuzzyLogic.Utility;
 
     /// <summary>
-    /// The algebraic operations.
+    /// The immutable <see cref="AlgebraicOperations"/> class.
     /// </summary>
+    [Immutable]
     public static class AlgebraicOperations
     {
         /// <summary>
@@ -26,6 +28,7 @@ namespace FuzzyLogic.Mathematics
         /// <returns>
         /// A <see cref="double"/>.
         /// </returns>
+        [Pure]
         public static double Square(this double input)
         {
             Validate.NotOutOfRange(input, nameof(input));
@@ -42,6 +45,7 @@ namespace FuzzyLogic.Mathematics
         /// <returns>
         /// A <see cref="double"/>.
         /// </returns>
+        [Pure]
         public static double SquareRoot(this double input)
         {
             Validate.NotOutOfRange(input, nameof(input));

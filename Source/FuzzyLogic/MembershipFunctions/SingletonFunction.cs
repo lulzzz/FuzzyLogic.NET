@@ -13,7 +13,7 @@ namespace FuzzyLogic.MembershipFunctions
     using FuzzyLogic.Utility;
 
     /// <summary>
-    /// The <see cref="SingletonFunction"/> immutable class.
+    /// The immutable <see cref="SingletonFunction"/> class.
     /// </summary>
     [Immutable]
     public class SingletonFunction : IMembershipFunction
@@ -32,12 +32,12 @@ namespace FuzzyLogic.MembershipFunctions
         }
 
         /// <summary>
-        /// The minimum y value.
+        /// The minimum Y value.
         /// </summary>
         public double MinY => 0;
 
         /// <summary>
-        /// The maximum y value.
+        /// The maximum Y value.
         /// </summary>
         public double MaxY => 1;
 
@@ -60,7 +60,7 @@ namespace FuzzyLogic.MembershipFunctions
         /// Initializes a new instance of the <see cref="SingletonFunction"/> class.
         /// </summary>
         /// <param name="x">
-        /// The support position on the x axis.
+        /// The support position on the X axis.
         /// </param>
         /// <returns>
         /// The <see cref="SingletonFunction"/>.
@@ -76,10 +76,10 @@ namespace FuzzyLogic.MembershipFunctions
         /// Returns the membership value of a given input to the <see cref="SingletonFunction"/>.
         /// </summary>
         /// <param name="x">
-        /// The x.
+        /// The input double.
         /// </param>
         /// <returns>
-        /// The <see cref="double"/>.
+        /// A <see cref="double"/>.
         /// </returns>
         public double GetMembership(double x)
         {

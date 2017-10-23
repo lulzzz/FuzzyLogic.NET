@@ -14,7 +14,7 @@ namespace FuzzyLogic.Inference
     using FuzzyLogic.Logic.Interfaces;
 
     /// <summary>
-    /// The fuzzy rule builder.
+    /// The <see cref="FuzzyRuleBuilder"/> class.
     /// </summary>
     public class FuzzyRuleBuilder
     {
@@ -22,7 +22,7 @@ namespace FuzzyLogic.Inference
         /// Initializes a new instance of the <see cref="FuzzyRuleBuilder"/> class.
         /// </summary>
         /// <param name="name">
-        /// The name.
+        /// The name of the <see cref="FuzzyRule"/> to be built.
         /// </param>
         public FuzzyRuleBuilder(string name)
         {
@@ -30,7 +30,7 @@ namespace FuzzyLogic.Inference
         }
 
         /// <summary>
-        /// Gets the name.
+        /// Gets the name of the <see cref="FuzzyRule"/> to be built.
         /// </summary>
         private string Name { get; }
 
@@ -39,10 +39,10 @@ namespace FuzzyLogic.Inference
         private IList<Conclusion> Conclusions { get; set; } = new List<Conclusion>();
 
         /// <summary>
-        /// The add condition.
+        /// Adds a condition to the <see cref="FuzzyRule"/> to be built.
         /// </summary>
         /// <param name="condition">
-        /// The condition.
+        /// The condition to be added.
         /// </param>
         /// <returns>
         /// The <see cref="FuzzyRuleBuilder"/>.
@@ -55,16 +55,16 @@ namespace FuzzyLogic.Inference
         }
 
         /// <summary>
-        /// The add condition.
+        /// Adds a conclusion to the <see cref="FuzzyRule"/> to be built.
         /// </summary>
         /// <param name="variable">
-        /// The variable.
+        /// The linguistic variable.
         /// </param>
         /// <param name="evaluator">
-        /// The evaluator.
+        /// The evaluation logic operator.
         /// </param>
         /// <param name="state">
-        /// The state.
+        /// The fuzzy state.
         /// </param>
         /// <returns>
         /// The <see cref="FuzzyRuleBuilder"/>.
@@ -80,10 +80,10 @@ namespace FuzzyLogic.Inference
         }
 
         /// <summary>
-        /// The build.
+        /// Builds an immutable <see cref="FuzzyRule"/>.
         /// </summary>
         /// <returns>
-        /// The <see cref="FuzzyRule"/>.
+        /// A new <see cref="FuzzyRule"/>.
         /// </returns>
         public FuzzyRule Build()
         {

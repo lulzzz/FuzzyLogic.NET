@@ -14,7 +14,7 @@ namespace FuzzyLogic.MembershipFunctions
     using FuzzyLogic.Utility;
 
     /// <summary>
-    /// The <see cref="TriangularFunction" /> class.
+    /// The immutable <see cref="TriangularFunction" /> class.
     /// </summary>
     [Immutable]
     public class TriangularFunction : PiecewiseLinearFunction
@@ -35,22 +35,22 @@ namespace FuzzyLogic.MembershipFunctions
         /// Initializes a new instance of the <see cref="TriangularFunction"/> class.
         /// </summary>
         /// <param name="x1">
-        /// The x1.
+        /// The X coordinate where the membership value starts to rise.
         /// </param>
         /// <param name="x2">
-        /// The x2.
+        /// The X coordinate where the membership value reaches maximum (point of triangle).
         /// </param>
         /// <param name="x3">
-        /// The x3.
+        /// The X coordinate where the membership value returns to the minimum.
         /// </param>
         /// <param name="minY">
-        /// The min y.
+        /// The min Y.
         /// </param>
         /// <param name="maxY">
-        /// The max y.
+        /// The max Y.
         /// </param>
         /// <exception cref="ArgumentException">
-        /// Throws an exception if minimum y exceeds maximum y.
+        /// Throws if arguments are invalid.
         /// </exception>
         /// <returns>
         /// The <see cref="TriangularFunction"/>.

@@ -15,10 +15,10 @@ namespace FuzzyLogic
     using FuzzyLogic.Utility;
 
     /// <summary>
-    /// The linguistic variable immutable class.
+    /// The immutable <see cref="LinguisticVariable"/> class.
     /// </summary>
     [Immutable]
-    public class LinguisticVariable
+    public sealed class LinguisticVariable
     {
         private readonly Dictionary<Label, FuzzySet> fuzzySets = new Dictionary<Label, FuzzySet>();
 
@@ -26,16 +26,16 @@ namespace FuzzyLogic
         /// Initializes a new instance of the <see cref="LinguisticVariable"/> class.
         /// </summary>
         /// <param name="label">
-        /// The label.
+        /// The <see cref="LinguisticVariable"/> label.
         /// </param>
         /// <param name="inputSets">
-        /// The input Sets.
+        /// The input sets.
         /// </param>
         /// <param name="lowerBound">
-        /// The lower bound.
+        /// The lower bound for this <see cref="LinguisticVariable"/>.
         /// </param>
         /// <param name="upperBound">
-        /// The upper bound.
+        /// The upper bound for this <see cref="LinguisticVariable"/>.
         /// </param>
         public LinguisticVariable(
             string label,
@@ -75,7 +75,7 @@ namespace FuzzyLogic
         public double UpperBound { get; }
 
         /// <summary>
-        /// The get members.
+        /// Returns the members contained within this <see cref="LinguisticVariable"/>.
         /// </summary>
         /// <returns>
         /// The <see cref="IReadOnlyCollection{T}"/>.
@@ -83,10 +83,11 @@ namespace FuzzyLogic
         public IReadOnlyCollection<Label> GetMembers() => this.fuzzySets.Keys.ToList().AsReadOnly();
 
         /// <summary>
-        /// The is member.
+        /// Returns a <see cref="bool"/> indicating whether the given label is a member
+        /// of this <see cref="LinguisticVariable"/>.
         /// </summary>
         /// <param name="label">
-        /// The lingualExpression.
+        /// The label.
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
@@ -99,10 +100,10 @@ namespace FuzzyLogic
         }
 
         /// <summary>
-        /// The get set.
+        /// Returns a <see cref="FuzzySet"/> with a label which matches the given label.
         /// </summary>
         /// <param name="label">
-        /// The lingualExpression.
+        /// The label.
         /// </param>
         /// <returns>
         /// The <see cref="FuzzySet"/>.
@@ -115,10 +116,11 @@ namespace FuzzyLogic
         }
 
         /// <summary>
-        /// The get set membership.
+        /// Returns the membership value [0, 1] of the member matching the given label
+        /// (using the given <see cref="double"/>).
         /// </summary>
         /// <param name="label">
-        /// The set name.
+        /// The label.
         /// </param>
         /// <param name="input">
         /// The input.
@@ -135,7 +137,8 @@ namespace FuzzyLogic
         }
 
         /// <summary>
-        /// The get fuzzy membership.
+        /// Returns the <see cref="FuzzyState"/> of this <see cref="LinguisticVariable"/> determined
+        /// by the given <see cref="double"/>.
         /// </summary>
         /// <param name="input">
         /// The input.

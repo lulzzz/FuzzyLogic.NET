@@ -10,13 +10,12 @@
 namespace FuzzyLogic
 {
     using System;
-    using System.Linq;
     using FuzzyLogic.Annotations;
     using FuzzyLogic.MembershipFunctions;
     using FuzzyLogic.Utility;
 
     /// <summary>
-    /// The fuzzy set structure.
+    /// The immutable <see cref="FuzzySet"/> class.
     /// </summary>
     [Immutable]
     public sealed class FuzzySet
@@ -27,10 +26,10 @@ namespace FuzzyLogic
         /// Initializes a new instance of the <see cref="FuzzySet"/> class.
         /// </summary>
         /// <param name="label">
-        /// The lingualExpression.
+        /// The label.
         /// </param>
         /// <param name="function">
-        /// The function.
+        /// The membership function.
         /// </param>
         public FuzzySet(string label, IMembershipFunction function)
         {
@@ -47,27 +46,28 @@ namespace FuzzyLogic
         public Label Label { get; }
 
         /// <summary>
-        /// The lower bound.
+        /// Returns the lower bound of the <see cref="FuzzySet"/>.
         /// </summary>
         public double LowerBound => this.function.LowerBound;
 
         /// <summary>
-        /// The upper bound.
+        /// Returns the upper bound of the <see cref="FuzzySet"/>
         /// </summary>
         public double UpperBound => this.function.UpperBound;
 
         /// <summary>
-        /// Returns a boolean indicating whether the <see cref="FuzzySet"/> is normal (max y = 1.0).
+        /// Returns a <see cref="bool"/> indicating whether the <see cref="FuzzySet"/> is normal (max y = 1.0).
         /// </summary>
         public bool IsNormal => this.function.MaxY.Equals(1);
 
         /// <summary>
-        /// Returns a boolean indicating whether the <see cref="FuzzySet"/> is convex (all points either increasing or decreasing).
+        /// Returns a <see cref="bool"/> indicating whether the <see cref="FuzzySet"/> is convex
+        /// (all points either increasing or decreasing).
         /// </summary>
         public bool IsConvex => this.CalculateIsConvex();
 
         /// <summary>
-        /// Returns the value of the membership for the given input (input must not be negative).
+        /// Returns the value of the membership for the given <see cref="double"/>.
         /// </summary>
         /// <param name="x">
         /// The x input (must not be negative).
@@ -83,7 +83,7 @@ namespace FuzzyLogic
         }
 
         /// <summary>
-        /// Returns the negation of the membership value for this fuzzy set.
+        /// Returns the negation of the membership value for the <see cref="FuzzySet"/>.
         /// </summary>
         /// <param name="x">
         /// The x.

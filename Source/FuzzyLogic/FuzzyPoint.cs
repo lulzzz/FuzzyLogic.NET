@@ -15,7 +15,7 @@ namespace FuzzyLogic
     using FuzzyLogic.Utility;
 
     /// <summary>
-    /// The <see cref="FuzzyPoint"/> class.
+    /// The immutable <see cref="FuzzyPoint"/> structure.
     /// </summary>
     [Immutable]
     [Serializable]
@@ -25,10 +25,10 @@ namespace FuzzyLogic
         /// Initializes a new instance of the <see cref="FuzzyPoint"/> struct.
         /// </summary>
         /// <param name="x">
-        /// The x co-ordinate.
+        /// The X co-ordinate.
         /// </param>
         /// <param name="y">
-        /// The y co-ordinate.
+        /// The Y co-ordinate.
         /// </param>
         public FuzzyPoint(double x, double y)
         {
@@ -50,47 +50,47 @@ namespace FuzzyLogic
         public double Y { get; }
 
         /// <summary>
-        /// The addition operator.
+        /// The + operator.
         /// </summary>
-        /// <param name="point1">
-        /// The point 1.
+        /// <param name="left">
+        /// The left point.
         /// </param>
-        /// <param name="point2">
-        /// The point 2.
+        /// <param name="right">
+        /// The right point.
         /// </param>
         /// <returns>
-        /// The <see cref="FuzzyPoint"/>
+        /// A <see cref="FuzzyPoint"/>.
         /// </returns>
-        public static FuzzyPoint operator +(FuzzyPoint point1, FuzzyPoint point2)
+        public static FuzzyPoint operator +(FuzzyPoint left, FuzzyPoint right)
         {
-            Validate.NotNull(point1, nameof(point1));
-            Validate.NotNull(point2, nameof(point2));
+            Validate.NotNull(left, nameof(left));
+            Validate.NotNull(right, nameof(right));
 
-            return new FuzzyPoint(point1.X + point2.X, point1.Y + point2.Y);
+            return new FuzzyPoint(left.X + right.X, left.Y + right.Y);
         }
 
         /// <summary>
-        /// The -.
+        /// The - operator.
         /// </summary>
-        /// <param name="point1">
-        /// The point 1.
+        /// <param name="left">
+        /// The left point.
         /// </param>
-        /// <param name="point2">
-        /// The point 2.
+        /// <param name="right">
+        /// The right point.
         /// </param>
         /// <returns>
-        /// The <see cref="FuzzyPoint"/>.
+        /// A <see cref="FuzzyPoint"/>.
         /// </returns>
-        public static FuzzyPoint operator -(FuzzyPoint point1, FuzzyPoint point2)
+        public static FuzzyPoint operator -(FuzzyPoint left, FuzzyPoint right)
         {
-            Validate.NotNull(point1, nameof(point1));
-            Validate.NotNull(point2, nameof(point2));
+            Validate.NotNull(left, nameof(left));
+            Validate.NotNull(right, nameof(right));
 
-            return new FuzzyPoint(point1.X - point2.X, point1.Y - point2.Y);
+            return new FuzzyPoint(left.X - right.X, left.Y - right.Y);
         }
 
         /// <summary>
-        /// The product of two points.
+        /// The multiply operator.
         /// </summary>
         /// <param name="point">
         /// The point.
@@ -99,7 +99,7 @@ namespace FuzzyLogic
         /// The factor.
         /// </param>
         /// <returns>
-        /// The <see cref="FuzzyPoint"/>.
+        /// A <see cref="FuzzyPoint"/>.
         /// </returns>
         public static FuzzyPoint operator *(FuzzyPoint point, double factor)
         {
@@ -110,7 +110,7 @@ namespace FuzzyLogic
         }
 
         /// <summary>
-        /// The /.
+        /// The divide operator.
         /// </summary>
         /// <param name="point">
         /// The point.
@@ -119,7 +119,7 @@ namespace FuzzyLogic
         /// The factor.
         /// </param>
         /// <returns>
-        /// The <see cref="FuzzyPoint"/>.
+        /// A <see cref="FuzzyPoint"/>.
         /// </returns>
         public static FuzzyPoint operator /(FuzzyPoint point, double factor)
         {
@@ -130,41 +130,41 @@ namespace FuzzyLogic
         }
 
         /// <summary>
-        /// The ==.
+        /// The == operator.
         /// </summary>
-        /// <param name="point1">
-        /// The point 1.
+        /// <param name="left">
+        /// The left point.
         /// </param>
         /// <param name="point2">
-        /// The point 2.
+        /// The right point.
         /// </param>
         /// <returns>
         /// A <see cref="bool"/>.
         /// </returns>
-        public static bool operator ==(FuzzyPoint point1, FuzzyPoint point2)
+        public static bool operator ==(FuzzyPoint left, FuzzyPoint point2)
         {
-            return point1.X.Equals(point2.X) && point1.Y.Equals(point2.Y);
+            return left.X.Equals(point2.X) && left.Y.Equals(point2.Y);
         }
 
         /// <summary>
-        /// The !=.
+        /// The != operator.
         /// </summary>
-        /// <param name="point1">
-        /// The point 1.
+        /// <param name="left">
+        /// The left point.
         /// </param>
         /// <param name="point2">
-        /// The point 2.
+        /// The right point.
         /// </param>
         /// <returns>
         /// A <see cref="bool"/>.
         /// </returns>
-        public static bool operator !=(FuzzyPoint point1, FuzzyPoint point2)
+        public static bool operator !=(FuzzyPoint left, FuzzyPoint point2)
         {
-            return !point1.X.Equals(point2.X) || !point1.Y.Equals(point2.Y);
+            return !left.X.Equals(point2.X) || !left.Y.Equals(point2.Y);
         }
 
         /// <summary>
-        /// Returns the sum of two points.
+        /// Adds the given <see cref="FuzzyPoint"/> to this <see cref="FuzzyPoint"/>.
         /// </summary>
         /// <param name="other">
         /// The other point to add.
@@ -180,7 +180,7 @@ namespace FuzzyLogic
         }
 
         /// <summary>
-        /// The subtract.
+        /// Subtracts the given <see cref="FuzzyPoint"/> from this <see cref="FuzzyPoint"/>.
         /// </summary>
         /// <param name="other">
         /// The other point to subtract.
@@ -196,7 +196,7 @@ namespace FuzzyLogic
         }
 
         /// <summary>
-        /// The multiply.
+        /// Multiplies the <see cref="FuzzyPoint"/> by the given factor.
         /// </summary>
         /// <param name="factor">
         /// The factor.
@@ -212,23 +212,23 @@ namespace FuzzyLogic
         }
 
         /// <summary>
-        /// The divide.
+        /// Divides the <see cref="FuzzyPoint"/> by the given divisor.
         /// </summary>
-        /// <param name="factor">
-        /// The factor.
+        /// <param name="divisor">
+        /// The divisor.
         /// </param>
         /// <returns>
         /// The <see cref="FuzzyPoint"/>.
         /// </returns>
-        public FuzzyPoint Divide(double factor)
+        public FuzzyPoint Divide(double divisor)
         {
-            Validate.NotOutOfRange(factor, nameof(factor));
+            Validate.NotOutOfRange(divisor, nameof(divisor));
 
-            return new FuzzyPoint(this.X / factor, this.Y / factor);
+            return new FuzzyPoint(this.X / divisor, this.Y / divisor);
         }
 
         /// <summary>
-        /// The distance to another point.
+        /// Returns the distance to another point.
         /// </summary>
         /// <param name="other">
         /// The other point.
@@ -285,7 +285,7 @@ namespace FuzzyLogic
         }
 
         /// <summary>
-        /// The euclidean norm.
+        /// Returns the euclidean norm of the <see cref="FuzzyPoint"/>.
         /// </summary>
         /// <returns>
         /// The <see cref="double"/>.
@@ -296,13 +296,13 @@ namespace FuzzyLogic
         }
 
         /// <summary>
-        /// The equals.
+        /// The equals override.
         /// </summary>
         /// <param name="obj">
         /// The object.
         /// </param>
         /// <returns>
-        /// The <see cref="bool"/>.
+        /// A <see cref="bool"/>.
         /// </returns>
         public override bool Equals(object obj)
         {
@@ -310,18 +310,18 @@ namespace FuzzyLogic
         }
 
         /// <summary>
-        /// The get hash code.
+        /// Returns the hash code of this <see cref="FuzzyPoint"/>.
         /// </summary>
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
         public override int GetHashCode()
         {
-            return this.X.GetHashCode() + this.Y.GetHashCode() + 9;
+            return (this.X.GetHashCode() + this.Y.GetHashCode()) + 9;
         }
 
         /// <summary>
-        /// The to string.
+        /// Returns a string representation of the <see cref="FuzzyPoint"/>.
         /// </summary>
         /// <returns>
         /// The <see cref="string"/>.

@@ -14,7 +14,7 @@ namespace FuzzyLogic.Logic
     using FuzzyLogic.Utility;
 
     /// <summary>
-    /// The premise.
+    /// The immutable <see cref="Premise"/> class.
     /// </summary>
     [Immutable]
     public class Premise : Proposition
@@ -23,16 +23,16 @@ namespace FuzzyLogic.Logic
         /// Initializes a new instance of the <see cref="Premise"/> class.
         /// </summary>
         /// <param name="connective">
-        /// The connective.
+        /// The connective logic operator.
         /// </param>
         /// <param name="variable">
-        /// The variable.
+        /// The linguistic variable.
         /// </param>
         /// <param name="evaluator">
-        /// The evaluator.
+        /// The evaluation logic operator.
         /// </param>
         /// <param name="state">
-        /// The query.
+        /// The fuzzy state.
         /// </param>
         public Premise(
             IConnectiveOperator connective,
@@ -50,7 +50,7 @@ namespace FuzzyLogic.Logic
         }
 
         /// <summary>
-        /// Gets the connective.
+        /// Gets the connective logic operator.
         /// </summary>
         public IConnectiveOperator Connective { get; }
 
@@ -60,7 +60,7 @@ namespace FuzzyLogic.Logic
         public Label Subject { get; }
 
         /// <summary>
-        /// The evaluate.
+        /// Returns the <see cref="Evaluation"/> of the <see cref="Premise"/>.
         /// </summary>
         /// <param name="input">
         /// The input.

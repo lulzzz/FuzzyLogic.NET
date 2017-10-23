@@ -10,7 +10,7 @@
 namespace FuzzyLogic.Logic.Interfaces
 {
     /// <summary>
-    /// The logic operator.
+    /// The <see cref="ILogicOperator"/> interface.
     /// </summary>
     public interface ILogicOperator
     {

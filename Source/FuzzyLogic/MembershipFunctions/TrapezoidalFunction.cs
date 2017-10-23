@@ -14,7 +14,7 @@ namespace FuzzyLogic.MembershipFunctions
     using FuzzyLogic.Utility;
 
     /// <summary>
-    /// The <see cref="TrapezoidalFunction"/> class.
+    /// The immutable <see cref="TrapezoidalFunction"/> class.
     /// </summary>
     [Immutable]
     public class TrapezoidalFunction : PiecewiseLinearFunction
@@ -35,25 +35,25 @@ namespace FuzzyLogic.MembershipFunctions
         /// Initializes a new instance of the <see cref="TrapezoidalFunction"/> class.
         /// </summary>
         /// <param name="x1">
-        /// The x1.
+        /// The X coordinate where the membership value starts to rise.
         /// </param>
         /// <param name="x2">
-        /// The x2.
+        /// The X coordinate where the membership value reaches the maximum.
         /// </param>
         /// <param name="x3">
-        /// The x3.
+        /// The X coordinate where the membership value starts to fall.
         /// </param>
         /// <param name="x4">
-        /// The x4.
+        /// The X coordinate where the membership value reaches the minimum.
         /// </param>
         /// <param name="minY">
-        /// The min y.
+        /// The min Y.
         /// </param>
         /// <param name="maxY">
-        /// The max y.
+        /// The max Y.
         /// </param>
         /// <exception cref="ArgumentException">
-        /// Throws an exception if minimum y is greater than maximum y.
+        /// Throws if arguments are invalid.
         /// </exception>
         /// <returns>
         /// The <see cref="TrapezoidalFunction"/>.
@@ -86,25 +86,25 @@ namespace FuzzyLogic.MembershipFunctions
         }
 
         /// <summary>
-        /// The create with left edge.
+        /// Initializes a new instance of the <see cref="TrapezoidalFunction"/> class (with a left edge).
         /// </summary>
         /// <param name="x1">
-        /// The x 1.
+        /// The X coordinate where the membership value starts to fall.
         /// </param>
         /// <param name="x2">
-        /// The x 2.
+        /// The X coordinate where the membership value reaches the minimum.
         /// </param>
         /// <param name="minY">
-        /// The min y.
+        /// The min Y.
         /// </param>
         /// <param name="maxY">
-        /// The max y.
+        /// The max Y.
         /// </param>
         /// <returns>
         /// The <see cref="TrapezoidalFunction"/>.
         /// </returns>
         /// <exception cref="ArgumentException">
-        /// Throws an exception if minimum y is greater than maximum y.
+        /// Throws if arguments are invalid.
         /// </exception>
         public static TrapezoidalFunction CreateWithLeftEdge(
             double x1,
@@ -128,25 +128,25 @@ namespace FuzzyLogic.MembershipFunctions
         }
 
         /// <summary>
-        /// The create with right edge.
+        /// Initializes a new instance of the <see cref="TrapezoidalFunction"/> class (with a right edge).
         /// </summary>
         /// <param name="x1">
-        /// The x 1.
+        /// The X coordinate where the membership value starts to rise.
         /// </param>
         /// <param name="x2">
-        /// The x 2.
+        /// The X coordinate where the membership value reaches the maximum.
         /// </param>
         /// <param name="minY">
-        /// The min y.
+        /// The min Y.
         /// </param>
         /// <param name="maxY">
-        /// The max y.
+        /// The max Y.
         /// </param>
         /// <returns>
         /// The <see cref="TrapezoidalFunction"/>.
         /// </returns>
         /// <exception cref="ArgumentException">
-        /// Throws an exception if minimum y is greater than maximum y.
+        /// Throws if arguments are invalid.
         /// </exception>
         public static TrapezoidalFunction CreateWithRightEdge(
             double x1,

@@ -16,7 +16,7 @@ namespace FuzzyLogic.Logic
     using FuzzyLogic.Utility;
 
     /// <summary>
-    /// The condition.
+    /// The <see cref="Condition"/> class.
     /// </summary>
     public class Condition
     {
@@ -24,16 +24,16 @@ namespace FuzzyLogic.Logic
         /// Initializes a new instance of the <see cref="Condition"/> class.
         /// </summary>
         /// <param name="connective">
-        /// The connective.
+        /// The connective logic operator.
         /// </param>
         /// <param name="variable">
-        /// The variable.
+        /// The linguistic variable.
         /// </param>
         /// <param name="evaluator">
-        /// The evaluator.
+        /// The evaluator logic operator.
         /// </param>
         /// <param name="state">
-        /// The value.
+        /// The fuzzy state.
         /// </param>
         public Condition(
             IConnectiveOperator connective,
@@ -52,23 +52,23 @@ namespace FuzzyLogic.Logic
         }
 
         /// <summary>
-        /// Gets the connective.
+        /// Gets the connective logic operator.
         /// </summary>
         public IConnectiveOperator Connective { get; }
 
         /// <summary>
-        /// Gets the premise.
+        /// Gets the list of premises.
         /// </summary>
         public IList<Premise> Premises { get; } = new List<Premise>();
 
         /// <summary>
-        /// The evaluate.
+        /// Returns the logical evaluation of all premises.
         /// </summary>
         /// <param name="data">
-        /// The data.
+        /// The input data.
         /// </param>
         /// <returns>
-        /// The <see cref="bool"/>.
+        /// A <see cref="bool"/>.
         /// </returns>
         public bool Evaluate(IDictionary<Label, double> data)
         {
@@ -94,19 +94,19 @@ namespace FuzzyLogic.Logic
         }
 
         /// <summary>
-        /// The and.
+        /// Adds an 'And' premise to the condition.
         /// </summary>
         /// <param name="variable">
-        /// The variable.
+        /// The linguistic variable.
         /// </param>
         /// <param name="evaluator">
-        /// The evaluator.
+        /// The evaluation logic operator.
         /// </param>
         /// <param name="state">
-        /// The state.
+        /// The expected fuzzy state.
         /// </param>
         /// <returns>
-        /// The <see cref="Condition"/>.
+        /// A <see cref="Condition"/>.
         /// </returns>
         public Condition And(
             LinguisticVariable variable,
@@ -123,19 +123,19 @@ namespace FuzzyLogic.Logic
         }
 
         /// <summary>
-        /// The and.
+        /// Adds an 'Or' premise to the condition.
         /// </summary>
         /// <param name="variable">
-        /// The variable.
+        /// The linguistic variable.
         /// </param>
         /// <param name="evaluator">
-        /// The evaluator.
+        /// The evaluation logic operator.
         /// </param>
         /// <param name="state">
-        /// The expected state.
+        /// The expected fuzzy state.
         /// </param>
         /// <returns>
-        /// The <see cref="Condition"/>.
+        /// A <see cref="Condition"/>.
         /// </returns>
         public Condition Or(
             LinguisticVariable variable,

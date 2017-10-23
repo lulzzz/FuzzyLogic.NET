@@ -12,7 +12,7 @@ namespace FuzzyLogic
     using FuzzyLogic.Annotations;
 
     /// <summary>
-    /// The immutable <see cref="FuzzyState"/> structure.
+    /// The immutable <see cref="FuzzyState"/> class.
     /// </summary>
     [Immutable]
     public sealed class FuzzyState : ValidString<FuzzyState>

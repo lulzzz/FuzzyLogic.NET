@@ -15,22 +15,22 @@ namespace FuzzyLogic.MembershipFunctions
     public interface IMembershipFunction
     {
         /// <summary>
-        /// Gets the minimum y value.
+        /// Gets the minimum Y value.
         /// </summary>
         double MinY { get; }
 
         /// <summary>
-        /// Gets the maximum y value.
+        /// Gets the maximum Y value.
         /// </summary>
         double MaxY { get; }
 
         /// <summary>
-        /// Gets the leftmost x value of the <see cref="IMembershipFunction"/>.
+        /// Gets the lower bound of the X axis.
         /// </summary>
         double LowerBound { get; }
 
         /// <summary>
-        /// Gets the rightmost x value of the <see cref="IMembershipFunction"/>.
+        /// Gets the upper bound of the X axis.
         /// </summary>
         double UpperBound { get; }
 

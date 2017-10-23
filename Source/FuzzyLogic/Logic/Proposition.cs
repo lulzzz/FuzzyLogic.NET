@@ -15,7 +15,7 @@ namespace FuzzyLogic.Logic
     using FuzzyLogic.Utility;
 
     /// <summary>
-    /// The fuzzy rule proposition.
+    /// The immutable <see cref="Proposition"/> class.
     /// </summary>
     [Immutable]
     public abstract class Proposition
@@ -24,13 +24,13 @@ namespace FuzzyLogic.Logic
         /// Initializes a new instance of the <see cref="Proposition"/> class.
         /// </summary>
         /// <param name="variable">
-        /// The variable.
+        /// The linguistic variable.
         /// </param>
         /// <param name="evaluator">
-        /// The evaluator.
+        /// The evaluation logic operator.
         /// </param>
         /// <param name="state">
-        /// The state.
+        /// The fuzzy state.
         /// </param>
         protected Proposition(
             LinguisticVariable variable,
@@ -49,17 +49,17 @@ namespace FuzzyLogic.Logic
         }
 
         /// <summary>
-        /// Gets the variable.
+        /// Gets the linguistic variable of the <see cref="Proposition"/>.
         /// </summary>
         protected LinguisticVariable Variable { get; }
 
         /// <summary>
-        /// Gets the evaluator.
+        /// Gets the evaluation logic operator of the <see cref="Proposition"/>.
         /// </summary>
         protected IEvaluationOperator Evaluator { get; }
 
         /// <summary>
-        /// Gets the lingualExpression.
+        /// Gets the fuzzy state of the <see cref="Proposition"/>.
         /// </summary>
         protected FuzzyState State { get; }
 

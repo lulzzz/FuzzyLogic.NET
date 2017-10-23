@@ -11,16 +11,14 @@ namespace FuzzyLogic.Inference
 {
     using System;
     using System.Collections.Generic;
-    using FuzzyLogic.Annotations;
     using FuzzyLogic.Utility;
 
     /// <summary>
-    /// The fuzzy rule base.
+    /// The <see cref="FuzzyRulebase"/> class.
     /// </summary>
-    [Immutable]
     public class FuzzyRulebase
     {
-        private readonly Dictionary<string, FuzzyRule> rules = new Dictionary<string, FuzzyRule>();
+        private readonly Dictionary<Label, FuzzyRule> rules = new Dictionary<Label, FuzzyRule>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FuzzyRulebase"/> class.
@@ -37,16 +35,16 @@ namespace FuzzyLogic.Inference
         /// The input <see cref="FuzzyRule"/>.
         /// </param>
         /// <exception cref="ArgumentException">
-        /// Throws an exception if a fuzzyRule with the same name is already contained within the fuzzyRule base.
+        /// Throws an exception if a fuzzy rule with the same name is already contained within the fuzzyRule base.
         /// </exception>
         public void Add(FuzzyRule fuzzyRule)
         {
-            if (this.rules.ContainsKey(fuzzyRule.Name))
+            if (this.rules.ContainsKey(fuzzyRule.Label))
             {
-                throw new ArgumentException($"Cannot add rule (Rule base already contains a rule named {fuzzyRule.Name}).");
+                throw new ArgumentException($"Cannot add rule (Rule base already contains a rule named {fuzzyRule.Label}).");
             }
 
-            this.rules.Add(fuzzyRule.Name, fuzzyRule);
+            this.rules.Add(fuzzyRule.Label, fuzzyRule);
         }
 
         /// <summary>
@@ -58,17 +56,17 @@ namespace FuzzyLogic.Inference
         }
 
         /// <summary>
-        /// The get fuzzyRule.
+        /// Returns the <see cref="FuzzyRule"/> which matches the given string.
         /// </summary>
         /// <param name="ruleName">
-        /// The fuzzyRule name.
+        /// The rule name.
         /// </param>
         /// <returns>
-        /// The <see cref="FuzzyRule"/>.
+        /// A <see cref="FuzzyRule"/>.
         /// </returns>
         public FuzzyRule GetRule(string ruleName)
         {
-            return this.rules[ruleName];
+            return this.rules[Label.Create(ruleName)];
         }
     }
 }

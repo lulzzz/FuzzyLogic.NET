@@ -14,7 +14,7 @@ namespace FuzzyLogic.Logic
     using FuzzyLogic.Utility;
 
     /// <summary>
-    /// The evaluation.
+    /// The immutable <see cref="Evaluation"/> structure.
     /// </summary>
     [Immutable]
     public struct Evaluation
@@ -37,12 +37,12 @@ namespace FuzzyLogic.Logic
         }
 
         /// <summary>
-        /// Gets the connective.
+        /// Gets the connective logic operator.
         /// </summary>
         public IConnectiveOperator Connective { get; }
 
         /// <summary>
-        /// Gets a value indicating whether result.
+        /// Gets a value indicating whether result is true.
         /// </summary>
         public bool Result { get; }
     }
