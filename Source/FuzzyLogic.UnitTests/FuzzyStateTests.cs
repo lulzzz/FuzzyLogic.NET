@@ -21,7 +21,7 @@ namespace FuzzyLogic.UnitTests
         {
             // Arrange
             // Act
-            var fuzzyState = new FuzzyState("Low");
+            var fuzzyState = FuzzyState.Create("Low");
 
             // Assert
             Assert.Equal("Low", fuzzyState.Value);
@@ -32,8 +32,8 @@ namespace FuzzyLogic.UnitTests
         {
             // Arrange
             // Act
-            var fuzzyState1 = new FuzzyState("Low");
-            var fuzzyState2 = new FuzzyState("Low");
+            var fuzzyState1 = FuzzyState.Create("Low");
+            var fuzzyState2 = FuzzyState.Create("Low");
 
             // Assert
             Assert.True(fuzzyState1.Equals(fuzzyState2));
@@ -44,7 +44,7 @@ namespace FuzzyLogic.UnitTests
         {
             // Arrange
             // Act
-            var fuzzyState = new FuzzyState("Low");
+            var fuzzyState = FuzzyState.Create("Low");
 
             // Assert
             Assert.False(fuzzyState.Equals(null));
@@ -55,8 +55,8 @@ namespace FuzzyLogic.UnitTests
         {
             // Arrange
             // Act
-            var fuzzyState1 = new FuzzyState("Low");
-            var fuzzyState2 = new FuzzyState("Low");
+            var fuzzyState1 = FuzzyState.Create("Low");
+            var fuzzyState2 = FuzzyState.Create("Low");
 
             // Assert
             Assert.True(fuzzyState1.Equals(fuzzyState2));
@@ -67,8 +67,8 @@ namespace FuzzyLogic.UnitTests
         {
             // Arrange
             // Act
-            var fuzzyState1 = new FuzzyState("Low");
-            var fuzzyState2 = new FuzzyState("Low");
+            var fuzzyState1 = FuzzyState.Create("Low");
+            var fuzzyState2 = FuzzyState.Create("Low");
 
             // Assert
             Assert.True(fuzzyState1 == fuzzyState2);
@@ -79,8 +79,8 @@ namespace FuzzyLogic.UnitTests
         {
             // Arrange
             // Act
-            var fuzzyState1 = new FuzzyState("High");
-            var fuzzyState2 = new FuzzyState("Low");
+            var fuzzyState1 = FuzzyState.Create("High");
+            var fuzzyState2 = FuzzyState.Create("Low");
 
             // Assert
             Assert.False(fuzzyState1 == fuzzyState2);
@@ -91,8 +91,8 @@ namespace FuzzyLogic.UnitTests
         {
             // Arrange
             // Act
-            var fuzzyState1 = new FuzzyState("Low");
-            var fuzzyState2 = new FuzzyState("Low");
+            var fuzzyState1 = FuzzyState.Create("Low");
+            var fuzzyState2 = FuzzyState.Create("Low");
 
             // Assert
             Assert.False(fuzzyState1 != fuzzyState2);
@@ -103,8 +103,8 @@ namespace FuzzyLogic.UnitTests
         {
             // Arrange
             // Act
-            var fuzzyState1 = new FuzzyState("High");
-            var fuzzyState2 = new FuzzyState("Low");
+            var fuzzyState1 = FuzzyState.Create("High");
+            var fuzzyState2 = FuzzyState.Create("Low");
 
             // Assert
             Assert.True(fuzzyState1 != fuzzyState2);
@@ -114,7 +114,7 @@ namespace FuzzyLogic.UnitTests
         internal void GetHashcode_ReturnsExpectedValue()
         {
             // Arrange
-            var fuzzyState = new FuzzyState("High");
+            var fuzzyState = FuzzyState.Create("High");
 
             // Act
             var result = fuzzyState.GetHashCode();
@@ -127,7 +127,7 @@ namespace FuzzyLogic.UnitTests
         internal void ToString_ReturnsExpectedString()
         {
             // Arrange
-            var fuzzyState = new FuzzyState("High");
+            var fuzzyState = FuzzyState.Create("High");
 
             // Act
             var result = fuzzyState.ToString();

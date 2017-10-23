@@ -49,7 +49,7 @@ namespace FuzzyLogic
             Validate.NotOutOfRange(upperBound, nameof(upperBound));
             Validate.FuzzySetCollection(inputSets, lowerBound, upperBound);
 
-            this.Label = new Label(label);
+            this.Label = Label.Create(label);
             this.LowerBound = lowerBound;
             this.UpperBound = upperBound;
 
@@ -126,7 +126,7 @@ namespace FuzzyLogic
         /// <returns>
         /// The <see cref="double"/>.
         /// </returns>
-        public double GetLabelMembership(Label label, double input)
+        public double GetMembership(Label label, double input)
         {
             Validate.NotNull(label, nameof(label));
             Validate.NotOutOfRange(input, nameof(input), this.LowerBound, this.UpperBound);
@@ -153,7 +153,7 @@ namespace FuzzyLogic
                 .Value
                 .Label;
 
-            return new FuzzyState(label.Value);
+            return FuzzyState.Create(label.Value);
         }
     }
 }

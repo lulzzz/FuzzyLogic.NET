@@ -57,6 +57,10 @@
     <Compile Include="UtilityTests\ValidateTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FuzzyLogic.TestKit\FuzzyLogic.TestKit.csproj">
+      <Project>{4b87205e-b184-4d69-a41f-e230c8c88482}</Project>
+      <Name>FuzzyLogic.TestKit</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FuzzyLogic\FuzzyLogic.csproj">
       <Project>{32683b84-4a85-4454-8a8f-d4acb96ce899}</Project>
       <Name>FuzzyLogic</Name>

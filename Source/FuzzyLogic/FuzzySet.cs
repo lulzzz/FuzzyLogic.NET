@@ -37,7 +37,7 @@ namespace FuzzyLogic
             Validate.NotNull(label, nameof(label));
             Validate.NotNull(function, nameof(function));
 
-            this.Label = new Label(label);
+            this.Label = Label.Create(label);
             this.function = function;
         }
 

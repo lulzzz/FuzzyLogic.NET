@@ -23,8 +23,22 @@ namespace FuzzyLogic
         /// <param name="value">
         /// The value.
         /// </param>
-        public Label(string value) : base(value)
+        private Label(string value) : base(value)
         {
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="Label"/>.
+        /// </summary>
+        /// <param name="label">
+        /// The label.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Label"/>.
+        /// </returns>
+        public static Label Create(string label)
+        {
+            return new Label(label);
         }
     }
 }

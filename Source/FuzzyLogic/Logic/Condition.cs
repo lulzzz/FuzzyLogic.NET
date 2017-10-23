@@ -48,7 +48,7 @@ namespace FuzzyLogic.Logic
 
             this.Connective = connective;
 
-            this.Premises.Add(new Premise(LogicOperators.If, variable, evaluator, new FuzzyState(state)));
+            this.Premises.Add(new Premise(LogicOperators.If, variable, evaluator, FuzzyState.Create(state)));
         }
 
         /// <summary>
@@ -117,7 +117,7 @@ namespace FuzzyLogic.Logic
             Validate.NotNull(evaluator, nameof(evaluator));
             Validate.NotNull(state, nameof(state));
 
-            this.Premises.Add(new Premise(LogicOperators.And, variable, evaluator, new FuzzyState(state)));
+            this.Premises.Add(new Premise(LogicOperators.And, variable, evaluator, FuzzyState.Create(state)));
 
             return this;
         }
@@ -146,7 +146,7 @@ namespace FuzzyLogic.Logic
             Validate.NotNull(evaluator, nameof(evaluator));
             Validate.NotNull(state, nameof(state));
 
-            this.Premises.Add(new Premise(LogicOperators.Or, variable, evaluator, new FuzzyState(state)));
+            this.Premises.Add(new Premise(LogicOperators.Or, variable, evaluator, FuzzyState.Create(state)));
 
             return this;
         }

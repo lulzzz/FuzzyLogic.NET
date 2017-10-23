@@ -74,7 +74,7 @@ namespace FuzzyLogic.Inference
             IEvaluationOperator evaluator,
             string state)
         {
-            this.Conclusions.Add(new Conclusion(variable, evaluator, new FuzzyState(state)));
+            this.Conclusions.Add(new Conclusion(variable, evaluator, FuzzyState.Create(state)));
 
             return this;
         }

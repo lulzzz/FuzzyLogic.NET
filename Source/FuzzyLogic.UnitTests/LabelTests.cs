@@ -21,7 +21,7 @@ namespace FuzzyLogic.UnitTests
         {
             // Arrange
             // Act
-            var label = new Label("Temperature");
+            var label = Label.Create("Temperature");
 
             // Assert
             Assert.Equal("Temperature", label.Value);
@@ -32,8 +32,8 @@ namespace FuzzyLogic.UnitTests
         {
             // Arrange
             // Act
-            var label1 = new Label("Temperature");
-            var label2 = new Label("Temperature");
+            var label1 = Label.Create("Temperature");
+            var label2 = Label.Create("Temperature");
 
             // Assert
             Assert.True(label1.Equals(label2));
@@ -44,7 +44,7 @@ namespace FuzzyLogic.UnitTests
         {
             // Arrange
             // Act
-            var label = new Label("Temperature");
+            var label = Label.Create("Temperature");
 
             // Assert
             Assert.False(label.Equals(null));
@@ -55,8 +55,8 @@ namespace FuzzyLogic.UnitTests
         {
             // Arrange
             // Act
-            var label1 = new Label("Temperature");
-            var label2 = new Label("Temperature");
+            var label1 = Label.Create("Temperature");
+            var label2 = Label.Create("Temperature");
 
             // Assert
             Assert.True(label1.Equals(label2));
@@ -67,8 +67,8 @@ namespace FuzzyLogic.UnitTests
         {
             // Arrange
             // Act
-            var label1 = new Label("Temperature");
-            var label2 = new Label("Temperature");
+            var label1 = Label.Create("Temperature");
+            var label2 = Label.Create("Temperature");
 
             // Assert
             Assert.True(label1 == label2);
@@ -79,8 +79,8 @@ namespace FuzzyLogic.UnitTests
         {
             // Arrange
             // Act
-            var label1 = new Label("Pressure");
-            var label2 = new Label("Temperature");
+            var label1 = Label.Create("Pressure");
+            var label2 = Label.Create("Temperature");
 
             // Assert
             Assert.False(label1 == label2);
@@ -91,8 +91,8 @@ namespace FuzzyLogic.UnitTests
         {
             // Arrange
             // Act
-            var label1 = new Label("Temperature");
-            var label2 = new Label("Temperature");
+            var label1 = Label.Create("Temperature");
+            var label2 = Label.Create("Temperature");
 
             // Assert
             Assert.False(label1 != label2);
@@ -103,8 +103,8 @@ namespace FuzzyLogic.UnitTests
         {
             // Arrange
             // Act
-            var label1 = new Label("Pressure");
-            var label2 = new Label("Temperature");
+            var label1 = Label.Create("Pressure");
+            var label2 = Label.Create("Temperature");
 
             // Assert
             Assert.True(label1 != label2);
@@ -114,7 +114,7 @@ namespace FuzzyLogic.UnitTests
         internal void GetHashcode_ReturnsExpectedValue()
         {
             // Arrange
-            var label = new Label("Pressure");
+            var label = Label.Create("Pressure");
 
             // Act
             var result = label.GetHashCode();
@@ -127,7 +127,7 @@ namespace FuzzyLogic.UnitTests
         internal void ToString_ReturnsExpectedString()
         {
             // Arrange
-            var label = new Label("Pressure");
+            var label = Label.Create("Pressure");
 
             // Act
             var result = label.ToString();
