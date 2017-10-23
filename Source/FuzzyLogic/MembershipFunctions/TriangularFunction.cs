@@ -67,11 +67,7 @@ namespace FuzzyLogic.MembershipFunctions
             Validate.NotOutOfRange(x3, nameof(x3));
             Validate.NotOutOfRange(minY, nameof(x1), 0, 1);
             Validate.NotOutOfRange(maxY, nameof(x1), 0, 1);
-
-            if (minY > maxY)
-            {
-                throw new ArgumentException("Minimum Y cannot be greater than Maximum Y.");
-            }
+            Validate.MinMax(minY, maxY);
 
             var fuzzyPoints = new[]
                                   {

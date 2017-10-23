@@ -83,7 +83,7 @@ namespace FuzzyLogic.MembershipFunctions
         /// </returns>
         public double GetMembership(double x)
         {
-            Validate.NotOutOfRange(x, nameof(x), 0);
+            Validate.NotOutOfRange(x, nameof(x));
 
             return this.Points[0].X.Equals(x) ? 1 : 0;
         }

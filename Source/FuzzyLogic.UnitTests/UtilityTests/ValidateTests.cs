@@ -68,6 +68,18 @@ namespace FuzzyLogic.UnitTests.UtilityTests
         }
 
         [Theory]
+        [InlineData(1, 0)]
+        [InlineData(-1, -2)]
+        [InlineData(2, 1)]
+        internal void MinMax_WhenMinGreaterThanMax_Throws(double min, double max)
+        {
+            // Arrange
+            // Act
+            // Assert
+            Assert.Throws<ArgumentException>(() => Validate.MinMax(min, max));
+        }
+
+        [Theory]
         [InlineData(double.NaN)]
         [InlineData(double.NegativeInfinity)]
         [InlineData(double.PositiveInfinity)]

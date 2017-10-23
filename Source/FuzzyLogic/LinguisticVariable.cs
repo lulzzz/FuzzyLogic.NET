@@ -129,7 +129,7 @@ namespace FuzzyLogic
         public double GetLabelMembership(Label label, double input)
         {
             Validate.NotNull(label, nameof(label));
-            Validate.NotOutOfRange(input, nameof(input));
+            Validate.NotOutOfRange(input, nameof(input), this.LowerBound, this.UpperBound);
 
             return this.fuzzySets[label].GetMembership(input);
         }
@@ -145,7 +145,7 @@ namespace FuzzyLogic
         /// </returns>
         public FuzzyState GetState(double input)
         {
-            Validate.NotOutOfRange(input, nameof(input));
+            Validate.NotOutOfRange(input, nameof(input), this.LowerBound, this.UpperBound);
 
             var label = this.fuzzySets
                 .OrderByDescending(fs => fs.Value.GetMembership(input))

@@ -9,7 +9,6 @@
 
 namespace FuzzyLogic.UnitTests.MembershipFunctionTests
 {
-    using System;
     using System.Diagnostics.CodeAnalysis;
     using FuzzyLogic.MembershipFunctions;
     using Xunit;
@@ -21,15 +20,6 @@ namespace FuzzyLogic.UnitTests.MembershipFunctionTests
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "*", Justification = "Reviewed. Suppression is OK within the Test Suite.")]
     public class TriangularFunctionTests
     {
-        [Fact]
-        internal void Instantiation_WhenMinYGreaterThanMaxY_Throws()
-        {
-            // Arrange
-            // Act
-            // Assert
-            Assert.Throws<ArgumentException>(() => TriangularFunction.Create(1, 2, 3, 1, 0));
-        }
-
         [Theory]
         [InlineData(2, 3, 4, 0, 0)]
         [InlineData(2, 3, 4, 1, 0)]

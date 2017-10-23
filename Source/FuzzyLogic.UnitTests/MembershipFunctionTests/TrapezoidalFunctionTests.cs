@@ -21,15 +21,6 @@ namespace FuzzyLogic.UnitTests.MembershipFunctionTests
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "*", Justification = "Reviewed. Suppression is OK within the Test Suite.")]
     public class TrapezoidalFunctionTests
     {
-        [Fact]
-        internal void Instantiation_WhenMinYGreaterThanMaxY_Throws()
-        {
-            // Arrange
-            // Act
-            // Assert
-            Assert.Throws<ArgumentException>(() => TrapezoidalFunction.Create(1, 2, 3, 4, 1, 0.5));
-        }
-
         [Theory]
         [InlineData(2, 3, 4, 5, 0, 0)]
         [InlineData(2, 3, 4, 5, 1, 0)]

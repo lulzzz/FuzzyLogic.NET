@@ -90,6 +90,27 @@ namespace FuzzyLogic.Utility
         }
 
         /// <summary>
+        /// The min vs max validation.
+        /// </summary>
+        /// <param name="min">
+        /// The min.
+        /// </param>
+        /// <param name="max">
+        /// The max.
+        /// </param>
+        /// <exception cref="ArgumentException">
+        /// If min is greater than max then throws.
+        /// </exception>
+        [DebuggerStepThrough]
+        internal static void MinMax(double min, double max)
+        {
+            if (min > max)
+            {
+                throw new ArgumentException("Minimum Y cannot be greater than Maximum Y.");
+            }
+        }
+
+        /// <summary>
         /// The double not out of range.
         /// </summary>
         /// <param name="value">
