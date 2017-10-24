@@ -13,6 +13,7 @@ namespace FuzzyLogic.UnitTests.InferenceTests
     using System.Diagnostics.CodeAnalysis;
     using FuzzyLogic.Inference;
     using FuzzyLogic.Logic;
+    using FuzzyLogic.MembershipFunctions;
     using FuzzyLogic.TestKit.Stubs;
     using Xunit;
 
@@ -22,6 +23,31 @@ namespace FuzzyLogic.UnitTests.InferenceTests
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "*", Justification = "Reviewed. Suppression is OK within the Test Suite.")]
     public class FuzzyRuleBuilderTests
     {
+        [Fact]
+        internal void Build_WhenConditionsAndConclusionsAreValid_ReturnsExpectedRuzzyRule()
+        {
+            // Arrange
+            var frozen = new FuzzySet("frozen", SingletonFunction.Create(0));
+            var freezing = new FuzzySet("freezing", TriangularFunction.Create(0, 5, 10));
+            var cold = new FuzzySet("cold", TrapezoidalFunction.Create(5, 10, 15, 20));
+            var warm = new FuzzySet("warm", TrapezoidalFunction.Create(15, 25, 35, 40));
+            var hot = new FuzzySet("hot", TrapezoidalFunction.Create(35, 60, 80, 100));
+            var boiling = new FuzzySet("boiling", TrapezoidalFunction.CreateWithRightEdge(95, 100));
+
+            var water = new LinguisticVariable("Temperature", new List<FuzzySet> { frozen, freezing, cold, warm, hot, boiling }, -20, 200);
+
+            // Act
+            var fuzzyRule = new FuzzyRuleBuilder("Rule1")
+                .Add(new Condition(If, water, Is, "warm"))
+                .Then(water, Is, "warm")
+                .Build();
+
+            // Assert
+            Assert.Equal(fuzzyRule.Label, Label.Create("Rule1"));
+            Assert.Equal(1, fuzzyRule.Conditions.Count);
+            Assert.Equal(1, fuzzyRule.Conclusions.Count);
+        }
+
         [Fact]
         internal void Build_ValidConditionsAndConclusions_ReturnsExpectedFuzzyRule()
         {

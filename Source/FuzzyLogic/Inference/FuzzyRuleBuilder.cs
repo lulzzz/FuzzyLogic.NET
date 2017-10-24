@@ -19,6 +19,10 @@ namespace FuzzyLogic.Inference
     /// </summary>
     public class FuzzyRuleBuilder
     {
+        private readonly string name;
+        private readonly IList<Condition> conditions = new List<Condition>();
+        private readonly IList<Conclusion> conclusions = new List<Conclusion>();
+
         /// <summary>
         /// Initializes a new instance of the <see cref="FuzzyRuleBuilder"/> class.
         /// </summary>
@@ -27,17 +31,8 @@ namespace FuzzyLogic.Inference
         /// </param>
         public FuzzyRuleBuilder(string name)
         {
-            this.Name = name;
+            this.name = name;
         }
-
-        /// <summary>
-        /// Gets the name of the <see cref="FuzzyRule"/> to be built.
-        /// </summary>
-        private string Name { get; }
-
-        private IList<Condition> Conditions { get; set; } = new List<Condition>();
-
-        private IList<Conclusion> Conclusions { get; set; } = new List<Conclusion>();
 
         /// <summary>
         /// Adds a condition to the <see cref="FuzzyRule"/> to be built.
@@ -52,7 +47,7 @@ namespace FuzzyLogic.Inference
         {
             Validate.NotNull(condition, nameof(condition));
 
-            this.Conditions.Add(condition);
+            this.conditions.Add(condition);
 
             return this;
         }
@@ -81,7 +76,7 @@ namespace FuzzyLogic.Inference
             Validate.NotNull(evaluator, nameof(evaluator));
             Validate.NotNull(state, nameof(state));
 
-            this.Conclusions.Add(new Conclusion(variable, evaluator, FuzzyState.Create(state)));
+            this.conclusions.Add(new Conclusion(variable, evaluator, FuzzyState.Create(state)));
 
             return this;
         }
@@ -94,7 +89,7 @@ namespace FuzzyLogic.Inference
         /// </returns>
         public FuzzyRule Build()
         {
-            return new FuzzyRule(this.Name, this.Conditions, this.Conclusions);
+            return new FuzzyRule(this.name, this.conditions, this.conclusions);
         }
     }
 }

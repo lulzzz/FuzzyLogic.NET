@@ -150,9 +150,9 @@ namespace FuzzyLogic.Inference
         /// <returns>
         /// A <see cref="IList{ValueType}"/>.
         /// </returns>
-        public IList<(Label variable, double data)> GetAllData()
+        public IDictionary<Label, double> GetAllData()
         {
-            return this.variableData.Select(variable => (variable.Key, variable.Value)).ToList();
+            return new Dictionary<Label, double>(this.variableData);
         }
     }
 }

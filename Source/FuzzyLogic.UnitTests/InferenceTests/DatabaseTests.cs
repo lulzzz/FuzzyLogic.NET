@@ -128,6 +128,23 @@ namespace FuzzyLogic.UnitTests.InferenceTests
         }
 
         [Fact]
+        internal void GetData_WhenVariableContainedWithinDatabase_ThenReturnsExpectedData()
+        {
+            // Arrange
+            var database = new Database();
+            var pressure = Label.Create("pressure");
+
+            database.AddVariable(pressure, 3000);
+
+            // Act
+            database.Update(pressure, 3001);
+            var result = database.GetData(pressure);
+
+            // Assert
+            Assert.Equal(3001, result);
+        }
+
+        [Fact]
         internal void Update_WhenVariableContainedWithinDatabase_ThenReturnsExpectedData()
         {
             // Arrange
@@ -142,6 +159,29 @@ namespace FuzzyLogic.UnitTests.InferenceTests
 
             // Assert
             Assert.Equal(3001, result);
+        }
+
+        [Fact]
+        internal void GetAllData_ReturnsExpectedData()
+        {
+            // Arrange
+            var database = new Database();
+            var label1 = Label.Create("pressure");
+            var label2 = Label.Create("temperature");
+            var label3 = Label.Create("pump1");
+
+            database.AddVariable(label1, 3000);
+            database.AddVariable(label2, 25);
+            database.AddVariable(label3, 199);
+
+            // Act
+            var result = database.GetAllData();
+
+            // Assert
+            Assert.Equal(3, result.Count);
+            Assert.Equal(3000, result[label1]);
+            Assert.Equal(25, result[label2]);
+            Assert.Equal(199, result[label3]);
         }
     }
 }
