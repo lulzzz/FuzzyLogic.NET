@@ -120,12 +120,12 @@ namespace FuzzyLogic.Utility
         {
             if (collection == null)
             {
-                throw new ArgumentNullException(paramName, $"(The {paramName} collection is null).");
+                throw new ArgumentNullException(paramName, $"The {paramName} collection is null.");
             }
 
             if (collection.Count != 0)
             {
-                throw new ArgumentException($"(The {paramName} collection is not empty).", paramName);
+                throw new ArgumentException($"The {paramName} collection is not empty.", paramName);
             }
         }
 
@@ -152,7 +152,7 @@ namespace FuzzyLogic.Utility
         {
             if (!collection.Contains(element))
             {
-                throw new ArgumentException($"(The collection does not contain the {paramName} element).", paramName);
+                throw new ArgumentException($"The collection does not contain the {paramName} element.", paramName);
             }
         }
 
@@ -179,7 +179,7 @@ namespace FuzzyLogic.Utility
         {
             if (collection.Contains(element))
             {
-                throw new ArgumentException($"(The collection already contains the {paramName} element).", paramName);
+                throw new ArgumentException($"The collection already contains the {paramName} element.", paramName);
             }
         }
 
@@ -209,7 +209,7 @@ namespace FuzzyLogic.Utility
         {
             if (!collection.ContainsKey(key))
             {
-                throw new ArgumentException($"(The collection does not contain the {paramName} element).", paramName);
+                throw new ArgumentException($"The collection does not contain the {paramName} element.", paramName);
             }
         }
 
@@ -239,7 +239,7 @@ namespace FuzzyLogic.Utility
         {
             if (collection.ContainsKey(key))
             {
-                throw new ArgumentException($"(The collection already contains the {paramName} element).", paramName);
+                throw new ArgumentException($"The collection already contains the {paramName} element.", paramName);
             }
         }
 
