@@ -14,6 +14,7 @@ namespace FuzzyLogic.UnitTests.InferenceTests
     using FuzzyLogic.Inference;
     using FuzzyLogic.Logic;
     using FuzzyLogic.MembershipFunctions;
+    using FuzzyLogic.TestKit.Stubs;
     using Xunit;
 
     using static FuzzyLogic.Logic.LogicOperators;
@@ -26,14 +27,7 @@ namespace FuzzyLogic.UnitTests.InferenceTests
         internal void Build_ValidConditionsAndConclusions_ReturnsExpectedFuzzyRule()
         {
             // Arrange
-            var frozen = new FuzzySet("frozen", TrapezoidalFunction.CreateWithLeftEdge(0, 5));
-            var freezing = new FuzzySet("freezing", TriangularFunction.Create(0, 5, 10));
-            var cold = new FuzzySet("cold", TrapezoidalFunction.Create(10, 15, 18, 20));
-            var warm = new FuzzySet("warm", TrapezoidalFunction.Create(15, 25, 35, 40));
-            var hot = new FuzzySet("hot", TrapezoidalFunction.CreateWithRightEdge(30, 60, 1));
-            var boiling = new FuzzySet("boiling", TrapezoidalFunction.CreateWithRightEdge(90, 100));
-
-            var water = new LinguisticVariable("Temperature", new List<FuzzySet> { frozen, freezing, cold, warm, hot, boiling }, -20, 200);
+            var water = StubLinguisticVariableFactory.CreateTemperature();
 
             // Act
             var rule1 = new FuzzyRuleBuilder("Rule1")
@@ -53,14 +47,7 @@ namespace FuzzyLogic.UnitTests.InferenceTests
         internal void ReturnsExpectedFuzzyRule()
         {
             // Arrange
-            var frozen = new FuzzySet("frozen", TrapezoidalFunction.CreateWithLeftEdge(0, 2));
-            var freezing = new FuzzySet("freezing", TriangularFunction.Create(0, 5, 10));
-            var cold = new FuzzySet("cold", TrapezoidalFunction.Create(10, 15, 18, 20));
-            var warm = new FuzzySet("warm", TrapezoidalFunction.Create(15, 25, 35, 40));
-            var hot = new FuzzySet("hot", TrapezoidalFunction.CreateWithRightEdge(30, 60, 1));
-            var boiling = new FuzzySet("boiling", TrapezoidalFunction.CreateWithRightEdge(90, 100));
-
-            var water = new LinguisticVariable("Temperature", new List<FuzzySet> { frozen, freezing, cold, warm, hot, boiling }, -20, 200);
+            var water = StubLinguisticVariableFactory.CreateTemperature();
 
             // Act
             var rule1 = new FuzzyRuleBuilder("Rule1")

@@ -7,7 +7,7 @@
     <Authors>Christopher Sellers</Authors>
     <Company></Company>
     <Version>0.4.0</Version>
-    <Description>A library to express fuzzy logic for .NET. Fuzzy set operations, fuzzification with linguistic varables and fuzzy inference.</Description>
+    <Description>A library to express fuzzy logic for .NET. Fuzzy set operations, fuzzification with linguistic variables and fuzzy inference.</Description>
     <AssemblyVersion>0.4.0.0</AssemblyVersion>
     <Language>C#</Language>
     <Copyright>Copyright ©2017 Christopher Sellers</Copyright>
