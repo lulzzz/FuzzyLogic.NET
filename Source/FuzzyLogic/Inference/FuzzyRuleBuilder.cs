@@ -12,6 +12,7 @@ namespace FuzzyLogic.Inference
     using System.Collections.Generic;
     using FuzzyLogic.Logic;
     using FuzzyLogic.Logic.Interfaces;
+    using FuzzyLogic.Utility;
 
     /// <summary>
     /// The <see cref="FuzzyRuleBuilder"/> class.
@@ -49,6 +50,8 @@ namespace FuzzyLogic.Inference
         /// </returns>
         public FuzzyRuleBuilder Add(Condition condition)
         {
+            Validate.NotNull(condition, nameof(condition));
+
             this.Conditions.Add(condition);
 
             return this;
@@ -74,6 +77,10 @@ namespace FuzzyLogic.Inference
             IEvaluationOperator evaluator,
             string state)
         {
+            Validate.NotNull(variable, nameof(variable));
+            Validate.NotNull(evaluator, nameof(evaluator));
+            Validate.NotNull(state, nameof(state));
+
             this.Conclusions.Add(new Conclusion(variable, evaluator, FuzzyState.Create(state)));
 
             return this;

@@ -53,7 +53,7 @@ namespace FuzzyLogic.UnitTests.UtilityTests
 
             // Act
             // Assert (ignore expression is always null)
-            Assert.Throws<ArgumentNullException>(() => Validate.NotNullOrEmpty(collection, nameof(collection)));
+            Assert.Throws<ArgumentNullException>(() => Validate.CollectionNotNullOrEmpty(collection, nameof(collection)));
         }
 
         [Fact]
@@ -64,7 +64,122 @@ namespace FuzzyLogic.UnitTests.UtilityTests
 
             // Act
             // Assert
-            Assert.Throws<ArgumentException>(() => Validate.NotNullOrEmpty(collection, nameof(collection)));
+            Assert.Throws<ArgumentException>(() => Validate.CollectionNotNullOrEmpty(collection, nameof(collection)));
+        }
+
+
+        [Fact]
+        internal void CollectionEmpty_WhenCollectionNotEmpty_Throws()
+        {
+            // Arrange
+            List<string> collection = new List<string> { "anElement" };
+
+            // Act
+            // Assert
+            Assert.Throws<ArgumentException>(() => Validate.CollectionEmpty(collection, nameof(collection)));
+        }
+
+        [Fact]
+        internal void CollectionEmpty_WhenCollectionNull_Throws()
+        {
+            // Arrange
+            List<string> collection = null;
+
+            // Act
+            // Assert
+            Assert.Throws<ArgumentNullException>(() => Validate.CollectionEmpty(collection, nameof(collection)));
+        }
+
+        [Fact]
+        internal void CollectionNotNullOrEmpty_WhenCollectionNull_Throws()
+        {
+            // Arrange
+            List<string> collection = null;
+
+            // Act
+            // Assert
+            Assert.Throws<ArgumentNullException>(() => Validate.CollectionNotNullOrEmpty(collection, nameof(collection)));
+        }
+
+        [Fact]
+        internal void CollectionNotNullOrEmpty_WhenCollectionEmpty_Throws()
+        {
+            // Arrange
+            var collection = new List<string>();
+
+            // Act
+            // Assert
+            Assert.Throws<ArgumentException>(() => Validate.CollectionNotNullOrEmpty(collection, nameof(collection)));
+        }
+
+        [Fact]
+        internal void CollectionNotNullOrEmpty_WhenDictionaryNull_Throws()
+        {
+            // Arrange
+            Dictionary<string, int> dictionary = null;
+
+            // Act
+            // Assert
+            Assert.Throws<ArgumentNullException>(() => Validate.CollectionNotNullOrEmpty(dictionary, nameof(dictionary)));
+        }
+
+        [Fact]
+        internal void CollectionNotNullOrEmpty_WhenDictionaryEmpty_Throws()
+        {
+            // Arrange
+            var dictionary = new Dictionary<string, int>();
+
+            // Act
+            // Assert
+            Assert.Throws<ArgumentException>(() => Validate.CollectionNotNullOrEmpty(dictionary, nameof(dictionary)));
+        }
+
+        [Fact]
+        internal void CollectionContains_WhenCollectionDoesNotContainElement_Throws()
+        {
+            // Arrange
+            var element = "the_fifth_element";
+            var collection = new List<string>();
+
+            // Act
+            // Assert
+            Assert.Throws<ArgumentException>(() => Validate.CollectionContains(element, nameof(element), collection));
+        }
+
+        [Fact]
+        internal void CollectionDoesNotContain_WhenCollectionContainsElement_Throws()
+        {
+            // Arrange
+            var element = "the_fifth_element";
+            var collection = new List<string> { element };
+
+            // Act
+            // Assert
+            Assert.Throws<ArgumentException>(() => Validate.CollectionDoesNotContain(element, nameof(element), collection));
+        }
+
+        [Fact]
+        internal void DictionaryContainsKey_WhenDictionaryDoesNotContainKey_Throws()
+        {
+            // Arrange
+            var key = "the_key";
+            var collection = new Dictionary<string, int>();
+
+            // Act
+            // Assert
+            Assert.Throws<ArgumentException>(() => Validate.DictionaryContainsKey(key, nameof(key), collection));
+        }
+
+        [Fact]
+        internal void DictionaryDoesNotContainKey_WhenDictionaryContainsKey_Throws()
+        {
+            // Arrange
+            var key = "the_key";
+            var collection = new Dictionary<string, int> { { key, 1 } };
+
+            // Act
+            // Assert
+            Assert.Throws<ArgumentException>(() => Validate.DictionaryDoesNotContainKey(key, nameof(key), collection));
         }
 
         [Theory]
@@ -208,7 +323,7 @@ namespace FuzzyLogic.UnitTests.UtilityTests
 
             // Act
             // Assert
-            Assert.Throws<ArgumentException>(() => new LinguisticVariable("test", fuzzySetCollection, 2, 100));
+            Assert.Throws<ArgumentOutOfRangeException>(() => new LinguisticVariable("test", fuzzySetCollection, 2, 100));
         }
 
         [Fact]
@@ -222,7 +337,7 @@ namespace FuzzyLogic.UnitTests.UtilityTests
 
             // Act
             // Assert
-            Assert.Throws<ArgumentException>(() => new LinguisticVariable("test", fuzzySetCollection, 1, 3));
+            Assert.Throws<ArgumentOutOfRangeException>(() => new LinguisticVariable("test", fuzzySetCollection, 1, 3));
         }
     }
 }

@@ -72,6 +72,8 @@ namespace FuzzyLogic.Logic
         /// </returns>
         public bool Evaluate(IDictionary<Label, double> data)
         {
+            Validate.CollectionNotNullOrEmpty(data, nameof(data));
+
             var truthTable = new List<Evaluation>();
 
             foreach (var premise in this.Premises)

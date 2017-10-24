@@ -84,7 +84,7 @@ namespace FuzzyLogic.Utility
         /// Throws if the collection is empty.
         /// </exception>
         [DebuggerStepThrough]
-        internal static void NotNullOrEmpty<T>(ICollection<T> collection, string paramName)
+        internal static void CollectionNotNullOrEmpty<T>(ICollection<T> collection, string paramName)
         {
             if (collection == null)
             {
@@ -98,13 +98,159 @@ namespace FuzzyLogic.Utility
         }
 
         /// <summary>
+        /// Validates that the collection is not null, or empty (count zero).
+        /// </summary>
+        /// <param name="collection">
+        /// The collection.
+        /// </param>
+        /// <param name="paramName">
+        /// The parameter name.
+        /// </param>
+        /// <typeparam name="T">
+        /// The type of collection.
+        /// </typeparam>
+        /// <exception cref="ArgumentNullException">
+        /// Throws if the collection is null.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// Throws if the collection is empty.
+        /// </exception>
+        [DebuggerStepThrough]
+        internal static void CollectionEmpty<T>(ICollection<T> collection, string paramName)
+        {
+            if (collection == null)
+            {
+                throw new ArgumentNullException(paramName, $"(The {paramName} collection is null).");
+            }
+
+            if (collection.Count != 0)
+            {
+                throw new ArgumentException($"(The {paramName} collection is not empty).", paramName);
+            }
+        }
+
+        /// <summary>
+        /// Validates that the collection contains the element.
+        /// </summary>
+        /// <param name="element">
+        /// The element.
+        /// </param>
+        /// <param name="paramName">
+        /// The parameter name.
+        /// </param>
+        /// <param name="collection">
+        /// The collection.
+        /// </param>
+        /// <typeparam name="T">
+        /// The type of collection.
+        /// </typeparam>
+        /// <exception cref="ArgumentException">
+        /// Throws if the collection does not contain the element.
+        /// </exception>
+        [DebuggerStepThrough]
+        internal static void CollectionContains<T>(T element, string paramName, ICollection<T> collection)
+        {
+            if (!collection.Contains(element))
+            {
+                throw new ArgumentException($"(The collection does not contain the {paramName} element).", paramName);
+            }
+        }
+
+        /// <summary>
+        /// Validates that the collection does not contain the element.
+        /// </summary>
+        /// <param name="element">
+        /// The element.
+        /// </param>
+        /// <param name="paramName">
+        /// The parameter name.
+        /// </param>
+        /// <param name="collection">
+        /// The collection.
+        /// </param>
+        /// <typeparam name="T">
+        /// The type of collection.
+        /// </typeparam>
+        /// <exception cref="ArgumentException">
+        /// Throws if the collection contains the element.
+        /// </exception>
+        [DebuggerStepThrough]
+        internal static void CollectionDoesNotContain<T>(T element, string paramName, ICollection<T> collection)
+        {
+            if (collection.Contains(element))
+            {
+                throw new ArgumentException($"(The collection already contains the {paramName} element).", paramName);
+            }
+        }
+
+        /// <summary>
+        /// Validates that the dictionary contains the key.
+        /// </summary>
+        /// <param name="key">
+        /// The key.
+        /// </param>
+        /// <param name="paramName">
+        /// The parameter name.
+        /// </param>
+        /// <param name="collection">
+        /// The collection.
+        /// </param>
+        /// <typeparam name="T1">
+        /// The type of the keys.
+        /// </typeparam>
+        /// <typeparam name="T2">
+        /// The type of the values
+        /// </typeparam>
+        /// <exception cref="ArgumentException">
+        /// Throws if the dictionary does not contain the key.
+        /// </exception>
+        [DebuggerStepThrough]
+        internal static void DictionaryContainsKey<T1, T2>(T1 key, string paramName, IDictionary<T1, T2> collection)
+        {
+            if (!collection.ContainsKey(key))
+            {
+                throw new ArgumentException($"(The collection does not contain the {paramName} element).", paramName);
+            }
+        }
+
+        /// <summary>
+        /// Validates that the dictionary does not contain the key.
+        /// </summary>
+        /// <param name="key">
+        /// The key.
+        /// </param>
+        /// <param name="paramName">
+        /// The parameter name.
+        /// </param>
+        /// <param name="collection">
+        /// The collection.
+        /// </param>
+        /// <typeparam name="T1">
+        /// The type of the keys.
+        /// </typeparam>
+        /// <typeparam name="T2">
+        /// The type of the values.
+        /// </typeparam>
+        /// <exception cref="ArgumentException">
+        /// Throws if the dictionary does not contain the key.
+        /// </exception>
+        [DebuggerStepThrough]
+        internal static void DictionaryDoesNotContainKey<T1, T2>(T1 key, string paramName, IDictionary<T1, T2> collection)
+        {
+            if (collection.ContainsKey(key))
+            {
+                throw new ArgumentException($"(The collection already contains the {paramName} element).", paramName);
+            }
+        }
+
+        /// <summary>
         /// Validates the minimum vs maximum arguments.
         /// </summary>
         /// <param name="min">
-        /// The min argument.
+        /// The min value.
         /// </param>
         /// <param name="max">
-        /// The max argument.
+        /// The max value.
         /// </param>
         /// <exception cref="ArgumentException">
         /// Throws if min is greater than max.
@@ -114,7 +260,7 @@ namespace FuzzyLogic.Utility
         {
             if (min > max)
             {
-                throw new ArgumentException("Minimum Y cannot be greater than Maximum Y.");
+                throw new ArgumentException("Minimum value cannot be greater than Maximum value.");
             }
         }
 
@@ -193,12 +339,7 @@ namespace FuzzyLogic.Utility
         [DebuggerStepThrough]
         internal static void FuzzyPointArray(FuzzyPoint[] points, string paramName)
         {
-            NotNull(points, nameof(points));
-
-            if (points.Length == 0)
-            {
-                throw new ArgumentException("Points array cannot be empty.", paramName);
-            }
+            CollectionNotNullOrEmpty(points, nameof(points));
 
             for (var i = 0; i < points.Length; i++)
             {
@@ -235,29 +376,15 @@ namespace FuzzyLogic.Utility
             double lowerBound,
             double upperBound)
         {
-            NotNullOrEmpty(inputSets, nameof(inputSets));
+            CollectionNotNullOrEmpty(inputSets, nameof(inputSets));
             NotOutOfRange(lowerBound, nameof(lowerBound));
-            NotOutOfRange(lowerBound, nameof(upperBound));
-
-            if (lowerBound > upperBound)
-            {
-                throw new ArgumentException(
-                    $"Lower bound ({lowerBound}) cannot be greater than upper bound ({upperBound}).");
-            }
+            NotOutOfRange(upperBound, nameof(upperBound));
+            MinMax(lowerBound, upperBound);
 
             foreach (var set in inputSets)
             {
-                if (set.LowerBound < lowerBound)
-                {
-                    throw new ArgumentException(
-                        $"Lower bound cannot be greater than lowest bound of input set ({set.Label} {lowerBound} < {set.LowerBound}).");
-                }
-
-                if (set.UpperBound > upperBound)
-                {
-                    throw new ArgumentException(
-                        $"Upper bound cannot be less than highest upper bound of input set ({set.Label}).");
-                }
+                NotOutOfRange(set.LowerBound, nameof(set.LowerBound), lowerBound, upperBound);
+                NotOutOfRange(set.UpperBound, nameof(set.UpperBound), lowerBound, upperBound);
             }
         }
 

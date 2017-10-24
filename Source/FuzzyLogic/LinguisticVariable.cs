@@ -44,7 +44,7 @@ namespace FuzzyLogic
             double upperBound = double.MaxValue)
         {
             Validate.NotNull(label, nameof(label));
-            Validate.NotNullOrEmpty(inputSets, nameof(inputSets));
+            Validate.CollectionNotNullOrEmpty(inputSets, nameof(inputSets));
             Validate.NotOutOfRange(lowerBound, nameof(lowerBound));
             Validate.NotOutOfRange(upperBound, nameof(upperBound));
             Validate.FuzzySetCollection(inputSets, lowerBound, upperBound);

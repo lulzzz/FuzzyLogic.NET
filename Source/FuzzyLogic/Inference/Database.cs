@@ -56,12 +56,7 @@ namespace FuzzyLogic.Inference
         {
             Validate.NotNull(variable, nameof(variable));
             Validate.NotOutOfRange(input, nameof(input));
-
-            if (this.variableData.ContainsKey(variable))
-            {
-                throw new ArgumentException(
-                    $"Cannot add variable (Fuzzy database already contains a variable named {variable}).");
-            }
+            Validate.DictionaryDoesNotContainKey(variable, nameof(variable), this.variableData);
 
             this.variableData.Add(variable, input);
         }
@@ -78,12 +73,7 @@ namespace FuzzyLogic.Inference
         public void DeleteVariable(Label variable)
         {
             Validate.NotNull(variable, nameof(variable));
-
-            if (!this.variableData.ContainsKey(variable))
-            {
-                throw new ArgumentException(
-                    $"Cannot delete variable (Fuzzy database does not contain a variable named {variable}).");
-            }
+            Validate.DictionaryContainsKey(variable, nameof(variable), this.variableData);
 
             this.variableData.Remove(variable);
         }
@@ -129,12 +119,9 @@ namespace FuzzyLogic.Inference
         {
             Validate.NotNull(variable, nameof(variable));
             Validate.NotOutOfRange(input, nameof(input));
+            Validate.DictionaryContainsKey(variable, nameof(variable), this.variableData);
 
-            if (!this.variableData.ContainsKey(variable))
-            {
-                throw new ArgumentException(
-                    $"Cannot update linguistic variable (Fuzzy database does not contain a variable named {variable}).");
-            }
+            this.variableData[variable] = input;
         }
 
         /// <summary>
@@ -152,12 +139,7 @@ namespace FuzzyLogic.Inference
         public double GetData(Label variable)
         {
             Validate.NotNull(variable, nameof(variable));
-
-            if (!this.variableData.ContainsKey(variable))
-            {
-                throw new ArgumentException(
-                    $"Cannot get variable input data (Fuzzy database does not contain a variable named {variable}).");
-            }
+            Validate.DictionaryContainsKey(variable, nameof(variable), this.variableData);
 
             return this.variableData[variable];
         }

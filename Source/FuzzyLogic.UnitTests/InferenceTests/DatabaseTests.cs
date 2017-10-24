@@ -9,7 +9,6 @@
 
 namespace FuzzyLogic.UnitTests.InferenceTests
 {
-    using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using FuzzyLogic.Inference;
@@ -31,19 +30,6 @@ namespace FuzzyLogic.UnitTests.InferenceTests
 
             // Assert
             Assert.Equal(1, database.VariableCount);
-        }
-
-        [Fact]
-        internal void AddVariable_WhenVariableAlreadyInDatabase_Throws()
-        {
-            // Arrange
-            var database = new Database();
-            var label = Label.Create("pressure");
-            database.AddVariable(label, 3000);
-
-            // Act
-            // Assert
-            Assert.Throws<ArgumentException>(() => database.AddVariable(label, 0));
         }
 
         [Fact]
@@ -73,18 +59,6 @@ namespace FuzzyLogic.UnitTests.InferenceTests
 
             // Assert
             Assert.True(result);
-        }
-
-        [Fact]
-        internal void DeleteVariable_WhenVariableNotContainedWithinDatabase_Throws()
-        {
-            // Arrange
-            var database = new Database();
-            var label = Label.Create("pressure");
-
-            // Act
-            // Assert
-            Assert.Throws<ArgumentException>(() => database.DeleteVariable(label));
         }
 
         [Fact]
@@ -151,6 +125,23 @@ namespace FuzzyLogic.UnitTests.InferenceTests
 
             // Assert
             Assert.Equal(expectedList, result);
+        }
+
+        [Fact]
+        internal void Update_WhenVariableContainedWithinDatabase_ThenReturnsExpectedData()
+        {
+            // Arrange
+            var database = new Database();
+            var pressure = Label.Create("pressure");
+
+            database.AddVariable(pressure, 3000);
+
+            // Act
+            database.Update(pressure, 3001);
+            var result = database.GetData(pressure);
+
+            // Assert
+            Assert.Equal(3001, result);
         }
     }
 }

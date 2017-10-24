@@ -42,8 +42,8 @@ namespace FuzzyLogic.Inference
             IList<Conclusion> conclusions)
         {
             Validate.NotNull(label, nameof(label));
-            Validate.NotNullOrEmpty(conditions, nameof(conditions));
-            Validate.NotNullOrEmpty(conclusions, nameof(conclusions));
+            Validate.CollectionNotNullOrEmpty(conditions, nameof(conditions));
+            Validate.CollectionNotNullOrEmpty(conclusions, nameof(conclusions));
 
             this.Label = Label.Create(label);
             this.conditions = conditions;
