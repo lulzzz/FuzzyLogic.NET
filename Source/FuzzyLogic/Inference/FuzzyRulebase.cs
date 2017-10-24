@@ -29,7 +29,7 @@ namespace FuzzyLogic.Inference
         }
 
         /// <summary>
-        /// Adds the input <see cref="FuzzyRule"/> to the database.
+        /// Adds the given <see cref="FuzzyRule"/> to the database.
         /// </summary>
         /// <param name="fuzzyRule">
         /// The input <see cref="FuzzyRule"/>.
@@ -50,7 +50,7 @@ namespace FuzzyLogic.Inference
         /// <summary>
         /// Clears all rules from the <see cref="FuzzyRulebase"/>.
         /// </summary>
-        public void ClearRules()
+        public void DeleteAllRules()
         {
             this.rules.Clear();
         }
@@ -58,15 +58,15 @@ namespace FuzzyLogic.Inference
         /// <summary>
         /// Returns the <see cref="FuzzyRule"/> which matches the given string.
         /// </summary>
-        /// <param name="ruleName">
-        /// The rule name.
+        /// <param name="ruleLabel">
+        /// The rule label.
         /// </param>
         /// <returns>
         /// A <see cref="FuzzyRule"/>.
         /// </returns>
-        public FuzzyRule GetRule(string ruleName)
+        public FuzzyRule GetRule(Label ruleLabel)
         {
-            return this.rules[Label.Create(ruleName)];
+            return this.rules[ruleLabel];
         }
     }
 }

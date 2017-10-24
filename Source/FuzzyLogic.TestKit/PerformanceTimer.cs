@@ -13,12 +13,12 @@ namespace FuzzyLogic.TestKit
     using System.Diagnostics;
 
     /// <summary>
-    /// The performance timer.
+    /// The static <see cref="PerformanceTimer"/> class.
     /// </summary>
     public static class PerformanceTimer
     {
         /// <summary>
-        /// The run.
+        /// Performance tests the given <see cref="Action"/> and returns the time it took to invoke.
         /// </summary>
         /// <param name="action">
         /// The action.
@@ -26,7 +26,7 @@ namespace FuzzyLogic.TestKit
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        public static long Run(Action action)
+        public static long Test(Action action)
         {
             var stopwatch = new Stopwatch();
             stopwatch.Start();

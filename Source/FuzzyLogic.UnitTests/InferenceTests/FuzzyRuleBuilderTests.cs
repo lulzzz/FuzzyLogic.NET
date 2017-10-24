@@ -13,7 +13,6 @@ namespace FuzzyLogic.UnitTests.InferenceTests
     using System.Diagnostics.CodeAnalysis;
     using FuzzyLogic.Inference;
     using FuzzyLogic.Logic;
-    using FuzzyLogic.MembershipFunctions;
     using FuzzyLogic.TestKit.Stubs;
     using Xunit;
 

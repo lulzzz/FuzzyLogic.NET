@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="FuzzyPointTests.cs" />
     <Compile Include="FuzzySetTests.cs" />
+    <Compile Include="InferenceTests\DatabaseTests.cs" />
     <Compile Include="LinguisticVariableTests.cs" />
     <Compile Include="LabelTests.cs" />
     <Compile Include="FuzzyStateTests.cs" />
