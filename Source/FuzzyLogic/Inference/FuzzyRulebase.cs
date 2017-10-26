@@ -11,6 +11,8 @@ namespace FuzzyLogic.Inference
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Threading;
     using FuzzyLogic.Utility;
 
     /// <summary>
@@ -29,6 +31,19 @@ namespace FuzzyLogic.Inference
         }
 
         /// <summary>
+        /// Returns the count of the <see cref="FuzzyRulebase"/>.
+        /// </summary>
+        public int Count => this.rules.Count;
+
+        /// <summary>
+        /// Returns a dictionary of rules.
+        /// </summary>
+        /// <returns>
+        /// A read only dictionary.
+        /// </returns>
+        public IReadOnlyDictionary<Label, FuzzyRule> GetRules() => new ReadOnlyDictionary<Label, FuzzyRule>(this.rules);
+
+        /// <summary>
         /// Adds the given <see cref="FuzzyRule"/> to the database.
         /// </summary>
         /// <param name="fuzzyRule">
@@ -37,12 +52,9 @@ namespace FuzzyLogic.Inference
         /// <exception cref="ArgumentException">
         /// Throws an exception if a fuzzy rule with the same name is already contained within the fuzzyRule base.
         /// </exception>
-        public void Add(FuzzyRule fuzzyRule)
+        public void AddRule(FuzzyRule fuzzyRule)
         {
-            if (this.rules.ContainsKey(fuzzyRule.Label))
-            {
-                throw new ArgumentException($"Cannot add rule (Rule base already contains a rule named {fuzzyRule.Label}).");
-            }
+            Validate.DictionaryDoesNotContainKey(fuzzyRule.Label, nameof(fuzzyRule.Label), this.rules);
 
             this.rules.Add(fuzzyRule.Label, fuzzyRule);
         }
@@ -64,8 +76,13 @@ namespace FuzzyLogic.Inference
         /// <returns>
         /// A <see cref="FuzzyRule"/>.
         /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Throws an exception if the ruleLabel is null.
+        /// </exception>
         public FuzzyRule GetRule(Label ruleLabel)
         {
+            Validate.NotNull(ruleLabel, nameof(ruleLabel));
+
             return this.rules[ruleLabel];
         }
     }
