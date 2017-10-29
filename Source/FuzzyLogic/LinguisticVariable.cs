@@ -9,6 +9,7 @@
 
 namespace FuzzyLogic
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using FuzzyLogic.Annotations;
@@ -90,6 +91,24 @@ namespace FuzzyLogic
         /// The state.
         /// </param>
         /// <returns>
+        /// The <see cref="Proposition"/>.
+        /// </returns>
+        public Proposition Is(Enum state)
+        {
+            Validate.NotNull(state, nameof(state));
+
+            return this.Is(state
+                .ToString()
+                .ToLower());
+        }
+
+        /// <summary>
+        /// Returns a proposition based on whether the variable IS in the given state.
+        /// </summary>
+        /// <param name="state">
+        /// The state.
+        /// </param>
+        /// <returns>
         /// The <see cref="Premise"/>.
         /// </returns>
         public Proposition Is(string state)
@@ -97,6 +116,38 @@ namespace FuzzyLogic
             Validate.NotNull(state, nameof(state));
 
             return this.Is(FuzzyState.Create(state));
+        }
+
+        /// <summary>
+        /// Returns a proposition based on whether the variable IS in the given state.
+        /// </summary>
+        /// <param name="state">
+        /// The state.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Premise"/>.
+        /// </returns>
+        public Proposition Is(FuzzyState state)
+        {
+            return new Proposition(this, LogicOperators.Is, state);
+        }
+
+        /// <summary>
+        /// Returns a proposition based on whether the variable IS NOT in the given state.
+        /// </summary>
+        /// <param name="state">
+        /// The state.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Proposition"/>.
+        /// </returns>
+        public Proposition IsNot(Enum state)
+        {
+            Validate.NotNull(state, nameof(state));
+
+            return this.IsNot(state
+                .ToString()
+                .ToLower());
         }
 
         /// <summary>
@@ -113,20 +164,6 @@ namespace FuzzyLogic
             Validate.NotNull(state, nameof(state));
 
             return this.IsNot(FuzzyState.Create(state));
-        }
-
-        /// <summary>
-        /// Returns a proposition based on whether the variable IS in the given state.
-        /// </summary>
-        /// <param name="state">
-        /// The state.
-        /// </param>
-        /// <returns>
-        /// The <see cref="Premise"/>.
-        /// </returns>
-        public Proposition Is(FuzzyState state)
-        {
-            return new Proposition(this, LogicOperators.Is, state);
         }
 
         /// <summary>

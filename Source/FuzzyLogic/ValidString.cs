@@ -31,7 +31,7 @@ namespace FuzzyLogic
         {
             Validate.NotNull(value, nameof(value));
 
-            this.Value = value;
+            this.Value = value.RemoveAllWhitespace();
         }
 
         /// <summary>

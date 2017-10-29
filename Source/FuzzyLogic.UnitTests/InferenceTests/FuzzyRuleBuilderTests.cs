@@ -14,10 +14,9 @@ namespace FuzzyLogic.UnitTests.InferenceTests
     using FuzzyLogic.Inference;
     using FuzzyLogic.Logic;
     using FuzzyLogic.MembershipFunctions;
+    using FuzzyLogic.TestKit;
     using FuzzyLogic.TestKit.Stubs;
     using Xunit;
-
-    using static FuzzyLogic.Logic.LogicOperators;
 
     [SuppressMessage("StyleCop.CSharp.NamingRules", "*", Justification = "Reviewed. Suppression is OK within the Test Suite.")]
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "*", Justification = "Reviewed. Suppression is OK within the Test Suite.")]
@@ -57,8 +56,8 @@ namespace FuzzyLogic.UnitTests.InferenceTests
             // Act
             var rule1 = new FuzzyRuleBuilder("Rule1")
                 .If(new Condition(
-                    water.Is("cold"))
-                    .And(water.IsNot("freezing"))
+                    water.Is(WaterTemp.Cold))
+                    .And(water.IsNot(WaterTemp.Freezing))
                     .Or(water.IsNot("frozen")))
                 .And(new Condition(
                     water.Is("warm"))
@@ -85,15 +84,15 @@ namespace FuzzyLogic.UnitTests.InferenceTests
             // Act
             var rule1 = new FuzzyRuleBuilder("Rule1")
                 .If(new Condition(
-                        water.Is("cold"))
+                    water.Is("cold"))
                     .And(water.IsNot("freezing"))
                     .Or(water.IsNot("frozen")))
                 .If(new Condition(
-                        water.Is("warm"))
+                    water.Is("warm"))
                     .And(water.IsNot("hot"))
                     .Or(water.IsNot("boiling")))
                 .If(new Condition(
-                        water.Is("frozen"))
+                    water.Is("frozen"))
                     .And(water.Is("warm")))
                 .Then(water.IsNot("frozen"))
                 .Build();
