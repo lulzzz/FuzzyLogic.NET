@@ -12,6 +12,7 @@ namespace FuzzyLogic
     using System.Collections.Generic;
     using System.Linq;
     using FuzzyLogic.Annotations;
+    using FuzzyLogic.Logic;
     using FuzzyLogic.Utility;
 
     /// <summary>
@@ -32,10 +33,10 @@ namespace FuzzyLogic
         /// The input sets.
         /// </param>
         /// <param name="lowerBound">
-        /// The lower bound for this <see cref="LinguisticVariable"/>.
+        /// The lower bound for the <see cref="LinguisticVariable"/>.
         /// </param>
         /// <param name="upperBound">
-        /// The upper bound for this <see cref="LinguisticVariable"/>.
+        /// The upper bound for the <see cref="LinguisticVariable"/>.
         /// </param>
         public LinguisticVariable(
             string label,
@@ -81,6 +82,66 @@ namespace FuzzyLogic
         /// The <see cref="IReadOnlyCollection{T}"/>.
         /// </returns>
         public IReadOnlyCollection<Label> GetMembers() => this.fuzzySets.Keys.ToList().AsReadOnly();
+
+        /// <summary>
+        /// Returns a proposition based on whether the variable IS in the given state.
+        /// </summary>
+        /// <param name="state">
+        /// The state.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Premise"/>.
+        /// </returns>
+        public Proposition Is(string state)
+        {
+            Validate.NotNull(state, nameof(state));
+
+            return this.Is(FuzzyState.Create(state));
+        }
+
+        /// <summary>
+        /// Returns a proposition based on whether the variable IS NOT in the given state.
+        /// </summary>
+        /// <param name="state">
+        /// The state.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Proposition"/>.
+        /// </returns>
+        public Proposition IsNot(string state)
+        {
+            Validate.NotNull(state, nameof(state));
+
+            return this.IsNot(FuzzyState.Create(state));
+        }
+
+        /// <summary>
+        /// Returns a proposition based on whether the variable IS in the given state.
+        /// </summary>
+        /// <param name="state">
+        /// The state.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Premise"/>.
+        /// </returns>
+        public Proposition Is(FuzzyState state)
+        {
+            return new Proposition(this, LogicOperators.Is, state);
+        }
+
+        /// <summary>
+        /// Returns a proposition based on whether the variable IS NOT in the given state.
+        /// </summary>
+        /// <param name="state">
+        /// The state.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Proposition"/>.
+        /// </returns>
+        public Proposition IsNot(FuzzyState state)
+        {
+            return new Proposition(this, LogicOperators.IsNot, state);
+        }
 
         /// <summary>
         /// Returns a <see cref="bool"/> indicating whether the given label is a member

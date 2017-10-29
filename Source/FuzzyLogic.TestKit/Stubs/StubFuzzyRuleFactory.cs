@@ -33,8 +33,8 @@ namespace FuzzyLogic.TestKit.Stubs
             var water = StubLinguisticVariableFactory.CreateTemperature();
 
            return new FuzzyRuleBuilder(label)
-                .Add(new Condition(If, water, Is, "warm"))
-                .Then(water, Is, "warm")
+                .If(new Condition(water.Is("warm")))
+                .Then(water.Is("warm"))
                 .Build();
         }
     }

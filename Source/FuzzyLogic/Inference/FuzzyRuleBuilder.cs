@@ -11,7 +11,6 @@ namespace FuzzyLogic.Inference
 {
     using System.Collections.Generic;
     using FuzzyLogic.Logic;
-    using FuzzyLogic.Logic.Interfaces;
     using FuzzyLogic.Utility;
 
     /// <summary>
@@ -43,10 +42,44 @@ namespace FuzzyLogic.Inference
         /// <returns>
         /// The <see cref="FuzzyRuleBuilder"/>.
         /// </returns>
-        public FuzzyRuleBuilder Add(Condition condition)
+        public FuzzyRuleBuilder If(Condition condition)
         {
             Validate.NotNull(condition, nameof(condition));
 
+            condition.SetConnective(LogicOperators.If);
+            this.conditions.Add(condition);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Adds a condition to the <see cref="FuzzyRule"/> to be built.
+        /// </summary>
+        /// <param name="condition">
+        /// The condition.
+        /// </param>
+        /// <returns>
+        /// The <see cref="FuzzyRuleBuilder"/>.
+        /// </returns>
+        public FuzzyRuleBuilder And(Condition condition)
+        {
+            return this.If(condition);
+        }
+
+        /// <summary>
+        /// Adds an OR condition to the <see cref="FuzzyRule"/> to be built.
+        /// </summary>
+        /// <param name="condition">
+        /// The condition.
+        /// </param>
+        /// <returns>
+        /// The <see cref="FuzzyRuleBuilder"/>.
+        /// </returns>
+        public FuzzyRuleBuilder Or(Condition condition)
+        {
+            Validate.NotNull(condition, nameof(condition));
+
+            condition.SetConnective(LogicOperators.Or);
             this.conditions.Add(condition);
 
             return this;
@@ -55,28 +88,20 @@ namespace FuzzyLogic.Inference
         /// <summary>
         /// Adds a conclusion to the <see cref="FuzzyRule"/> to be built.
         /// </summary>
-        /// <param name="variable">
-        /// The linguistic variable.
-        /// </param>
-        /// <param name="evaluator">
-        /// The evaluation logic operator.
-        /// </param>
-        /// <param name="state">
-        /// The fuzzy state.
+        /// <param name="proposition">
+        /// The proposition.
         /// </param>
         /// <returns>
         /// The <see cref="FuzzyRuleBuilder"/>.
         /// </returns>
-        public FuzzyRuleBuilder Then(
-            LinguisticVariable variable,
-            IEvaluationOperator evaluator,
-            string state)
+        public FuzzyRuleBuilder Then(Proposition proposition)
         {
-            Validate.NotNull(variable, nameof(variable));
-            Validate.NotNull(evaluator, nameof(evaluator));
-            Validate.NotNull(state, nameof(state));
+            Validate.NotNull(proposition, nameof(proposition));
 
-            this.conclusions.Add(new Conclusion(variable, evaluator, FuzzyState.Create(state)));
+            this.conclusions.Add(new Conclusion(
+                proposition.Variable,
+                proposition.Evaluator,
+                proposition.State));
 
             return this;
         }

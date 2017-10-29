@@ -13,7 +13,7 @@ namespace FuzzyLogic.TestKit.Stubs
     using FuzzyLogic.MembershipFunctions;
 
     /// <summary>
-    /// The stub linguistic variable factory.
+    /// The static <see cref="StubLinguisticVariableFactory"/> class.
     /// </summary>
     public static class StubLinguisticVariableFactory
     {

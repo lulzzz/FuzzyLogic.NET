@@ -22,44 +22,95 @@ namespace FuzzyLogic.Logic
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Condition"/> class.
+        /// The if.
         /// </summary>
-        /// <param name="connective">
-        /// The connective logic operator.
+        /// <param name="proposition">
+        /// The proposition.
         /// </param>
-        /// <param name="variable">
-        /// The linguistic variable.
-        /// </param>
-        /// <param name="evaluator">
-        /// The evaluator logic operator.
-        /// </param>
-        /// <param name="state">
-        /// The fuzzy state.
-        /// </param>
-        public Condition(
-            IConnectiveOperator connective,
-            LinguisticVariable variable,
-            IEvaluationOperator evaluator,
-            string state)
+        /// <returns>
+        /// The <see cref="Condition"/>.
+        /// </returns>
+        public Condition(Proposition proposition)
         {
-            Validate.NotNull(connective, nameof(connective));
-            Validate.NotNull(variable, nameof(variable));
-            Validate.NotNull(evaluator, nameof(evaluator));
-            Validate.NotNull(state, nameof(state));
+            Validate.NotNull(proposition, nameof(proposition));
 
-            this.Connective = connective;
-
-            this.Premises.Add(new Premise(LogicOperators.If, variable, evaluator, FuzzyState.Create(state)));
+            this.Premises.Add(new Premise(
+                LogicOperators.If,
+                proposition.Variable,
+                proposition.Evaluator,
+                proposition.State));
         }
 
         /// <summary>
         /// Gets the connective logic operator.
         /// </summary>
-        public IConnectiveOperator Connective { get; }
+        public IConnectiveOperator Connective { get; private set; }
 
         /// <summary>
         /// Gets the list of premises.
         /// </summary>
         public IList<Premise> Premises { get; } = new List<Premise>();
+
+        /// <summary>
+        /// Sets the connective (if null).
+        /// </summary>
+        /// <param name="connective">
+        /// The connective.
+        /// </param>
+        public void SetConnective(IConnectiveOperator connective)
+        {
+            if (this.Connective != null)
+            {
+                throw new InvalidOperationException(
+                    "Invalid Operation (cannot change a conditions connective once set).");
+            }
+
+            this.Connective = connective;
+        }
+
+        /// <summary>
+        /// Adds an 'And' premise to the condition.
+        /// </summary>
+        /// <param name="proposition">
+        /// The proposition.
+        /// </param>
+        /// <returns>
+        /// A <see cref="Condition"/>.
+        /// </returns>
+        public Condition And(Proposition proposition)
+        {
+            Validate.NotNull(proposition, nameof(proposition));
+
+            this.Premises.Add(new Premise(
+                LogicOperators.And,
+                proposition.Variable,
+                proposition.Evaluator,
+                proposition.State));
+
+            return this;
+        }
+
+        /// <summary>
+        /// Adds an 'Or' premise to the condition.
+        /// </summary>
+        /// <param name="proposition">
+        /// The proposition.
+        /// </param>
+        /// <returns>
+        /// A <see cref="Condition"/>.
+        /// </returns>
+        public Condition Or(Proposition proposition)
+        {
+            Validate.NotNull(proposition, nameof(proposition));
+
+            this.Premises.Add(new Premise(
+                LogicOperators.Or,
+                proposition.Variable,
+                proposition.Evaluator,
+                proposition.State));
+
+            return this;
+        }
 
         /// <summary>
         /// Returns the logical evaluation of all premises.
@@ -93,64 +144,6 @@ namespace FuzzyLogic.Logic
 
             return truthTable.All(p => p.Result)
                 || truthTable.Any(p => p.Connective == LogicOperators.Or && p.Result);
-        }
-
-        /// <summary>
-        /// Adds an 'And' premise to the condition.
-        /// </summary>
-        /// <param name="variable">
-        /// The linguistic variable.
-        /// </param>
-        /// <param name="evaluator">
-        /// The evaluation logic operator.
-        /// </param>
-        /// <param name="state">
-        /// The expected fuzzy state.
-        /// </param>
-        /// <returns>
-        /// A <see cref="Condition"/>.
-        /// </returns>
-        public Condition And(
-            LinguisticVariable variable,
-            IEvaluationOperator evaluator,
-            string state)
-        {
-            Validate.NotNull(variable, nameof(variable));
-            Validate.NotNull(evaluator, nameof(evaluator));
-            Validate.NotNull(state, nameof(state));
-
-            this.Premises.Add(new Premise(LogicOperators.And, variable, evaluator, FuzzyState.Create(state)));
-
-            return this;
-        }
-
-        /// <summary>
-        /// Adds an 'Or' premise to the condition.
-        /// </summary>
-        /// <param name="variable">
-        /// The linguistic variable.
-        /// </param>
-        /// <param name="evaluator">
-        /// The evaluation logic operator.
-        /// </param>
-        /// <param name="state">
-        /// The expected fuzzy state.
-        /// </param>
-        /// <returns>
-        /// A <see cref="Condition"/>.
-        /// </returns>
-        public Condition Or(
-            LinguisticVariable variable,
-            IEvaluationOperator evaluator,
-            string state)
-        {
-            Validate.NotNull(variable, nameof(variable));
-            Validate.NotNull(evaluator, nameof(evaluator));
-            Validate.NotNull(state, nameof(state));
-
-            this.Premises.Add(new Premise(LogicOperators.Or, variable, evaluator, FuzzyState.Create(state)));
-
-            return this;
         }
     }
 }

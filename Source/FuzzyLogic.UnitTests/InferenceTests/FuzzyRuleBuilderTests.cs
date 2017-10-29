@@ -38,12 +38,12 @@ namespace FuzzyLogic.UnitTests.InferenceTests
 
             // Act
             var fuzzyRule = new FuzzyRuleBuilder("Rule1")
-                .Add(new Condition(If, water, Is, "warm"))
-                .Then(water, Is, "warm")
+                .If(new Condition(water.Is("warm")))
+                .Then(water.Is("warm"))
                 .Build();
 
             // Assert
-            Assert.Equal(fuzzyRule.Label, Label.Create("Rule1"));
+            Assert.Equal(Label.Create("Rule1"), fuzzyRule.Label);
             Assert.Equal(1, fuzzyRule.Conditions.Count);
             Assert.Equal(1, fuzzyRule.Conclusions.Count);
         }
@@ -56,11 +56,19 @@ namespace FuzzyLogic.UnitTests.InferenceTests
 
             // Act
             var rule1 = new FuzzyRuleBuilder("Rule1")
-                .Add(new Condition(If, water, Is, "cold").And(water, IsNot, "freezing").Or(water, IsNot, "frozen"))
-                .Add(new Condition(And, water, Is, "warm").And(water, IsNot, "hot").Or(water, IsNot, "boiling"))
-                .Add(new Condition(Or, water, Is, "frozen"))
-                .Then(water, Is, "warm")
-                .Then(water, IsNot, "frozen")
+                .If(new Condition(
+                    water.Is("cold"))
+                    .And(water.IsNot("freezing"))
+                    .Or(water.IsNot("frozen")))
+                .And(new Condition(
+                    water.Is("warm"))
+                    .And(water.IsNot("hot"))
+                    .Or(water.IsNot("boiling")))
+                .And(new Condition(
+                    water.Is("frozen"))
+                    .And(water.Is("warm")))
+                .Then(water.IsNot("frozen"))
+                .Then(water.IsNot("boiling"))
                 .Build();
 
             // Assert
@@ -76,9 +84,18 @@ namespace FuzzyLogic.UnitTests.InferenceTests
 
             // Act
             var rule1 = new FuzzyRuleBuilder("Rule1")
-                .Add(new Condition(If, water, Is, "cold").And(water, IsNot, "freezing").Or(water, IsNot, "frozen"))
-                .Add(new Condition(And, water, IsNot, "hot").Or(water, IsNot, "boiling"))
-                .Then(water, Is, "warm")
+                .If(new Condition(
+                        water.Is("cold"))
+                    .And(water.IsNot("freezing"))
+                    .Or(water.IsNot("frozen")))
+                .If(new Condition(
+                        water.Is("warm"))
+                    .And(water.IsNot("hot"))
+                    .Or(water.IsNot("boiling")))
+                .If(new Condition(
+                        water.Is("frozen"))
+                    .And(water.Is("warm")))
+                .Then(water.IsNot("frozen"))
                 .Build();
 
             var data = new Dictionary<Label, double> { { water.Label, 20 } };

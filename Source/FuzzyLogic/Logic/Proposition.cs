@@ -18,7 +18,7 @@ namespace FuzzyLogic.Logic
     /// The immutable <see cref="Proposition"/> class.
     /// </summary>
     [Immutable]
-    public abstract class Proposition
+    public class Proposition
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Proposition"/> class.
@@ -32,7 +32,7 @@ namespace FuzzyLogic.Logic
         /// <param name="state">
         /// The fuzzy state.
         /// </param>
-        protected Proposition(
+        public Proposition(
             LinguisticVariable variable,
             IEvaluationOperator evaluator,
             FuzzyState state)
@@ -51,17 +51,17 @@ namespace FuzzyLogic.Logic
         /// <summary>
         /// Gets the linguistic variable of the <see cref="Proposition"/>.
         /// </summary>
-        protected LinguisticVariable Variable { get; }
+        public LinguisticVariable Variable { get; }
 
         /// <summary>
         /// Gets the evaluation logic operator of the <see cref="Proposition"/>.
         /// </summary>
-        protected IEvaluationOperator Evaluator { get; }
+        public IEvaluationOperator Evaluator { get; }
 
         /// <summary>
         /// Gets the fuzzy state of the <see cref="Proposition"/>.
         /// </summary>
-        protected FuzzyState State { get; }
+        public FuzzyState State { get; }
 
         private void ValidateProposition()
         {
