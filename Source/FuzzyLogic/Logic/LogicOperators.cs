@@ -17,7 +17,7 @@ namespace FuzzyLogic.Logic
     public static class LogicOperators
     {
         /// <summary>
-        /// The 'if' logic operator.
+        /// The 'IF' logic operator.
         /// </summary>
         /// <returns>
         /// An <see cref="If"/>.
@@ -25,7 +25,7 @@ namespace FuzzyLogic.Logic
         public static If If => new If();
 
         /// <summary>
-        /// The 'is' logic operator.
+        /// The 'IS' logic operator.
         /// </summary>
         /// <returns>
         /// An <see cref="Is"/>.
@@ -33,7 +33,7 @@ namespace FuzzyLogic.Logic
         public static Is Is => new Is();
 
         /// <summary>
-        /// The 'is' not logic operator.
+        /// The 'IS NOT' logic operator.
         /// </summary>
         /// <returns>
         /// An <see cref="IsNot"/>.
@@ -41,7 +41,7 @@ namespace FuzzyLogic.Logic
         public static IsNot IsNot => new IsNot();
 
         /// <summary>
-        /// The 'then' logic operator.
+        /// The 'THEN' logic operator.
         /// </summary>
         /// <returns>
         /// An <see cref="Then"/>.
@@ -49,7 +49,7 @@ namespace FuzzyLogic.Logic
         public static Then Then => new Then();
 
         /// <summary>
-        /// The 'and' logic operator.
+        /// The 'AND' logic operator.
         /// </summary>
         /// <returns>
         /// An <see cref="And"/>.
@@ -57,7 +57,7 @@ namespace FuzzyLogic.Logic
         public static And And => new And();
 
         /// <summary>
-        /// The 'or' logic operator.
+        /// The 'OR' logic operator.
         /// </summary>
         /// <returns>
         /// An <see cref="Or"/>.

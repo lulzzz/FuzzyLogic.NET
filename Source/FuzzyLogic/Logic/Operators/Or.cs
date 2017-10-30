@@ -13,17 +13,17 @@ namespace FuzzyLogic.Logic.Operators
     using FuzzyLogic.Logic.Interfaces;
 
     /// <summary>
-    /// The immutable <see cref="Or"/> class.
+    /// The immutable sealed <see cref="Or"/> class. Represents a linguistic string representation
+    /// of the 'OR' logic operator.
     /// </summary>
     [Immutable]
-    public sealed class Or : IConnectiveOperator
+    public sealed class Or : ValidString<Or>, IConnectiveOperator
     {
         /// <summary>
-        /// Returns a linguistic string representation of the logic operator.
+        /// Initializes a new instance of the <see cref="Or"/> class.
         /// </summary>
-        /// <returns>
-        /// A <see cref="string"/>.
-        /// </returns>
-        public override string ToString() => nameof(Or).ToUpper();
+        public Or() : base(nameof(Or).ToUpper())
+        {
+        }
     }
 }

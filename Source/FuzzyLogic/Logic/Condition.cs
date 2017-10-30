@@ -22,23 +22,18 @@ namespace FuzzyLogic.Logic
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Condition"/> class.
-        /// The if.
         /// </summary>
-        /// <param name="proposition">
-        /// The proposition.
+        /// <param name="weight">
+        /// The weight.
         /// </param>
         /// <returns>
         /// The <see cref="Condition"/>.
         /// </returns>
-        public Condition(Proposition proposition)
+        private Condition(double weight)
         {
-            Validate.NotNull(proposition, nameof(proposition));
+            Validate.NotOutOfRange(weight, nameof(weight), 0, 1);
 
-            this.Premises.Add(new Premise(
-                LogicOperators.If,
-                proposition.Variable,
-                proposition.Evaluator,
-                proposition.State));
+            this.Weight = weight;
         }
 
         /// <summary>
@@ -50,6 +45,11 @@ namespace FuzzyLogic.Logic
         /// Gets the list of premises.
         /// </summary>
         public IList<Premise> Premises { get; } = new List<Premise>();
+
+        /// <summary>
+        /// Gets the weight.
+        /// </summary>
+        public double Weight { get; }
 
         /// <summary>
         /// Sets the connective (if null).
@@ -66,6 +66,44 @@ namespace FuzzyLogic.Logic
             }
 
             this.Connective = connective;
+        }
+
+        /// <summary>
+        /// Returns a new condition with the given weight.
+        /// </summary>
+        /// <param name="weight">
+        /// The weight [0, 1].
+        /// </param>
+        /// <returns>
+        /// A <see cref="Condition"/>.
+        /// </returns>
+        public static Condition Create(double weight = 1)
+        {
+            Validate.NotOutOfRange(weight, nameof(weight), 0, 1);
+
+            return new Condition(weight);
+        }
+
+        /// <summary>
+        /// Adds an 'If' premise to the condition.
+        /// </summary>
+        /// <param name="proposition">
+        /// The proposition.
+        /// </param>
+        /// <returns>
+        /// A <see cref="Condition"/>.
+        /// </returns>
+        public Condition If(Proposition proposition)
+        {
+            Validate.NotNull(proposition, nameof(proposition));
+
+            this.Premises.Add(new Premise(
+                LogicOperators.If,
+                proposition.Variable,
+                proposition.Evaluator,
+                proposition.State));
+
+            return this;
         }
 
         /// <summary>
@@ -143,7 +181,7 @@ namespace FuzzyLogic.Logic
             }
 
             return truthTable.All(p => p.Result)
-                || truthTable.Any(p => p.Connective == LogicOperators.Or && p.Result);
+                || truthTable.Any(p => p.Connective.Equals(LogicOperators.Or) && p.Result);
         }
     }
 }

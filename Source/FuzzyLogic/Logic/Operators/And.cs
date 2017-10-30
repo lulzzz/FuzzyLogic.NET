@@ -13,17 +13,18 @@ namespace FuzzyLogic.Logic.Operators
     using FuzzyLogic.Logic.Interfaces;
 
     /// <summary>
-    /// The immutable <see cref="And"/> class.
+    /// The immutable sealed <see cref="And"/> class. Represents a linguistic string representation
+    /// of the 'AND' logic operator.
     /// </summary>
     [Immutable]
-    public sealed class And : IConnectiveOperator
+    public sealed class And : ValidString<And>, IConnectiveOperator
     {
         /// <summary>
-        /// Returns a linguistic string representation of the logic operator.
+        /// Initializes a new instance of the <see cref="And"/> class.
         /// </summary>
-        /// <returns>
-        /// A <see cref="string"/>.
-        /// </returns>
-        public override string ToString() => nameof(And).ToUpper();
+        public And()
+            : base(nameof(And).ToUpper())
+        {
+        }
     }
 }

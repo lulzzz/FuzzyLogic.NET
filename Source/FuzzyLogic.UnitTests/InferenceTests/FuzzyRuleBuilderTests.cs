@@ -37,7 +37,7 @@ namespace FuzzyLogic.UnitTests.InferenceTests
 
             // Act
             var fuzzyRule = new FuzzyRuleBuilder("Rule1")
-                .If(new Condition(water.Is("warm")))
+                .If(Condition.Create().If(water.Is("warm")))
                 .Then(water.Is("warm"))
                 .Build();
 
@@ -51,23 +51,23 @@ namespace FuzzyLogic.UnitTests.InferenceTests
         internal void Build_ValidConditionsAndConclusions_ReturnsExpectedFuzzyRule()
         {
             // Arrange
-            var water = StubLinguisticVariableFactory.CreateTemperature();
+            var temp = StubLinguisticVariableFactory.CreateTemperature();
 
             // Act
             var rule1 = new FuzzyRuleBuilder("Rule1")
-                .If(new Condition(
-                    water.Is(WaterTemp.Cold))
-                    .And(water.IsNot(WaterTemp.Freezing))
-                    .Or(water.IsNot("frozen")))
-                .And(new Condition(
-                    water.Is("warm"))
-                    .And(water.IsNot("hot"))
-                    .Or(water.IsNot("boiling")))
-                .And(new Condition(
-                    water.Is("frozen"))
-                    .And(water.Is("warm")))
-                .Then(water.IsNot("frozen"))
-                .Then(water.IsNot("boiling"))
+                .If(Condition.Create()
+                    .If(temp.Is(WaterTemp.Cold))
+                    .And(temp.IsNot(WaterTemp.Freezing))
+                    .Or(temp.IsNot(WaterTemp.Frozen)))
+                .And(Condition.Create(0.5)
+                    .If(temp.Is("warm"))
+                    .And(temp.IsNot("hot"))
+                    .Or(temp.IsNot("boiling")))
+                .And(Condition.Create(0.5)
+                    .If(temp.Is("frozen"))
+                    .And(temp.Is("warm")))
+                .Then(temp.IsNot("frozen"))
+                .Then(temp.IsNot("boiling"))
                 .Build();
 
             // Assert
@@ -83,16 +83,16 @@ namespace FuzzyLogic.UnitTests.InferenceTests
 
             // Act
             var rule1 = new FuzzyRuleBuilder("Rule1")
-                .If(new Condition(
-                    water.Is("cold"))
+                .If(Condition.Create()
+                    .If(water.Is("cold"))
                     .And(water.IsNot("freezing"))
                     .Or(water.IsNot("frozen")))
-                .If(new Condition(
-                    water.Is("warm"))
+                .And(Condition.Create(0.8)
+                    .If(water.Is("warm"))
                     .And(water.IsNot("hot"))
                     .Or(water.IsNot("boiling")))
-                .If(new Condition(
-                    water.Is("frozen"))
+                .And(Condition.Create()
+                    .If(water.Is("frozen"))
                     .And(water.Is("warm")))
                 .Then(water.IsNot("frozen"))
                 .Build();

@@ -13,11 +13,19 @@ namespace FuzzyLogic.Logic.Operators
     using FuzzyLogic.Logic.Interfaces;
 
     /// <summary>
-    /// The immutable <see cref="IsNot"/> class.
+    /// The immutable sealed <see cref="IsNot"/> class. Represents a linguistic string representation
+    /// of the 'IS NOT' logic operator.
     /// </summary>
     [Immutable]
-    public sealed class IsNot : IEvaluationOperator
+    public sealed class IsNot : ValidString<IsNot>, IEvaluationOperator
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="IsNot"/> class.
+        /// </summary>
+        public IsNot() : base(nameof(IsNot).ToUpper())
+        {
+        }
+
         /// <summary>
         /// Returns a <see cref="bool"/> indicating the result of the evaluation.
         /// </summary>
@@ -31,13 +39,5 @@ namespace FuzzyLogic.Logic.Operators
         /// A <see cref="bool"/>.
         /// </returns>
         public bool Evaluate(FuzzyState expected, FuzzyState result) => expected != result;
-
-        /// <summary>
-        /// Returns a linguistic string representation of the logic operator.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="string"/>.
-        /// </returns>
-        public override string ToString() => nameof(IsNot).ToUpper();
     }
 }

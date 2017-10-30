@@ -9,7 +9,9 @@
 
 namespace FuzzyLogic.Inference
 {
+    using System;
     using System.Collections.Generic;
+    using System.Linq;
     using FuzzyLogic.Logic;
     using FuzzyLogic.Utility;
 
@@ -63,7 +65,12 @@ namespace FuzzyLogic.Inference
         /// </returns>
         public FuzzyRuleBuilder And(Condition condition)
         {
-            return this.If(condition);
+            Validate.NotNull(condition, nameof(condition));
+
+            condition.SetConnective(LogicOperators.And);
+            this.conditions.Add(condition);
+
+            return this;
         }
 
         /// <summary>
@@ -114,6 +121,24 @@ namespace FuzzyLogic.Inference
         /// </returns>
         public FuzzyRule Build()
         {
+            Validate.CollectionNotNullOrEmpty(this.conditions, nameof(this.conditions));
+            Validate.CollectionNotNullOrEmpty(this.conclusions, nameof(this.conclusions));
+
+            if (this.conditions[0].Connective.ToString() != LogicOperators.If.ToString())
+            {
+                throw new InvalidOperationException(
+                    $"Invalid FuzzyRule (the connective of the first condition must be an IF). Value = {this.conditions[0].Connective}.");
+            }
+
+            var remainingConditions = new List<Condition>(this.conditions);
+            remainingConditions.RemoveAt(0);
+
+            if (remainingConditions.Any(conclusion => conclusion.Connective.ToString() == LogicOperators.If.ToString()))
+            {
+                throw new InvalidOperationException(
+                    $"Invalid FuzzyRule (only the connective of the first condition can be an IF).");
+            }
+
             return new FuzzyRule(this.name, this.conditions, this.conclusions);
         }
     }

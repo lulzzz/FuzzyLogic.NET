@@ -297,28 +297,28 @@ namespace FuzzyLogic.Utility
                 case RangeEndPoints.Inclusive:
                     if (value < lowerBound || value > upperBound)
                     {
-                        throw new ArgumentOutOfRangeException(paramName, $"The {paramName} is not within the specified range [{lowerBound}, {upperBound}] inclusive. InputValue = {value}.");
+                        throw new ArgumentOutOfRangeException(paramName, $"The {paramName} is not within the specified range [{lowerBound}, {upperBound}]. Value = {value}.");
                     }
                     break;
 
                 case RangeEndPoints.LowerExclusive:
                     if (value <= lowerBound || value > upperBound)
                     {
-                        throw new ArgumentOutOfRangeException(paramName, $"The {paramName} is not within the specified range [{lowerBound}, {upperBound}] lower exclusive. InputValue = {value}.");
+                        throw new ArgumentOutOfRangeException(paramName, $"The {paramName} is not within the specified range ({lowerBound}, {upperBound}]. Value = {value}.");
                     }
                     break;
 
                 case RangeEndPoints.UpperExclusive:
                     if (value < lowerBound || value >= upperBound)
                     {
-                        throw new ArgumentOutOfRangeException(paramName, $"The {paramName} is not within the specified range [{lowerBound}, {upperBound}] upper exclusive. InputValue = {value}.");
+                        throw new ArgumentOutOfRangeException(paramName, $"The {paramName} is not within the specified range [{lowerBound}, {upperBound}). Value = {value}.");
                     }
                     break;
 
                 case RangeEndPoints.Exclusive:
                     if (value <= lowerBound || value >= upperBound)
                     {
-                        throw new ArgumentOutOfRangeException(paramName, $"The {paramName} is not within the specified range [{lowerBound}, {upperBound}] exclusive. InputValue = {value}.");
+                        throw new ArgumentOutOfRangeException(paramName, $"The {paramName} is not within the specified range ({lowerBound}, {upperBound}). Value = {value}.");
                     }
                     break;
             }

@@ -13,11 +13,19 @@ namespace FuzzyLogic.Logic.Operators
     using FuzzyLogic.Logic.Interfaces;
 
     /// <summary>
-    /// The immutable <see cref="Is"/> class.
+    /// The immutable sealed <see cref="Is"/> class. Represents a linguistic string representation
+    /// of the 'IS' logic operator.
     /// </summary>
     [Immutable]
-    public sealed class Is : IEvaluationOperator
+    public sealed class Is : ValidString<Is>, IEvaluationOperator
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Is"/> class.
+        /// </summary>
+        public Is() : base(nameof(Is).ToUpper())
+        {
+        }
+
         /// <summary>
         /// Returns a <see cref="bool"/> indicating the result of the evaluation.
         /// </summary>
@@ -31,13 +39,5 @@ namespace FuzzyLogic.Logic.Operators
         /// A <see cref="bool"/>.
         /// </returns>
         public bool Evaluate(FuzzyState expected, FuzzyState result) => expected == result;
-
-        /// <summary>
-        /// Returns a linguistic string representation of the logic operator.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="string"/>.
-        /// </returns>
-        public override string ToString() => nameof(Is).ToUpper();
     }
 }

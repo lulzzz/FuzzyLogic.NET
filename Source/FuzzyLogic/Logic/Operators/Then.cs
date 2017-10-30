@@ -13,17 +13,17 @@ namespace FuzzyLogic.Logic.Operators
     using FuzzyLogic.Logic.Interfaces;
 
     /// <summary>
-    /// The immutable <see cref="Then"/> class.
+    /// The immutable sealed <see cref="Then"/> class. Represents a linguistic string representation
+    /// of the 'THEN' logic operator.
     /// </summary>
     [Immutable]
-    public sealed class Then : IConnectiveOperator
+    public sealed class Then : ValidString<Then>, IConnectiveOperator
     {
         /// <summary>
-        /// Returns a linguistic string representation of the logic operator.
+        /// Initializes a new instance of the <see cref="Then"/> class.
         /// </summary>
-        /// <returns>
-        /// A <see cref="string"/>.
-        /// </returns>
-        public override string ToString() => nameof(Then).ToUpper();
+        public Then() : base(nameof(Then).ToUpper())
+        {
+        }
     }
 }

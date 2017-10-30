@@ -1,5 +1,5 @@
 ﻿// -------------------------------------------------------------------------------------------------
-// <copyright file="Add.cs" author="Christopher Sellers">
+// <copyright file="If.cs" author="Christopher Sellers">
 //   Copyright (C) 2017. All rights reserved.
 //   https://github.com/cjdsellers/FuzzyLogic
 //   the use of this source code is governed by the Apache 2.0 license
@@ -13,17 +13,18 @@ namespace FuzzyLogic.Logic.Operators
     using FuzzyLogic.Logic.Interfaces;
 
     /// <summary>
-    /// The immutable <see cref="If"/> class.
+    /// The immutable sealed <see cref="If"/> class. Represents a linguistic string representation
+    /// of the 'IF' logic operator.
     /// </summary>
     [Immutable]
-    public sealed class If : IConnectiveOperator
+    public sealed class If : ValidString<If>, IConnectiveOperator
     {
         /// <summary>
-        /// Returns a linguistic string representation of the logic operator.
+        /// Initializes a new instance of the <see cref="If"/> class.
         /// </summary>
-        /// <returns>
-        /// A <see cref="string"/>.
-        /// </returns>
-        public override string ToString() => nameof(If).ToUpper();
+        public If()
+            : base(nameof(If).ToUpper())
+        {
+        }
     }
 }
