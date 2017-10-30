@@ -16,9 +16,6 @@ namespace FuzzyLogic.UnitTests.UtilityTests
     using FuzzyLogic.Utility;
     using Xunit;
 
-    /// <summary>
-    /// The validate tests.
-    /// </summary>
     [SuppressMessage("StyleCop.CSharp.NamingRules", "*", Justification = "Reviewed. Suppression is OK within the Test Suite.")]
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "*", Justification = "Reviewed. Suppression is OK within the Test Suite.")]
     public class ValidateTests

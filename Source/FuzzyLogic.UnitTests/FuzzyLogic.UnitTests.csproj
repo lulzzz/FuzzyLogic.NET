@@ -42,6 +42,18 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BinaryOperationsTests\HamacherSumTests.cs" />
+    <Compile Include="BinaryOperationsTests\HamacherProductTests.cs" />
+    <Compile Include="BinaryOperationsTests\EinsteinSumTests.cs" />
+    <Compile Include="BinaryOperationsTests\EinsteinProductTests.cs" />
+    <Compile Include="BinaryOperationsTests\BoundedSumTests.cs" />
+    <Compile Include="BinaryOperationsTests\AlgebraicProductTests.cs" />
+    <Compile Include="BinaryOperationsTests\DrasticSumTests.cs" />
+    <Compile Include="BinaryOperationsTests\LukasiewiczTests.cs" />
+    <Compile Include="BinaryOperationsTests\DrasticProductTests.cs" />
+    <Compile Include="BinaryOperationsTests\ProbabilisticSumTests.cs" />
+    <Compile Include="BinaryOperationsTests\MinimumTNormTests.cs" />
+    <Compile Include="BinaryOperationsTests\MaximumTConormTests.cs" />
     <Compile Include="FuzzyPointTests.cs" />
     <Compile Include="FuzzySetTests.cs" />
     <Compile Include="InferenceTests\DatabaseTests.cs" />
@@ -56,6 +68,7 @@
     <Compile Include="MembershipFunctionTests\TrapezoidalFunctionTests.cs" />
     <Compile Include="MembershipFunctionTests\TriangularFunctionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UtilityTests\StringExtensionsTests.cs" />
     <Compile Include="UtilityTests\ValidateTests.cs" />
   </ItemGroup>
   <ItemGroup>

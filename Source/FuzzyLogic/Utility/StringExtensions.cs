@@ -15,10 +15,10 @@ namespace FuzzyLogic.Utility
     /// <summary>
     /// The static <see cref="StringExtensions"/> class.
     /// </summary>
-    public static class StringExtensions
+    internal static class StringExtensions
     {
         /// <summary>
-        /// Removes all whitespace from the given string.
+        /// Removes all whitespace from this string.
         /// </summary>
         /// <param name="input">
         /// The input.
@@ -26,7 +26,7 @@ namespace FuzzyLogic.Utility
         /// <returns>
         /// The <see cref="string"/>.
         /// </returns>
-        public static string RemoveAllWhitespace(this string input)
+        internal static string RemoveAllWhitespace(this string input)
         {
             return new string(input.ToCharArray()
                 .Where(c => !char.IsWhiteSpace(c))
@@ -45,7 +45,7 @@ namespace FuzzyLogic.Utility
         /// <returns>
         /// The enum type.
         /// </returns>
-        public static T ToEnum<T>(this string enumerationString)
+        internal static T ToEnum<T>(this string enumerationString)
         {
             if (string.IsNullOrWhiteSpace(enumerationString))
             {

@@ -12,8 +12,6 @@ namespace FuzzyLogic.TestKit.Stubs
     using FuzzyLogic.Inference;
     using FuzzyLogic.Logic;
 
-    using static FuzzyLogic.Logic.LogicOperators;
-
     /// <summary>
     /// The static <see cref="StubFuzzyRuleFactory"/> class.
     /// </summary>

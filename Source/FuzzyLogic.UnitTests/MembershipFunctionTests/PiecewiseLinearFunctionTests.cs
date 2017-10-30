@@ -13,9 +13,6 @@ namespace FuzzyLogic.UnitTests.MembershipFunctionTests
     using FuzzyLogic.MembershipFunctions;
     using Xunit;
 
-    /// <summary>
-    /// The piecewise linear function tests.
-    /// </summary>
     [SuppressMessage("StyleCop.CSharp.NamingRules", "*", Justification = "Reviewed. Suppression is OK within the Test Suite.")]
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "*", Justification = "Reviewed. Suppression is OK within the Test Suite.")]
     public class PiecewiseLinearFunctionTests

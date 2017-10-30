@@ -12,9 +12,6 @@ namespace FuzzyLogic.UnitTests
     using System.Diagnostics.CodeAnalysis;
     using Xunit;
 
-    /// <summary>
-    /// The fuzzy point tests.
-    /// </summary>
     [SuppressMessage("StyleCop.CSharp.NamingRules", "*", Justification = "Reviewed. Suppression is OK within the Test Suite.")]
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "*", Justification = "Reviewed. Suppression is OK within the Test Suite.")]
     public class FuzzyPointTests

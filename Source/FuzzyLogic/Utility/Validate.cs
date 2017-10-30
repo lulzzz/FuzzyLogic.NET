@@ -260,7 +260,7 @@ namespace FuzzyLogic.Utility
         {
             if (min > max)
             {
-                throw new ArgumentException("Minimum value cannot be greater than Maximum value.");
+                throw new ArgumentException("MinimumTNorm value cannot be greater than MaximumTConorm value.");
             }
         }
 

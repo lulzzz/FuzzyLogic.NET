@@ -1,5 +1,5 @@
 ﻿// -------------------------------------------------------------------------------------------------
-// <copyright file="TriangularFunctionTests.cs" author="Christopher Sellers">
+// <copyright file="DrasticSumTests.cs" author="Christopher Sellers">
 //   Copyright (C) 2017. All rights reserved.
 //   https://github.com/cjdsellers/FuzzyLogic
 //   the use of this source code is governed by the Apache 2.0 license
@@ -7,37 +7,34 @@
 // </copyright>
 // -------------------------------------------------------------------------------------------------
 
-namespace FuzzyLogic.UnitTests.MembershipFunctionTests
+namespace FuzzyLogic.UnitTests.BinaryOperationsTests
 {
     using System.Diagnostics.CodeAnalysis;
-    using FuzzyLogic.MembershipFunctions;
+    using FuzzyLogic.BinaryOperations;
     using Xunit;
 
     [SuppressMessage("StyleCop.CSharp.NamingRules", "*", Justification = "Reviewed. Suppression is OK within the Test Suite.")]
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "*", Justification = "Reviewed. Suppression is OK within the Test Suite.")]
-    public class TriangularFunctionTests
+    public class DrasticSumTests
     {
         [Theory]
-        [InlineData(2, 3, 4, 0, 0)]
-        [InlineData(2, 3, 4, 1, 0)]
-        [InlineData(2, 3, 4, 2, 0)]
-        [InlineData(2, 3, 4, 3, 1)]
-        [InlineData(2, 3, 4, 5, 0)]
-        [InlineData(2, 3, 4, 2.5, 0.5)]
-        [InlineData(2, 3, 4, 3.5, 0.5)]
-        [InlineData(2, 3, 4, double.MaxValue, 0)]
-        internal void GetMembership_VariousInputs_ReturnsExpectedResult(
-            double x1,
-            double x2,
-            double x3,
-            double input,
-            double expected)
+        [InlineData(0, 0, 0)]
+        [InlineData(0, 0.25, 0)]
+        [InlineData(0.5, 0.5, 0)]
+        [InlineData(0.5, 1, 1)]
+        [InlineData(1, 0.5, 1)]
+        [InlineData(1, 0.75, 1)]
+        [InlineData(1, 1, 1)]
+        internal void Evaluate_WithVariousValidValues_ReturnsExpectedResult(
+            int membershipA,
+            int membershipB,
+            int expected)
         {
             // Arrange
-            var function = TriangularFunction.Create(x1, x2, x3);
+            var drasticSum = new DrasticSum();
 
             // Act
-            var result = function.GetMembership(input);
+            var result = drasticSum.Evaluate(membershipA, membershipB);
 
             // Assert
             Assert.Equal(expected, result);

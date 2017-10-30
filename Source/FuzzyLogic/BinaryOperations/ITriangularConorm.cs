@@ -1,0 +1,31 @@
+﻿// -------------------------------------------------------------------------------------------------
+// <copyright file="ITriangularConorm.cs" author="Christopher Sellers">
+//   Copyright (C) 2017. All rights reserved.
+//   https://github.com/cjdsellers/FuzzyLogic
+//   the use of this source code is governed by the Apache 2.0 license
+//   as found in the LICENSE.txt file.
+// </copyright>
+// -------------------------------------------------------------------------------------------------
+
+namespace FuzzyLogic.BinaryOperations
+{
+    /// <summary>
+    /// The <see cref="ITriangularConorm"/> interface. Represents a type of t-conorm.
+    /// </summary>
+    public interface ITriangularConorm
+    {
+        /// <summary>
+        /// Returns the binary operation of the given membership values.
+        /// </summary>
+        /// <param name="membershipA">
+        /// The membership value A [0, 1].
+        /// </param>
+        /// <param name="membershipB">
+        /// The membership value B [0, 1].
+        /// </param>
+        /// <returns>
+        /// A <see cref="double"/> [0, 1].
+        /// </returns>
+        double Evaluate(double membershipA, double membershipB);
+    }
+}
