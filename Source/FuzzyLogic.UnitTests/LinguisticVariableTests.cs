@@ -9,7 +9,9 @@
 
 namespace FuzzyLogic.UnitTests
 {
+    using System;
     using System.Diagnostics.CodeAnalysis;
+    using FuzzyLogic.TestKit;
     using FuzzyLogic.TestKit.Stubs;
     using Xunit;
 
@@ -21,20 +23,20 @@ namespace FuzzyLogic.UnitTests
         internal void GetLabel_ReturnsExpectedLabel()
         {
             // Arrange
-            var temperature = StubLinguisticVariableFactory.CreateTemperature();
+            var temperature = StubLinguisticVariableFactory.WaterTemp();
 
             // Act
             var result = temperature.Label;
 
             // Assert
-            Assert.Equal(Label.Create("Temperature"), result);
+            Assert.Equal(Label.Create(InputVariable.WaterTemp), result);
         }
 
         [Fact]
         internal void GetLowerBound_ReturnsExpectedDouble()
         {
             // Arrange
-            var temperature = StubLinguisticVariableFactory.CreateTemperature();
+            var temperature = StubLinguisticVariableFactory.WaterTemp();
 
             // Act
             var result = temperature.LowerBound;
@@ -47,7 +49,7 @@ namespace FuzzyLogic.UnitTests
         internal void GetUpperBound_ReturnsExpectedDouble()
         {
             // Arrange
-            var temperature = StubLinguisticVariableFactory.CreateTemperature();
+            var temperature = StubLinguisticVariableFactory.WaterTemp();
 
             // Act
             var result = temperature.UpperBound;
@@ -57,42 +59,42 @@ namespace FuzzyLogic.UnitTests
         }
 
         [Theory]
-        [InlineData(0, "frozen", 1)]
-        [InlineData(1, "freezing", 0.2)]
-        [InlineData(10, "cold", 1)]
-        [InlineData(10, "warm", 0)]
-        [InlineData(40, "hot", 0.2)]
-        [InlineData(100, "boiling", 1)]
-        internal void GetMembership_ReturnsExpectedDouble(double input, string label, double membershipValue)
+        [InlineData(0, WaterTemp.Frozen, 1)]
+        [InlineData(1, WaterTemp.Freezing, 0.2)]
+        [InlineData(10, WaterTemp.Cold, 1)]
+        [InlineData(10, WaterTemp.Warm, 0)]
+        [InlineData(40, WaterTemp.Hot, 0.2)]
+        [InlineData(100, WaterTemp.Boiling, 1)]
+        internal void GetMembership_ReturnsExpectedDouble(double input, Enum label, double membershipValue)
         {
             // Arrange
-            var temperature = StubLinguisticVariableFactory.CreateTemperature();
+            var temperature = StubLinguisticVariableFactory.WaterTemp();
 
             // Act
-            var result = temperature.GetMembership(Label.Create(label), input);
+            var result = temperature.GetMembership(label, input);
 
             // Assert
             Assert.Equal(membershipValue, result);
         }
 
         [Theory]
-        [InlineData(-20, "frozen")]
-        [InlineData(0, "frozen")]
-        [InlineData(5, "freezing")]
-        [InlineData(10, "cold")]
-        [InlineData(15, "cold")]
-        [InlineData(20, "warm")]
-        [InlineData(25, "warm")]
-        [InlineData(30, "warm")]
-        [InlineData(35, "warm")]
-        [InlineData(40, "hot")]
-        [InlineData(80, "hot")]
-        [InlineData(100, "boiling")]
-        [InlineData(200, "boiling")]
-        internal void GetState_ReturnsExpectedState(double input, string state)
+        [InlineData(-20, WaterTemp.Frozen)]
+        [InlineData(0, WaterTemp.Frozen)]
+        [InlineData(5, WaterTemp.Freezing)]
+        [InlineData(10, WaterTemp.Cold)]
+        [InlineData(15, WaterTemp.Cold)]
+        [InlineData(20, WaterTemp.Warm)]
+        [InlineData(25, WaterTemp.Warm)]
+        [InlineData(30, WaterTemp.Warm)]
+        [InlineData(35, WaterTemp.Warm)]
+        [InlineData(40, WaterTemp.Hot)]
+        [InlineData(80, WaterTemp.Hot)]
+        [InlineData(100, WaterTemp.Boiling)]
+        [InlineData(200, WaterTemp.Boiling)]
+        internal void GetState_ReturnsExpectedState(double input, Enum state)
         {
             // Arrange
-            var temperature = StubLinguisticVariableFactory.CreateTemperature();
+            var temperature = StubLinguisticVariableFactory.WaterTemp();
 
             // Act
             var result = temperature.GetState(input);
@@ -105,10 +107,10 @@ namespace FuzzyLogic.UnitTests
         internal void IsMember_WhenVariableContainsMember_ReturnsTrue()
         {
             // Arrange
-            var temperature = StubLinguisticVariableFactory.CreateTemperature();
+            var temperature = StubLinguisticVariableFactory.WaterTemp();
 
             // Act
-            var result = temperature.IsMember(Label.Create("frozen"));
+            var result = temperature.IsMember(WaterTemp.Frozen);
 
             // Assert
             Assert.True(result);
@@ -118,7 +120,7 @@ namespace FuzzyLogic.UnitTests
         internal void IsMember_WhenVariableDoesNotContainMember_ReturnsTrue()
         {
             // Arrange
-            var temperature = StubLinguisticVariableFactory.CreateTemperature();
+            var temperature = StubLinguisticVariableFactory.WaterTemp();
 
             // Act
             var result = temperature.IsMember(Label.Create("vapour"));
@@ -131,10 +133,10 @@ namespace FuzzyLogic.UnitTests
         internal void GetSet_ReturnsTheFuzzySet()
         {
             // Arrange
-            var temperature = StubLinguisticVariableFactory.CreateTemperature();
+            var temperature = StubLinguisticVariableFactory.WaterTemp();
 
             // Act
-            var result = temperature.GetSet(Label.Create("frozen"));
+            var result = temperature.GetSet(WaterTemp.Frozen);
 
             // Assert
             Assert.Equal(Label.Create("frozen"), result.Label);
@@ -144,7 +146,7 @@ namespace FuzzyLogic.UnitTests
         internal void GetMembers_ReturnsTheListOfMembers()
         {
             // Arrange
-            var temperature = StubLinguisticVariableFactory.CreateTemperature();
+            var temperature = StubLinguisticVariableFactory.WaterTemp();
 
             // Act
             var result = temperature.GetMembers();

@@ -9,6 +9,7 @@
 
 namespace FuzzyLogic
 {
+    using System;
     using FuzzyLogic.Annotations;
 
     /// <summary>
@@ -39,6 +40,20 @@ namespace FuzzyLogic
         public static Label Create(string label)
         {
             return new Label(label);
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="Label"/>.
+        /// </summary>
+        /// <param name="label">
+        /// The label.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Label"/>.
+        /// </returns>
+        public static Label Create(Enum label)
+        {
+            return new Label(label.ToString());
         }
     }
 }

@@ -13,7 +13,6 @@ namespace FuzzyLogic.Logic
     using System.Collections.Generic;
     using System.Linq;
     using FuzzyLogic.Logic.Interfaces;
-    using FuzzyLogic.Utility;
 
     /// <summary>
     /// The <see cref="Condition"/> class.
@@ -31,7 +30,7 @@ namespace FuzzyLogic.Logic
         /// </returns>
         private Condition(double weight)
         {
-            Validate.NotOutOfRange(weight, nameof(weight), 0, 1);
+            Utility.Validate.NotOutOfRange(weight, nameof(weight), 0, 1);
 
             this.Weight = weight;
         }
@@ -49,14 +48,17 @@ namespace FuzzyLogic.Logic
         /// <summary>
         /// Gets the weight.
         /// </summary>
-        public double Weight { get; }
+        public double Weight { get; private set; }
 
         /// <summary>
-        /// Sets the connective (if null).
+        /// Sets the conditions connective (if null).
         /// </summary>
         /// <param name="connective">
         /// The connective.
         /// </param>
+        /// <exception cref="InvalidOperationException">
+        /// Throws if the method is called when the connective is already set (not null).
+        /// </exception>
         public void SetConnective(IConnectiveOperator connective)
         {
             if (this.Connective != null)
@@ -66,6 +68,19 @@ namespace FuzzyLogic.Logic
             }
 
             this.Connective = connective;
+        }
+
+        /// <summary>
+        /// The set weight.
+        /// </summary>
+        /// <param name="weight">
+        /// The weight.
+        /// </param>
+        public void SetWeight(double weight)
+        {
+            Utility.Validate.NotOutOfRange(weight, nameof(weight), 0, 1);
+
+            this.Weight = weight;
         }
 
         /// <summary>
@@ -79,7 +94,7 @@ namespace FuzzyLogic.Logic
         /// </returns>
         public static Condition Create(double weight = 1)
         {
-            Validate.NotOutOfRange(weight, nameof(weight), 0, 1);
+            Utility.Validate.NotOutOfRange(weight, nameof(weight), 0, 1);
 
             return new Condition(weight);
         }
@@ -95,7 +110,7 @@ namespace FuzzyLogic.Logic
         /// </returns>
         public Condition If(Proposition proposition)
         {
-            Validate.NotNull(proposition, nameof(proposition));
+            Utility.Validate.NotNull(proposition, nameof(proposition));
 
             this.Premises.Add(new Premise(
                 LogicOperators.If,
@@ -117,7 +132,7 @@ namespace FuzzyLogic.Logic
         /// </returns>
         public Condition And(Proposition proposition)
         {
-            Validate.NotNull(proposition, nameof(proposition));
+            Utility.Validate.NotNull(proposition, nameof(proposition));
 
             this.Premises.Add(new Premise(
                 LogicOperators.And,
@@ -139,7 +154,7 @@ namespace FuzzyLogic.Logic
         /// </returns>
         public Condition Or(Proposition proposition)
         {
-            Validate.NotNull(proposition, nameof(proposition));
+            Utility.Validate.NotNull(proposition, nameof(proposition));
 
             this.Premises.Add(new Premise(
                 LogicOperators.Or,
@@ -151,19 +166,23 @@ namespace FuzzyLogic.Logic
         }
 
         /// <summary>
-        /// Returns the logical evaluation of all premises.
+        /// Evaluates the fuzzy condition.
         /// </summary>
         /// <param name="data">
-        /// The input data.
+        /// The data.
         /// </param>
         /// <returns>
-        /// A <see cref="bool"/>.
+        /// A <see cref="double"/>.
         /// </returns>
-        public bool Evaluate(IDictionary<Label, double> data)
+        /// <exception cref="ArgumentException">
+        /// Throws if provided data does not contain all subjects.
+        /// </exception>
+        public double Evaluate(IDictionary<Label, double> data)
         {
-            Validate.CollectionNotNullOrEmpty(data, nameof(data));
+            Utility.Validate.CollectionNotNullOrEmpty(this.Premises, nameof(this.Premises));
+            Utility.Validate.CollectionNotNullOrEmpty(data, nameof(data));
 
-            var truthTable = new List<Evaluation>();
+            var evaluations = new List<Evaluation>();
 
             foreach (var premise in this.Premises)
             {
@@ -171,17 +190,50 @@ namespace FuzzyLogic.Logic
                 {
                     var input = data[premise.Subject];
 
-                    truthTable.Add(premise.Evaluate(input));
+                    evaluations.Add(premise.Evaluate(input));
                 }
                 else
                 {
-                    throw new ArgumentException(
+                    throw new InvalidOperationException(
                         $"Evaluation Failed (cannot evaluate premise '{premise.Subject}' with provided data).");
                 }
             }
 
-            return truthTable.All(p => p.Result)
-                || truthTable.Any(p => p.Connective.Equals(LogicOperators.Or) && p.Result);
+            var ifAndAverage = evaluations
+                .Where(e => e.Connective.Equals(LogicOperators.If) || e.Connective.Equals(LogicOperators.And))
+                .Average(e => e.Result);
+
+            var highestOr = 0.0;
+
+            if (evaluations.Exists(e => e.Connective.Equals(LogicOperators.Or)))
+            {
+                highestOr = evaluations
+                    .Where(e => e.Connective.Equals(LogicOperators.Or))
+                    .Max(e => e.Result);
+            }
+
+            return Math.Max(ifAndAverage, highestOr) * this.Weight;
+        }
+
+        /// <summary>
+        /// Validates the condition.
+        /// </summary>
+        /// <exception cref="InvalidOperationException">
+        /// Throws if the condition is found invalid.
+        /// </exception>
+        public void Validate()
+        {
+            if (this.Connective == null)
+            {
+                throw new InvalidOperationException(
+                    "Invalid Condition (the connective is null).");
+            }
+
+            if (this.Premises.Count == 0)
+            {
+                throw new InvalidOperationException(
+                    "Invalid Condition (there are no premises).");
+            }
         }
     }
 }

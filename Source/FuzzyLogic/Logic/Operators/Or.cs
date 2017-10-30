@@ -13,8 +13,8 @@ namespace FuzzyLogic.Logic.Operators
     using FuzzyLogic.Logic.Interfaces;
 
     /// <summary>
-    /// The immutable sealed <see cref="Or"/> class. Represents a linguistic string representation
-    /// of the 'OR' logic operator.
+    /// The immutable sealed <see cref="Or"/> class. A linguistic string representation of the
+    /// 'OR' logic operator.
     /// </summary>
     [Immutable]
     public sealed class Or : ValidString<Or>, IConnectiveOperator

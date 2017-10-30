@@ -26,19 +26,12 @@ namespace FuzzyLogic.UnitTests.InferenceTests
         internal void Build_WhenConditionsAndConclusionsAreValid_ReturnsExpectedRuzzyRule()
         {
             // Arrange
-            var frozen = new FuzzySet("frozen", SingletonFunction.Create(0));
-            var freezing = new FuzzySet("freezing", TriangularFunction.Create(0, 5, 10));
-            var cold = new FuzzySet("cold", TrapezoidalFunction.Create(5, 10, 15, 20));
-            var warm = new FuzzySet("warm", TrapezoidalFunction.Create(15, 25, 35, 40));
-            var hot = new FuzzySet("hot", TrapezoidalFunction.Create(35, 60, 80, 100));
-            var boiling = new FuzzySet("boiling", TrapezoidalFunction.CreateWithRightEdge(95, 100));
-
-            var water = new LinguisticVariable("Temperature", new List<FuzzySet> { frozen, freezing, cold, warm, hot, boiling }, -20, 200);
+            var waterTemp = StubLinguisticVariableFactory.WaterTemp();
 
             // Act
             var fuzzyRule = new FuzzyRuleBuilder("Rule1")
-                .If(Condition.Create().If(water.Is("warm")))
-                .Then(water.Is("warm"))
+                .If(Condition.Create().If(waterTemp.Is(WaterTemp.Warm)))
+                .Then(waterTemp.Is(WaterTemp.Warm))
                 .Build();
 
             // Assert
@@ -51,23 +44,20 @@ namespace FuzzyLogic.UnitTests.InferenceTests
         internal void Build_ValidConditionsAndConclusions_ReturnsExpectedFuzzyRule()
         {
             // Arrange
-            var temp = StubLinguisticVariableFactory.CreateTemperature();
+            var waterTemp = StubLinguisticVariableFactory.WaterTemp();
 
             // Act
             var rule1 = new FuzzyRuleBuilder("Rule1")
                 .If(Condition.Create()
-                    .If(temp.Is(WaterTemp.Cold))
-                    .And(temp.IsNot(WaterTemp.Freezing))
-                    .Or(temp.IsNot(WaterTemp.Frozen)))
+                    .If(waterTemp.IsNot(WaterTemp.Cold))
+                    .And(waterTemp.IsNot(WaterTemp.Freezing))
+                    .And(waterTemp.IsNot(WaterTemp.Frozen)))
+                .And(Condition.Create(0.5).If(waterTemp.Is(WaterTemp.Warm)))
                 .And(Condition.Create(0.5)
-                    .If(temp.Is("warm"))
-                    .And(temp.IsNot("hot"))
-                    .Or(temp.IsNot("boiling")))
-                .And(Condition.Create(0.5)
-                    .If(temp.Is("frozen"))
-                    .And(temp.Is("warm")))
-                .Then(temp.IsNot("frozen"))
-                .Then(temp.IsNot("boiling"))
+                    .If(waterTemp.IsNot(WaterTemp.Frozen))
+                    .And(waterTemp.IsNot(WaterTemp.Boiling)))
+                .Then(waterTemp.IsNot(WaterTemp.Boiling))
+                .Then(waterTemp.IsNot(WaterTemp.Frozen))
                 .Build();
 
             // Assert
@@ -79,29 +69,29 @@ namespace FuzzyLogic.UnitTests.InferenceTests
         internal void ReturnsExpectedFuzzyRule()
         {
             // Arrange
-            var water = StubLinguisticVariableFactory.CreateTemperature();
+            var waterTemp = StubLinguisticVariableFactory.WaterTemp();
 
             // Act
             var rule1 = new FuzzyRuleBuilder("Rule1")
                 .If(Condition.Create()
-                    .If(water.Is("cold"))
-                    .And(water.IsNot("freezing"))
-                    .Or(water.IsNot("frozen")))
+                    .If(waterTemp.Is("cold"))
+                    .And(waterTemp.IsNot("freezing"))
+                    .Or(waterTemp.IsNot("frozen")))
                 .And(Condition.Create(0.8)
-                    .If(water.Is("warm"))
-                    .And(water.IsNot("hot"))
-                    .Or(water.IsNot("boiling")))
+                    .If(waterTemp.Is("warm"))
+                    .And(waterTemp.IsNot("hot"))
+                    .Or(waterTemp.IsNot("boiling")))
                 .And(Condition.Create()
-                    .If(water.Is("frozen"))
-                    .And(water.Is("warm")))
-                .Then(water.IsNot("frozen"))
+                    .If(waterTemp.Is("frozen"))
+                    .And(waterTemp.Is("warm")))
+                .Then(waterTemp.IsNot("frozen"))
                 .Build();
 
-            var data = new Dictionary<Label, double> { { water.Label, 20 } };
+            var data = new Dictionary<Label, double> { { waterTemp.Label, 20 } };
 
             var result = rule1.Evaluate(data);
 
-            var temp = water.GetState(2);
+            var temp = waterTemp.GetState(2);
 
             // Assert
             //Assert.Equal(new FuzzyState("warm"), temp);

@@ -62,6 +62,8 @@
     <Compile Include="LabelTests.cs" />
     <Compile Include="FuzzyStateTests.cs" />
     <Compile Include="InferenceTests\FuzzyRuleBuilderTests.cs" />
+    <Compile Include="LogicTests\ConclusionTests.cs" />
+    <Compile Include="LogicTests\ConditionTests.cs" />
     <Compile Include="MathematicsTests\AlgebraicOperationsTests.cs" />
     <Compile Include="MembershipFunctionTests\PiecewiseLinearFunctionTests.cs" />
     <Compile Include="MembershipFunctionTests\SingletonFunctionTests.cs" />
@@ -86,9 +88,7 @@
       <Version>2.3.0</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="LogicTests\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

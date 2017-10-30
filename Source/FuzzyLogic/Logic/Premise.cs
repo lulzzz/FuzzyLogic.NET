@@ -72,7 +72,9 @@ namespace FuzzyLogic.Logic
         {
             Validate.NotOutOfRange(input, nameof(input));
 
-            return new Evaluation(this.Connective, this.Evaluator.Evaluate(this.State, this.Variable.GetState(input)));
+            var stateMembership = this.Variable.GetMembership(Label.Create(this.State.ToString()), input);
+
+            return new Evaluation(this.Connective, stateMembership);
         }
 
         /// <summary>

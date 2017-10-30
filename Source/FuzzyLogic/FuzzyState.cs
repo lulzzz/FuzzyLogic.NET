@@ -9,6 +9,7 @@
 
 namespace FuzzyLogic
 {
+    using System;
     using FuzzyLogic.Annotations;
 
     /// <summary>
@@ -23,7 +24,7 @@ namespace FuzzyLogic
         /// <param name="value">
         /// The value.
         /// </param>
-        private FuzzyState(string value) : base(value)
+        private FuzzyState(string value) : base(value.ToLower())
         {
         }
 
@@ -39,6 +40,20 @@ namespace FuzzyLogic
         public static FuzzyState Create(string state)
         {
             return new FuzzyState(state);
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="FuzzyState"/>.
+        /// </summary>
+        /// <param name="state">
+        /// The state.
+        /// </param>
+        /// <returns>
+        /// The <see cref="FuzzyState"/>.
+        /// </returns>
+        public static FuzzyState Create(Enum state)
+        {
+            return new FuzzyState(state.ToString());
         }
     }
 }

@@ -23,16 +23,16 @@ namespace FuzzyLogic.TestKit.Stubs
         /// <returns>
         /// The <see cref="LinguisticVariable"/>.
         /// </returns>
-        public static LinguisticVariable CreateTemperature()
+        public static LinguisticVariable WaterTemp()
         {
-            var frozen = new FuzzySet("frozen", SingletonFunction.Create(0));
-            var freezing = new FuzzySet("freezing", TriangularFunction.Create(0, 5, 10));
-            var cold = new FuzzySet("cold", TrapezoidalFunction.Create(5, 10, 15, 20));
-            var warm = new FuzzySet("warm", TrapezoidalFunction.Create(15, 25, 35, 40));
-            var hot = new FuzzySet("hot", TrapezoidalFunction.Create(35, 60, 80, 100));
-            var boiling = new FuzzySet("boiling", TrapezoidalFunction.CreateWithRightEdge(95, 100));
+            var frozen = new FuzzySet(TestKit.WaterTemp.Frozen, SingletonFunction.Create(0));
+            var freezing = new FuzzySet(TestKit.WaterTemp.Freezing, TriangularFunction.Create(0, 5, 10));
+            var cold = new FuzzySet(TestKit.WaterTemp.Cold, TrapezoidalFunction.Create(5, 10, 15, 20));
+            var warm = new FuzzySet(TestKit.WaterTemp.Warm, TrapezoidalFunction.Create(15, 25, 35, 40));
+            var hot = new FuzzySet(TestKit.WaterTemp.Hot, TrapezoidalFunction.Create(35, 60, 80, 100));
+            var boiling = new FuzzySet(TestKit.WaterTemp.Boiling, TrapezoidalFunction.CreateWithRightEdge(95, 100));
 
-            return new LinguisticVariable("Temperature", new List<FuzzySet> { frozen, freezing, cold, warm, hot, boiling }, -20, 200);
+            return new LinguisticVariable(InputVariable.WaterTemp, new List<FuzzySet> { frozen, freezing, cold, warm, hot, boiling }, -20, 200);
         }
     }
 }

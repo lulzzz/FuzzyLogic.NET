@@ -23,4 +23,14 @@ namespace FuzzyLogic.TestKit
         Hot = 6,
         Boiling = 7
     }
+
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1602:EnumerationItemsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
+    public enum InputVariable
+    {
+        Unknown = 0,
+        WaterTemp = 1,
+        Pressure = 2,
+        FanSpeed = 3
+    }
 }

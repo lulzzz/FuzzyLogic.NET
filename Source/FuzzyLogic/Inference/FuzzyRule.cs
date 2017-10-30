@@ -9,17 +9,19 @@
 
 namespace FuzzyLogic.Inference
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Runtime.CompilerServices;
     using FuzzyLogic.Annotations;
     using FuzzyLogic.Logic;
     using FuzzyLogic.Utility;
 
     /// <summary>
-    /// The fuzzy rule.
+    /// The immutable sealed <see cref="FuzzyRule"/> class.
     /// </summary>
     [Immutable]
-    public class FuzzyRule
+    public sealed class FuzzyRule
     {
         private readonly IList<Condition> conditions;
         private readonly IList<Conclusion> conclusions;
@@ -44,10 +46,31 @@ namespace FuzzyLogic.Inference
             Validate.NotNull(label, nameof(label));
             Validate.CollectionNotNullOrEmpty(conditions, nameof(conditions));
             Validate.CollectionNotNullOrEmpty(conclusions, nameof(conclusions));
+            ValidateFuzzyRule(conditions, conclusions);
 
             this.Label = Label.Create(label);
             this.conditions = conditions;
             this.conclusions = conclusions;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FuzzyRule"/> class.
+        /// </summary>
+        /// <param name="label">
+        /// The label.
+        /// </param>
+        /// <param name="conditions">
+        /// The conditions.
+        /// </param>
+        /// <param name="conclusions">
+        /// The conclusions.
+        /// </param>
+        public FuzzyRule(
+            Enum label,
+            IList<Condition> conditions,
+            IList<Conclusion> conclusions)
+            : this(label.ToString(), conditions, conclusions)
+        {
         }
 
         /// <summary>
@@ -72,8 +95,63 @@ namespace FuzzyLogic.Inference
         /// The data.
         /// </param>
         /// <returns>
-        /// A <see cref="bool"/>.
+        /// The <see cref="IEnumerable{FuzzyOutput}"/>.
         /// </returns>
-        public bool Evaluate(IDictionary<Label, double> data) => this.Conditions.All(c => c.Evaluate(data));
+        public IEnumerable<FuzzyOutput> Evaluate(IDictionary<Label, double> data)
+        {
+            Validate.NotNull(data, nameof(data));
+
+            var firingStrength = this.conditions
+                .Select(c => c.Evaluate(data))
+                .Max();
+
+            var output = new List<FuzzyOutput>();
+
+            foreach (var conclusion in this.conclusions)
+            {
+                var label = Label.Create(conclusion.State.ToString());
+
+                output.Add(new FuzzyOutput(
+                    label,
+                    conclusion.State,
+                    conclusion.Variable.GetSet(label),
+                    firingStrength));
+            }
+
+            return output;
+        }
+
+        private static void ValidateFuzzyRule(IList<Condition> conditions, IList<Conclusion> conclusions)
+        {
+            Validate.CollectionNotNullOrEmpty(conditions, nameof(conditions));
+            Validate.CollectionNotNullOrEmpty(conclusions, nameof(conclusions));
+
+            conditions.ForEach(c => c.Validate());
+
+            if (conditions[0].Connective.ToString() != LogicOperators.If.ToString())
+            {
+                throw new InvalidOperationException(
+                    $"Invalid FuzzyRule (the connective of the first condition must be an IF). Value = {conditions[0].Connective}.");
+            }
+
+            var remainingConditions = new List<Condition>(conditions);
+            remainingConditions.RemoveAt(0);
+
+            if (remainingConditions.Any(conclusion => conclusion.Connective.Equals(LogicOperators.If)))
+            {
+                throw new InvalidOperationException(
+                    $"Invalid FuzzyRule (only the connective of the first condition can be an IF).");
+            }
+
+            for (var i = 0; i < conditions.Count - 1; i++)
+            {
+                if (conditions[i].Connective.Equals(LogicOperators.Or)
+                 && conditions[i + 1].Connective.Equals(LogicOperators.And))
+                {
+                    throw new InvalidOperationException(
+                        $"Invalid FuzzyRule (an OR condition connective cannot be followed by an AND).");
+                }
+            }
+        }
     }
 }

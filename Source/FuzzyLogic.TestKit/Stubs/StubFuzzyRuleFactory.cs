@@ -28,7 +28,7 @@ namespace FuzzyLogic.TestKit.Stubs
         /// </returns>
         public static FuzzyRule Create(string label)
         {
-            var water = StubLinguisticVariableFactory.CreateTemperature();
+            var water = StubLinguisticVariableFactory.WaterTemp();
 
            return new FuzzyRuleBuilder(label)
                 .If(Condition.Create().If(water.Is("warm")))

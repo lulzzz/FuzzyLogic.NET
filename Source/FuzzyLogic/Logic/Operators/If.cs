@@ -13,8 +13,8 @@ namespace FuzzyLogic.Logic.Operators
     using FuzzyLogic.Logic.Interfaces;
 
     /// <summary>
-    /// The immutable sealed <see cref="If"/> class. Represents a linguistic string representation
-    /// of the 'IF' logic operator.
+    /// The immutable sealed <see cref="If"/> class. A linguistic string representation of the
+    /// 'IF' logic operator.
     /// </summary>
     [Immutable]
     public sealed class If : ValidString<If>, IConnectiveOperator

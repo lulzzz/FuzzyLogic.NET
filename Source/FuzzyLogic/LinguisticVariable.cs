@@ -28,7 +28,7 @@ namespace FuzzyLogic
         /// Initializes a new instance of the <see cref="LinguisticVariable"/> class.
         /// </summary>
         /// <param name="label">
-        /// The <see cref="LinguisticVariable"/> label.
+        /// The label.
         /// </param>
         /// <param name="inputSets">
         /// The input sets.
@@ -59,6 +59,30 @@ namespace FuzzyLogic
             {
                 this.fuzzySets.Add(set.Label, set);
             }
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LinguisticVariable"/> class.
+        /// </summary>
+        /// <param name="labelEnum">
+        /// The label enumeration.
+        /// </param>
+        /// <param name="inputSets">
+        /// The input sets.
+        /// </param>
+        /// <param name="lowerBound">
+        /// The lower bound.
+        /// </param>
+        /// <param name="upperBound">
+        /// The upper bound.
+        /// </param>
+        public LinguisticVariable(
+            Enum labelEnum,
+            IList<FuzzySet> inputSets,
+            double lowerBound = double.MinValue,
+            double upperBound = double.MaxValue)
+            : this(labelEnum.ToString(), inputSets, lowerBound, upperBound)
+        {
         }
 
         /// <summary>
@@ -181,20 +205,35 @@ namespace FuzzyLogic
         }
 
         /// <summary>
-        /// Returns a <see cref="bool"/> indicating whether the given label is a member
-        /// of this <see cref="LinguisticVariable"/>.
+        /// Evaluates whether the given label is a member of the <see cref="LinguisticVariable"/>.
         /// </summary>
         /// <param name="label">
         /// The label.
         /// </param>
         /// <returns>
-        /// The <see cref="bool"/>.
+        /// A <see cref="bool"/>.
         /// </returns>
         public bool IsMember(Label label)
         {
             Validate.NotNull(label, nameof(label));
 
             return this.fuzzySets.ContainsKey(label);
+        }
+
+        /// <summary>
+        /// Evaluates whether the given label is a member of the <see cref="LinguisticVariable"/>.
+        /// </summary>
+        /// <param name="labelEnum">
+        /// The label enumerator.
+        /// </param>
+        /// <returns>
+        /// A <see cref="bool"/>.
+        /// </returns>
+        public bool IsMember(Enum labelEnum)
+        {
+            Validate.NotNull(labelEnum, nameof(labelEnum));
+
+            return this.IsMember(CreateLabelFromEnum(labelEnum));
         }
 
         /// <summary>
@@ -214,8 +253,24 @@ namespace FuzzyLogic
         }
 
         /// <summary>
+        /// Returns a <see cref="FuzzySet"/> with a label which matches the given enumerator.
+        /// </summary>
+        /// <param name="labelEnum">
+        /// The label enumerator.
+        /// </param>
+        /// <returns>
+        /// The <see cref="FuzzySet"/>.
+        /// </returns>
+        public FuzzySet GetSet(Enum labelEnum)
+        {
+            Validate.NotNull(labelEnum, nameof(labelEnum));
+
+            return this.GetSet(CreateLabelFromEnum(labelEnum));
+        }
+
+        /// <summary>
         /// Returns the membership value [0, 1] of the member matching the given label
-        /// (using the given <see cref="double"/>).
+        /// (using the given as input <see cref="double"/>).
         /// </summary>
         /// <param name="label">
         /// The label.
@@ -232,6 +287,27 @@ namespace FuzzyLogic
             Validate.NotOutOfRange(input, nameof(input), this.LowerBound, this.UpperBound);
 
             return this.fuzzySets[label].GetMembership(input);
+        }
+
+        /// <summary>
+        /// Returns the membership value [0, 1] of the member matching the given enumeration
+        /// (using the given as input <see cref="double"/>).
+        /// </summary>
+        /// <param name="labelEnum">
+        /// The label enumeration.
+        /// </param>
+        /// <param name="input">
+        /// The input.
+        /// </param>
+        /// <returns>
+        /// The <see cref="double"/>.
+        /// </returns>
+        public double GetMembership(Enum labelEnum, double input)
+        {
+            Validate.NotNull(labelEnum, nameof(labelEnum));
+            Validate.NotOutOfRange(input, nameof(input), this.LowerBound, this.UpperBound);
+
+            return this.fuzzySets[CreateLabelFromEnum(labelEnum)].GetMembership(input);
         }
 
         /// <summary>
@@ -255,6 +331,11 @@ namespace FuzzyLogic
                 .Label;
 
             return FuzzyState.Create(label.Value);
+        }
+
+        private static Label CreateLabelFromEnum(Enum @enum)
+        {
+            return Label.Create(@enum.ToString().ToLower());
         }
     }
 }

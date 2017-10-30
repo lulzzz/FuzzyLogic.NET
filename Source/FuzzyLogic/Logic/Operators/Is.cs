@@ -13,8 +13,8 @@ namespace FuzzyLogic.Logic.Operators
     using FuzzyLogic.Logic.Interfaces;
 
     /// <summary>
-    /// The immutable sealed <see cref="Is"/> class. Represents a linguistic string representation
-    /// of the 'IS' logic operator.
+    /// The immutable sealed <see cref="Is"/> class. A linguistic string representation of the
+    /// 'IS' logic operator.
     /// </summary>
     [Immutable]
     public sealed class Is : ValidString<Is>, IEvaluationOperator
@@ -27,17 +27,14 @@ namespace FuzzyLogic.Logic.Operators
         }
 
         /// <summary>
-        /// Returns a <see cref="bool"/> indicating the result of the evaluation.
+        /// Returns the result of the evaluation.
         /// </summary>
-        /// <param name="expected">
-        /// The expected fuzzy state.
-        /// </param>
-        /// <param name="result">
-        /// The actual fuzzy state.
+        /// <param name="membership">
+        /// The membership.
         /// </param>
         /// <returns>
-        /// A <see cref="bool"/>.
+        /// A <see cref="double"/> [0, 1].
         /// </returns>
-        public bool Evaluate(FuzzyState expected, FuzzyState result) => expected == result;
+        public double Evaluate(double membership) => membership;
     }
 }

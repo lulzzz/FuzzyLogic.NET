@@ -15,7 +15,7 @@ namespace FuzzyLogic
     using FuzzyLogic.Utility;
 
     /// <summary>
-    /// The immutable <see cref="FuzzySet"/> class.
+    /// The immutable sealed <see cref="FuzzySet"/> class.
     /// </summary>
     [Immutable]
     public sealed class FuzzySet
@@ -36,8 +36,22 @@ namespace FuzzyLogic
             Validate.NotNull(label, nameof(label));
             Validate.NotNull(function, nameof(function));
 
-            this.Label = Label.Create(label);
+            this.Label = Label.Create(label.ToLower());
             this.function = function;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FuzzySet"/> class.
+        /// </summary>
+        /// <param name="labelEnum">
+        /// The label enumeration.
+        /// </param>
+        /// <param name="function">
+        /// The membership function.
+        /// </param>
+        public FuzzySet(Enum labelEnum, IMembershipFunction function)
+            : this(labelEnum.ToString(), function)
+        {
         }
 
         /// <summary>

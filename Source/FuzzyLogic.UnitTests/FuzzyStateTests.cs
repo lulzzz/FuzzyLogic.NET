@@ -24,7 +24,7 @@ namespace FuzzyLogic.UnitTests
             var fuzzyState = FuzzyState.Create("Low");
 
             // Assert
-            Assert.Equal("Low", fuzzyState.Value);
+            Assert.Equal("low", fuzzyState.Value);
         }
 
         [Fact]
@@ -120,7 +120,7 @@ namespace FuzzyLogic.UnitTests
             var result = fuzzyState.GetHashCode();
 
             // Assert
-            Assert.Equal(-77932258, result);
+            Assert.Equal(-77933506, result);
         }
 
         [Fact]
@@ -133,7 +133,7 @@ namespace FuzzyLogic.UnitTests
             var result = fuzzyState.ToString();
 
             // Assert
-            Assert.Equal("High", result);
+            Assert.Equal("high", result);
         }
     }
 }

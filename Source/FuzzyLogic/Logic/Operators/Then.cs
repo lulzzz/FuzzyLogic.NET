@@ -13,8 +13,8 @@ namespace FuzzyLogic.Logic.Operators
     using FuzzyLogic.Logic.Interfaces;
 
     /// <summary>
-    /// The immutable sealed <see cref="Then"/> class. Represents a linguistic string representation
-    /// of the 'THEN' logic operator.
+    /// The immutable sealed <see cref="Then"/> class. A linguistic string representation of the 
+    /// 'THEN' logic operator.
     /// </summary>
     [Immutable]
     public sealed class Then : ValidString<Then>, IConnectiveOperator

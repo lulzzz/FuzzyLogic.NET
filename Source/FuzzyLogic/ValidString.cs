@@ -30,6 +30,7 @@ namespace FuzzyLogic
         protected ValidString(string value)
         {
             Validate.NotNull(value, nameof(value));
+            Validate.NotOutOfRange(value.Length, nameof(value.Length), 0, 50);
 
             this.Value = value.RemoveAllWhitespace();
         }

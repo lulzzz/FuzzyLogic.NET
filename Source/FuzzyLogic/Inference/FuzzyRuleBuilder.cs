@@ -36,6 +36,17 @@ namespace FuzzyLogic.Inference
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="FuzzyRuleBuilder"/> class.
+        /// </summary>
+        /// <param name="name">
+        /// The name of the <see cref="FuzzyRule"/> to be built.
+        /// </param>
+        public FuzzyRuleBuilder(Enum name)
+            : this(name.ToString())
+        {
+        }
+
+        /// <summary>
         /// Adds a condition to the <see cref="FuzzyRule"/> to be built.
         /// </summary>
         /// <param name="condition">
@@ -119,25 +130,13 @@ namespace FuzzyLogic.Inference
         /// <returns>
         /// A new <see cref="FuzzyRule"/>.
         /// </returns>
+        /// <exception cref="InvalidOperationException">
+        /// Throws if first connective is not an IF, or if there is more than one connective IF.
+        /// </exception>
         public FuzzyRule Build()
         {
             Validate.CollectionNotNullOrEmpty(this.conditions, nameof(this.conditions));
             Validate.CollectionNotNullOrEmpty(this.conclusions, nameof(this.conclusions));
-
-            if (this.conditions[0].Connective.ToString() != LogicOperators.If.ToString())
-            {
-                throw new InvalidOperationException(
-                    $"Invalid FuzzyRule (the connective of the first condition must be an IF). Value = {this.conditions[0].Connective}.");
-            }
-
-            var remainingConditions = new List<Condition>(this.conditions);
-            remainingConditions.RemoveAt(0);
-
-            if (remainingConditions.Any(conclusion => conclusion.Connective.ToString() == LogicOperators.If.ToString()))
-            {
-                throw new InvalidOperationException(
-                    $"Invalid FuzzyRule (only the connective of the first condition can be an IF).");
-            }
 
             return new FuzzyRule(this.name, this.conditions, this.conclusions);
         }
