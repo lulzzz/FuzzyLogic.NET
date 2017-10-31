@@ -19,16 +19,16 @@ namespace FuzzyLogic.UnitTests.BinaryOperationsTests
     {
         [Theory]
         [InlineData(0, 0, 0)]
-        [InlineData(0, 0.25, 0)]
-        [InlineData(0.5, 0.5, 0)]
+        [InlineData(0, 0.25, 0.25)]
+        [InlineData(0.5, 0.5, 1)]
         [InlineData(0.5, 1, 1)]
         [InlineData(1, 0.5, 1)]
         [InlineData(1, 0.75, 1)]
         [InlineData(1, 1, 1)]
         internal void Evaluate_WithVariousValidValues_ReturnsExpectedResult(
-            int membershipA,
-            int membershipB,
-            int expected)
+            double membershipA,
+            double membershipB,
+            double expected)
         {
             // Arrange
             var boundedSum = new BoundedSum();

@@ -26,9 +26,9 @@ namespace FuzzyLogic.UnitTests.BinaryOperationsTests
         [InlineData(1, 0.75, 0.75)]
         [InlineData(1, 1, 1)]
         internal void Evaluate_WithVariousValidValues_ReturnsExpectedResult(
-            int membershipA,
-            int membershipB,
-            int expected)
+            double membershipA,
+            double membershipB,
+            double expected)
         {
             // Arrange
             var minimumTNorm = new MinimumTNorm();

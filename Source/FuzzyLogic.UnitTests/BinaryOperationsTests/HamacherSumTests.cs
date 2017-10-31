@@ -9,6 +9,7 @@
 
 namespace FuzzyLogic.UnitTests.BinaryOperationsTests
 {
+    using System;
     using System.Diagnostics.CodeAnalysis;
     using FuzzyLogic.BinaryOperations;
     using Xunit;
@@ -19,16 +20,16 @@ namespace FuzzyLogic.UnitTests.BinaryOperationsTests
     {
         [Theory]
         [InlineData(0, 0, 0)]
-        [InlineData(0, 0.25, 0)]
-        [InlineData(0.5, 0.5, 0)]
+        [InlineData(0, 0.25, 0.25)]
+        [InlineData(0.5, 0.5, 0.666666666666667)]
         [InlineData(0.5, 1, 1)]
         [InlineData(1, 0.5, 1)]
         [InlineData(1, 0.75, 1)]
         [InlineData(1, 1, 1)]
         internal void Evaluate_WithVariousValidValues_ReturnsExpectedResult(
-            int membershipA,
-            int membershipB,
-            int expected)
+            double membershipA,
+            double membershipB,
+            double expected)
         {
             // Arrange
             var hamacherSum = new HamacherSum();
@@ -37,7 +38,7 @@ namespace FuzzyLogic.UnitTests.BinaryOperationsTests
             var result = hamacherSum.Evaluate(membershipA, membershipB);
 
             // Assert
-            Assert.Equal(expected, result);
+            Assert.Equal(Math.Round(expected, 5), Math.Round(result, 5));
         }
     }
 }
