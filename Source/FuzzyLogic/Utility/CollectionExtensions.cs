@@ -12,6 +12,9 @@ namespace FuzzyLogic.Utility
     using System;
     using System.Collections.Generic;
 
+    /// <summary>
+    /// The static <see cref="CollectionExtensions"/> class.
+    /// </summary>
     internal static class CollectionExtensions
     {
         /// <summary>

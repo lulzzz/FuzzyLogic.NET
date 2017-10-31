@@ -10,6 +10,7 @@
 namespace FuzzyLogic.UnitTests.MembershipFunctionTests
 {
     using System.Diagnostics.CodeAnalysis;
+    using FuzzyLogic.Fuzzification;
     using FuzzyLogic.MembershipFunctions;
     using Xunit;
 

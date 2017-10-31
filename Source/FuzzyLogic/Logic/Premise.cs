@@ -10,6 +10,7 @@
 namespace FuzzyLogic.Logic
 {
     using FuzzyLogic.Annotations;
+    using FuzzyLogic.Fuzzification;
     using FuzzyLogic.Logic.Interfaces;
     using FuzzyLogic.Utility;
 
@@ -46,7 +47,7 @@ namespace FuzzyLogic.Logic
             Validate.NotNull(state, nameof(state));
 
             this.Connective = connective;
-            this.Subject = variable.Label;
+            this.Subject = variable.Subject;
         }
 
         /// <summary>
@@ -81,6 +82,6 @@ namespace FuzzyLogic.Logic
         /// <returns>
         /// The <see cref="string"/>.
         /// </returns>
-        public override string ToString() => $"{this.Connective} {this.Variable.Label} {this.Evaluator} {this.State}";
+        public override string ToString() => $"{this.Connective} {this.Variable.Subject} {this.Evaluator} {this.State}";
     }
 }

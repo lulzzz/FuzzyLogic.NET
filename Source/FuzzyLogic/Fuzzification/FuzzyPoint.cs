@@ -7,7 +7,7 @@
 // </copyright>
 // -------------------------------------------------------------------------------------------------
 
-namespace FuzzyLogic
+namespace FuzzyLogic.Fuzzification
 {
     using System;
     using FuzzyLogic.Annotations;

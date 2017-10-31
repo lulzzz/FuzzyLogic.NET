@@ -11,6 +11,7 @@ namespace FuzzyLogic.UnitTests.LogicTests
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
+    using FuzzyLogic.Fuzzification;
     using FuzzyLogic.Logic;
     using FuzzyLogic.TestKit;
     using FuzzyLogic.TestKit.Stubs;

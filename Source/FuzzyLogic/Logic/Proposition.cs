@@ -11,6 +11,7 @@ namespace FuzzyLogic.Logic
 {
     using System;
     using FuzzyLogic.Annotations;
+    using FuzzyLogic.Fuzzification;
     using FuzzyLogic.Logic.Interfaces;
     using FuzzyLogic.Utility;
 
@@ -68,7 +69,7 @@ namespace FuzzyLogic.Logic
             if (!this.Variable.IsMember(this.State))
             {
                 throw new InvalidOperationException(
-                    $"Invalid Proposition (the state '{this.State}' is not a member of the linguistic variable '{this.Variable.Label}').");
+                    $"Invalid Proposition (the state '{this.State}' is not a member of the linguistic variable '{this.Variable.Subject}').");
             }
         }
     }

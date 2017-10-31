@@ -13,6 +13,7 @@ namespace FuzzyLogic.Utility
     using System.Collections.Generic;
     using System.Diagnostics;
     using FuzzyLogic.Annotations;
+    using FuzzyLogic.Fuzzification;
 
     /// <summary>
     /// The immutable static <see cref="Validate"/> class.

@@ -10,6 +10,7 @@
 namespace FuzzyLogic.Inference
 {
     using FuzzyLogic.Annotations;
+    using FuzzyLogic.Fuzzification;
     using FuzzyLogic.Utility;
 
     /// <summary>

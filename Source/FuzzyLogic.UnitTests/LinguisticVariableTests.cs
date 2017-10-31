@@ -11,6 +11,7 @@ namespace FuzzyLogic.UnitTests
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
+    using FuzzyLogic.Fuzzification;
     using FuzzyLogic.TestKit;
     using FuzzyLogic.TestKit.Stubs;
     using Xunit;
@@ -26,7 +27,7 @@ namespace FuzzyLogic.UnitTests
             var temperature = StubLinguisticVariableFactory.WaterTemp();
 
             // Act
-            var result = temperature.Label;
+            var result = temperature.Subject;
 
             // Assert
             Assert.Equal(Label.Create(InputVariable.WaterTemp), result);

@@ -22,7 +22,7 @@ namespace FuzzyLogic.UnitTests.InferenceTests
         internal void Count_WhenNoRulesInRulebase_ReturnsZero()
         {
             // Arrange
-            var rulebase = new FuzzyRulebase();
+            var rulebase = new Rulebase();
 
             // Act
             // Assert
@@ -33,7 +33,7 @@ namespace FuzzyLogic.UnitTests.InferenceTests
         internal void Add_AddsRuleToRulebase()
         {
             // Arrange
-            var rulebase = new FuzzyRulebase();
+            var rulebase = new Rulebase();
             var rule = StubFuzzyRuleFactory.Create("Rule1");
 
             // Act
@@ -47,7 +47,7 @@ namespace FuzzyLogic.UnitTests.InferenceTests
         internal void DeleteRule_WhenRuleInRulebase_ReturnsExpectedCountOfRules()
         {
             // Arrange
-            var rulebase = new FuzzyRulebase();
+            var rulebase = new Rulebase();
             var rule = StubFuzzyRuleFactory.Create("Rule1");
 
             rulebase.AddRule(rule);
@@ -65,7 +65,7 @@ namespace FuzzyLogic.UnitTests.InferenceTests
         internal void GetRule_WhenRuleInRulebase_ReturnsExpectedCountOfRules()
         {
             // Arrange
-            var rulebase = new FuzzyRulebase();
+            var rulebase = new Rulebase();
             var rule = StubFuzzyRuleFactory.Create("Rule1");
 
             rulebase.AddRule(rule);
@@ -81,7 +81,7 @@ namespace FuzzyLogic.UnitTests.InferenceTests
         internal void GetRules_WhenNoRuleInRulebase_ReturnsDictionaryWithCountZero()
         {
             // Arrange
-            var rulebase = new FuzzyRulebase();
+            var rulebase = new Rulebase();
 
             // Act
             var result = rulebase.GetRules().Count;
@@ -94,7 +94,7 @@ namespace FuzzyLogic.UnitTests.InferenceTests
         internal void GetRules_RulesInRulebase_ReturnsDictionaryWithCountZero()
         {
             // Arrange
-            var rulebase = new FuzzyRulebase();
+            var rulebase = new Rulebase();
             var rule1 = StubFuzzyRuleFactory.Create("Rule1");
             var rule2 = StubFuzzyRuleFactory.Create("Rule2");
 

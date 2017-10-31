@@ -10,6 +10,7 @@
 namespace FuzzyLogic.TestKit.Stubs
 {
     using System.Collections.Generic;
+    using FuzzyLogic.Fuzzification;
     using FuzzyLogic.MembershipFunctions;
 
     /// <summary>

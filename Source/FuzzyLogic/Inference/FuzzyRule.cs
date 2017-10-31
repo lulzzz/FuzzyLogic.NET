@@ -89,7 +89,7 @@ namespace FuzzyLogic.Inference
             foreach (var conclusion in this.conclusions)
             {
                 output.Add(new FuzzyOutput(
-                    conclusion.Variable.Label,
+                    conclusion.Variable.Subject,
                     conclusion.State,
                     conclusion.Variable.GetSet(conclusion.State),
                     firingStrength));

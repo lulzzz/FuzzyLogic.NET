@@ -30,7 +30,6 @@
 
   <ItemGroup>
     <Folder Include="Control\" />
-    <Folder Include="Defuzzification\" />
     <Folder Include="Annotations\" />
   </ItemGroup>
 

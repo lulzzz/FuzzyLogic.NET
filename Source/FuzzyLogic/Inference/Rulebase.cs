@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------------------------------
-// <copyright file="FuzzyRulebase.cs" author="Christopher Sellers">
+// <copyright file="Rulebase.cs" author="Christopher Sellers">
 //   Copyright (C) 2017. All rights reserved.
 //   https://github.com/cjdsellers/FuzzyLogic
 //   the use of this source code is governed by the Apache 2.0 license
@@ -15,22 +15,22 @@ namespace FuzzyLogic.Inference
     using FuzzyLogic.Utility;
 
     /// <summary>
-    /// The <see cref="FuzzyRulebase"/> class.
+    /// The <see cref="Rulebase"/> class.
     /// </summary>
-    public class FuzzyRulebase
+    public class Rulebase
     {
         private readonly Dictionary<Label, FuzzyRule> rules = new Dictionary<Label, FuzzyRule>();
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FuzzyRulebase"/> class.
+        /// Initializes a new instance of the <see cref="Rulebase"/> class.
         /// </summary>
-        public FuzzyRulebase()
+        public Rulebase()
         {
             Validate.NotNull(this.rules, nameof(this.rules));
         }
 
         /// <summary>
-        /// Returns the count of the <see cref="FuzzyRulebase"/>.
+        /// Returns the count of the <see cref="Rulebase"/>.
         /// </summary>
         public int Count => this.rules.Count;
 
@@ -59,7 +59,7 @@ namespace FuzzyLogic.Inference
         }
 
         /// <summary>
-        /// Clears all rules from the <see cref="FuzzyRulebase"/>.
+        /// Clears all rules from the <see cref="Rulebase"/>.
         /// </summary>
         public void DeleteAllRules()
         {

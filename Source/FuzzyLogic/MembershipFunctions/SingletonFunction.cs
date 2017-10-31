@@ -10,13 +10,14 @@
 namespace FuzzyLogic.MembershipFunctions
 {
     using FuzzyLogic.Annotations;
+    using FuzzyLogic.Fuzzification;
     using FuzzyLogic.Utility;
 
     /// <summary>
-    /// The immutable <see cref="SingletonFunction"/> class.
+    /// The immutable sealed <see cref="SingletonFunction"/> class.
     /// </summary>
     [Immutable]
-    public class SingletonFunction : IMembershipFunction
+    public sealed class SingletonFunction : IMembershipFunction
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SingletonFunction"/> class.
@@ -42,12 +43,12 @@ namespace FuzzyLogic.MembershipFunctions
         public double MaxY => 1;
 
         /// <summary>
-        /// The lower bound of the <see cref="IMembershipFunction"/>, the same value as the support.
+        /// The lower bound of the <see cref="IMembershipFunction"/> (the same value as the support).
         /// </summary>
         public double LowerBound => this.Points[0].X;
 
         /// <summary>
-        /// The upper bound of the <see cref="IMembershipFunction"/>, the same value as the support.
+        /// The upper bound of the <see cref="IMembershipFunction"/> (the same value as the support).
         /// </summary>
         public double UpperBound => this.Points[0].X;
 

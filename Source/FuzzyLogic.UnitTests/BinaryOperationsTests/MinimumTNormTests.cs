@@ -31,7 +31,7 @@ namespace FuzzyLogic.UnitTests.BinaryOperationsTests
             double expected)
         {
             // Arrange
-            var minimumTNorm = new MinimumTNorm();
+            var minimumTNorm = TriangularNormFactory.MinimumTNorm();
 
             // Act
             var result = minimumTNorm.Evaluate(membershipA, membershipB);

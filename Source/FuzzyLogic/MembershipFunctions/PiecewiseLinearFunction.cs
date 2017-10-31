@@ -11,10 +11,11 @@ namespace FuzzyLogic.MembershipFunctions
 {
     using System.Linq;
     using FuzzyLogic.Annotations;
+    using FuzzyLogic.Fuzzification;
     using FuzzyLogic.Utility;
 
     /// <summary>
-    /// The immutable <see cref="PiecewiseLinearFunction"/> class.
+    /// The immutable sealed <see cref="PiecewiseLinearFunction"/> class.
     /// </summary>
     [Immutable]
     public class PiecewiseLinearFunction : IMembershipFunction

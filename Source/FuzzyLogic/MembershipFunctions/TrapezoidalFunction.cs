@@ -11,13 +11,14 @@ namespace FuzzyLogic.MembershipFunctions
 {
     using System;
     using FuzzyLogic.Annotations;
+    using FuzzyLogic.Fuzzification;
     using FuzzyLogic.Utility;
 
     /// <summary>
-    /// The immutable <see cref="TrapezoidalFunction"/> class.
+    /// The immutable sealed <see cref="TrapezoidalFunction"/> class.
     /// </summary>
     [Immutable]
-    public class TrapezoidalFunction : PiecewiseLinearFunction
+    public sealed class TrapezoidalFunction : PiecewiseLinearFunction
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TrapezoidalFunction"/> class.

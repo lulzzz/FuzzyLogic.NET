@@ -10,6 +10,7 @@
 namespace FuzzyLogic.UnitTests
 {
     using System.Diagnostics.CodeAnalysis;
+    using FuzzyLogic.Fuzzification;
     using Xunit;
 
     [SuppressMessage("StyleCop.CSharp.NamingRules", "*", Justification = "Reviewed. Suppression is OK within the Test Suite.")]

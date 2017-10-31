@@ -12,12 +12,13 @@ namespace FuzzyLogic.Inference
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using FuzzyLogic.Fuzzification;
     using FuzzyLogic.Utility;
 
     /// <summary>
     /// The sealed <see cref="Database"/> class.
     /// </summary>
-    internal sealed class Database
+    public sealed class Database
     {
         private readonly IDictionary<Label, double> variableData = new Dictionary<Label, double>();
 

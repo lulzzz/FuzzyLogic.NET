@@ -7,7 +7,7 @@
 // </copyright>
 // -------------------------------------------------------------------------------------------------
 
-namespace FuzzyLogic
+namespace FuzzyLogic.Fuzzification
 {
     using System;
     using System.Collections.Generic;
@@ -51,7 +51,7 @@ namespace FuzzyLogic
             Validate.NotOutOfRange(upperBound, nameof(upperBound));
             Validate.FuzzySetCollection(inputSets, lowerBound, upperBound);
 
-            this.Label = Label.Create(label);
+            this.Subject = Label.Create(label);
             this.LowerBound = lowerBound;
             this.UpperBound = upperBound;
 
@@ -88,7 +88,7 @@ namespace FuzzyLogic
         /// <summary>
         /// Gets the label of the <see cref="LinguisticVariable"/>.
         /// </summary>
-        public Label Label { get; }
+        public Label Subject { get; }
 
         /// <summary>
         /// Gets the lower bound of the <see cref="LinguisticVariable"/>.

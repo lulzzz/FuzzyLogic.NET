@@ -31,7 +31,7 @@ namespace FuzzyLogic.UnitTests.BinaryOperationsTests
             double expected)
         {
             // Arrange
-            var maximumTConorm = new MaximumTConorm();
+            var maximumTConorm = TriangularConormFactory.MaximumTConorm();
 
             // Act
             var result = maximumTConorm.Evaluate(membershipA, membershipB);

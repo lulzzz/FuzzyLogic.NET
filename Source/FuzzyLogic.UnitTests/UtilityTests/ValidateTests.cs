@@ -12,6 +12,7 @@ namespace FuzzyLogic.UnitTests.UtilityTests
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using FuzzyLogic.Fuzzification;
     using FuzzyLogic.MembershipFunctions;
     using FuzzyLogic.Utility;
     using Xunit;

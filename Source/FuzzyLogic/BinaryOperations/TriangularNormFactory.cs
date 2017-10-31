@@ -15,6 +15,14 @@ namespace FuzzyLogic.BinaryOperations
     public static class TriangularNormFactory
     {
         /// <summary>
+        /// Returns a minimum t-norm function (default).
+        /// </summary>
+        /// <returns>
+        /// A <see cref="MinimumTNorm"/>.
+        /// </returns>
+        public static MinimumTNorm MinimumTNorm() => new MinimumTNorm();
+
+        /// <summary>
         /// Returns an algebraic product t-norm function.
         /// </summary>
         /// <returns>

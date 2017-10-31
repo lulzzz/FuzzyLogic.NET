@@ -15,6 +15,14 @@ namespace FuzzyLogic.BinaryOperations
     public static class TriangularConormFactory
     {
         /// <summary>
+        /// Returns a maximum t-conorm function (default).
+        /// </summary>
+        /// <returns>
+        /// A <see cref="MinimumTNorm"/>.
+        /// </returns>
+        public static MaximumTConorm MaximumTConorm() => new MaximumTConorm();
+
+        /// <summary>
         /// Returns a bounded sum t-conorm function.
         /// </summary>
         /// <returns>
