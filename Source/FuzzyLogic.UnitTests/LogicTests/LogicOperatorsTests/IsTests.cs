@@ -1,5 +1,5 @@
 ﻿// -------------------------------------------------------------------------------------------------
-// <copyright file="ConclusionTests.cs" author="Christopher Sellers">
+// <copyright file="IsTests.cs" author="Christopher Sellers">
 //   Copyright (C) 2017. All rights reserved.
 //   https://github.com/cjdsellers/FuzzyLogic
 //   the use of this source code is governed by the Apache 2.0 license
@@ -7,30 +7,32 @@
 // </copyright>
 // -------------------------------------------------------------------------------------------------
 
-namespace FuzzyLogic.UnitTests.LogicTests
+namespace FuzzyLogic.UnitTests.LogicTests.LogicOperatorsTests
 {
     using System.Diagnostics.CodeAnalysis;
     using FuzzyLogic.Logic;
-    using FuzzyLogic.TestKit;
-    using FuzzyLogic.TestKit.Stubs;
     using Xunit;
 
     [SuppressMessage("StyleCop.CSharp.NamingRules", "*", Justification = "Reviewed. Suppression is OK within the Test Suite.")]
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "*", Justification = "Reviewed. Suppression is OK within the Test Suite.")]
-    public class ConclusionTests
+    public class IsTests
     {
-        [Fact]
-        internal void ToString_ReturnsExpectedString()
+        [Theory]
+        [InlineData(0, 0)]
+        [InlineData(0.25, 0.25)]
+        [InlineData(0.5, 0.5)]
+        [InlineData(0.75, 0.75)]
+        [InlineData(1, 1)]
+        internal void Evaluate_WithVariousValues_ReturnsExpectedResult(double membership, double expected)
         {
             // Arrange
-            var waterTemp = StubLinguisticVariableFactory.WaterTemp();
-            var conclusion = new Conclusion(waterTemp, LogicOperators.Is(), FuzzyState.Create(WaterTemp.Cold));
+            var isOperator = LogicOperators.Is();
 
             // Act
-            var result = conclusion.ToString();
+            var result = isOperator.Evaluate(membership);
 
             // Assert
-            Assert.Equal("THEN WaterTemp IS cold", result);
+            Assert.Equal(expected, result);
         }
     }
 }

@@ -22,7 +22,7 @@ namespace FuzzyLogic.Logic
         /// <returns>
         /// An <see cref="If"/>.
         /// </returns>
-        public static If If => new If();
+        public static If If() => new If();
 
         /// <summary>
         /// The 'IS' logic operator.
@@ -30,7 +30,7 @@ namespace FuzzyLogic.Logic
         /// <returns>
         /// An <see cref="Is"/>.
         /// </returns>
-        public static Is Is => new Is();
+        public static Is Is() => new Is();
 
         /// <summary>
         /// The 'IS NOT' logic operator.
@@ -38,7 +38,7 @@ namespace FuzzyLogic.Logic
         /// <returns>
         /// An <see cref="IsNot"/>.
         /// </returns>
-        public static IsNot IsNot => new IsNot();
+        public static IsNot IsNot() => new IsNot();
 
         /// <summary>
         /// The 'THEN' logic operator.
@@ -46,7 +46,7 @@ namespace FuzzyLogic.Logic
         /// <returns>
         /// An <see cref="Then"/>.
         /// </returns>
-        public static Then Then => new Then();
+        public static Then Then() => new Then();
 
         /// <summary>
         /// The 'AND' logic operator.
@@ -54,7 +54,7 @@ namespace FuzzyLogic.Logic
         /// <returns>
         /// An <see cref="And"/>.
         /// </returns>
-        public static And And => new And();
+        public static And And() => new And();
 
         /// <summary>
         /// The 'OR' logic operator.
@@ -62,6 +62,6 @@ namespace FuzzyLogic.Logic
         /// <returns>
         /// An <see cref="Or"/>.
         /// </returns>
-        public static Or Or => new Or();
+        public static Or Or() => new Or();
     }
 }

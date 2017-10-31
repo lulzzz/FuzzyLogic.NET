@@ -67,7 +67,8 @@ namespace FuzzyLogic.Logic
         {
             if (!this.Variable.IsMember(Label.Create(this.State.Value)))
             {
-                throw new ArgumentException($"Invalid Proposition (the state '{this.State}' is not a member of the linguistic variable '{this.Variable.Label}').");
+                throw new InvalidOperationException(
+                    $"Invalid Proposition (the state '{this.State}' is not a member of the linguistic variable '{this.Variable.Label}').");
             }
         }
     }

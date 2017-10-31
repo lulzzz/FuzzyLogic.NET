@@ -12,7 +12,6 @@ namespace FuzzyLogic.Inference
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Runtime.CompilerServices;
     using FuzzyLogic.Annotations;
     using FuzzyLogic.Logic;
     using FuzzyLogic.Utility;
@@ -128,7 +127,7 @@ namespace FuzzyLogic.Inference
 
             conditions.ForEach(c => c.Validate());
 
-            if (conditions[0].Connective.ToString() != LogicOperators.If.ToString())
+            if (conditions[0].Connective.ToString() != LogicOperators.If().ToString())
             {
                 throw new InvalidOperationException(
                     $"Invalid FuzzyRule (the connective of the first condition must be an IF). Value = {conditions[0].Connective}.");
@@ -137,7 +136,7 @@ namespace FuzzyLogic.Inference
             var remainingConditions = new List<Condition>(conditions);
             remainingConditions.RemoveAt(0);
 
-            if (remainingConditions.Any(conclusion => conclusion.Connective.Equals(LogicOperators.If)))
+            if (remainingConditions.Any(conclusion => conclusion.Connective.Equals(LogicOperators.If())))
             {
                 throw new InvalidOperationException(
                     $"Invalid FuzzyRule (only the connective of the first condition can be an IF).");
@@ -145,8 +144,8 @@ namespace FuzzyLogic.Inference
 
             for (var i = 0; i < conditions.Count - 1; i++)
             {
-                if (conditions[i].Connective.Equals(LogicOperators.Or)
-                 && conditions[i + 1].Connective.Equals(LogicOperators.And))
+                if (conditions[i].Connective.Equals(LogicOperators.Or())
+                 && conditions[i + 1].Connective.Equals(LogicOperators.And()))
                 {
                     throw new InvalidOperationException(
                         $"Invalid FuzzyRule (an OR condition connective cannot be followed by an AND).");

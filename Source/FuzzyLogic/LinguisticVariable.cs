@@ -153,7 +153,7 @@ namespace FuzzyLogic
         /// </returns>
         public Proposition Is(FuzzyState state)
         {
-            return new Proposition(this, LogicOperators.Is, state);
+            return new Proposition(this, LogicOperators.Is(), state);
         }
 
         /// <summary>
@@ -201,7 +201,7 @@ namespace FuzzyLogic
         /// </returns>
         public Proposition IsNot(FuzzyState state)
         {
-            return new Proposition(this, LogicOperators.IsNot, state);
+            return new Proposition(this, LogicOperators.IsNot(), state);
         }
 
         /// <summary>

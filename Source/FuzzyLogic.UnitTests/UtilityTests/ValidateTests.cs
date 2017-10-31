@@ -87,6 +87,18 @@ namespace FuzzyLogic.UnitTests.UtilityTests
             Assert.Throws<ArgumentNullException>(() => Validate.CollectionEmpty(collection, nameof(collection)));
         }
 
+        // This test exists to exercise all execution paths.
+        [Fact]
+        internal void CollectionEmpty_WhenCollectionEmpty_DoesNothing()
+        {
+            // Arrange
+            List<string> collection = new List<string>();
+
+            // Act
+            // Assert
+            Validate.CollectionEmpty(collection, nameof(collection));
+        }
+
         [Fact]
         internal void CollectionNotNullOrEmpty_WhenCollectionNull_Throws()
         {
@@ -131,6 +143,19 @@ namespace FuzzyLogic.UnitTests.UtilityTests
             Assert.Throws<ArgumentException>(() => Validate.CollectionNotNullOrEmpty(dictionary, nameof(dictionary)));
         }
 
+        // This test exists to exercise all execution paths.
+        [Fact]
+        internal void CollectionContains_WhenCollectionContainsTheElement_DoesNothing()
+        {
+            // Arrange
+            var element = "the_fifth_element";
+            var collection = new List<string> { element };
+
+            // Act
+            // Assert
+            Validate.CollectionContains(element, nameof(element), collection);
+        }
+
         [Fact]
         internal void CollectionContains_WhenCollectionDoesNotContainElement_Throws()
         {
@@ -141,6 +166,19 @@ namespace FuzzyLogic.UnitTests.UtilityTests
             // Act
             // Assert
             Assert.Throws<ArgumentException>(() => Validate.CollectionContains(element, nameof(element), collection));
+        }
+
+        // This test exists to exercise all execution paths.
+        [Fact]
+        internal void CollectionDoesNotContain_WhenCollectionDoesNotContainElement_DoesNothing()
+        {
+            // Arrange
+            var element = "the_fifth_element";
+            var collection = new List<string>();
+
+            // Act
+            // Assert
+            Validate.CollectionDoesNotContain(element, nameof(element), collection);
         }
 
         [Fact]
@@ -250,6 +288,30 @@ namespace FuzzyLogic.UnitTests.UtilityTests
             // Act
             // Assert
             Assert.Throws<ArgumentOutOfRangeException>(() => Validate.NotOutOfRange(number, nameof(number), 0, 1, RangeEndPoints.Exclusive));
+        }
+
+        // This test exists to test all execution paths.
+        [Fact]
+        internal void NotOutOfRangeUpperExclusive_WithInRangeNumber_DoesNothing()
+        {
+            // Arrange
+            var number = 0.9;
+
+            // Act
+            // Assert
+            Validate.NotOutOfRange(number, nameof(number), 0, 1, RangeEndPoints.UpperExclusive);
+        }
+
+        // This test exists to test all execution paths.
+        [Fact]
+        internal void NotOutOfRangeExclusive_WithInRangeNumber_DoesNothing()
+        {
+            // Arrange
+            var number = 0.9;
+
+            // Act
+            // Assert
+            Validate.NotOutOfRange(number, nameof(number), 0, 1, RangeEndPoints.Exclusive);
         }
 
         [Fact]

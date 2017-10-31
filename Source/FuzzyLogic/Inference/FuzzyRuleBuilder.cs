@@ -59,7 +59,7 @@ namespace FuzzyLogic.Inference
         {
             Validate.NotNull(condition, nameof(condition));
 
-            condition.SetConnective(LogicOperators.If);
+            condition.SetConnective(LogicOperators.If());
             this.conditions.Add(condition);
 
             return this;
@@ -78,7 +78,7 @@ namespace FuzzyLogic.Inference
         {
             Validate.NotNull(condition, nameof(condition));
 
-            condition.SetConnective(LogicOperators.And);
+            condition.SetConnective(LogicOperators.And());
             this.conditions.Add(condition);
 
             return this;
@@ -97,7 +97,7 @@ namespace FuzzyLogic.Inference
         {
             Validate.NotNull(condition, nameof(condition));
 
-            condition.SetConnective(LogicOperators.Or);
+            condition.SetConnective(LogicOperators.Or());
             this.conditions.Add(condition);
 
             return this;

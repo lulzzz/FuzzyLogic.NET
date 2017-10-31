@@ -113,7 +113,7 @@ namespace FuzzyLogic.Logic
             Utility.Validate.NotNull(proposition, nameof(proposition));
 
             this.Premises.Add(new Premise(
-                LogicOperators.If,
+                LogicOperators.If(),
                 proposition.Variable,
                 proposition.Evaluator,
                 proposition.State));
@@ -135,7 +135,7 @@ namespace FuzzyLogic.Logic
             Utility.Validate.NotNull(proposition, nameof(proposition));
 
             this.Premises.Add(new Premise(
-                LogicOperators.And,
+                LogicOperators.And(),
                 proposition.Variable,
                 proposition.Evaluator,
                 proposition.State));
@@ -157,7 +157,7 @@ namespace FuzzyLogic.Logic
             Utility.Validate.NotNull(proposition, nameof(proposition));
 
             this.Premises.Add(new Premise(
-                LogicOperators.Or,
+                LogicOperators.Or(),
                 proposition.Variable,
                 proposition.Evaluator,
                 proposition.State));
@@ -200,15 +200,15 @@ namespace FuzzyLogic.Logic
             }
 
             var ifAndAverage = evaluations
-                .Where(e => e.Connective.Equals(LogicOperators.If) || e.Connective.Equals(LogicOperators.And))
+                .Where(e => e.Connective.Equals(LogicOperators.If()) || e.Connective.Equals(LogicOperators.And()))
                 .Average(e => e.Result);
 
             var highestOr = 0.0;
 
-            if (evaluations.Exists(e => e.Connective.Equals(LogicOperators.Or)))
+            if (evaluations.Exists(e => e.Connective.Equals(LogicOperators.Or())))
             {
                 highestOr = evaluations
-                    .Where(e => e.Connective.Equals(LogicOperators.Or))
+                    .Where(e => e.Connective.Equals(LogicOperators.Or()))
                     .Max(e => e.Result);
             }
 
@@ -235,5 +235,15 @@ namespace FuzzyLogic.Logic
                     "Invalid Condition (there are no premises).");
             }
         }
+
+        /// <summary>
+        /// Returns a string representation of the condition.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="string"/>.
+        /// </returns>
+        public override string ToString() => this.Premises
+            .Aggregate(string.Empty, (current, premise) => current + $" {premise}")
+            .Trim();
     }
 }

@@ -44,6 +44,6 @@ namespace FuzzyLogic.Logic
         /// <returns>
         /// The <see cref="string"/>.
         /// </returns>
-        public override string ToString() => $"THEN {this.Variable.Label} {this.Evaluator} {this.State}";
+        public override string ToString() => $"{LogicOperators.Then()} {this.Variable.Label} {this.Evaluator} {this.State}";
     }
 }

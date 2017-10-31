@@ -1,5 +1,5 @@
 ﻿// -------------------------------------------------------------------------------------------------
-// <copyright file="ConclusionTests.cs" author="Christopher Sellers">
+// <copyright file="PropositionTests.cs" author="Christopher Sellers">
 //   Copyright (C) 2017. All rights reserved.
 //   https://github.com/cjdsellers/FuzzyLogic
 //   the use of this source code is governed by the Apache 2.0 license
@@ -9,6 +9,7 @@
 
 namespace FuzzyLogic.UnitTests.LogicTests
 {
+    using System;
     using System.Diagnostics.CodeAnalysis;
     using FuzzyLogic.Logic;
     using FuzzyLogic.TestKit;
@@ -17,20 +18,20 @@ namespace FuzzyLogic.UnitTests.LogicTests
 
     [SuppressMessage("StyleCop.CSharp.NamingRules", "*", Justification = "Reviewed. Suppression is OK within the Test Suite.")]
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "*", Justification = "Reviewed. Suppression is OK within the Test Suite.")]
-    public class ConclusionTests
+    public class PropositionTests
     {
         [Fact]
-        internal void ToString_ReturnsExpectedString()
+        internal void ValidateProposition_WhenStateNotAMemberOfLinguisticVariable_Throws()
         {
             // Arrange
             var waterTemp = StubLinguisticVariableFactory.WaterTemp();
-            var conclusion = new Conclusion(waterTemp, LogicOperators.Is(), FuzzyState.Create(WaterTemp.Cold));
+
+            // Invalid fuzzy state.
+            var fuzzyState = FuzzyState.Create(PumpSpeed.Off);
 
             // Act
-            var result = conclusion.ToString();
-
             // Assert
-            Assert.Equal("THEN WaterTemp IS cold", result);
+            Assert.Throws<InvalidOperationException>(() => new Proposition(waterTemp, LogicOperators.Is(), fuzzyState));
         }
     }
 }

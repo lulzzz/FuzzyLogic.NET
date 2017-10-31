@@ -64,12 +64,17 @@
     <Compile Include="InferenceTests\FuzzyRuleBuilderTests.cs" />
     <Compile Include="LogicTests\ConclusionTests.cs" />
     <Compile Include="LogicTests\ConditionTests.cs" />
+    <Compile Include="LogicTests\LogicOperatorsTests\IsNotTests.cs" />
+    <Compile Include="LogicTests\LogicOperatorsTests\IsTests.cs" />
+    <Compile Include="LogicTests\PremiseTests.cs" />
+    <Compile Include="LogicTests\PropositionTests.cs" />
     <Compile Include="MathematicsTests\AlgebraicOperationsTests.cs" />
     <Compile Include="MembershipFunctionTests\PiecewiseLinearFunctionTests.cs" />
     <Compile Include="MembershipFunctionTests\SingletonFunctionTests.cs" />
     <Compile Include="MembershipFunctionTests\TrapezoidalFunctionTests.cs" />
     <Compile Include="MembershipFunctionTests\TriangularFunctionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UtilityTests\CollectionExtensionsTests.cs" />
     <Compile Include="UtilityTests\StringExtensionsTests.cs" />
     <Compile Include="UtilityTests\ValidateTests.cs" />
   </ItemGroup>

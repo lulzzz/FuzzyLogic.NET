@@ -15,7 +15,6 @@ namespace FuzzyLogic.UnitTests.UtilityTests
 
     [SuppressMessage("StyleCop.CSharp.NamingRules", "*", Justification = "Reviewed. Suppression is OK within the Test Suite.")]
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "*", Justification = "Reviewed. Suppression is OK within the Test Suite.")]
-    [Collection("UnitTests.Collections.Core")]
     public class StringExtensionsTests
     {
         private enum TestEnum

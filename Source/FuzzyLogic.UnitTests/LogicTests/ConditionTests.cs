@@ -37,7 +37,7 @@ namespace FuzzyLogic.UnitTests.LogicTests
         {
             // Arrange
             var condition = Condition.Create();
-            condition.SetConnective(LogicOperators.If);
+            condition.SetConnective(LogicOperators.If());
 
             // Act
             // Assert
@@ -51,10 +51,10 @@ namespace FuzzyLogic.UnitTests.LogicTests
             var condition = Condition.Create();
 
             // Act
-            condition.SetConnective(LogicOperators.If);
+            condition.SetConnective(LogicOperators.If());
 
             // Assert
-            Assert.Equal(LogicOperators.If, condition.Connective);
+            Assert.Equal(LogicOperators.If(), condition.Connective);
         }
 
         [Fact]
@@ -62,11 +62,11 @@ namespace FuzzyLogic.UnitTests.LogicTests
         {
             // Arrange
             var condition = Condition.Create();
-            condition.SetConnective(LogicOperators.If);
+            condition.SetConnective(LogicOperators.If());
 
             // Act
             // Assert
-            Assert.Throws<InvalidOperationException>(() => condition.SetConnective(LogicOperators.If));
+            Assert.Throws<InvalidOperationException>(() => condition.SetConnective(LogicOperators.If()));
         }
 
         [Fact]
@@ -74,7 +74,7 @@ namespace FuzzyLogic.UnitTests.LogicTests
         {
             // Arrange
             var condition = Condition.Create(1.0);
-            condition.SetConnective(LogicOperators.If);
+            condition.SetConnective(LogicOperators.If());
 
             // Act
             condition.SetWeight(0.5);
@@ -90,7 +90,7 @@ namespace FuzzyLogic.UnitTests.LogicTests
             var waterTemp = StubLinguisticVariableFactory.WaterTemp();
 
             var condition = Condition.Create().If(waterTemp.Is(WaterTemp.Boiling));
-            condition.SetConnective(LogicOperators.If);
+            condition.SetConnective(LogicOperators.If());
             condition.Validate();
 
             var data = new Dictionary<Label, double> { { Label.Create(InputVariable.Pressure), 3000 } };
@@ -98,6 +98,27 @@ namespace FuzzyLogic.UnitTests.LogicTests
             // Act
             // Assert
             Assert.Throws<InvalidOperationException>(() => condition.Evaluate(data));
+        }
+
+        [Fact]
+        internal void ToString_ReturnsExpectedString()
+        {
+            // Arrange
+            var waterTemp = StubLinguisticVariableFactory.WaterTemp();
+
+            var condition = Condition.Create()
+                .If(waterTemp.IsNot(WaterTemp.Boiling))
+                .And(waterTemp.IsNot(WaterTemp.Freezing))
+                .And(waterTemp.IsNot(WaterTemp.Frozen));
+
+            condition.SetConnective(LogicOperators.If());
+            condition.Validate();
+
+            // Act
+            var result = condition.ToString();
+
+            // Assert
+            Assert.Equal("IF WaterTemp IS-NOT boiling AND WaterTemp IS-NOT freezing AND WaterTemp IS-NOT frozen", result);
         }
     }
 }
