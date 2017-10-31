@@ -11,7 +11,6 @@ namespace FuzzyLogic.Inference
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using FuzzyLogic.Logic;
     using FuzzyLogic.Utility;
 
@@ -55,12 +54,12 @@ namespace FuzzyLogic.Inference
         /// <returns>
         /// The <see cref="FuzzyRuleBuilder"/>.
         /// </returns>
-        public FuzzyRuleBuilder If(Condition condition)
+        public FuzzyRuleBuilder If(ConditionBuilder condition)
         {
             Validate.NotNull(condition, nameof(condition));
 
-            condition.SetConnective(LogicOperators.If());
-            this.conditions.Add(condition);
+            condition.Connective = LogicOperators.If();
+            this.conditions.Add(condition.Build());
 
             return this;
         }
@@ -74,12 +73,12 @@ namespace FuzzyLogic.Inference
         /// <returns>
         /// The <see cref="FuzzyRuleBuilder"/>.
         /// </returns>
-        public FuzzyRuleBuilder And(Condition condition)
+        public FuzzyRuleBuilder And(ConditionBuilder condition)
         {
             Validate.NotNull(condition, nameof(condition));
 
-            condition.SetConnective(LogicOperators.And());
-            this.conditions.Add(condition);
+            condition.Connective = LogicOperators.And();
+            this.conditions.Add(condition.Build());
 
             return this;
         }
@@ -93,12 +92,12 @@ namespace FuzzyLogic.Inference
         /// <returns>
         /// The <see cref="FuzzyRuleBuilder"/>.
         /// </returns>
-        public FuzzyRuleBuilder Or(Condition condition)
+        public FuzzyRuleBuilder Or(ConditionBuilder condition)
         {
             Validate.NotNull(condition, nameof(condition));
 
-            condition.SetConnective(LogicOperators.Or());
-            this.conditions.Add(condition);
+            condition.Connective = LogicOperators.Or();
+            this.conditions.Add(condition.Build());
 
             return this;
         }

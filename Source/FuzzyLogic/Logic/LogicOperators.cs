@@ -9,20 +9,29 @@
 
 namespace FuzzyLogic.Logic
 {
+    using FuzzyLogic.Annotations;
     using FuzzyLogic.Logic.Operators;
 
     /// <summary>
     /// The immutable <see cref="LogicOperators"/> class.
     /// </summary>
+    [Immutable]
     public static class LogicOperators
     {
+        private static readonly If IfOperator = new If();
+        private static readonly Is IsOperator = new Is();
+        private static readonly IsNot IsNotOperator = new IsNot();
+        private static readonly Then ThenOperator = new Then();
+        private static readonly And AndOperator = new And();
+        private static readonly Or OrOperator = new Or();
+
         /// <summary>
         /// The 'IF' logic operator.
         /// </summary>
         /// <returns>
         /// An <see cref="If"/>.
         /// </returns>
-        public static If If() => new If();
+        public static If If() => IfOperator;
 
         /// <summary>
         /// The 'IS' logic operator.
@@ -30,7 +39,7 @@ namespace FuzzyLogic.Logic
         /// <returns>
         /// An <see cref="Is"/>.
         /// </returns>
-        public static Is Is() => new Is();
+        public static Is Is() => IsOperator;
 
         /// <summary>
         /// The 'IS NOT' logic operator.
@@ -38,7 +47,7 @@ namespace FuzzyLogic.Logic
         /// <returns>
         /// An <see cref="IsNot"/>.
         /// </returns>
-        public static IsNot IsNot() => new IsNot();
+        public static IsNot IsNot() => IsNotOperator;
 
         /// <summary>
         /// The 'THEN' logic operator.
@@ -46,7 +55,7 @@ namespace FuzzyLogic.Logic
         /// <returns>
         /// An <see cref="Then"/>.
         /// </returns>
-        public static Then Then() => new Then();
+        public static Then Then() => ThenOperator;
 
         /// <summary>
         /// The 'AND' logic operator.
@@ -54,7 +63,7 @@ namespace FuzzyLogic.Logic
         /// <returns>
         /// An <see cref="And"/>.
         /// </returns>
-        public static And And() => new And();
+        public static And And() => AndOperator;
 
         /// <summary>
         /// The 'OR' logic operator.
@@ -62,6 +71,6 @@ namespace FuzzyLogic.Logic
         /// <returns>
         /// An <see cref="Or"/>.
         /// </returns>
-        public static Or Or() => new Or();
+        public static Or Or() => OrOperator;
     }
 }

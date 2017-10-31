@@ -22,7 +22,8 @@ namespace FuzzyLogic.Logic.Operators
         /// <summary>
         /// Initializes a new instance of the <see cref="IsNot"/> class.
         /// </summary>
-        public IsNot() : base("IS-NOT")
+        public IsNot()
+            : base("IS-NOT")
         {
         }
 

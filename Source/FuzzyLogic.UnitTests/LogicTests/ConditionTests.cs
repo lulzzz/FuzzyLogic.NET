@@ -12,6 +12,7 @@ namespace FuzzyLogic.UnitTests.LogicTests
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using FuzzyLogic.Inference;
     using FuzzyLogic.Logic;
     using FuzzyLogic.TestKit;
     using FuzzyLogic.TestKit.Stubs;
@@ -22,59 +23,14 @@ namespace FuzzyLogic.UnitTests.LogicTests
     public class ConditionTests
     {
         [Fact]
-        internal void Validate_WhenConnectiveNull_Throws()
-        {
-            // Arrange
-            var condition = Condition.Create();
-
-            // Act
-            // Assert
-            Assert.Throws<InvalidOperationException>(() => condition.Validate());
-        }
-
-        [Fact]
-        internal void Validate_WhenNoPremises_Throws()
-        {
-            // Arrange
-            var condition = Condition.Create();
-            condition.SetConnective(LogicOperators.If());
-
-            // Act
-            // Assert
-            Assert.Throws<InvalidOperationException>(() => condition.Validate());
-        }
-
-        [Fact]
-        internal void SetConnective_WhenConnectiveNotSet_SetsExpectedConnective()
-        {
-            // Arrange
-            var condition = Condition.Create();
-
-            // Act
-            condition.SetConnective(LogicOperators.If());
-
-            // Assert
-            Assert.Equal(LogicOperators.If(), condition.Connective);
-        }
-
-        [Fact]
-        internal void SetConnective_WhenConnectiveAlreadySet_Throws()
-        {
-            // Arrange
-            var condition = Condition.Create();
-            condition.SetConnective(LogicOperators.If());
-
-            // Act
-            // Assert
-            Assert.Throws<InvalidOperationException>(() => condition.SetConnective(LogicOperators.If()));
-        }
-
-        [Fact]
         internal void SetWeight_SetsWeightToExpectedValue()
         {
             // Arrange
-            var condition = Condition.Create(1.0);
-            condition.SetConnective(LogicOperators.If());
+            var waterTemp = StubLinguisticVariableFactory.WaterTemp();
+
+            var condition = new ConditionBuilder(1.0) { Connective = LogicOperators.If() }
+                .If(waterTemp.Is(WaterTemp.Boiling))
+                .Build();
 
             // Act
             condition.SetWeight(0.5);
@@ -89,9 +45,9 @@ namespace FuzzyLogic.UnitTests.LogicTests
             // Arrange
             var waterTemp = StubLinguisticVariableFactory.WaterTemp();
 
-            var condition = Condition.Create().If(waterTemp.Is(WaterTemp.Boiling));
-            condition.SetConnective(LogicOperators.If());
-            condition.Validate();
+            var condition = new ConditionBuilder(1.0) { Connective = LogicOperators.If() }
+            .If(waterTemp.Is(WaterTemp.Boiling))
+            .Build();
 
             var data = new Dictionary<Label, double> { { Label.Create(InputVariable.Pressure), 3000 } };
 
@@ -106,13 +62,11 @@ namespace FuzzyLogic.UnitTests.LogicTests
             // Arrange
             var waterTemp = StubLinguisticVariableFactory.WaterTemp();
 
-            var condition = Condition.Create()
+            var condition = new ConditionBuilder(1.0) { Connective = LogicOperators.If() }
                 .If(waterTemp.IsNot(WaterTemp.Boiling))
                 .And(waterTemp.IsNot(WaterTemp.Freezing))
-                .And(waterTemp.IsNot(WaterTemp.Frozen));
-
-            condition.SetConnective(LogicOperators.If());
-            condition.Validate();
+                .And(waterTemp.IsNot(WaterTemp.Frozen))
+                .Build();
 
             // Act
             var result = condition.ToString();

@@ -12,7 +12,6 @@ namespace FuzzyLogic.UnitTests.InferenceTests
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using FuzzyLogic.Inference;
-    using FuzzyLogic.Logic;
     using FuzzyLogic.TestKit;
     using FuzzyLogic.TestKit.Stubs;
     using Xunit;
@@ -29,7 +28,7 @@ namespace FuzzyLogic.UnitTests.InferenceTests
 
             // Act
             var fuzzyRule = new FuzzyRuleBuilder("Rule1")
-                .If(Condition.Create().If(waterTemp.Is(WaterTemp.Warm)))
+                .If(new ConditionBuilder().If(waterTemp.Is(WaterTemp.Warm)))
                 .Then(waterTemp.Is(WaterTemp.Warm))
                 .Build();
 
@@ -47,12 +46,12 @@ namespace FuzzyLogic.UnitTests.InferenceTests
 
             // Act
             var rule1 = new FuzzyRuleBuilder(PumpSpeedRule.Rule0)
-                .If(Condition.Create()
+                .If(new ConditionBuilder()
                     .If(waterTemp.IsNot(WaterTemp.Cold))
                     .And(waterTemp.IsNot(WaterTemp.Freezing))
                     .And(waterTemp.IsNot(WaterTemp.Frozen)))
-                .And(Condition.Create(0.5).If(waterTemp.Is(WaterTemp.Warm)))
-                .And(Condition.Create(0.5)
+                .And(new ConditionBuilder(0.5).If(waterTemp.Is(WaterTemp.Warm)))
+                .Or(new ConditionBuilder(0.5)
                     .If(waterTemp.IsNot(WaterTemp.Frozen))
                     .And(waterTemp.IsNot(WaterTemp.Boiling)))
                 .Then(waterTemp.IsNot(WaterTemp.Boiling))
@@ -72,15 +71,15 @@ namespace FuzzyLogic.UnitTests.InferenceTests
 
             // Act
             var rule1 = new FuzzyRuleBuilder("Rule1")
-                .If(Condition.Create()
+                .If(new ConditionBuilder()
                     .If(waterTemp.Is("cold"))
                     .And(waterTemp.IsNot("freezing"))
                     .Or(waterTemp.IsNot("frozen")))
-                .And(Condition.Create(0.8)
+                .And(new ConditionBuilder(0.8)
                     .If(waterTemp.Is("warm"))
                     .And(waterTemp.IsNot("hot"))
                     .Or(waterTemp.IsNot("boiling")))
-                .And(Condition.Create()
+                .And(new ConditionBuilder()
                     .If(waterTemp.Is("frozen"))
                     .And(waterTemp.Is("warm")))
                 .Then(waterTemp.IsNot("frozen"))

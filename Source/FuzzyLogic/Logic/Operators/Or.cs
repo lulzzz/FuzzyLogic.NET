@@ -22,7 +22,8 @@ namespace FuzzyLogic.Logic.Operators
         /// <summary>
         /// Initializes a new instance of the <see cref="Or"/> class.
         /// </summary>
-        public Or() : base(nameof(Or).ToUpper())
+        public Or()
+            : base(nameof(Or).ToUpper())
         {
         }
     }

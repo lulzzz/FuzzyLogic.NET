@@ -22,7 +22,8 @@ namespace FuzzyLogic.Logic.Operators
         /// <summary>
         /// Initializes a new instance of the <see cref="Is"/> class.
         /// </summary>
-        public Is() : base(nameof(Is).ToUpper())
+        public Is()
+            : base(nameof(Is).ToUpper())
         {
         }
 

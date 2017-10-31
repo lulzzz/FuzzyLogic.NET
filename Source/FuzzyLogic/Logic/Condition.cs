@@ -13,6 +13,7 @@ namespace FuzzyLogic.Logic
     using System.Collections.Generic;
     using System.Linq;
     using FuzzyLogic.Logic.Interfaces;
+    using FuzzyLogic.Utility;
 
     /// <summary>
     /// The <see cref="Condition"/> class.
@@ -22,53 +23,46 @@ namespace FuzzyLogic.Logic
         /// <summary>
         /// Initializes a new instance of the <see cref="Condition"/> class.
         /// </summary>
+        /// <param name="connective">
+        /// The connective.
+        /// </param>
+        /// <param name="premises">
+        /// The premises.
+        /// </param>
         /// <param name="weight">
         /// The weight.
         /// </param>
         /// <returns>
         /// The <see cref="Condition"/>.
         /// </returns>
-        private Condition(double weight)
+        public Condition(
+            IConnectiveOperator connective,
+            IList<Premise> premises,
+            double weight)
         {
-            Utility.Validate.NotOutOfRange(weight, nameof(weight), 0, 1);
+            Validate.NotNull(connective, nameof(connective));
+            Validate.CollectionNotNullOrEmpty(premises, nameof(premises));
+            Validate.NotOutOfRange(weight, nameof(weight), 0, 1);
 
+            this.Connective = connective;
+            this.Premises = premises;
             this.Weight = weight;
         }
 
         /// <summary>
         /// Gets the connective logic operator.
         /// </summary>
-        public IConnectiveOperator Connective { get; private set; }
+        public IConnectiveOperator Connective { get; }
 
         /// <summary>
         /// Gets the list of premises.
         /// </summary>
-        public IList<Premise> Premises { get; } = new List<Premise>();
+        public IList<Premise> Premises { get; }
 
         /// <summary>
         /// Gets the weight.
         /// </summary>
         public double Weight { get; private set; }
-
-        /// <summary>
-        /// Sets the conditions connective (if null).
-        /// </summary>
-        /// <param name="connective">
-        /// The connective.
-        /// </param>
-        /// <exception cref="InvalidOperationException">
-        /// Throws if the method is called when the connective is already set (not null).
-        /// </exception>
-        public void SetConnective(IConnectiveOperator connective)
-        {
-            if (this.Connective != null)
-            {
-                throw new InvalidOperationException(
-                    "Invalid Operation (cannot change a conditions connective once set).");
-            }
-
-            this.Connective = connective;
-        }
 
         /// <summary>
         /// The set weight.
@@ -78,91 +72,9 @@ namespace FuzzyLogic.Logic
         /// </param>
         public void SetWeight(double weight)
         {
-            Utility.Validate.NotOutOfRange(weight, nameof(weight), 0, 1);
+            Validate.NotOutOfRange(weight, nameof(weight), 0, 1);
 
             this.Weight = weight;
-        }
-
-        /// <summary>
-        /// Returns a new condition with the given weight.
-        /// </summary>
-        /// <param name="weight">
-        /// The weight [0, 1].
-        /// </param>
-        /// <returns>
-        /// A <see cref="Condition"/>.
-        /// </returns>
-        public static Condition Create(double weight = 1)
-        {
-            Utility.Validate.NotOutOfRange(weight, nameof(weight), 0, 1);
-
-            return new Condition(weight);
-        }
-
-        /// <summary>
-        /// Adds an 'If' premise to the condition.
-        /// </summary>
-        /// <param name="proposition">
-        /// The proposition.
-        /// </param>
-        /// <returns>
-        /// A <see cref="Condition"/>.
-        /// </returns>
-        public Condition If(Proposition proposition)
-        {
-            Utility.Validate.NotNull(proposition, nameof(proposition));
-
-            this.Premises.Add(new Premise(
-                LogicOperators.If(),
-                proposition.Variable,
-                proposition.Evaluator,
-                proposition.State));
-
-            return this;
-        }
-
-        /// <summary>
-        /// Adds an 'And' premise to the condition.
-        /// </summary>
-        /// <param name="proposition">
-        /// The proposition.
-        /// </param>
-        /// <returns>
-        /// A <see cref="Condition"/>.
-        /// </returns>
-        public Condition And(Proposition proposition)
-        {
-            Utility.Validate.NotNull(proposition, nameof(proposition));
-
-            this.Premises.Add(new Premise(
-                LogicOperators.And(),
-                proposition.Variable,
-                proposition.Evaluator,
-                proposition.State));
-
-            return this;
-        }
-
-        /// <summary>
-        /// Adds an 'Or' premise to the condition.
-        /// </summary>
-        /// <param name="proposition">
-        /// The proposition.
-        /// </param>
-        /// <returns>
-        /// A <see cref="Condition"/>.
-        /// </returns>
-        public Condition Or(Proposition proposition)
-        {
-            Utility.Validate.NotNull(proposition, nameof(proposition));
-
-            this.Premises.Add(new Premise(
-                LogicOperators.Or(),
-                proposition.Variable,
-                proposition.Evaluator,
-                proposition.State));
-
-            return this;
         }
 
         /// <summary>
@@ -179,8 +91,7 @@ namespace FuzzyLogic.Logic
         /// </exception>
         public double Evaluate(IDictionary<Label, double> data)
         {
-            Utility.Validate.CollectionNotNullOrEmpty(this.Premises, nameof(this.Premises));
-            Utility.Validate.CollectionNotNullOrEmpty(data, nameof(data));
+            Validate.CollectionNotNullOrEmpty(data, nameof(data));
 
             var evaluations = new List<Evaluation>();
 
@@ -213,27 +124,6 @@ namespace FuzzyLogic.Logic
             }
 
             return Math.Max(ifAndAverage, highestOr) * this.Weight;
-        }
-
-        /// <summary>
-        /// Validates the condition.
-        /// </summary>
-        /// <exception cref="InvalidOperationException">
-        /// Throws if the condition is found invalid.
-        /// </exception>
-        public void Validate()
-        {
-            if (this.Connective == null)
-            {
-                throw new InvalidOperationException(
-                    "Invalid Condition (the connective is null).");
-            }
-
-            if (this.Premises.Count == 0)
-            {
-                throw new InvalidOperationException(
-                    "Invalid Condition (there are no premises).");
-            }
         }
 
         /// <summary>

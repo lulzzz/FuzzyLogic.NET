@@ -123,8 +123,6 @@ namespace FuzzyLogic.Inference
             Validate.CollectionNotNullOrEmpty(conditions, nameof(conditions));
             Validate.CollectionNotNullOrEmpty(conclusions, nameof(conclusions));
 
-            conditions.ForEach(c => c.Validate());
-
             if (conditions[0].Connective.ToString() != LogicOperators.If().ToString())
             {
                 throw new InvalidOperationException(

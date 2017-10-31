@@ -22,7 +22,8 @@ namespace FuzzyLogic.Logic.Operators
         /// <summary>
         /// Initializes a new instance of the <see cref="Then"/> class.
         /// </summary>
-        public Then() : base(nameof(Then).ToUpper())
+        public Then()
+            : base(nameof(Then).ToUpper())
         {
         }
     }
