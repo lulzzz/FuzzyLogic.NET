@@ -19,8 +19,6 @@ namespace FuzzyLogic.Logic
     [Immutable]
     public class Premise : Proposition
     {
-        private readonly Label stateLabel;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Premise"/> class.
         /// </summary>
@@ -49,7 +47,6 @@ namespace FuzzyLogic.Logic
 
             this.Connective = connective;
             this.Subject = variable.Label;
-            this.stateLabel = Label.Create(state.ToString());
         }
 
         /// <summary>
@@ -75,9 +72,7 @@ namespace FuzzyLogic.Logic
         {
             Validate.NotOutOfRange(input, nameof(input));
 
-            var stateMembership = this.Variable.GetMembership(this.stateLabel, input);
-
-            return new Evaluation(this.Connective, stateMembership);
+            return new Evaluation(this.Connective, this.Variable.GetMembership(this.State, input));
         }
 
         /// <summary>

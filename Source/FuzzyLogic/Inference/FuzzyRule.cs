@@ -108,12 +108,10 @@ namespace FuzzyLogic.Inference
 
             foreach (var conclusion in this.conclusions)
             {
-                var label = Label.Create(conclusion.State.ToString());
-
                 output.Add(new FuzzyOutput(
-                    label,
+                    conclusion.Variable.Label,
                     conclusion.State,
-                    conclusion.Variable.GetSet(label),
+                    conclusion.Variable.GetSet(conclusion.State),
                     firingStrength));
             }
 

@@ -29,14 +29,14 @@ namespace FuzzyLogic.UnitTests
         {
             // Arrange
             var function = TriangularFunction.Create(2, 3, 4);
-            var fuzzySet = new FuzzySet("fuzzy_set", function);
+            var fuzzySet = new FuzzySet("some_fuzzy_state", function);
 
             // Act
             var result = fuzzySet.GetMembership(input);
 
             // Assert
             Assert.Equal(expected, result);
-            Assert.Equal("fuzzy_set", fuzzySet.Label.Value);
+            Assert.Equal("some_fuzzy_state", fuzzySet.State.Value);
         }
 
         [Fact]
@@ -44,7 +44,7 @@ namespace FuzzyLogic.UnitTests
         {
             // Arrange
             var function = TriangularFunction.Create(2, 3, 4);
-            var fuzzySet = new FuzzySet("fuzzy_set", function);
+            var fuzzySet = new FuzzySet("some_fuzzy_state", function);
 
             // Act
             var result = fuzzySet.IsNormal;
@@ -58,7 +58,7 @@ namespace FuzzyLogic.UnitTests
         {
             // Arrange
             var function = TriangularFunction.Create(2, 3, 4, 0, 0.9);
-            var fuzzySet = new FuzzySet("fuzzy_set", function);
+            var fuzzySet = new FuzzySet("some_fuzzy_state", function);
 
             // Act
             var result = fuzzySet.IsNormal;
@@ -72,7 +72,7 @@ namespace FuzzyLogic.UnitTests
         {
             // Arrange
             var function = TrapezoidalFunction.CreateWithLeftEdge(0, 3);
-            var fuzzySet = new FuzzySet("fuzzy_set", function);
+            var fuzzySet = new FuzzySet("some_fuzzy_state", function);
 
             // Act
             var result = fuzzySet.IsConvex;
@@ -86,7 +86,7 @@ namespace FuzzyLogic.UnitTests
         {
             // Arrange
             var function = TrapezoidalFunction.CreateWithRightEdge(0, 3);
-            var fuzzySet = new FuzzySet("fuzzy_set", function);
+            var fuzzySet = new FuzzySet("some_fuzzy_state", function);
 
             // Act
             var result = fuzzySet.IsConvex;
@@ -100,7 +100,7 @@ namespace FuzzyLogic.UnitTests
         {
             // Arrange
             var function = TrapezoidalFunction.Create(0, 1, 2, 3);
-            var fuzzySet = new FuzzySet("fuzzy_set", function);
+            var fuzzySet = new FuzzySet("some_fuzzy_state", function);
 
             // Act
             var result = fuzzySet.IsConvex;
@@ -118,7 +118,7 @@ namespace FuzzyLogic.UnitTests
         {
             // Arrange
             var function = TriangularFunction.Create(2, 3, 4);
-            var fuzzySet = new FuzzySet("fuzzy_set", function);
+            var fuzzySet = new FuzzySet("some_fuzzy_state", function);
 
             // Act
             var result = fuzzySet.Complement(input);
@@ -140,8 +140,8 @@ namespace FuzzyLogic.UnitTests
             // Arrange
             var function1 = TriangularFunction.Create(2, 3, 4);
             var function2 = TriangularFunction.Create(3, 4, 5, 0, 0.75);
-            var fuzzySet1 = new FuzzySet("fuzzy_set1", function1);
-            var fuzzySet2 = new FuzzySet("fuzzy_set2", function2);
+            var fuzzySet1 = new FuzzySet("some_fuzzy_state1", function1);
+            var fuzzySet2 = new FuzzySet("some_fuzzy_state2", function2);
 
             // Act
             var result = fuzzySet1.Union(fuzzySet2, input);
@@ -163,8 +163,8 @@ namespace FuzzyLogic.UnitTests
             // Arrange
             var function1 = TriangularFunction.Create(1, 3, 5);
             var function2 = TriangularFunction.Create(2, 4, 6, 0, 0.75);
-            var fuzzySet1 = new FuzzySet("fuzzy_set1", function1);
-            var fuzzySet2 = new FuzzySet("fuzzy_set2", function2);
+            var fuzzySet1 = new FuzzySet("some_fuzzy_state1", function1);
+            var fuzzySet2 = new FuzzySet("some_fuzzy_state2", function2);
 
             // Act
             var result = fuzzySet1.Intersection(fuzzySet2, input);

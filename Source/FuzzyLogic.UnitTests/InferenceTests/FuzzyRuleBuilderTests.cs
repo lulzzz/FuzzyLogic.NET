@@ -13,7 +13,6 @@ namespace FuzzyLogic.UnitTests.InferenceTests
     using System.Diagnostics.CodeAnalysis;
     using FuzzyLogic.Inference;
     using FuzzyLogic.Logic;
-    using FuzzyLogic.MembershipFunctions;
     using FuzzyLogic.TestKit;
     using FuzzyLogic.TestKit.Stubs;
     using Xunit;
@@ -47,7 +46,7 @@ namespace FuzzyLogic.UnitTests.InferenceTests
             var waterTemp = StubLinguisticVariableFactory.WaterTemp();
 
             // Act
-            var rule1 = new FuzzyRuleBuilder("Rule1")
+            var rule1 = new FuzzyRuleBuilder(PumpSpeedRule.Rule0)
                 .If(Condition.Create()
                     .If(waterTemp.IsNot(WaterTemp.Cold))
                     .And(waterTemp.IsNot(WaterTemp.Freezing))

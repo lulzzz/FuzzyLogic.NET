@@ -25,18 +25,18 @@ namespace FuzzyLogic
         /// <summary>
         /// Initializes a new instance of the <see cref="FuzzySet"/> class.
         /// </summary>
-        /// <param name="label">
-        /// The label.
+        /// <param name="state">
+        /// The state.
         /// </param>
         /// <param name="function">
         /// The membership function.
         /// </param>
-        public FuzzySet(string label, IMembershipFunction function)
+        public FuzzySet(string state, IMembershipFunction function)
         {
-            Validate.NotNull(label, nameof(label));
+            Validate.NotNull(state, nameof(state));
             Validate.NotNull(function, nameof(function));
 
-            this.Label = Label.Create(label.ToLower());
+            this.State = FuzzyState.Create(state);
             this.function = function;
         }
 
@@ -55,9 +55,9 @@ namespace FuzzyLogic
         }
 
         /// <summary>
-        /// Gets the name of the fuzzy set.
+        /// Gets the fuzzy state of the set.
         /// </summary>
-        public Label Label { get; }
+        public FuzzyState State { get; }
 
         /// <summary>
         /// Returns the lower bound of the <see cref="FuzzySet"/>.

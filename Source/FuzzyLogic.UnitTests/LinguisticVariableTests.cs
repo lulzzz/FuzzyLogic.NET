@@ -123,7 +123,7 @@ namespace FuzzyLogic.UnitTests
             var temperature = StubLinguisticVariableFactory.WaterTemp();
 
             // Act
-            var result = temperature.IsMember(Label.Create("vapour"));
+            var result = temperature.IsMember(FuzzyState.Create("vapour"));
 
             // Assert
             Assert.False(result);
@@ -139,7 +139,7 @@ namespace FuzzyLogic.UnitTests
             var result = temperature.GetSet(WaterTemp.Frozen);
 
             // Assert
-            Assert.Equal(Label.Create("frozen"), result.Label);
+            Assert.Equal(FuzzyState.Create("frozen"), result.State);
         }
 
         [Fact]

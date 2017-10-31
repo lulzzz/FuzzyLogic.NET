@@ -65,7 +65,7 @@ namespace FuzzyLogic.Logic
 
         private void ValidateProposition()
         {
-            if (!this.Variable.IsMember(Label.Create(this.State.Value)))
+            if (!this.Variable.IsMember(this.State))
             {
                 throw new InvalidOperationException(
                     $"Invalid Proposition (the state '{this.State}' is not a member of the linguistic variable '{this.Variable.Label}').");

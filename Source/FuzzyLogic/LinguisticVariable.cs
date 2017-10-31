@@ -22,7 +22,7 @@ namespace FuzzyLogic
     [Immutable]
     public sealed class LinguisticVariable
     {
-        private readonly Dictionary<Label, FuzzySet> fuzzySets = new Dictionary<Label, FuzzySet>();
+        private readonly Dictionary<FuzzyState, FuzzySet> fuzzySets = new Dictionary<FuzzyState, FuzzySet>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LinguisticVariable"/> class.
@@ -57,7 +57,7 @@ namespace FuzzyLogic
 
             foreach (var set in inputSets)
             {
-                this.fuzzySets.Add(set.Label, set);
+                this.fuzzySets.Add(set.State, set);
             }
         }
 
@@ -106,7 +106,7 @@ namespace FuzzyLogic
         /// <returns>
         /// The <see cref="IReadOnlyCollection{T}"/>.
         /// </returns>
-        public IReadOnlyCollection<Label> GetMembers() => this.fuzzySets.Keys.ToList().AsReadOnly();
+        public IReadOnlyCollection<FuzzyState> GetMembers() => this.fuzzySets.Keys.ToList().AsReadOnly();
 
         /// <summary>
         /// Returns a proposition based on whether the variable IS in the given state.
@@ -205,75 +205,75 @@ namespace FuzzyLogic
         }
 
         /// <summary>
-        /// Evaluates whether the given label is a member of the <see cref="LinguisticVariable"/>.
+        /// Evaluates whether the given state is a member of the <see cref="LinguisticVariable"/>.
         /// </summary>
-        /// <param name="label">
-        /// The label.
+        /// <param name="state">
+        /// The state.
         /// </param>
         /// <returns>
         /// A <see cref="bool"/>.
         /// </returns>
-        public bool IsMember(Label label)
+        public bool IsMember(FuzzyState state)
         {
-            Validate.NotNull(label, nameof(label));
+            Validate.NotNull(state, nameof(state));
 
-            return this.fuzzySets.ContainsKey(label);
+            return this.fuzzySets.ContainsKey(state);
         }
 
         /// <summary>
         /// Evaluates whether the given label is a member of the <see cref="LinguisticVariable"/>.
         /// </summary>
-        /// <param name="labelEnum">
+        /// <param name="state">
         /// The label enumerator.
         /// </param>
         /// <returns>
         /// A <see cref="bool"/>.
         /// </returns>
-        public bool IsMember(Enum labelEnum)
+        public bool IsMember(Enum state)
         {
-            Validate.NotNull(labelEnum, nameof(labelEnum));
+            Validate.NotNull(state, nameof(state));
 
-            return this.IsMember(CreateLabelFromEnum(labelEnum));
+            return this.IsMember(CreateStateFromEnum(state));
         }
 
         /// <summary>
-        /// Returns a <see cref="FuzzySet"/> with a label which matches the given label.
+        /// Returns a <see cref="FuzzySet"/> with a state which matches the given state.
         /// </summary>
-        /// <param name="label">
-        /// The label.
+        /// <param name="state">
+        /// The state.
         /// </param>
         /// <returns>
         /// The <see cref="FuzzySet"/>.
         /// </returns>
-        public FuzzySet GetSet(Label label)
+        public FuzzySet GetSet(FuzzyState state)
         {
-            Validate.NotNull(label, nameof(label));
+            Validate.NotNull(state, nameof(state));
 
-            return this.fuzzySets[label];
+            return this.fuzzySets[state];
         }
 
         /// <summary>
         /// Returns a <see cref="FuzzySet"/> with a label which matches the given enumerator.
         /// </summary>
-        /// <param name="labelEnum">
+        /// <param name="state">
         /// The label enumerator.
         /// </param>
         /// <returns>
         /// The <see cref="FuzzySet"/>.
         /// </returns>
-        public FuzzySet GetSet(Enum labelEnum)
+        public FuzzySet GetSet(Enum state)
         {
-            Validate.NotNull(labelEnum, nameof(labelEnum));
+            Validate.NotNull(state, nameof(state));
 
-            return this.GetSet(CreateLabelFromEnum(labelEnum));
+            return this.GetSet(CreateStateFromEnum(state));
         }
 
         /// <summary>
-        /// Returns the membership value [0, 1] of the member matching the given label
-        /// (using the given as input <see cref="double"/>).
+        /// Returns the membership value [0, 1] of the member matching the given fuzzy state
+        /// (using the given input <see cref="double"/>).
         /// </summary>
-        /// <param name="label">
-        /// The label.
+        /// <param name="state">
+        /// The state.
         /// </param>
         /// <param name="input">
         /// The input.
@@ -281,12 +281,12 @@ namespace FuzzyLogic
         /// <returns>
         /// The <see cref="double"/>.
         /// </returns>
-        public double GetMembership(Label label, double input)
+        public double GetMembership(FuzzyState state, double input)
         {
-            Validate.NotNull(label, nameof(label));
+            Validate.NotNull(state, nameof(state));
             Validate.NotOutOfRange(input, nameof(input), this.LowerBound, this.UpperBound);
 
-            return this.fuzzySets[label].GetMembership(input);
+            return this.fuzzySets[state].GetMembership(input);
         }
 
         /// <summary>
@@ -307,7 +307,7 @@ namespace FuzzyLogic
             Validate.NotNull(labelEnum, nameof(labelEnum));
             Validate.NotOutOfRange(input, nameof(input), this.LowerBound, this.UpperBound);
 
-            return this.fuzzySets[CreateLabelFromEnum(labelEnum)].GetMembership(input);
+            return this.fuzzySets[CreateStateFromEnum(labelEnum)].GetMembership(input);
         }
 
         /// <summary>
@@ -324,18 +324,16 @@ namespace FuzzyLogic
         {
             Validate.NotOutOfRange(input, nameof(input), this.LowerBound, this.UpperBound);
 
-            var label = this.fuzzySets
+           return this.fuzzySets
                 .OrderByDescending(fs => fs.Value.GetMembership(input))
                 .FirstOrDefault()
                 .Value
-                .Label;
-
-            return FuzzyState.Create(label.Value);
+                .State;
         }
 
-        private static Label CreateLabelFromEnum(Enum @enum)
+        private static FuzzyState CreateStateFromEnum(Enum @enum)
         {
-            return Label.Create(@enum.ToString().ToLower());
+            return FuzzyState.Create(@enum.ToString().ToLower());
         }
     }
 }

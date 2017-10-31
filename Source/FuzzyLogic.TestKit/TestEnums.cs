@@ -40,6 +40,17 @@ namespace FuzzyLogic.TestKit
 
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1602:EnumerationItemsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
+    public enum PumpSpeedRule
+    {
+        Rule0 = 0,
+        Rule1 = 1,
+        Rule2 = 2,
+        Rule3 = 3,
+
+    }
+
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1602:EnumerationItemsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public enum InputVariable
     {
         Unknown = 0,
