@@ -53,26 +53,6 @@ namespace FuzzyLogic.Inference
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FuzzyRule"/> class.
-        /// </summary>
-        /// <param name="label">
-        /// The label.
-        /// </param>
-        /// <param name="conditions">
-        /// The conditions.
-        /// </param>
-        /// <param name="conclusions">
-        /// The conclusions.
-        /// </param>
-        public FuzzyRule(
-            Enum label,
-            IList<Condition> conditions,
-            IList<Conclusion> conclusions)
-            : this(label.ToString(), conditions, conclusions)
-        {
-        }
-
-        /// <summary>
         /// Gets the rule label.
         /// </summary>
         public Label Label { get; }
@@ -94,9 +74,9 @@ namespace FuzzyLogic.Inference
         /// The data.
         /// </param>
         /// <returns>
-        /// The <see cref="IEnumerable{FuzzyOutput}"/>.
+        /// The <see cref="IList{FuzzyOutput}"/>.
         /// </returns>
-        public IEnumerable<FuzzyOutput> Evaluate(IDictionary<Label, double> data)
+        public IList<FuzzyOutput> Evaluate(IDictionary<Label, double> data)
         {
             Validate.NotNull(data, nameof(data));
 

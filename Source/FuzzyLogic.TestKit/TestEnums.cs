@@ -26,7 +26,7 @@ namespace FuzzyLogic.TestKit
 
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1602:EnumerationItemsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
-    public enum PumpSpeed
+    public enum FanSpeed
     {
         Unknown = 0,
         Off = 1,
@@ -56,6 +56,6 @@ namespace FuzzyLogic.TestKit
         Unknown = 0,
         WaterTemp = 1,
         Pressure = 2,
-        FanSpeed = 3
+        PumpSpeed = 3
     }
 }

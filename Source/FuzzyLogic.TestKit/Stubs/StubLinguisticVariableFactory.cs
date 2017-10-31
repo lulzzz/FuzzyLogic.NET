@@ -34,5 +34,19 @@ namespace FuzzyLogic.TestKit.Stubs
 
             return new LinguisticVariable(InputVariable.WaterTemp, new List<FuzzySet> { frozen, freezing, cold, warm, hot, boiling }, -20, 200);
         }
+
+        /// <summary>
+        /// Returns a <see cref="LinguisticVariable"/> representing fan speed.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="LinguisticVariable"/>.
+        /// </returns>
+        public static LinguisticVariable FanSpeed()
+        {
+            var off = new FuzzySet(TestKit.FanSpeed.Off, SingletonFunction.Create(0));
+            var limit = new FuzzySet(TestKit.FanSpeed.AtLimit, SingletonFunction.Create(5000));
+
+            return new LinguisticVariable(InputVariable.PumpSpeed, new List<FuzzySet> { off, limit }, 0, 5000);
+        }
     }
 }

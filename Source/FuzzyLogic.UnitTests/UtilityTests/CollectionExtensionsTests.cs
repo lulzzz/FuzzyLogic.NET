@@ -11,6 +11,7 @@ namespace FuzzyLogic.UnitTests.UtilityTests
 {
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using FuzzyLogic.Utility;
     using Xunit;
 
     [SuppressMessage("StyleCop.CSharp.NamingRules", "*", Justification = "Reviewed. Suppression is OK within the Test Suite.")]
@@ -25,7 +26,7 @@ namespace FuzzyLogic.UnitTests.UtilityTests
             var testClass2 = new TestClass();
             var testClass3 = new TestClass();
 
-            var listOfActions = new List<TestClass> { testClass1, testClass2, testClass3 };
+            IEnumerable<TestClass> listOfActions = new List<TestClass> { testClass1, testClass2, testClass3 };
 
             // Act
             listOfActions.ForEach(tc => tc.Invoke());

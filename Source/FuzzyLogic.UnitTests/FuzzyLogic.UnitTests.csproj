@@ -58,6 +58,7 @@
     <Compile Include="FuzzySetTests.cs" />
     <Compile Include="InferenceTests\DatabaseTests.cs" />
     <Compile Include="InferenceTests\FuzzyRulebaseTests.cs" />
+    <Compile Include="InferenceTests\FuzzyRuleTests.cs" />
     <Compile Include="LinguisticVariableTests.cs" />
     <Compile Include="LabelTests.cs" />
     <Compile Include="FuzzyStateTests.cs" />

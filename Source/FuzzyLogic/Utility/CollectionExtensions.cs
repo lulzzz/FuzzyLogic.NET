@@ -15,7 +15,7 @@ namespace FuzzyLogic.Utility
     internal static class CollectionExtensions
     {
         /// <summary>
-        /// The for each method for generic types.
+        /// Performs the action on each element in the <see cref="IEnumerable{T}"/> source.
         /// </summary>
         /// <param name="source">
         /// The source.

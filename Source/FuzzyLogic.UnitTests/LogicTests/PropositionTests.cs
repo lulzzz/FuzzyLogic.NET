@@ -27,7 +27,7 @@ namespace FuzzyLogic.UnitTests.LogicTests
             var waterTemp = StubLinguisticVariableFactory.WaterTemp();
 
             // Invalid fuzzy state.
-            var fuzzyState = FuzzyState.Create(PumpSpeed.Off);
+            var fuzzyState = FuzzyState.Create(FanSpeed.Off);
 
             // Act
             // Assert
