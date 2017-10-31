@@ -32,7 +32,7 @@ namespace FuzzyLogic.UnitTests.BinaryOperationsTests
             double expected)
         {
             // Arrange
-            var hamacherSum = new HamacherSum();
+            var hamacherSum = TriangularConormFactory.HamacherSum();
 
             // Act
             var result = hamacherSum.Evaluate(membershipA, membershipB);

@@ -15,7 +15,7 @@ namespace FuzzyLogic.BinaryOperations
     /// <summary>
     /// The sealed <see cref="DrasticSum"/> class.
     /// </summary>
-    public sealed class DrasticSum : ITriangularNorm
+    public sealed class DrasticSum : ITriangularConorm
     {
         /// <summary>
         /// Returns the calculated drastic sum t-conorm of the given membership values.

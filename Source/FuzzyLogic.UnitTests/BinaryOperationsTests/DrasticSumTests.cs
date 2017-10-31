@@ -31,7 +31,7 @@ namespace FuzzyLogic.UnitTests.BinaryOperationsTests
             double expected)
         {
             // Arrange
-            var drasticSum = new DrasticSum();
+            var drasticSum = TriangularConormFactory.DrasticSum();
 
             // Act
             var result = drasticSum.Evaluate(membershipA, membershipB);

@@ -31,7 +31,7 @@ namespace FuzzyLogic.UnitTests.BinaryOperationsTests
             double expected)
         {
             // Arrange
-            var boundedSum = new BoundedSum();
+            var boundedSum = TriangularConormFactory.BoundedSum();
 
             // Act
             var result = boundedSum.Evaluate(membershipA, membershipB);

@@ -31,7 +31,7 @@ namespace FuzzyLogic.UnitTests.BinaryOperationsTests
             double expected)
         {
             // Arrange
-            var drasticProduct = new DrasticProduct();
+            var drasticProduct = TriangularNormFactory.DrasticProduct();
 
             // Act
             var result = drasticProduct.Evaluate(membershipA, membershipB);

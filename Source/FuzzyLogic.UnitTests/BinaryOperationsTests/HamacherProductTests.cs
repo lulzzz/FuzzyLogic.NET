@@ -31,7 +31,7 @@ namespace FuzzyLogic.UnitTests.BinaryOperationsTests
             double expected)
         {
             // Arrange
-            var hamacherProduct = new HamacherProduct();
+            var hamacherProduct = TriangularNormFactory.HamacherProduct();
 
             // Act
             var result = hamacherProduct.Evaluate(membershipA, membershipB);

@@ -31,7 +31,7 @@ namespace FuzzyLogic.UnitTests.BinaryOperationsTests
             double expected)
         {
             // Arrange
-            var einsteinProduct = new EinsteinProduct();
+            var einsteinProduct = TriangularNormFactory.EinsteinProduct();
 
             // Act
             var result = einsteinProduct.Evaluate(membershipA, membershipB);

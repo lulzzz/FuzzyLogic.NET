@@ -31,7 +31,7 @@ namespace FuzzyLogic.UnitTests.BinaryOperationsTests
             double expected)
         {
             // Arrange
-            var lukasiewicz = new Lukasiewicz();
+            var lukasiewicz = TriangularNormFactory.Lukasiewicz();
 
             // Act
             var result = lukasiewicz.Evaluate(membershipA, membershipB);

@@ -31,7 +31,7 @@ namespace FuzzyLogic.UnitTests.BinaryOperationsTests
             double expected)
         {
             // Arrange
-            var algebraicProduct = new AlgebraicProduct();
+            var algebraicProduct = TriangularNormFactory.AlgebraicProduct();
 
             // Act
             var result = algebraicProduct.Evaluate(membershipA, membershipB);

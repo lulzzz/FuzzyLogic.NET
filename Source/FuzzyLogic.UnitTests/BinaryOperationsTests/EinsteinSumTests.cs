@@ -31,7 +31,7 @@ namespace FuzzyLogic.UnitTests.BinaryOperationsTests
             double expected)
         {
             // Arrange
-            var einsteinSum = new EinsteinSum();
+            var einsteinSum = TriangularConormFactory.EinsteinSum();
 
             // Act
             var result = einsteinSum.Evaluate(membershipA, membershipB);
