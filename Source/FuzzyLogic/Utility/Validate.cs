@@ -88,12 +88,14 @@ namespace FuzzyLogic.Utility
         {
             if (collection == null)
             {
-                throw new ArgumentNullException(paramName, $"The {paramName} collection is null.");
+                throw new ArgumentNullException(
+                    paramName, $"The {paramName} collection is null.");
             }
 
             if (collection.Count == 0)
             {
-                throw new ArgumentException($"The {paramName} collection is empty.", paramName);
+                throw new ArgumentException(
+                    $"The {paramName} collection is empty.", paramName);
             }
         }
 
@@ -120,12 +122,14 @@ namespace FuzzyLogic.Utility
         {
             if (collection == null)
             {
-                throw new ArgumentNullException(paramName, $"The {paramName} collection is null.");
+                throw new ArgumentNullException(
+                    paramName, $"The {paramName} collection is null.");
             }
 
             if (collection.Count != 0)
             {
-                throw new ArgumentException($"The {paramName} collection is not empty.", paramName);
+                throw new ArgumentException(
+                    $"The {paramName} collection is not empty.", paramName);
             }
         }
 
@@ -152,7 +156,8 @@ namespace FuzzyLogic.Utility
         {
             if (!collection.Contains(element))
             {
-                throw new ArgumentException($"The collection does not contain the {paramName} element.", paramName);
+                throw new ArgumentException(
+                    $"The collection does not contain the {paramName} element.", paramName);
             }
         }
 
@@ -179,7 +184,8 @@ namespace FuzzyLogic.Utility
         {
             if (collection.Contains(element))
             {
-                throw new ArgumentException($"The collection already contains the {paramName} element.", paramName);
+                throw new ArgumentException(
+                    $"The collection already contains the {paramName} element.", paramName);
             }
         }
 
@@ -209,7 +215,8 @@ namespace FuzzyLogic.Utility
         {
             if (!collection.ContainsKey(key))
             {
-                throw new ArgumentException($"The collection does not contain the {paramName} element.", paramName);
+                throw new ArgumentException(
+                    $"The collection does not contain the {paramName} element.", paramName);
             }
         }
 
@@ -239,7 +246,8 @@ namespace FuzzyLogic.Utility
         {
             if (collection.ContainsKey(key))
             {
-                throw new ArgumentException($"The collection already contains the {paramName} element.", paramName);
+                throw new ArgumentException(
+                    $"The collection already contains the {paramName} element.", paramName);
             }
         }
 
@@ -260,7 +268,8 @@ namespace FuzzyLogic.Utility
         {
             if (min > max)
             {
-                throw new ArgumentException("MinimumTNorm value cannot be greater than MaximumTConorm value.");
+                throw new ArgumentException(
+                    "Minimum value cannot be greater than Maximum value.");
             }
         }
 
@@ -297,28 +306,32 @@ namespace FuzzyLogic.Utility
                 case RangeEndPoints.Inclusive:
                     if (value < lowerBound || value > upperBound)
                     {
-                        throw new ArgumentOutOfRangeException(paramName, $"The {paramName} is not within the specified range [{lowerBound}, {upperBound}]. Value = {value}.");
+                        throw new ArgumentOutOfRangeException(
+                            paramName, $"The {paramName} is not within the specified range [{lowerBound}, {upperBound}]. Value = {value}.");
                     }
                     break;
 
                 case RangeEndPoints.LowerExclusive:
                     if (value <= lowerBound || value > upperBound)
                     {
-                        throw new ArgumentOutOfRangeException(paramName, $"The {paramName} is not within the specified range ({lowerBound}, {upperBound}]. Value = {value}.");
+                        throw new ArgumentOutOfRangeException(
+                            paramName, $"The {paramName} is not within the specified range ({lowerBound}, {upperBound}]. Value = {value}.");
                     }
                     break;
 
                 case RangeEndPoints.UpperExclusive:
                     if (value < lowerBound || value >= upperBound)
                     {
-                        throw new ArgumentOutOfRangeException(paramName, $"The {paramName} is not within the specified range [{lowerBound}, {upperBound}). Value = {value}.");
+                        throw new ArgumentOutOfRangeException(
+                            paramName, $"The {paramName} is not within the specified range [{lowerBound}, {upperBound}). Value = {value}.");
                     }
                     break;
 
                 case RangeEndPoints.Exclusive:
                     if (value <= lowerBound || value >= upperBound)
                     {
-                        throw new ArgumentOutOfRangeException(paramName, $"The {paramName} is not within the specified range ({lowerBound}, {upperBound}). Value = {value}.");
+                        throw new ArgumentOutOfRangeException(
+                            paramName, $"The {paramName} is not within the specified range ({lowerBound}, {upperBound}). Value = {value}.");
                     }
                     break;
             }
@@ -350,7 +363,8 @@ namespace FuzzyLogic.Utility
 
                 if (points[i - 1].X > points[i].X)
                 {
-                    throw new ArgumentException("Points array out of sequence (must be in ascending order on X axis).", paramName);
+                    throw new ArgumentException(
+                        "Points array out of sequence (must be in ascending order on X axis).", paramName);
                 }
             }
         }
@@ -407,7 +421,8 @@ namespace FuzzyLogic.Utility
              || double.IsNegativeInfinity(value)
              || double.IsPositiveInfinity(value))
             {
-                throw new ArgumentOutOfRangeException(paramName, $"The {paramName} is an invalid number.");
+                throw new ArgumentOutOfRangeException(
+                    paramName, $"The {paramName} is an invalid number.");
             }
         }
     }
