@@ -9,7 +9,7 @@
 
 namespace FuzzyLogic.BinaryOperations
 {
-    using FuzzyLogic.Utility;
+    using FuzzyLogic.Annotations;
 
     /// <summary>
     /// The sealed <see cref="HamacherSum"/> class.
@@ -17,7 +17,7 @@ namespace FuzzyLogic.BinaryOperations
     public sealed class HamacherSum : ITriangularConorm
     {
         /// <summary>
-        /// Returns the Hamacher sum t-conorm of the given membership values.
+        /// Returns the <see cref="HamacherSum"/> t-conorm of the given membership values.
         /// </summary>
         /// <param name="membershipA">
         /// The membership value A [0, 1].
@@ -26,17 +26,16 @@ namespace FuzzyLogic.BinaryOperations
         /// The membership value B [0, 1].
         /// </param>
         /// <returns>
-        /// A <see cref="double"/> [0, 1].
+        /// A <see cref="UnitInterval"/> [0, 1].
         /// </returns>
-        public double Evaluate(double membershipA, double membershipB)
+        [Pure]
+        public UnitInterval Evaluate(UnitInterval membershipA, UnitInterval membershipB)
         {
-            Validate.NotOutOfRange(membershipA, nameof(membershipA), 0, 1);
-            Validate.NotOutOfRange(membershipB, nameof(membershipB), 0, 1);
-
-            var numerator = (membershipA + membershipB) - (2 * (membershipA * membershipB));
-            var denominator = 1 - (membershipA * membershipB);
-
-            return denominator > 0 ? numerator / denominator : 1;
+            return 1 - (membershipA * membershipB) > 0
+                ? UnitInterval.Create(
+                ((membershipA + membershipB) - (2 * (membershipA * membershipB)))
+                / (1 - (membershipA * membershipB)))
+                : UnitInterval.One();
         }
     }
 }

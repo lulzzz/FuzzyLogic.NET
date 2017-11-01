@@ -1,5 +1,5 @@
 ﻿// -------------------------------------------------------------------------------------------------
-// <copyright file="IsNotTests.cs" author="Christopher Sellers">
+// <copyright file="NotTests.cs" author="Christopher Sellers">
 //   Copyright (C) 2017. All rights reserved.
 //   https://github.com/cjdsellers/FuzzyLogic
 //   the use of this source code is governed by the Apache 2.0 license
@@ -15,7 +15,7 @@ namespace FuzzyLogic.UnitTests.LogicTests.LogicOperatorsTests
 
     [SuppressMessage("StyleCop.CSharp.NamingRules", "*", Justification = "Reviewed. Suppression is OK within the Test Suite.")]
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "*", Justification = "Reviewed. Suppression is OK within the Test Suite.")]
-    public class IsNotTests
+    public class NotTests
     {
         [Theory]
         [InlineData(0, 1)]
@@ -29,10 +29,10 @@ namespace FuzzyLogic.UnitTests.LogicTests.LogicOperatorsTests
             var isNotOperator = LogicOperators.IsNot();
 
             // Act
-            var result = isNotOperator.Evaluate(membership);
+            var result = isNotOperator.Evaluate(UnitInterval.Create(membership));
 
             // Assert
-            Assert.Equal(expected, result);
+            Assert.Equal(UnitInterval.Create(expected), result);
         }
     }
 }

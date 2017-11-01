@@ -23,6 +23,6 @@ namespace FuzzyLogic.Logic.Interfaces
         /// <returns>
         /// A <see cref="bool"/>.
         /// </returns>
-        double Evaluate(double membership);
+        UnitInterval Evaluate(UnitInterval membership);
     }
 }

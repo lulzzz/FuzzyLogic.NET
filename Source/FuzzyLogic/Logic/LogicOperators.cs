@@ -20,7 +20,7 @@ namespace FuzzyLogic.Logic
     {
         private static readonly If IfOperator = new If();
         private static readonly Is IsOperator = new Is();
-        private static readonly IsNot IsNotOperator = new IsNot();
+        private static readonly Not NotOperator = new Not();
         private static readonly Then ThenOperator = new Then();
         private static readonly And AndOperator = new And();
         private static readonly Or OrOperator = new Or();
@@ -47,7 +47,7 @@ namespace FuzzyLogic.Logic
         /// <returns>
         /// An <see cref="IsNot"/>.
         /// </returns>
-        public static IsNot IsNot() => IsNotOperator;
+        public static Not IsNot() => NotOperator;
 
         /// <summary>
         /// The 'THEN' logic operator.

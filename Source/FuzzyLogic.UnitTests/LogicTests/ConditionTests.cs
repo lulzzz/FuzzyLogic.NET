@@ -33,10 +33,10 @@ namespace FuzzyLogic.UnitTests.LogicTests
                 .Build();
 
             // Act
-            condition.SetWeight(0.5);
+            condition.SetWeight(UnitInterval.Create(0.5));
 
             // Assert
-            Assert.Equal(0.5, condition.Weight);
+            Assert.Equal(0.5, condition.Weight.Value);
         }
 
         [Fact]
@@ -74,7 +74,7 @@ namespace FuzzyLogic.UnitTests.LogicTests
             var result = condition.ToString();
 
             // Assert
-            Assert.Equal("IF WaterTemp IS-NOT boiling AND WaterTemp IS-NOT freezing AND WaterTemp IS-NOT frozen", result);
+            Assert.Equal("IF WaterTemp NOT boiling AND WaterTemp NOT freezing AND WaterTemp NOT frozen", result);
         }
     }
 }

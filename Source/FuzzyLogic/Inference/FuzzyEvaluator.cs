@@ -71,11 +71,9 @@ namespace FuzzyLogic.Inference
         /// <returns>
         /// A <see cref="double"/>.
         /// </returns>
-        public double And(double membershipA, double membershipB)
+        [Pure]
+        public UnitInterval And(UnitInterval membershipA, UnitInterval membershipB)
         {
-            Validate.NotOutOfRange(membershipA, nameof(membershipA), 0, 1);
-            Validate.NotOutOfRange(membershipB, nameof(membershipB), 0, 1);
-
             return this.TNorm.Evaluate(membershipA, membershipB);
         }
 
@@ -88,7 +86,7 @@ namespace FuzzyLogic.Inference
         /// <returns>
         /// The <see cref="double"/>.
         /// </returns>
-        public double And(IEnumerable<double> input)
+        public UnitInterval And(IEnumerable<UnitInterval> input)
         {
             Validate.NotNull(input, nameof(input));
 
@@ -107,11 +105,9 @@ namespace FuzzyLogic.Inference
         /// <returns>
         /// The <see cref="double"/>.
         /// </returns>
-        public double Or(double membershipA, double membershipB)
+        [Pure]
+        public UnitInterval Or(UnitInterval membershipA, UnitInterval membershipB)
         {
-            Validate.NotOutOfRange(membershipA, nameof(membershipA), 0, 1);
-            Validate.NotOutOfRange(membershipB, nameof(membershipB), 0, 1);
-
             return this.TConorm.Evaluate(membershipA, membershipB);
         }
 
@@ -124,7 +120,7 @@ namespace FuzzyLogic.Inference
         /// <returns>
         /// The <see cref="double"/>.
         /// </returns>
-        public double Or(IEnumerable<double> input)
+        public UnitInterval Or(IEnumerable<UnitInterval> input)
         {
             Validate.NotNull(input, nameof(input));
 
@@ -140,7 +136,7 @@ namespace FuzzyLogic.Inference
         /// <returns>
         /// A <see cref="double"/>.
         /// </returns>
-        public double Evaluate(List<Evaluation> evaluations)
+        public UnitInterval Evaluate(List<Evaluation> evaluations)
         {
             var allIfAndResults = evaluations
                 .Where(e => e.Connective.Equals(LogicOperators.If()) || e.Connective.Equals(LogicOperators.And()))
@@ -148,7 +144,7 @@ namespace FuzzyLogic.Inference
 
             var ifAndAggregate = this.And(allIfAndResults);
 
-            var orAggregate = 0.0;
+            var orAggregate = UnitInterval.Zero();
 
             if (evaluations.Exists(e => e.Connective.Equals(LogicOperators.Or())))
             {

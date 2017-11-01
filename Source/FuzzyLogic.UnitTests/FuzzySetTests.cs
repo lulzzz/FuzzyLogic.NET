@@ -36,7 +36,7 @@ namespace FuzzyLogic.UnitTests
             var result = fuzzySet.GetMembership(input);
 
             // Assert
-            Assert.Equal(expected, result);
+            Assert.Equal(UnitInterval.Create(expected), result);
             Assert.Equal("some_fuzzy_state", fuzzySet.State.Value);
         }
 
@@ -125,7 +125,7 @@ namespace FuzzyLogic.UnitTests
             var result = fuzzySet.Complement(input);
 
             // Assert
-            Assert.Equal(expected, result);
+            Assert.Equal(UnitInterval.Create(expected), result);
         }
 
         [Theory]
@@ -148,7 +148,7 @@ namespace FuzzyLogic.UnitTests
             var result = fuzzySet1.Union(fuzzySet2, input);
 
             // Assert
-            Assert.Equal(expected, result);
+            Assert.Equal(UnitInterval.Create(expected), result);
         }
 
         [Theory]
@@ -171,7 +171,7 @@ namespace FuzzyLogic.UnitTests
             var result = fuzzySet1.Intersection(fuzzySet2, input);
 
             // Assert
-            Assert.Equal(expected, result);
+            Assert.Equal(UnitInterval.Create(expected), result);
         }
     }
 }

@@ -34,10 +34,10 @@ namespace FuzzyLogic.UnitTests.BinaryOperationsTests
             var maximumTConorm = TriangularConormFactory.MaximumTConorm();
 
             // Act
-            var result = maximumTConorm.Evaluate(membershipA, membershipB);
+            var result = maximumTConorm.Evaluate(UnitInterval.Create(membershipA), UnitInterval.Create(membershipB));
 
             // Assert
-            Assert.Equal(expected, result);
+            Assert.Equal(UnitInterval.Create(expected), result);
         }
     }
 }

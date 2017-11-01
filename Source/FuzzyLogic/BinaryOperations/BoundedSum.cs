@@ -10,7 +10,7 @@
 namespace FuzzyLogic.BinaryOperations
 {
     using System;
-    using FuzzyLogic.Utility;
+    using FuzzyLogic.Annotations;
 
     /// <summary>
     /// The sealed <see cref="BoundedSum"/> class.
@@ -27,14 +27,12 @@ namespace FuzzyLogic.BinaryOperations
         /// The membership value B [0, 1].
         /// </param>
         /// <returns>
-        /// A <see cref="double"/> [0, 1].
+        /// A <see cref="UnitInterval"/> [0, 1].
         /// </returns>
-        public double Evaluate(double membershipA, double membershipB)
+        [Pure]
+        public UnitInterval Evaluate(UnitInterval membershipA, UnitInterval membershipB)
         {
-            Validate.NotOutOfRange(membershipA, nameof(membershipA), 0, 1);
-            Validate.NotOutOfRange(membershipB, nameof(membershipB), 0, 1);
-
-            return Math.Min(membershipA + membershipB, 1);
+            return UnitInterval.Create(Math.Min(membershipA + membershipB, 1));
         }
     }
 }

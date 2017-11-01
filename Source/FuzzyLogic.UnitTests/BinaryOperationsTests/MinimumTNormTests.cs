@@ -34,10 +34,10 @@ namespace FuzzyLogic.UnitTests.BinaryOperationsTests
             var minimumTNorm = TriangularNormFactory.MinimumTNorm();
 
             // Act
-            var result = minimumTNorm.Evaluate(membershipA, membershipB);
+            var result = minimumTNorm.Evaluate(UnitInterval.Create(membershipA), UnitInterval.Create(membershipB));
 
             // Assert
-            Assert.Equal(expected, result);
+            Assert.Equal(UnitInterval.Create(expected), result);
         }
     }
 }

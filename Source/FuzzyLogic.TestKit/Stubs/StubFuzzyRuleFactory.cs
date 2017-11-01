@@ -10,7 +10,6 @@
 namespace FuzzyLogic.TestKit.Stubs
 {
     using FuzzyLogic.Inference;
-    using FuzzyLogic.Logic;
 
     /// <summary>
     /// The static <see cref="StubFuzzyRuleFactory"/> class.

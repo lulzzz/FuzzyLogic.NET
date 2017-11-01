@@ -34,10 +34,10 @@ namespace FuzzyLogic.UnitTests.BinaryOperationsTests
             var drasticSum = TriangularConormFactory.DrasticSum();
 
             // Act
-            var result = drasticSum.Evaluate(membershipA, membershipB);
+            var result = drasticSum.Evaluate(UnitInterval.Create(membershipA), UnitInterval.Create(membershipB));
 
             // Assert
-            Assert.Equal(expected, result);
+            Assert.Equal(UnitInterval.Create(expected), result);
         }
     }
 }

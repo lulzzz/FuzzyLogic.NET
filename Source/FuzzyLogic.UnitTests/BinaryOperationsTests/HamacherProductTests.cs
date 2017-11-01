@@ -34,10 +34,10 @@ namespace FuzzyLogic.UnitTests.BinaryOperationsTests
             var hamacherProduct = TriangularNormFactory.HamacherProduct();
 
             // Act
-            var result = hamacherProduct.Evaluate(membershipA, membershipB);
+            var result = hamacherProduct.Evaluate(UnitInterval.Create(membershipA), UnitInterval.Create(membershipB));
 
             // Assert
-            Assert.Equal(expected, result);
+            Assert.Equal(UnitInterval.Create(expected), result);
         }
     }
 }

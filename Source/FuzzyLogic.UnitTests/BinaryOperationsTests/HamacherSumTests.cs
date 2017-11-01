@@ -35,10 +35,10 @@ namespace FuzzyLogic.UnitTests.BinaryOperationsTests
             var hamacherSum = TriangularConormFactory.HamacherSum();
 
             // Act
-            var result = hamacherSum.Evaluate(membershipA, membershipB);
+            var result = hamacherSum.Evaluate(UnitInterval.Create(membershipA), UnitInterval.Create(membershipB));
 
             // Assert
-            Assert.Equal(Math.Round(expected, 5), Math.Round(result, 5));
+            Assert.Equal(Math.Round(expected, 5), Math.Round(result.Value, 5));
         }
     }
 }

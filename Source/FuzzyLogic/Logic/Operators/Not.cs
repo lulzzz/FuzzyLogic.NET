@@ -1,5 +1,5 @@
 ﻿// -------------------------------------------------------------------------------------------------
-// <copyright file="IsNot.cs" author="Christopher Sellers">
+// <copyright file="Not.cs" author="Christopher Sellers">
 //   Copyright (C) 2017. All rights reserved.
 //   https://github.com/cjdsellers/FuzzyLogic
 //   the use of this source code is governed by the Apache 2.0 license
@@ -13,17 +13,17 @@ namespace FuzzyLogic.Logic.Operators
     using FuzzyLogic.Logic.Interfaces;
 
     /// <summary>
-    /// The immutable sealed <see cref="IsNot"/> class. A linguistic string representation of the
-    /// 'IS NOT' logic operator.
+    /// The immutable sealed <see cref="Not"/> class. A linguistic string representation of the
+    /// 'NOT' logic operator.
     /// </summary>
     [Immutable]
-    public sealed class IsNot : ValidString<IsNot>, IEvaluationOperator
+    public sealed class Not : ValidString<Not>, IEvaluationOperator
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="IsNot"/> class.
+        /// Initializes a new instance of the <see cref="Not"/> class.
         /// </summary>
-        public IsNot()
-            : base("IS-NOT")
+        public Not()
+            : base(nameof(Not).ToUpper())
         {
         }
 
@@ -36,6 +36,6 @@ namespace FuzzyLogic.Logic.Operators
         /// <returns>
         /// A <see cref="double"/> [0, 1].
         /// </returns>
-        public double Evaluate(double membership) => 1 - membership;
+        public UnitInterval Evaluate(UnitInterval membership) => UnitInterval.Create(1 - membership);
     }
 }

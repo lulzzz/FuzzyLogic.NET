@@ -35,12 +35,12 @@ namespace FuzzyLogic.MembershipFunctions
         /// <summary>
         /// The minimum Y value.
         /// </summary>
-        public double MinY => 0;
+        public UnitInterval MinY => UnitInterval.Zero();
 
         /// <summary>
         /// The maximum Y value.
         /// </summary>
-        public double MaxY => 1;
+        public UnitInterval MaxY => UnitInterval.One();
 
         /// <summary>
         /// The lower bound of the <see cref="IMembershipFunction"/> (the same value as the support).
@@ -82,11 +82,11 @@ namespace FuzzyLogic.MembershipFunctions
         /// <returns>
         /// A <see cref="double"/>.
         /// </returns>
-        public double GetMembership(double x)
+        public UnitInterval GetMembership(double x)
         {
             Validate.NotOutOfRange(x, nameof(x));
 
-            return this.Points[0].X.Equals(x) ? 1 : 0;
+            return this.Points[0].X.Equals(x) ? this.MaxY : this.MinY;
         }
     }
 }

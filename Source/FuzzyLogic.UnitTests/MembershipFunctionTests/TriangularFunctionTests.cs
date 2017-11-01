@@ -40,7 +40,7 @@ namespace FuzzyLogic.UnitTests.MembershipFunctionTests
             var result = function.GetMembership(input);
 
             // Assert
-            Assert.Equal(expected, result);
+            Assert.Equal(UnitInterval.Create(expected), result);
         }
     }
 }

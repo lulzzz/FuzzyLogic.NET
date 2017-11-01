@@ -279,9 +279,9 @@ namespace FuzzyLogic.Fuzzification
         /// The input.
         /// </param>
         /// <returns>
-        /// The <see cref="double"/>.
+        /// The <see cref="UnitInterval"/>.
         /// </returns>
-        public double GetMembership(FuzzyState state, double input)
+        public UnitInterval GetMembership(FuzzyState state, double input)
         {
             Validate.NotNull(state, nameof(state));
             Validate.NotOutOfRange(input, nameof(input), this.LowerBound, this.UpperBound);
@@ -302,7 +302,7 @@ namespace FuzzyLogic.Fuzzification
         /// <returns>
         /// The <see cref="double"/>.
         /// </returns>
-        public double GetMembership(Enum labelEnum, double input)
+        public UnitInterval GetMembership(Enum labelEnum, double input)
         {
             Validate.NotNull(labelEnum, nameof(labelEnum));
             Validate.NotOutOfRange(input, nameof(input), this.LowerBound, this.UpperBound);
@@ -325,7 +325,7 @@ namespace FuzzyLogic.Fuzzification
             Validate.NotOutOfRange(input, nameof(input), this.LowerBound, this.UpperBound);
 
            return this.fuzzySets
-                .OrderByDescending(fs => fs.Value.GetMembership(input))
+                .OrderBy(fs => fs.Value.GetMembership(input))
                 .FirstOrDefault()
                 .Value
                 .State;

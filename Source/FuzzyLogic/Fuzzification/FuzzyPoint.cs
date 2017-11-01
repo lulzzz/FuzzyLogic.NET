@@ -36,7 +36,7 @@ namespace FuzzyLogic.Fuzzification
             Validate.NotOutOfRange(y, nameof(y), 0, 1);
 
             this.X = x;
-            this.Y = y;
+            this.Y = UnitInterval.Create(y);
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace FuzzyLogic.Fuzzification
         /// <summary>
         /// Gets the Y coordinate.
         /// </summary>
-        public double Y { get; }
+        public UnitInterval Y { get; }
 
         /// <summary>
         /// The + operator.
@@ -106,7 +106,7 @@ namespace FuzzyLogic.Fuzzification
             Validate.NotNull(point, nameof(point));
             Validate.NotOutOfRange(factor, nameof(factor));
 
-            return new FuzzyPoint(point.X * factor, point.Y * factor);
+            return new FuzzyPoint(point.X * factor, point.Y.Value * factor);
         }
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace FuzzyLogic.Fuzzification
             Validate.NotNull(point, nameof(point));
             Validate.NotOutOfRange(factor, nameof(factor), 0, double.MaxValue, RangeEndPoints.LowerExclusive);
 
-            return new FuzzyPoint(point.X / factor, point.Y / factor);
+            return new FuzzyPoint(point.X / factor, point.Y.Value / factor);
         }
 
         /// <summary>
@@ -208,7 +208,7 @@ namespace FuzzyLogic.Fuzzification
         {
             Validate.NotOutOfRange(factor, nameof(factor));
 
-            return new FuzzyPoint(this.X * factor, this.Y * factor);
+            return new FuzzyPoint(this.X * factor, this.Y.Value * factor);
         }
 
         /// <summary>
@@ -224,7 +224,7 @@ namespace FuzzyLogic.Fuzzification
         {
             Validate.NotOutOfRange(divisor, nameof(divisor));
 
-            return new FuzzyPoint(this.X / divisor, this.Y / divisor);
+            return new FuzzyPoint(this.X / divisor, this.Y.Value / divisor);
         }
 
         /// <summary>

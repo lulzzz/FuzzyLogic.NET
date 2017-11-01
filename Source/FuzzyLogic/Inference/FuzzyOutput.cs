@@ -38,11 +38,11 @@ namespace FuzzyLogic.Inference
             Label subject,
             FuzzyState state,
             FuzzySet outputFunction,
-            double firingStrength)
+            UnitInterval firingStrength)
         {
             Validate.NotNull(subject, nameof(subject));
             Validate.NotNull(state, nameof(state));
-            Validate.NotOutOfRange(firingStrength, nameof(firingStrength), 0, 1);
+            Validate.NotNull(firingStrength, nameof(firingStrength));
             Validate.NotNull(outputFunction, nameof(outputFunction));
 
             this.Subject = subject;
@@ -69,6 +69,6 @@ namespace FuzzyLogic.Inference
         /// <summary>
         /// Gets the output firing strength.
         /// </summary>
-        public double FiringStrength { get; }
+        public UnitInterval FiringStrength { get; }
     }
 }

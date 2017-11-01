@@ -34,10 +34,10 @@ namespace FuzzyLogic.UnitTests.BinaryOperationsTests
             var drasticProduct = TriangularNormFactory.DrasticProduct();
 
             // Act
-            var result = drasticProduct.Evaluate(membershipA, membershipB);
+            var result = drasticProduct.Evaluate(UnitInterval.Create(membershipA), UnitInterval.Create(membershipB));
 
             // Assert
-            Assert.Equal(expected, result);
+            Assert.Equal(UnitInterval.Create(expected), result);
         }
     }
 }

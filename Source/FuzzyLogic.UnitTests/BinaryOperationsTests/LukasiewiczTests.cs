@@ -34,10 +34,10 @@ namespace FuzzyLogic.UnitTests.BinaryOperationsTests
             var lukasiewicz = TriangularNormFactory.Lukasiewicz();
 
             // Act
-            var result = lukasiewicz.Evaluate(membershipA, membershipB);
+            var result = lukasiewicz.Evaluate(UnitInterval.Create(membershipA), UnitInterval.Create(membershipB));
 
             // Assert
-            Assert.Equal(expected, result);
+            Assert.Equal(UnitInterval.Create(expected), result);
         }
     }
 }

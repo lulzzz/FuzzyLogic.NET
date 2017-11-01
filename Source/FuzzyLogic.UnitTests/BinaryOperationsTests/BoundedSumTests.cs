@@ -34,10 +34,10 @@ namespace FuzzyLogic.UnitTests.BinaryOperationsTests
             var boundedSum = TriangularConormFactory.BoundedSum();
 
             // Act
-            var result = boundedSum.Evaluate(membershipA, membershipB);
+            var result = boundedSum.Evaluate(UnitInterval.Create(membershipA), UnitInterval.Create(membershipB));
 
             // Assert
-            Assert.Equal(expected, result);
+            Assert.Equal(UnitInterval.Create(expected), result);
         }
     }
 }

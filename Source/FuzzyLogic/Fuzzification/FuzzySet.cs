@@ -72,7 +72,7 @@ namespace FuzzyLogic.Fuzzification
         /// <summary>
         /// Returns a <see cref="bool"/> indicating whether the <see cref="FuzzySet"/> is normal (max y = 1.0).
         /// </summary>
-        public bool IsNormal => this.function.MaxY.Equals(1);
+        public bool IsNormal => this.function.MaxY.Equals(UnitInterval.One());
 
         /// <summary>
         /// Returns a <see cref="bool"/> indicating whether the <see cref="FuzzySet"/> is convex
@@ -89,7 +89,7 @@ namespace FuzzyLogic.Fuzzification
         /// <returns>
         /// The <see cref="double"/>.
         /// </returns>
-        public double GetMembership(double x)
+        public UnitInterval GetMembership(double x)
         {
             Validate.NotOutOfRange(x, nameof(x));
 
@@ -105,11 +105,11 @@ namespace FuzzyLogic.Fuzzification
         /// <returns>
         /// The <see cref="double"/>.
         /// </returns>
-        public double Complement(double x)
+        public UnitInterval Complement(double x)
         {
             Validate.NotOutOfRange(x, nameof(x));
 
-            return 1 - this.function.GetMembership(x);
+            return UnitInterval.Create(1 - this.function.GetMembership(x));
         }
 
         /// <summary>
@@ -124,12 +124,12 @@ namespace FuzzyLogic.Fuzzification
         /// <returns>
         /// The <see cref="double"/>.
         /// </returns>
-        public double Union(FuzzySet other, double x)
+        public UnitInterval Union(FuzzySet other, double x)
         {
             Validate.NotNull(other, nameof(other));
             Validate.NotOutOfRange(x, nameof(x));
 
-            return Math.Max(this.function.GetMembership(x), other.GetMembership(x));
+            return UnitInterval.Create(Math.Max(this.function.GetMembership(x).Value, other.GetMembership(x).Value));
         }
 
         /// <summary>
@@ -144,12 +144,12 @@ namespace FuzzyLogic.Fuzzification
         /// <returns>
         /// The <see cref="double"/>.
         /// </returns>
-        public double Intersection(FuzzySet other, double x)
+        public UnitInterval Intersection(FuzzySet other, double x)
         {
             Validate.NotNull(other, nameof(other));
             Validate.NotOutOfRange(x, nameof(x));
 
-            return Math.Min(this.function.GetMembership(x), other.GetMembership(x));
+            return UnitInterval.Create(Math.Min(this.function.GetMembership(x).Value, other.GetMembership(x).Value));
         }
 
         private bool CalculateIsConvex()

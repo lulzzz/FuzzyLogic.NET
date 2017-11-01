@@ -24,8 +24,8 @@ namespace FuzzyLogic.BinaryOperations
         /// The membership value B [0, 1].
         /// </param>
         /// <returns>
-        /// A <see cref="double"/> [0, 1].
+        /// A <see cref="UnitInterval"/> [0, 1].
         /// </returns>
-        double Evaluate(double membershipA, double membershipB);
+        UnitInterval Evaluate(UnitInterval membershipA, UnitInterval membershipB);
     }
 }

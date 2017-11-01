@@ -34,10 +34,10 @@ namespace FuzzyLogic.UnitTests.BinaryOperationsTests
             var einsteinSum = TriangularConormFactory.EinsteinSum();
 
             // Act
-            var result = einsteinSum.Evaluate(membershipA, membershipB);
+            var result = einsteinSum.Evaluate(UnitInterval.Create(membershipA), UnitInterval.Create(membershipB));
 
             // Assert
-            Assert.Equal(expected, result);
+            Assert.Equal(UnitInterval.Create(expected), result);
         }
     }
 }

@@ -75,7 +75,7 @@ namespace FuzzyLogic.UnitTests
             var result = temperature.GetMembership(label, input);
 
             // Assert
-            Assert.Equal(membershipValue, result);
+            Assert.Equal(UnitInterval.Create(membershipValue), result);
         }
 
         [Theory]

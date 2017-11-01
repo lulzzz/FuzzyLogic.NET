@@ -28,7 +28,7 @@ namespace FuzzyLogic.Logic
         /// <param name="result">
         /// The result.
         /// </param>
-        public Evaluation(IConnectiveOperator connective, double result)
+        public Evaluation(IConnectiveOperator connective, UnitInterval result)
         {
             Validate.NotNull(connective, nameof(connective));
 
@@ -44,6 +44,6 @@ namespace FuzzyLogic.Logic
         /// <summary>
         /// Gets a value indicating the fuzzy result.
         /// </summary>
-        public double Result { get; }
+        public UnitInterval Result { get; }
     }
 }

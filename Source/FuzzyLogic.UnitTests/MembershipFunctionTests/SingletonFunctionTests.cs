@@ -32,7 +32,7 @@ namespace FuzzyLogic.UnitTests.MembershipFunctionTests
             var result = function.GetMembership(input);
 
             // Assert
-            Assert.Equal(expected, result);
+            Assert.Equal(UnitInterval.Create(expected), result);
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace FuzzyLogic.UnitTests.MembershipFunctionTests
             var result = function.MinY;
 
             // Assert
-            Assert.Equal(0, result);
+            Assert.Equal(UnitInterval.Zero(), result);
         }
 
         [Fact]
@@ -58,7 +58,7 @@ namespace FuzzyLogic.UnitTests.MembershipFunctionTests
             var result = function.MaxY;
 
             // Assert
-            Assert.Equal(1, result);
+            Assert.Equal(UnitInterval.One(), result);
         }
 
         [Fact]

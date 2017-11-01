@@ -34,10 +34,10 @@ namespace FuzzyLogic.UnitTests.BinaryOperationsTests
             var einsteinProduct = TriangularNormFactory.EinsteinProduct();
 
             // Act
-            var result = einsteinProduct.Evaluate(membershipA, membershipB);
+            var result = einsteinProduct.Evaluate(UnitInterval.Create(membershipA), UnitInterval.Create(membershipB));
 
             // Assert
-            Assert.Equal(expected, result);
+            Assert.Equal(UnitInterval.Create(expected), result);
         }
     }
 }

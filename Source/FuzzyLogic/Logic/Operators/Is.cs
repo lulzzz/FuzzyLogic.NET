@@ -36,6 +36,6 @@ namespace FuzzyLogic.Logic.Operators
         /// <returns>
         /// A <see cref="double"/> [0, 1].
         /// </returns>
-        public double Evaluate(double membership) => membership;
+        public UnitInterval Evaluate(UnitInterval membership) => membership;
     }
 }

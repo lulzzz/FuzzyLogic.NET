@@ -19,12 +19,12 @@ namespace FuzzyLogic.MembershipFunctions
         /// <summary>
         /// Gets the minimum Y value.
         /// </summary>
-        double MinY { get; }
+        UnitInterval MinY { get; }
 
         /// <summary>
         /// Gets the maximum Y value.
         /// </summary>
-        double MaxY { get; }
+        UnitInterval MaxY { get; }
 
         /// <summary>
         /// Gets the lower bound of the X axis.
@@ -50,6 +50,6 @@ namespace FuzzyLogic.MembershipFunctions
         /// <returns>
         /// A <see cref="double"/>.
         /// </returns>
-        double GetMembership(double x);
+        UnitInterval GetMembership(double x);
     }
 }

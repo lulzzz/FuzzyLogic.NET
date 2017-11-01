@@ -65,7 +65,7 @@
     <Compile Include="InferenceTests\FuzzyRuleBuilderTests.cs" />
     <Compile Include="LogicTests\ConclusionTests.cs" />
     <Compile Include="LogicTests\ConditionTests.cs" />
-    <Compile Include="LogicTests\LogicOperatorsTests\IsNotTests.cs" />
+    <Compile Include="LogicTests\LogicOperatorsTests\NotTests.cs" />
     <Compile Include="LogicTests\LogicOperatorsTests\IsTests.cs" />
     <Compile Include="LogicTests\PremiseTests.cs" />
     <Compile Include="LogicTests\PropositionTests.cs" />

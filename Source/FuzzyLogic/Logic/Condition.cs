@@ -39,11 +39,11 @@ namespace FuzzyLogic.Logic
         public Condition(
             IConnectiveOperator connective,
             IList<Premise> premises,
-            double weight)
+            UnitInterval weight)
         {
             Validate.NotNull(connective, nameof(connective));
             Validate.CollectionNotNullOrEmpty(premises, nameof(premises));
-            Validate.NotOutOfRange(weight, nameof(weight), 0, 1);
+            Validate.NotNull(weight, nameof(weight));
 
             this.Connective = connective;
             this.Premises = premises;
@@ -63,7 +63,7 @@ namespace FuzzyLogic.Logic
         /// <summary>
         /// Gets the weight.
         /// </summary>
-        public double Weight { get; private set; }
+        public UnitInterval Weight { get; private set; }
 
         /// <summary>
         /// The set weight.
@@ -71,9 +71,9 @@ namespace FuzzyLogic.Logic
         /// <param name="weight">
         /// The weight.
         /// </param>
-        public void SetWeight(double weight)
+        public void SetWeight(UnitInterval weight)
         {
-            Validate.NotOutOfRange(weight, nameof(weight), 0, 1);
+            Validate.NotNull(weight, nameof(weight));
 
             this.Weight = weight;
         }
@@ -117,7 +117,7 @@ namespace FuzzyLogic.Logic
                 }
             }
 
-            return new Evaluation(this.Connective, evaluator.Evaluate(evaluations) * this.Weight);
+            return new Evaluation(this.Connective, UnitInterval.Create(evaluator.Evaluate(evaluations) * this.Weight));
         }
 
         /// <summary>

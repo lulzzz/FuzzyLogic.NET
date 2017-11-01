@@ -29,10 +29,10 @@ namespace FuzzyLogic.UnitTests.LogicTests.LogicOperatorsTests
             var isOperator = LogicOperators.Is();
 
             // Act
-            var result = isOperator.Evaluate(membership);
+            var result = isOperator.Evaluate(UnitInterval.Create(membership));
 
             // Assert
-            Assert.Equal(expected, result);
+            Assert.Equal(UnitInterval.Create(expected), result);
         }
     }
 }

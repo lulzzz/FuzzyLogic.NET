@@ -31,7 +31,7 @@ namespace FuzzyLogic.Inference
         {
             Utility.Validate.NotOutOfRange(weight, nameof(weight), 0, 1);
 
-            this.Weight = weight;
+            this.Weight = UnitInterval.Create(weight);
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace FuzzyLogic.Inference
         /// <summary>
         /// Gets the weight.
         /// </summary>
-        public double Weight { get; }
+        public UnitInterval Weight { get; }
 
         /// <summary>
         /// Adds an 'If' premise to the condition builder.

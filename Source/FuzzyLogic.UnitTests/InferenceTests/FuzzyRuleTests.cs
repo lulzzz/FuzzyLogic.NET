@@ -109,7 +109,7 @@ namespace FuzzyLogic.UnitTests.InferenceTests
             // Assert
             Assert.Equal(fanSpeed.Subject, result[0].Subject);
             Assert.Equal(fanSpeed.GetState(0), result[0].State);
-            Assert.Equal(1, result[0].FiringStrength);
+            Assert.Equal(UnitInterval.One(), result[0].FiringStrength);
             Assert.Equal(fanSpeed.GetSet(FanSpeed.Off), result[0].OutputFunction);
         }
     }

@@ -37,12 +37,12 @@ namespace FuzzyLogic.MembershipFunctions
         /// <summary>
         /// Returns the minimum Y value.
         /// </summary>
-        public double MinY => this.Points.Select(p => p.Y).Min();
+        public UnitInterval MinY => UnitInterval.Create(this.Points.Select(p => p.Y.Value).Min());
 
         /// <summary>
         /// Returns the maximum Y value.
         /// </summary>
-        public double MaxY => this.Points.Select(p => p.Y).Max();
+        public UnitInterval MaxY => UnitInterval.Create(this.Points.Select(p => p.Y.Value).Max());
 
         /// <summary>
         /// Returns the lower bound of the <see cref="IMembershipFunction"/>.
@@ -68,7 +68,7 @@ namespace FuzzyLogic.MembershipFunctions
         /// <returns>
         /// A <see cref="double"/>.
         /// </returns>
-        public double GetMembership(double x)
+        public UnitInterval GetMembership(double x)
         {
             Validate.NotOutOfRange(x, nameof(x));
 
@@ -83,7 +83,7 @@ namespace FuzzyLogic.MembershipFunctions
                 {
                     var m = this.Points[i].AngularCoefficient(this.Points[i - 1]);
 
-                    return m * (x - this.Points[i - 1].X) + this.Points[i - 1].Y;
+                    return UnitInterval.Create(m * (x - this.Points[i - 1].X) + this.Points[i - 1].Y);
                 }
             }
 

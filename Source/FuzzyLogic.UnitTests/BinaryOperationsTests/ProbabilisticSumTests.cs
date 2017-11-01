@@ -34,10 +34,10 @@ namespace FuzzyLogic.UnitTests.BinaryOperationsTests
             var algebraicProduct = TriangularConormFactory.ProbabilisticSum();
 
             // Act
-            var result = algebraicProduct.Evaluate(membershipA, membershipB);
+            var result = algebraicProduct.Evaluate(UnitInterval.Create(membershipA), UnitInterval.Create(membershipB));
 
             // Assert
-            Assert.Equal(expected, result);
+            Assert.Equal(UnitInterval.Create(expected), result);
         }
     }
 }
