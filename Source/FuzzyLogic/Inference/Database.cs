@@ -41,7 +41,7 @@ namespace FuzzyLogic.Inference
         /// <returns>
         /// A <see cref="IReadOnlyCollection{Label}"/>.
         /// </returns>
-        public IReadOnlyCollection<Label> VariableNames() => new List<Label>(this.variableData.Keys).AsReadOnly();
+        public IReadOnlyList<Label> VariableNames() => new List<Label>(this.variableData.Keys).AsReadOnly();
 
         /// <summary>
         /// Returns all data contained within the <see cref="Database"/> as a read only dictionary.
@@ -49,7 +49,7 @@ namespace FuzzyLogic.Inference
         /// <returns>
         /// A <see cref="IReadOnlyCollection{DataPoint}"/>.
         /// </returns>
-        public IReadOnlyCollection<DataPoint> GetAllData() => new List<DataPoint>(this.variableData.Values).AsReadOnly();
+        public IReadOnlyList<DataPoint> GetAllData() => new List<DataPoint>(this.variableData.Values).AsReadOnly();
 
         /// <summary>
         /// Returns all data contained within the <see cref="Database"/> as a read only dictionary.
@@ -72,7 +72,7 @@ namespace FuzzyLogic.Inference
         {
             Validate.NotNull(variable, nameof(variable));
 
-            return this.variableData.ContainsKey(Label.Create(variable));
+            return this.ContainsVariable(Label.Create(variable));
         }
 
         /// <summary>

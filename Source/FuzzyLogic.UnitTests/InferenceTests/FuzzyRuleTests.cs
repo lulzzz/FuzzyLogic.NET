@@ -67,26 +67,6 @@ namespace FuzzyLogic.UnitTests.InferenceTests
         }
 
         [Fact]
-        internal void Validate_WhenAnOrConditionConnectiveIsFollowedByAnAnd_Throws()
-        {
-            // Arrange
-            var waterTemp = StubLinguisticVariableFactory.WaterTemp();
-            var fanSpeed = StubLinguisticVariableFactory.FanSpeed();
-
-            var fuzzyRule = new FuzzyRuleBuilder(PumpSpeedRule.Rule0)
-                .If(new ConditionBuilder().If(waterTemp.Is(WaterTemp.Frozen)))
-                .Or(new ConditionBuilder().If(waterTemp.Is(WaterTemp.Boiling)))
-                .And(new ConditionBuilder(0.5).If(waterTemp.IsNot(WaterTemp.Freezing)))
-                .Then(fanSpeed.Is(FanSpeed.AtLimit));
-
-            // Act
-            // Assert
-            var ex = Assert.Throws<InvalidOperationException>(() => fuzzyRule.Build());
-
-            this.output.WriteLine(ex.Message);
-        }
-
-        [Fact]
         internal void Evaluate_ValidRuleAndConditions_ReturnsExpectedFuzzyOutput()
         {
             // Arrange

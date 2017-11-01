@@ -24,7 +24,7 @@ namespace FuzzyLogic
     ///     and less than or equal to 1.
     /// </remarks>
     [Immutable]
-    public struct UnitInterval : IComparable<UnitInterval>
+    public struct UnitInterval : IComparable<UnitInterval>, IComparable<double>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="UnitInterval"/> struct.
@@ -75,10 +75,10 @@ namespace FuzzyLogic
         /// The + operator.
         /// </summary>
         /// <param name="left">
-        /// The left <see cref="UnitInterval"/>.
+        /// The left value.
         /// </param>
         /// <param name="right">
-        /// The right <see cref="UnitInterval"/>.
+        /// The right value.
         /// </param>
         /// <returns>
         /// A <see cref="double"/>.
@@ -89,10 +89,10 @@ namespace FuzzyLogic
         /// The + operator.
         /// </summary>
         /// <param name="left">
-        /// The left <see cref="UnitInterval"/>.
+        /// The left value.
         /// </param>
         /// <param name="right">
-        /// The right <see cref="UnitInterval"/>.
+        /// The right value.
         /// </param>
         /// <returns>
         /// A <see cref="double"/>.
@@ -103,10 +103,10 @@ namespace FuzzyLogic
         /// The + operator.
         /// </summary>
         /// <param name="left">
-        /// The left <see cref="UnitInterval"/>.
+        /// The left value.
         /// </param>
         /// <param name="right">
-        /// The right <see cref="UnitInterval"/>.
+        /// The right value.
         /// </param>
         /// <returns>
         /// A <see cref="double"/>.
@@ -117,10 +117,10 @@ namespace FuzzyLogic
         /// The - operator.
         /// </summary>
         /// <param name="left">
-        /// The left <see cref="UnitInterval"/>.
+        /// The left value.
         /// </param>
         /// <param name="right">
-        /// The right <see cref="UnitInterval"/>.
+        /// The right value.
         /// </param>
         /// <returns>
         /// A <see cref="double"/>.
@@ -131,10 +131,10 @@ namespace FuzzyLogic
         /// The - operator.
         /// </summary>
         /// <param name="left">
-        /// The left <see cref="UnitInterval"/>.
+        /// The left value.
         /// </param>
         /// <param name="right">
-        /// The right <see cref="UnitInterval"/>.
+        /// The right value.
         /// </param>
         /// <returns>
         /// A <see cref="double"/>.
@@ -145,10 +145,10 @@ namespace FuzzyLogic
         /// The - operator.
         /// </summary>
         /// <param name="left">
-        /// The left <see cref="UnitInterval"/>.
+        /// The left value.
         /// </param>
         /// <param name="right">
-        /// The right <see cref="UnitInterval"/>.
+        /// The right value.
         /// </param>
         /// <returns>
         /// A <see cref="double"/>.
@@ -159,10 +159,10 @@ namespace FuzzyLogic
         /// The * operator.
         /// </summary>
         /// <param name="left">
-        /// The left <see cref="UnitInterval"/>.
+        /// The left value.
         /// </param>
         /// <param name="right">
-        /// The right <see cref="UnitInterval"/>.
+        /// The right value.
         /// </param>
         /// <returns>
         /// A <see cref="double"/>.
@@ -173,10 +173,10 @@ namespace FuzzyLogic
         /// The * operator.
         /// </summary>
         /// <param name="left">
-        /// The left <see cref="UnitInterval"/>.
+        /// The left value.
         /// </param>
         /// <param name="right">
-        /// The right <see cref="UnitInterval"/>.
+        /// The right value.
         /// </param>
         /// <returns>
         /// A <see cref="double"/>.
@@ -187,10 +187,10 @@ namespace FuzzyLogic
         /// The * operator.
         /// </summary>
         /// <param name="left">
-        /// The left <see cref="UnitInterval"/>.
+        /// The left value.
         /// </param>
         /// <param name="right">
-        /// The right <see cref="UnitInterval"/>.
+        /// The right value.
         /// </param>
         /// <returns>
         /// A <see cref="double"/>.
@@ -201,10 +201,10 @@ namespace FuzzyLogic
         /// The / operator.
         /// </summary>
         /// <param name="left">
-        /// The left <see cref="UnitInterval"/>.
+        /// The left value.
         /// </param>
         /// <param name="right">
-        /// The right <see cref="UnitInterval"/>.
+        /// The right value.
         /// </param>
         /// <returns>
         /// A <see cref="double"/>.
@@ -215,10 +215,10 @@ namespace FuzzyLogic
         /// The / operator.
         /// </summary>
         /// <param name="left">
-        /// The left <see cref="UnitInterval"/>.
+        /// The left value.
         /// </param>
         /// <param name="right">
-        /// The right <see cref="UnitInterval"/>.
+        /// The right value.
         /// </param>
         /// <returns>
         /// A <see cref="double"/>.
@@ -229,10 +229,10 @@ namespace FuzzyLogic
         /// The / operator.
         /// </summary>
         /// <param name="left">
-        /// The left <see cref="UnitInterval"/>.
+        /// The left value.
         /// </param>
         /// <param name="right">
-        /// The right <see cref="UnitInterval"/>.
+        /// The right value.
         /// </param>
         /// <returns>
         /// A <see cref="double"/>.
@@ -243,10 +243,10 @@ namespace FuzzyLogic
         /// The &gt; operator.
         /// </summary>
         /// <param name="left">
-        /// The left <see cref="UnitInterval"/>.
+        /// The left value.
         /// </param>
         /// <param name="right">
-        /// The right <see cref="UnitInterval"/>.
+        /// The right value.
         /// </param>
         /// <returns>
         /// A <see cref="double"/>.
@@ -257,10 +257,10 @@ namespace FuzzyLogic
         /// The &gt; operator.
         /// </summary>
         /// <param name="left">
-        /// The left <see cref="UnitInterval"/>.
+        /// The left value.
         /// </param>
         /// <param name="right">
-        /// The right <see cref="UnitInterval"/>.
+        /// The right value.
         /// </param>
         /// <returns>
         /// A <see cref="double"/>.
@@ -271,10 +271,10 @@ namespace FuzzyLogic
         /// The &gt; operator.
         /// </summary>
         /// <param name="left">
-        /// The left <see cref="UnitInterval"/>.
+        /// The left value.
         /// </param>
         /// <param name="right">
-        /// The right <see cref="UnitInterval"/>.
+        /// The right value.
         /// </param>
         /// <returns>
         /// A <see cref="double"/>.
@@ -285,10 +285,10 @@ namespace FuzzyLogic
         /// The &lt; operator.
         /// </summary>
         /// <param name="left">
-        /// The left <see cref="UnitInterval"/>.
+        /// The left value.
         /// </param>
         /// <param name="right">
-        /// The right <see cref="UnitInterval"/>.
+        /// The right value.
         /// </param>
         /// <returns>
         /// A <see cref="double"/>.
@@ -299,10 +299,10 @@ namespace FuzzyLogic
         /// The &lt; operator.
         /// </summary>
         /// <param name="left">
-        /// The left <see cref="UnitInterval"/>.
+        /// The left value.
         /// </param>
         /// <param name="right">
-        /// The right <see cref="UnitInterval"/>.
+        /// The right value.
         /// </param>
         /// <returns>
         /// A <see cref="double"/>.
@@ -313,10 +313,10 @@ namespace FuzzyLogic
         /// The &lt; operator.
         /// </summary>
         /// <param name="left">
-        /// The left <see cref="UnitInterval"/>.
+        /// The left value.
         /// </param>
         /// <param name="right">
-        /// The right <see cref="UnitInterval"/>.
+        /// The right value.
         /// </param>
         /// <returns>
         /// A <see cref="double"/>.
@@ -327,10 +327,10 @@ namespace FuzzyLogic
         /// The == operator.
         /// </summary>
         /// <param name="left">
-        /// The left <see cref="UnitInterval"/>.
+        /// The left value.
         /// </param>
         /// <param name="right">
-        /// The right <see cref="UnitInterval"/>.
+        /// The right value.
         /// </param>
         /// <returns>
         /// A <see cref="double"/>.
@@ -338,13 +338,41 @@ namespace FuzzyLogic
         public static bool operator ==(UnitInterval left, UnitInterval right) => left.Equals(right);
 
         /// <summary>
+        /// The == operator.
+        /// </summary>
+        /// <param name="left">
+        /// The left value.
+        /// </param>
+        /// <param name="right">
+        /// The right value.
+        /// </param>
+        /// <returns>
+        /// A <see cref="double"/>.
+        /// </returns>
+        public static bool operator ==(double left, UnitInterval right) => left.Equals(right.Value);
+
+        /// <summary>
+        /// The == operator.
+        /// </summary>
+        /// <param name="left">
+        /// The left value.
+        /// </param>
+        /// <param name="right">
+        /// The right value.
+        /// </param>
+        /// <returns>
+        /// A <see cref="double"/>.
+        /// </returns>
+        public static bool operator ==(UnitInterval left, double right) => left.Value.Equals(right);
+
+        /// <summary>
         /// The != operator.
         /// </summary>
         /// <param name="left">
-        /// The left <see cref="UnitInterval"/>.
+        /// The left value.
         /// </param>
         /// <param name="right">
-        /// The right <see cref="UnitInterval"/>.
+        /// The right value.
         /// </param>
         /// <returns>
         /// A <see cref="double"/>.
@@ -352,13 +380,41 @@ namespace FuzzyLogic
         public static bool operator !=(UnitInterval left, UnitInterval right) => !(left == right);
 
         /// <summary>
+        /// The != operator.
+        /// </summary>
+        /// <param name="left">
+        /// The left value.
+        /// </param>
+        /// <param name="right">
+        /// The right value.
+        /// </param>
+        /// <returns>
+        /// A <see cref="double"/>.
+        /// </returns>
+        public static bool operator !=(double left, UnitInterval right) => !(left == right);
+
+        /// <summary>
+        /// The != operator.
+        /// </summary>
+        /// <param name="left">
+        /// The left value.
+        /// </param>
+        /// <param name="right">
+        /// The right value.
+        /// </param>
+        /// <returns>
+        /// A <see cref="double"/>.
+        /// </returns>
+        public static bool operator !=(UnitInterval left, double right) => !(left == right);
+
+        /// <summary>
         /// The &gt;= operator.
         /// </summary>
         /// <param name="left">
-        /// The left <see cref="UnitInterval"/>.
+        /// The left value.
         /// </param>
         /// <param name="right">
-        /// The right <see cref="UnitInterval"/>.
+        /// The right value.
         /// </param>
         /// <returns>
         /// A <see cref="double"/>.
@@ -366,18 +422,85 @@ namespace FuzzyLogic
         public static bool operator >=(UnitInterval left, UnitInterval right) => left.Value >= right.Value;
 
         /// <summary>
+        /// The &gt;= operator.
+        /// </summary>
+        /// <param name="left">
+        /// The left value.
+        /// </param>
+        /// <param name="right">
+        /// The right value.
+        /// </param>
+        /// <returns>
+        /// A <see cref="double"/>.
+        /// </returns>
+        public static bool operator >=(double left, UnitInterval right) => left >= right.Value;
+
+        /// <summary>
+        /// The &gt;= operator.
+        /// </summary>
+        /// <param name="left">
+        /// The left value.
+        /// </param>
+        /// <param name="right">
+        /// The right value.
+        /// </param>
+        /// <returns>
+        /// A <see cref="double"/>.
+        /// </returns>
+        public static bool operator >=(UnitInterval left, double right) => left.Value >= right;
+
+        /// <summary>
         /// The &lt;= operator.
         /// </summary>
         /// <param name="left">
-        /// The left <see cref="UnitInterval"/>.
+        /// The left value.
         /// </param>
         /// <param name="right">
-        /// The right <see cref="UnitInterval"/>.
+        /// The right value.
         /// </param>
         /// <returns>
         /// A <see cref="double"/>.
         /// </returns>
         public static bool operator <=(UnitInterval left, UnitInterval right) => left.Value <= right.Value;
+
+        /// <summary>
+        /// The &lt;= operator.
+        /// </summary>
+        /// <param name="left">
+        /// The left value.
+        /// </param>
+        /// <param name="right">
+        /// The right value.
+        /// </param>
+        /// <returns>
+        /// A <see cref="double"/>.
+        /// </returns>
+        public static bool operator <=(double left, UnitInterval right) => left <= right.Value;
+
+        /// <summary>
+        /// The &lt;= operator.
+        /// </summary>
+        /// <param name="left">
+        /// The left value.
+        /// </param>
+        /// <param name="right">
+        /// The right value.
+        /// </param>
+        /// <returns>
+        /// A <see cref="double"/>.
+        /// </returns>
+        public static bool operator <=(UnitInterval left, double right) => left.Value <= right;
+
+        /// <summary>
+        /// Returns a value of -1, 0 or 1 based on the comparison of the <see cref="UnitInterval"/>(s).
+        /// </summary>
+        /// <param name="other">
+        /// The other <see cref="UnitInterval"/>.
+        /// </param>
+        /// <returns>
+        /// An <see cref="int"/>.
+        /// </returns>
+        public int CompareTo(double other) => this.Value.CompareTo(other);
 
         /// <summary>
         /// Returns a value of -1, 0 or 1 based on the comparison of the <see cref="UnitInterval"/>(s).
@@ -401,6 +524,18 @@ namespace FuzzyLogic
         /// The <see cref="bool"/>.
         /// </returns>
         public override bool Equals(object other) => other is UnitInterval && this.Equals((UnitInterval)other);
+
+        /// <summary>
+        /// Returns a value indicating whether this instance and the given <see cref="double"/>
+        /// represent the same value.
+        /// </summary>
+        /// <param name="other">
+        /// The other <see cref="UnitInterval"/>.
+        /// </param>
+        /// <returns>
+        /// A <see cref="bool"/>.
+        /// </returns>
+        public bool Equals(double other) => this.Value.Equals(other);
 
         /// <summary>
         /// Returns a value indicating whether this instance and the given <see cref="UnitInterval"/>

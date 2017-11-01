@@ -22,13 +22,16 @@ namespace FuzzyLogic.Inference
     [Immutable]
     public sealed class FuzzyEvaluator
     {
+        private readonly ITriangularNorm triangularNorm;
+        private readonly ITriangularConorm triangularConorm;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="FuzzyEvaluator"/> class.
         /// </summary>
         public FuzzyEvaluator()
         {
-            this.TNorm = TriangularNormFactory.MinimumTNorm();
-            this.TConorm = TriangularConormFactory.MaximumTConorm();
+            this.triangularNorm = TriangularNormFactory.MinimumTNorm();
+            this.triangularConorm = TriangularConormFactory.MaximumTConorm();
         }
 
         /// <summary>
@@ -45,19 +48,9 @@ namespace FuzzyLogic.Inference
             Validate.NotNull(tnorm, nameof(tnorm));
             Validate.NotNull(tconorm, nameof(tconorm));
 
-            this.TNorm = tnorm;
-            this.TConorm = tconorm;
+            this.triangularNorm = tnorm;
+            this.triangularConorm = tconorm;
         }
-
-        /// <summary>
-        /// Gets the t-norm.
-        /// </summary>
-        public ITriangularNorm TNorm { get; }
-
-        /// <summary>
-        /// Gets the t-conorm.
-        /// </summary>
-        public ITriangularConorm TConorm { get; }
 
         /// <summary>
         /// Returns the result of an evaluation of two membership values separated by an 'AND'.
@@ -74,7 +67,7 @@ namespace FuzzyLogic.Inference
         [Pure]
         public UnitInterval And(UnitInterval membershipA, UnitInterval membershipB)
         {
-            return this.TNorm.Evaluate(membershipA, membershipB);
+            return this.triangularNorm.Evaluate(membershipA, membershipB);
         }
 
         /// <summary>
@@ -108,7 +101,7 @@ namespace FuzzyLogic.Inference
         [Pure]
         public UnitInterval Or(UnitInterval membershipA, UnitInterval membershipB)
         {
-            return this.TConorm.Evaluate(membershipA, membershipB);
+            return this.triangularConorm.Evaluate(membershipA, membershipB);
         }
 
         /// <summary>
@@ -134,28 +127,32 @@ namespace FuzzyLogic.Inference
         /// The evaluations.
         /// </param>
         /// <returns>
-        /// A <see cref="double"/>.
+        /// A <see cref="UnitInterval"/>.
         /// </returns>
-        public UnitInterval Evaluate(List<Evaluation> evaluations)
+        public UnitInterval Evaluate(IEnumerable<Evaluation> evaluations)
         {
-            var allIfAndResults = evaluations
-                .Where(e => e.Connective.Equals(LogicOperators.If()) || e.Connective.Equals(LogicOperators.And()))
-                .Select(e => e.Result);
+            var statementCount = 0;
+            var statements = new Dictionary<int, IList<UnitInterval>> { { statementCount, new List<UnitInterval>() } };
 
-            var ifAndAggregate = this.And(allIfAndResults);
-
-            var orAggregate = UnitInterval.Zero();
-
-            if (evaluations.Exists(e => e.Connective.Equals(LogicOperators.Or())))
+            foreach (var evaluation in evaluations)
             {
-                var allOrResults = evaluations
-                    .Where(e => e.Connective.Equals(LogicOperators.Or()))
-                    .Select(e => e.Result);
+                if (evaluation.Connective.Equals(LogicOperators.And())
+                 || evaluation.Connective.Equals(LogicOperators.If()))
+                {
+                    statements[statementCount].Add(evaluation.Result);
+                }
 
-                orAggregate = this.Or(allOrResults);
+                if (evaluation.Connective.Equals(LogicOperators.Or()))
+                {
+                    statementCount++;
+                    statements.Add(statementCount, new List<UnitInterval>());
+                    statements[statementCount].Add(evaluation.Result);
+                }
             }
 
-            return this.Or(ifAndAggregate, orAggregate);
+            return this.Or(statements
+                .Select(statement => this.And(statement.Value))
+                .ToList());
         }
     }
 }

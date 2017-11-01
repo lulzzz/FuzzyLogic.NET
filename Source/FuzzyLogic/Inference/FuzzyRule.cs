@@ -124,16 +124,6 @@ namespace FuzzyLogic.Inference
                 throw new InvalidOperationException(
                     $"Invalid FuzzyRule (only the connective of the first condition can be an IF).");
             }
-
-            for (var i = 0; i < conditions.Count - 1; i++)
-            {
-                if (conditions[i].Connective.Equals(LogicOperators.Or())
-                 && conditions[i + 1].Connective.Equals(LogicOperators.And()))
-                {
-                    throw new InvalidOperationException(
-                        $"Invalid FuzzyRule (an OR condition connective cannot be followed by an AND).");
-                }
-            }
         }
     }
 }
