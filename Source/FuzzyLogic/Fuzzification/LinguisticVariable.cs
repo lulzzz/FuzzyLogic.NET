@@ -325,7 +325,7 @@ namespace FuzzyLogic.Fuzzification
             Validate.NotOutOfRange(input, nameof(input), this.LowerBound, this.UpperBound);
 
            return this.fuzzySets
-                .OrderBy(fs => fs.Value.GetMembership(input))
+                .OrderByDescending(fs => fs.Value.GetMembership(input))
                 .FirstOrDefault()
                 .Value
                 .State;

@@ -53,10 +53,7 @@ namespace FuzzyLogic
         /// <returns>
         /// A <see cref="UnitInterval"/>.
         /// </returns>
-        public static UnitInterval Create(double value)
-        {
-            return new UnitInterval(value);
-        }
+        public static UnitInterval Create(double value) => new UnitInterval(value);
 
         /// <summary>
         /// Returns a new <see cref="UnitInterval"/> with a value of zero (0).
@@ -64,10 +61,7 @@ namespace FuzzyLogic
         /// <returns>
         /// A <see cref="UnitInterval"/>.
         /// </returns>
-        public static UnitInterval Zero()
-        {
-            return new UnitInterval(0);
-        }
+        public static UnitInterval Zero() => new UnitInterval(0);
 
         /// <summary>
         /// Returns a new <see cref="UnitInterval"/> with a value of one (1).
@@ -75,10 +69,7 @@ namespace FuzzyLogic
         /// <returns>
         /// A <see cref="UnitInterval"/>.
         /// </returns>
-        public static UnitInterval One()
-        {
-            return new UnitInterval(1);
-        }
+        public static UnitInterval One() => new UnitInterval(1);
 
         /// <summary>
         /// The + operator.
@@ -92,10 +83,7 @@ namespace FuzzyLogic
         /// <returns>
         /// A <see cref="double"/>.
         /// </returns>
-        public static double operator +(UnitInterval left, UnitInterval right)
-        {
-            return left.Value + right.Value;
-        }
+        public static double operator +(UnitInterval left, UnitInterval right) => left.Value + right.Value;
 
         /// <summary>
         /// The + operator.
@@ -109,10 +97,7 @@ namespace FuzzyLogic
         /// <returns>
         /// A <see cref="double"/>.
         /// </returns>
-        public static double operator +(double left, UnitInterval right)
-        {
-            return left + right.Value;
-        }
+        public static double operator +(double left, UnitInterval right) => left + right.Value;
 
         /// <summary>
         /// The + operator.
@@ -126,10 +111,7 @@ namespace FuzzyLogic
         /// <returns>
         /// A <see cref="double"/>.
         /// </returns>
-        public static double operator +(UnitInterval left, double right)
-        {
-            return left.Value + right;
-        }
+        public static double operator +(UnitInterval left, double right) => left.Value + right;
 
         /// <summary>
         /// The - operator.
@@ -143,11 +125,7 @@ namespace FuzzyLogic
         /// <returns>
         /// A <see cref="double"/>.
         /// </returns>
-        public static double operator -(UnitInterval left, UnitInterval right)
-        {
-
-            return left.Value - right.Value;
-        }
+        public static double operator -(UnitInterval left, UnitInterval right) => left.Value - right.Value;
 
         /// <summary>
         /// The - operator.
@@ -161,10 +139,7 @@ namespace FuzzyLogic
         /// <returns>
         /// A <see cref="double"/>.
         /// </returns>
-        public static double operator -(double left, UnitInterval right)
-        {
-            return left - right.Value;
-        }
+        public static double operator -(double left, UnitInterval right) => left - right.Value;
 
         /// <summary>
         /// The - operator.
@@ -178,10 +153,7 @@ namespace FuzzyLogic
         /// <returns>
         /// A <see cref="double"/>.
         /// </returns>
-        public static double operator -(UnitInterval left, double right)
-        {
-            return left.Value - right;
-        }
+        public static double operator -(UnitInterval left, double right) => left.Value - right;
 
         /// <summary>
         /// The * operator.
@@ -195,11 +167,7 @@ namespace FuzzyLogic
         /// <returns>
         /// A <see cref="double"/>.
         /// </returns>
-        public static double operator *(UnitInterval left, UnitInterval right)
-        {
-
-            return left.Value * right.Value;
-        }
+        public static double operator *(UnitInterval left, UnitInterval right) => left.Value * right.Value;
 
         /// <summary>
         /// The * operator.
@@ -213,10 +181,7 @@ namespace FuzzyLogic
         /// <returns>
         /// A <see cref="double"/>.
         /// </returns>
-        public static double operator *(double left, UnitInterval right)
-        {
-            return left * right.Value;
-        }
+        public static double operator *(double left, UnitInterval right) => left * right.Value;
 
         /// <summary>
         /// The * operator.
@@ -230,10 +195,7 @@ namespace FuzzyLogic
         /// <returns>
         /// A <see cref="double"/>.
         /// </returns>
-        public static double operator *(UnitInterval left, double right)
-        {
-            return left.Value * right;
-        }
+        public static double operator *(UnitInterval left, double right) => left.Value * right;
 
         /// <summary>
         /// The / operator.
@@ -247,11 +209,7 @@ namespace FuzzyLogic
         /// <returns>
         /// A <see cref="double"/>.
         /// </returns>
-        public static double operator /(UnitInterval left, UnitInterval right)
-        {
-
-            return left.Value / right.Value;
-        }
+        public static double operator /(UnitInterval left, UnitInterval right) => left.Value / right.Value;
 
         /// <summary>
         /// The / operator.
@@ -265,10 +223,7 @@ namespace FuzzyLogic
         /// <returns>
         /// A <see cref="double"/>.
         /// </returns>
-        public static double operator /(double left, UnitInterval right)
-        {
-            return left / right.Value;
-        }
+        public static double operator /(double left, UnitInterval right) => left / right.Value;
 
         /// <summary>
         /// The / operator.
@@ -280,11 +235,9 @@ namespace FuzzyLogic
         /// The right <see cref="UnitInterval"/>.
         /// </param>
         /// <returns>
+        /// A <see cref="double"/>.
         /// </returns>
-        public static double operator /(UnitInterval left, double right)
-        {
-            return left.Value / right;
-        }
+        public static double operator /(UnitInterval left, double right) => left.Value / right;
 
         /// <summary>
         /// The &gt; operator.
@@ -298,10 +251,7 @@ namespace FuzzyLogic
         /// <returns>
         /// A <see cref="double"/>.
         /// </returns>
-        public static bool operator >(UnitInterval left, UnitInterval right)
-        {
-            return left.Value > right.Value;
-        }
+        public static bool operator >(UnitInterval left, UnitInterval right) => left.Value > right.Value;
 
         /// <summary>
         /// The &gt; operator.
@@ -315,10 +265,7 @@ namespace FuzzyLogic
         /// <returns>
         /// A <see cref="double"/>.
         /// </returns>
-        public static bool operator >(double left, UnitInterval right)
-        {
-            return left > right.Value;
-        }
+        public static bool operator >(double left, UnitInterval right) => left > right.Value;
 
         /// <summary>
         /// The &gt; operator.
@@ -332,10 +279,7 @@ namespace FuzzyLogic
         /// <returns>
         /// A <see cref="double"/>.
         /// </returns>
-        public static bool operator >(UnitInterval left, double right)
-        {
-            return left.Value > right;
-        }
+        public static bool operator >(UnitInterval left, double right) => left.Value > right;
 
         /// <summary>
         /// The &lt; operator.
@@ -349,10 +293,7 @@ namespace FuzzyLogic
         /// <returns>
         /// A <see cref="double"/>.
         /// </returns>
-        public static bool operator <(UnitInterval left, UnitInterval right)
-        {
-            return left.Value < right.Value;
-        }
+        public static bool operator <(UnitInterval left, UnitInterval right) => left.Value < right.Value;
 
         /// <summary>
         /// The &lt; operator.
@@ -366,10 +307,7 @@ namespace FuzzyLogic
         /// <returns>
         /// A <see cref="double"/>.
         /// </returns>
-        public static bool operator <(double left, UnitInterval right)
-        {
-            return left < right.Value;
-        }
+        public static bool operator <(double left, UnitInterval right) => left < right.Value;
 
         /// <summary>
         /// The &lt; operator.
@@ -383,10 +321,7 @@ namespace FuzzyLogic
         /// <returns>
         /// A <see cref="double"/>.
         /// </returns>
-        public static bool operator <(UnitInterval left, double right)
-        {
-            return left.Value < right;
-        }
+        public static bool operator <(UnitInterval left, double right) => left.Value < right;
 
         /// <summary>
         /// The == operator.
@@ -400,10 +335,7 @@ namespace FuzzyLogic
         /// <returns>
         /// A <see cref="double"/>.
         /// </returns>
-        public static bool operator ==(UnitInterval left, UnitInterval right)
-        {
-            return left.Equals(right);
-        }
+        public static bool operator ==(UnitInterval left, UnitInterval right) => left.Equals(right);
 
         /// <summary>
         /// The != operator.
@@ -417,10 +349,7 @@ namespace FuzzyLogic
         /// <returns>
         /// A <see cref="double"/>.
         /// </returns>
-        public static bool operator !=(UnitInterval left, UnitInterval right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(UnitInterval left, UnitInterval right) => !(left == right);
 
         /// <summary>
         /// The &gt;= operator.
@@ -434,10 +363,7 @@ namespace FuzzyLogic
         /// <returns>
         /// A <see cref="double"/>.
         /// </returns>
-        public static bool operator >=(UnitInterval left, UnitInterval right)
-        {
-            return left.Value >= right.Value;
-        }
+        public static bool operator >=(UnitInterval left, UnitInterval right) => left.Value >= right.Value;
 
         /// <summary>
         /// The &lt;= operator.
@@ -451,10 +377,7 @@ namespace FuzzyLogic
         /// <returns>
         /// A <see cref="double"/>.
         /// </returns>
-        public static bool operator <=(UnitInterval left, UnitInterval right)
-        {
-            return left.Value <= right.Value;
-        }
+        public static bool operator <=(UnitInterval left, UnitInterval right) => left.Value <= right.Value;
 
         /// <summary>
         /// Returns a value of -1, 0 or 1 based on the comparison of the <see cref="UnitInterval"/>(s).
@@ -465,20 +388,7 @@ namespace FuzzyLogic
         /// <returns>
         /// An <see cref="int"/>.
         /// </returns>
-        public int CompareTo(UnitInterval other)
-        {
-            if (this.Value > other.Value)
-            {
-                return -1;
-            }
-
-            if (this.Value < other.Value)
-            {
-                return 1;
-            }
-
-            return 0;
-        }
+        public int CompareTo(UnitInterval other) => this.Value.CompareTo(other.Value);
 
         /// <summary>
         /// Returns a value indicating whether this instance and the given <see cref="object"/>
