@@ -12,6 +12,7 @@ namespace FuzzyLogic.Logic
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using FuzzyLogic.Inference;
     using FuzzyLogic.Logic.Interfaces;
     using FuzzyLogic.Utility;
 
@@ -83,15 +84,21 @@ namespace FuzzyLogic.Logic
         /// <param name="data">
         /// The data.
         /// </param>
+        /// <param name="evaluator">
+        /// The evaluator.
+        /// </param>
         /// <returns>
         /// A <see cref="double"/>.
         /// </returns>
         /// <exception cref="ArgumentException">
         /// Throws if provided data does not contain all subjects.
         /// </exception>
-        public double Evaluate(IDictionary<Label, double> data)
+        public Evaluation Evaluate(
+            IReadOnlyDictionary<Label, DataPoint> data,
+            FuzzyEvaluator evaluator)
         {
-            Validate.CollectionNotNullOrEmpty(data, nameof(data));
+            Validate.NotNull(data, nameof(data));
+            Validate.NotNull(evaluator, nameof(evaluator));
 
             var evaluations = new List<Evaluation>();
 
@@ -110,20 +117,7 @@ namespace FuzzyLogic.Logic
                 }
             }
 
-            var ifAndAverage = evaluations
-                .Where(e => e.Connective.Equals(LogicOperators.If()) || e.Connective.Equals(LogicOperators.And()))
-                .Average(e => e.Result);
-
-            var highestOr = 0.0;
-
-            if (evaluations.Exists(e => e.Connective.Equals(LogicOperators.Or())))
-            {
-                highestOr = evaluations
-                    .Where(e => e.Connective.Equals(LogicOperators.Or()))
-                    .Max(e => e.Result);
-            }
-
-            return Math.Max(ifAndAverage, highestOr) * this.Weight;
+            return new Evaluation(this.Connective, evaluator.Evaluate(evaluations) * this.Weight);
         }
 
         /// <summary>

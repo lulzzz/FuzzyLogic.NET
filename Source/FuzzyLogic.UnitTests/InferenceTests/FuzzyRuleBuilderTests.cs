@@ -85,9 +85,11 @@ namespace FuzzyLogic.UnitTests.InferenceTests
                 .Then(waterTemp.IsNot("frozen"))
                 .Build();
 
-            var data = new Dictionary<Label, double> { { waterTemp.Subject, 20 } };
+            var dataPoint = new DataPoint(waterTemp.Subject, 20);
 
-            var result = rule1.Evaluate(data);
+            var data = new Dictionary<Label, DataPoint> { { dataPoint.Variable, dataPoint } };
+
+            var result = rule1.Evaluate(data, new FuzzyEvaluator());
 
             var temp = waterTemp.GetState(2);
 

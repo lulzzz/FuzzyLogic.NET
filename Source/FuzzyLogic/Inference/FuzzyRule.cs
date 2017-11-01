@@ -73,16 +73,23 @@ namespace FuzzyLogic.Inference
         /// <param name="data">
         /// The data.
         /// </param>
+        /// <param name="evaluator">
+        /// The fuzzy evaluator.
+        /// </param>
         /// <returns>
         /// The <see cref="IList{FuzzyOutput}"/>.
         /// </returns>
-        public IList<FuzzyOutput> Evaluate(IDictionary<Label, double> data)
+        public IList<FuzzyOutput> Evaluate(
+            IReadOnlyDictionary<Label, DataPoint> data,
+            FuzzyEvaluator evaluator)
         {
             Validate.NotNull(data, nameof(data));
 
-            var firingStrength = this.conditions
-                .Select(c => c.Evaluate(data))
-                .Max();
+            var evaluations = this.conditions
+                .Select(c => c.Evaluate(data, evaluator))
+                .ToList();
+
+            var firingStrength = evaluator.Evaluate(evaluations);
 
             var output = new List<FuzzyOutput>();
 

@@ -69,11 +69,11 @@ namespace FuzzyLogic.Logic
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public Evaluation Evaluate(double input)
+        public Evaluation Evaluate(DataPoint input)
         {
-            Validate.NotOutOfRange(input, nameof(input));
+            Validate.NotNull(input, nameof(input));
 
-            return new Evaluation(this.Connective, this.Variable.GetMembership(this.State, input));
+            return new Evaluation(this.Connective, this.Variable.GetMembership(this.State, input.Value));
         }
 
         /// <summary>

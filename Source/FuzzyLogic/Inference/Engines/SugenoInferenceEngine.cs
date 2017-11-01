@@ -9,7 +9,11 @@
 
 namespace FuzzyLogic.Inference.Engines
 {
+    using System.Collections.Generic;
+    using System.Linq;
     using FuzzyLogic.BinaryOperations;
+    using FuzzyLogic.Defuzzification;
+    using FuzzyLogic.Inference.Engines.Base;
 
     /// <summary>
     /// The sealed <see cref="SugenoInferenceEngine"/> class.
@@ -25,11 +29,33 @@ namespace FuzzyLogic.Inference.Engines
         /// <param name="tconorm">
         /// The t-conorm function.
         /// </param>
+        /// <param name="defuzzifier">
+        /// The de-fuzzifier.
+        /// </param>
         public SugenoInferenceEngine(
             ITriangularNorm tnorm,
-            ITriangularConorm tconorm)
-            : base(tnorm, tconorm)
+            ITriangularConorm tconorm,
+            IDefuzzifier defuzzifier)
+            : base(tnorm, tconorm, defuzzifier)
         {
+        }
+
+        /// <summary>
+        /// Returns a list of the outputs of the inference engine.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="IList{DataPoint}"/>.
+        /// </returns>
+        public IList<Output> Execute()
+        {
+            var data = this.Database.GetAllDataLabeled();
+            var rules = this.Rulebase.GetAllRules();
+
+            var fuzzyOutputs = GroupFuzzyOutputs(EvaluateRules(rules, data, this.Evaluator));
+
+            return fuzzyOutputs
+                .Select(fuzzyOutputGroup => this.Defuzzifier.Defuzzify(fuzzyOutputGroup.Value))
+                .ToList();
         }
     }
 }

@@ -99,10 +99,12 @@ namespace FuzzyLogic.UnitTests.InferenceTests
                 .Then(fanSpeed.Is(FanSpeed.Off))
                 .Build();
 
-            var data = new Dictionary<Label, double> { { waterTemp.Subject, 0 } };
+            var dataPoint = new DataPoint(waterTemp.Subject, 0);
+
+            var data = new Dictionary<Label, DataPoint> { { dataPoint.Variable, dataPoint } };
 
             // Act
-            var result = fuzzyRule.Evaluate(data);
+            var result = fuzzyRule.Evaluate(data, new FuzzyEvaluator());
 
             // Assert
             Assert.Equal(fanSpeed.Subject, result[0].Subject);

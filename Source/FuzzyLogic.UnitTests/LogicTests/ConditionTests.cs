@@ -49,11 +49,13 @@ namespace FuzzyLogic.UnitTests.LogicTests
             .If(waterTemp.Is(WaterTemp.Boiling))
             .Build();
 
-            var data = new Dictionary<Label, double> { { Label.Create(InputVariable.Pressure), 3000 } };
+            var dataPoint = new DataPoint(Label.Create(InputVariable.Pressure), 3000);
+
+            var data = new Dictionary<Label, DataPoint> { { dataPoint.Variable, dataPoint } };
 
             // Act
             // Assert
-            Assert.Throws<InvalidOperationException>(() => condition.Evaluate(data));
+            Assert.Throws<InvalidOperationException>(() => condition.Evaluate(data, new FuzzyEvaluator()));
         }
 
         [Fact]

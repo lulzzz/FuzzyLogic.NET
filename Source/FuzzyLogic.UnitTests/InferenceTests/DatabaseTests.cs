@@ -121,7 +121,7 @@ namespace FuzzyLogic.UnitTests.InferenceTests
             var expectedList = new List<Label> { label1, label2, label3 };
 
             // Act
-            var result = database.Variables;
+            var result = database.VariableNames();
 
             // Assert
             Assert.Equal(expectedList, result);
@@ -136,9 +136,11 @@ namespace FuzzyLogic.UnitTests.InferenceTests
 
             database.AddVariable(pressure, 3000);
 
+            var data = new DataPoint(pressure, 3001);
+
             // Act
-            database.Update(pressure, 3001);
-            var result = database.GetData(pressure);
+            database.UpdateData(data);
+            var result = database.GetData(pressure).Value;
 
             // Assert
             Assert.Equal(3001, result);
@@ -153,9 +155,11 @@ namespace FuzzyLogic.UnitTests.InferenceTests
 
             database.AddVariable(pressure, 3000);
 
+            var data = new DataPoint(pressure, 3001);
+
             // Act
-            database.Update(pressure, 3001);
-            var result = database.GetData(pressure);
+            database.UpdateData(data);
+            var result = database.GetData(pressure).Value;
 
             // Assert
             Assert.Equal(3001, result);
@@ -175,13 +179,13 @@ namespace FuzzyLogic.UnitTests.InferenceTests
             database.AddVariable(label3, 199);
 
             // Act
-            var result = database.GetAllData();
+            var result = database.GetAllDataLabeled();
 
             // Assert
             Assert.Equal(3, result.Count);
-            Assert.Equal(3000, result[label1]);
-            Assert.Equal(25, result[label2]);
-            Assert.Equal(199, result[label3]);
+            Assert.Equal(3000, result[label1].Value);
+            Assert.Equal(25, result[label2].Value);
+            Assert.Equal(199, result[label3].Value);
         }
     }
 }

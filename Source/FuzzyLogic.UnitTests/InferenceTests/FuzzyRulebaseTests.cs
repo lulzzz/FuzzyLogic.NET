@@ -84,7 +84,7 @@ namespace FuzzyLogic.UnitTests.InferenceTests
             var rulebase = new Rulebase();
 
             // Act
-            var result = rulebase.GetRules().Count;
+            var result = rulebase.GetAllRules().Count;
 
             // Assert
             Assert.Equal(0, result);
@@ -102,11 +102,10 @@ namespace FuzzyLogic.UnitTests.InferenceTests
             rulebase.AddRule(rule2);
 
             // Act
-            var result = rulebase.GetRules();
+            var result = rulebase.GetAllRules();
 
             // Assert
-            Assert.True(result.ContainsKey(rule1.Label));
-            Assert.True(result.ContainsKey(rule2.Label));
+            Assert.Equal(2, result.Count);
         }
     }
 }

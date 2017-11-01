@@ -18,7 +18,7 @@ namespace FuzzyLogic.Defuzzification
     public interface IDefuzzifier
     {
         /// <summary>
-        /// Returns a single crisp value based on the given fuzzy output collection.
+        /// Returns a crisp output derived from the de-fuzzification of the given fuzzy outputs collection.
         /// </summary>
         /// <param name="fuzzyOutputs">
         /// The fuzzy outputs collection.

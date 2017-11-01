@@ -7,7 +7,7 @@
 // </copyright>
 // -------------------------------------------------------------------------------------------------
 
-namespace FuzzyLogic.Defuzzification
+namespace FuzzyLogic
 {
     using FuzzyLogic.Annotations;
     using FuzzyLogic.Utility;
@@ -21,25 +21,25 @@ namespace FuzzyLogic.Defuzzification
         /// <summary>
         /// Initializes a new instance of the <see cref="Output"/> struct.
         /// </summary>
-        /// <param name="subject">
-        /// The subject.
+        /// <param name="variable">
+        /// The variable name.
         /// </param>
         /// <param name="value">
         /// The output value.
         /// </param>
-        public Output(Label subject, double value)
+        public Output(Label variable, double value)
         {
-            Validate.NotNull(subject, nameof(subject));
+            Validate.NotNull(variable, nameof(variable));
             Validate.NotOutOfRange(value, nameof(value));
 
-            this.Subject = subject;
+            this.Variable = variable;
             this.Value = value;
         }
 
         /// <summary>
-        /// Gets the subject.
+        /// Gets the output variable name.
         /// </summary>
-        public Label Subject { get; }
+        public Label Variable { get; }
 
         /// <summary>
         /// Gets the output value.

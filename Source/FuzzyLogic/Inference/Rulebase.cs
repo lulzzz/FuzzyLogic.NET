@@ -11,7 +11,6 @@ namespace FuzzyLogic.Inference
 {
     using System;
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;
     using FuzzyLogic.Utility;
 
     /// <summary>
@@ -40,7 +39,7 @@ namespace FuzzyLogic.Inference
         /// <returns>
         /// A read only dictionary.
         /// </returns>
-        public IReadOnlyDictionary<Label, FuzzyRule> GetRules() => new ReadOnlyDictionary<Label, FuzzyRule>(this.rules);
+        public IReadOnlyList<FuzzyRule> GetAllRules() => new List<FuzzyRule>(this.rules.Values).AsReadOnly();
 
         /// <summary>
         /// Adds the given <see cref="FuzzyRule"/> to the database.
