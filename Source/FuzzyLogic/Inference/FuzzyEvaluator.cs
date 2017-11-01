@@ -10,7 +10,6 @@
 namespace FuzzyLogic.Inference
 {
     using System.Collections.Generic;
-    using System.Linq;
     using FuzzyLogic.Annotations;
     using FuzzyLogic.BinaryOperations;
     using FuzzyLogic.Logic;
@@ -59,7 +58,7 @@ namespace FuzzyLogic.Inference
         /// The membership value A.
         /// </param>
         /// <param name="membershipB">
-        /// The membership value V.
+        /// The membership value B.
         /// </param>
         /// <returns>
         /// A <see cref="double"/>.
@@ -71,32 +70,16 @@ namespace FuzzyLogic.Inference
         }
 
         /// <summary>
-        /// The and.
-        /// </summary>
-        /// <param name="input">
-        /// The input.
-        /// </param>
-        /// <returns>
-        /// The <see cref="double"/>.
-        /// </returns>
-        public UnitInterval And(IEnumerable<UnitInterval> input)
-        {
-            Validate.NotNull(input, nameof(input));
-
-            return input.Aggregate(this.And);
-        }
-
-        /// <summary>
         /// The or.
         /// </summary>
         /// <param name="membershipA">
-        /// The membership a.
+        /// The membership value A.
         /// </param>
         /// <param name="membershipB">
-        /// The membership b.
+        /// The membership value B.
         /// </param>
         /// <returns>
-        /// The <see cref="double"/>.
+        /// A <see cref="double"/>.
         /// </returns>
         [Pure]
         public UnitInterval Or(UnitInterval membershipA, UnitInterval membershipB)
@@ -105,23 +88,7 @@ namespace FuzzyLogic.Inference
         }
 
         /// <summary>
-        /// The or.
-        /// </summary>
-        /// <param name="input">
-        /// The input.
-        /// </param>
-        /// <returns>
-        /// The <see cref="double"/>.
-        /// </returns>
-        public UnitInterval Or(IEnumerable<UnitInterval> input)
-        {
-            Validate.NotNull(input, nameof(input));
-
-            return input.Aggregate(this.Or);
-        }
-
-        /// <summary>
-        /// Returns the result of the aggregated evaluation of the given collection of evaluations.
+        /// Returns the final evaluation result of the aggregated collection of evaluations.
         /// </summary>
         /// <param name="evaluations">
         /// The evaluations.
@@ -131,28 +98,23 @@ namespace FuzzyLogic.Inference
         /// </returns>
         public UnitInterval Evaluate(IEnumerable<Evaluation> evaluations)
         {
-            var statementCount = 0;
-            var statements = new Dictionary<int, IList<UnitInterval>> { { statementCount, new List<UnitInterval>() } };
+            var result = UnitInterval.One();
 
             foreach (var evaluation in evaluations)
             {
                 if (evaluation.Connective.Equals(LogicOperators.And())
                  || evaluation.Connective.Equals(LogicOperators.If()))
                 {
-                    statements[statementCount].Add(evaluation.Result);
+                    result = this.And(result, evaluation.Result);
                 }
 
                 if (evaluation.Connective.Equals(LogicOperators.Or()))
                 {
-                    statementCount++;
-                    statements.Add(statementCount, new List<UnitInterval>());
-                    statements[statementCount].Add(evaluation.Result);
+                    result = this.Or(result, evaluation.Result);
                 }
             }
 
-            return this.Or(statements
-                .Select(statement => this.And(statement.Value))
-                .ToList());
+            return result;
         }
     }
 }
