@@ -7,7 +7,7 @@
 // </copyright>
 // -------------------------------------------------------------------------------------------------
 
-namespace FuzzyLogic.UnitTests
+namespace FuzzyLogic.UnitTests.FuzzificationTests
 {
     using System.Diagnostics.CodeAnalysis;
     using FuzzyLogic.Fuzzification;
