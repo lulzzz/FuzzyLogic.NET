@@ -34,7 +34,7 @@ namespace FuzzyLogic.BinaryOperations
             return 1 - (membershipA * membershipB) > 0
                 ? UnitInterval.Create(
                 ((membershipA + membershipB) - (2 * (membershipA * membershipB)))
-                / (1 - (membershipA * membershipB)))
+          / (1 - (membershipA * membershipB)))
                 : UnitInterval.One();
         }
     }

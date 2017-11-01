@@ -33,7 +33,7 @@ namespace FuzzyLogic.BinaryOperations
         {
             return UnitInterval.Create(
                 (membershipA * membershipB)
-                / (2 - ((membershipA + membershipB) - (membershipA * membershipB))));
+        / (2 - ((membershipA + membershipB) - (membershipA * membershipB))));
         }
     }
 }

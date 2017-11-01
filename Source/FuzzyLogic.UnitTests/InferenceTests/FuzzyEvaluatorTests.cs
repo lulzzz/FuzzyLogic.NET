@@ -9,6 +9,7 @@
 
 namespace FuzzyLogic.UnitTests.InferenceTests
 {
+    using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using FuzzyLogic.BinaryOperations;
@@ -146,10 +147,10 @@ namespace FuzzyLogic.UnitTests.InferenceTests
                                       new Evaluation(LogicOperators.And(), UnitInterval.Create(0.0)),
                                       new Evaluation(LogicOperators.And(), UnitInterval.Create(0.2)),
 
-                                      // Statement group 2 (assumed to evaluate to 1).
+                                      // Statement group 2 (assumed to evaluate to 0.8).
                                       new Evaluation(LogicOperators.Or(), UnitInterval.Create(1)),
                                       new Evaluation(LogicOperators.And(), UnitInterval.Create(0.9)),
-                                      new Evaluation(LogicOperators.And(), UnitInterval.Create(0.8)),
+                                      new Evaluation(LogicOperators.And(), UnitInterval.Create(0.8))
                                   };
 
             // Act
@@ -157,6 +158,32 @@ namespace FuzzyLogic.UnitTests.InferenceTests
 
             // Assert
             Assert.Equal(UnitInterval.Create(0.8), result);
+        }
+
+        [Fact]
+        internal void Evaluate_WithTwoGroupCompoundStatementAllZero_ReturnsExpectedResult()
+        {
+            // Arrange
+            var evaluator = new FuzzyEvaluator();
+
+            var evaluations = new List<Evaluation>
+                                  {
+                                      // Statement group 1 (assumed to evaluate to 0).
+                                      new Evaluation(LogicOperators.If(), UnitInterval.Create(0.0)),
+                                      new Evaluation(LogicOperators.And(), UnitInterval.Create(0.0)),
+                                      new Evaluation(LogicOperators.And(), UnitInterval.Create(0.0)),
+
+                                      // Statement group 2 (assumed to evaluate to 0).
+                                      new Evaluation(LogicOperators.Or(), UnitInterval.Create(0)),
+                                      new Evaluation(LogicOperators.And(), UnitInterval.Create(0)),
+                                      new Evaluation(LogicOperators.And(), UnitInterval.Create(0))
+                                  };
+
+            // Act
+            var result = evaluator.Evaluate(evaluations);
+
+            // Assert
+            Assert.Equal(UnitInterval.Zero(), result);
         }
 
         [Fact]
@@ -177,8 +204,8 @@ namespace FuzzyLogic.UnitTests.InferenceTests
                                       new Evaluation(LogicOperators.And(), UnitInterval.Create(0.9)),
                                       new Evaluation(LogicOperators.And(), UnitInterval.Create(0.8)),
 
-                                      // Statement group 3 (assumed to evaluate to 1).
-                                      new Evaluation(LogicOperators.Or(), UnitInterval.Create(1)),
+                                      // Statement group 3 (assumed to evaluate to 0.9).
+                                      new Evaluation(LogicOperators.Or(), UnitInterval.Create(0.9)),
                                       new Evaluation(LogicOperators.And(), UnitInterval.Create(1)),
                                       new Evaluation(LogicOperators.And(), UnitInterval.Create(1))
                                   };
@@ -187,7 +214,7 @@ namespace FuzzyLogic.UnitTests.InferenceTests
             var result = evaluator.Evaluate(evaluations);
 
             // Assert
-            Assert.Equal(UnitInterval.Create(1), result);
+            Assert.Equal(UnitInterval.Create(0.9), result);
         }
 
         [Fact]
@@ -224,6 +251,108 @@ namespace FuzzyLogic.UnitTests.InferenceTests
 
             // Assert
             Assert.Equal(UnitInterval.Create(1), result);
+        }
+
+        [Fact]
+        internal void Evaluate_WithThreeGroupCompoundStatementAndEinsteinFunctions_ReturnsExpectedResult()
+        {
+            // Arrange
+            var tnorm = TriangularNormFactory.EinsteinProduct();
+            var tconorm = TriangularConormFactory.EinsteinSum();
+
+            var evaluator = new FuzzyEvaluator(tnorm, tconorm);
+
+            var evaluations = new List<Evaluation>
+                                  {
+                                      // Statement group 1
+                                      new Evaluation(LogicOperators.If(), UnitInterval.Create(0.25)),
+                                      new Evaluation(LogicOperators.And(), UnitInterval.Create(0.0)),
+                                      new Evaluation(LogicOperators.And(), UnitInterval.Create(0.2)),
+
+                                      // Statement group 2
+                                      new Evaluation(LogicOperators.Or(), UnitInterval.Create(1)),
+                                      new Evaluation(LogicOperators.And(), UnitInterval.Create(0.9)),
+                                      new Evaluation(LogicOperators.And(), UnitInterval.Create(0.8)),
+
+                                      // Statement group 3
+                                      new Evaluation(LogicOperators.Or(), UnitInterval.Create(0.5)),
+                                      new Evaluation(LogicOperators.And(), UnitInterval.Create(1)),
+                                      new Evaluation(LogicOperators.And(), UnitInterval.Create(1))
+                                  };
+
+            // Act
+            var result = evaluator.Evaluate(evaluations);
+
+            // Assert
+            Assert.Equal(0.891304347826087, result.Value);
+        }
+
+        [Fact]
+        internal void Evaluate_WithThreeGroupCompoundStatementAndHamacherFunctions_ReturnsExpectedResult()
+        {
+            // Arrange
+            var tnorm = TriangularNormFactory.HamacherProduct();
+            var tconorm = TriangularConormFactory.HamacherSum();
+
+            var evaluator = new FuzzyEvaluator(tnorm, tconorm);
+
+            var evaluations = new List<Evaluation>
+                                  {
+                                      // Statement group 1
+                                      new Evaluation(LogicOperators.If(), UnitInterval.Create(0.25)),
+                                      new Evaluation(LogicOperators.And(), UnitInterval.Create(0.0)),
+                                      new Evaluation(LogicOperators.And(), UnitInterval.Create(0.2)),
+
+                                      // Statement group 2
+                                      new Evaluation(LogicOperators.Or(), UnitInterval.Create(1)),
+                                      new Evaluation(LogicOperators.And(), UnitInterval.Create(0.9)),
+                                      new Evaluation(LogicOperators.And(), UnitInterval.Create(0.8)),
+
+                                      // Statement group 3
+                                      new Evaluation(LogicOperators.Or(), UnitInterval.Create(0.5)),
+                                      new Evaluation(LogicOperators.And(), UnitInterval.Create(1)),
+                                      new Evaluation(LogicOperators.And(), UnitInterval.Create(1))
+                                  };
+
+            // Act
+            var result = evaluator.Evaluate(evaluations);
+
+            // Assert
+            Assert.Equal(0.790322580645162, Math.Round(result.Value, 15));
+        }
+
+        [Fact]
+        internal void Evaluate_WithThreeGroupCompoundStatementAndOtherFunctions_ReturnsExpectedResult()
+        {
+            // Arrange
+            var tnorm = TriangularNormFactory.Lukasiewicz();
+            var tconorm = TriangularConormFactory.ProbabilisticSum();
+
+            var evaluator = new FuzzyEvaluator(tnorm, tconorm);
+
+            var evaluations = new List<Evaluation>
+                                  {
+                                      // Statement group 1
+                                      new Evaluation(LogicOperators.If(), UnitInterval.Create(0.25)),
+                                      new Evaluation(LogicOperators.And(), UnitInterval.Create(0.0)),
+                                      new Evaluation(LogicOperators.And(), UnitInterval.Create(0.2)),
+
+                                      // Statement group 2
+                                      new Evaluation(LogicOperators.Or(), UnitInterval.Create(1)),
+                                      new Evaluation(LogicOperators.And(), UnitInterval.Create(0.9)),
+                                      new Evaluation(LogicOperators.And(), UnitInterval.Create(0.8)),
+
+                                      // Statement group 3
+                                      new Evaluation(LogicOperators.Or(), UnitInterval.Create(0.5)),
+                                      new Evaluation(LogicOperators.And(), UnitInterval.Create(1)),
+                                      new Evaluation(LogicOperators.And(), UnitInterval.Create(1))
+                                  };
+
+            // Act
+            var result = evaluator.Evaluate(evaluations);
+
+            // Assert
+            Assert.Equal(0.85, Math.Round(result.Value, 2));
         }
     }
 }
