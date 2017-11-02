@@ -97,7 +97,6 @@ namespace FuzzyLogic.Inference
             {
                 output.Add(new FuzzyOutput(
                     conclusion.Variable.Subject,
-                    conclusion.State,
                     conclusion.Variable.GetSet(conclusion.State),
                     firingStrength));
             }

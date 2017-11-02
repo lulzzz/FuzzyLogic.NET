@@ -10,6 +10,7 @@
 namespace FuzzyLogic.Fuzzification
 {
     using System;
+    using System.Collections.Generic;
     using FuzzyLogic.Annotations;
     using FuzzyLogic.MembershipFunctions;
     using FuzzyLogic.Utility;
@@ -79,6 +80,14 @@ namespace FuzzyLogic.Fuzzification
         /// (all points either increasing or decreasing).
         /// </summary>
         public bool IsConvex => this.CalculateIsConvex();
+
+        /// <summary>
+        /// The get points.
+        /// </summary>
+        /// <returns>
+        /// An <see cref="IEnumerable{FuzzyPoint}"/>.
+        /// </returns>
+        public IEnumerable<FuzzyPoint> GetPoints() => this.function.Points;
 
         /// <summary>
         /// Returns the value of the membership for the given <see cref="double"/>.

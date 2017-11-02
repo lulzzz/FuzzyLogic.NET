@@ -25,9 +25,6 @@ namespace FuzzyLogic.Inference
         /// <param name="subject">
         /// The subject.
         /// </param>
-        /// <param name="state">
-        /// The fuzzy state.
-        /// </param>
         /// <param name="outputFunction">
         /// The output function.
         /// </param>
@@ -36,17 +33,14 @@ namespace FuzzyLogic.Inference
         /// </param>
         public FuzzyOutput(
             Label subject,
-            FuzzyState state,
             FuzzySet outputFunction,
             UnitInterval firingStrength)
         {
             Validate.NotNull(subject, nameof(subject));
-            Validate.NotNull(state, nameof(state));
             Validate.NotNull(firingStrength, nameof(firingStrength));
             Validate.NotNull(outputFunction, nameof(outputFunction));
 
             this.Subject = subject;
-            this.State = state;
             this.OutputFunction = outputFunction;
             this.FiringStrength = firingStrength;
         }
@@ -59,7 +53,7 @@ namespace FuzzyLogic.Inference
         /// <summary>
         /// Gets the output state.
         /// </summary>
-        public FuzzyState State { get; }
+        public FuzzyState State => this.OutputFunction.State;
 
         /// <summary>
         /// Gets the output function.

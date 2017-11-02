@@ -9,6 +9,7 @@
 
 namespace FuzzyLogic.MembershipFunctions
 {
+    using System.Linq;
     using FuzzyLogic.Annotations;
     using FuzzyLogic.Fuzzification;
     using FuzzyLogic.Utility;
@@ -19,6 +20,8 @@ namespace FuzzyLogic.MembershipFunctions
     [Immutable]
     public sealed class SingletonFunction : IMembershipFunction
     {
+        private readonly FuzzyPoint[] points;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="SingletonFunction"/> class.
         /// </summary>
@@ -29,7 +32,7 @@ namespace FuzzyLogic.MembershipFunctions
         {
             Validate.NotNull(point, nameof(point));
 
-            this.Points = new FuzzyPoint[] { point };
+            this.points = new FuzzyPoint[] { point };
         }
 
         /// <summary>
@@ -45,17 +48,17 @@ namespace FuzzyLogic.MembershipFunctions
         /// <summary>
         /// The lower bound of the <see cref="IMembershipFunction"/> (the same value as the support).
         /// </summary>
-        public double LowerBound => this.Points[0].X;
+        public double LowerBound => this.points[0].X;
 
         /// <summary>
         /// The upper bound of the <see cref="IMembershipFunction"/> (the same value as the support).
         /// </summary>
-        public double UpperBound => this.Points[0].X;
+        public double UpperBound => this.points[0].X;
 
         /// <summary>
         /// Gets the points array.
         /// </summary>
-        public FuzzyPoint[] Points { get; }
+        public FuzzyPoint[] Points => this.points.ToArray();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SingletonFunction"/> class.

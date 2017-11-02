@@ -20,6 +20,8 @@ namespace FuzzyLogic.MembershipFunctions
     [Immutable]
     public class PiecewiseLinearFunction : IMembershipFunction
     {
+        private readonly FuzzyPoint[] points;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="PiecewiseLinearFunction"/> class.
         /// </summary>
@@ -31,7 +33,7 @@ namespace FuzzyLogic.MembershipFunctions
             Validate.NotNull(points, nameof(points));
             Validate.FuzzyPointArray(points, nameof(points));
 
-            this.Points = points;
+            this.points = points;
         }
 
         /// <summary>
@@ -55,9 +57,9 @@ namespace FuzzyLogic.MembershipFunctions
         public double UpperBound => this.Points[this.Points.Length - 1].X;
 
         /// <summary>
-        /// Gets the points.
+        /// Gets the points array.
         /// </summary>
-        public FuzzyPoint[] Points { get; }
+        public FuzzyPoint[] Points => this.points.ToArray();
 
         /// <summary>
         /// Returns the membership value of a given input to the membership function.

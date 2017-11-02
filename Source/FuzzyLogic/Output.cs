@@ -21,25 +21,25 @@ namespace FuzzyLogic
         /// <summary>
         /// Initializes a new instance of the <see cref="Output"/> struct.
         /// </summary>
-        /// <param name="variable">
-        /// The variable name.
+        /// <param name="subject">
+        /// The subject name.
         /// </param>
         /// <param name="value">
         /// The output value.
         /// </param>
-        public Output(Label variable, double value)
+        public Output(Label subject, double value)
         {
-            Validate.NotNull(variable, nameof(variable));
+            Validate.NotNull(subject, nameof(subject));
             Validate.NotOutOfRange(value, nameof(value));
 
-            this.Variable = variable;
+            this.Subject = subject;
             this.Value = value;
         }
 
         /// <summary>
-        /// Gets the output variable name.
+        /// Gets the output subject name.
         /// </summary>
-        public Label Variable { get; }
+        public Label Subject { get; }
 
         /// <summary>
         /// Gets the output value.
