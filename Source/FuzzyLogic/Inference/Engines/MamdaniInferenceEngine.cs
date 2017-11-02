@@ -9,11 +9,11 @@
 
 namespace FuzzyLogic.Inference.Engines
 {
+    using System.Collections.Generic;
+    using System.Linq;
     using FuzzyLogic.BinaryOperations;
     using FuzzyLogic.Defuzzification;
     using FuzzyLogic.Inference.Engines.Base;
-    using System.Collections.Generic;
-    using System.Linq;
 
     /// <summary>
     /// The sealed <see cref="MamdaniInferenceEngine"/> class.
@@ -33,9 +33,9 @@ namespace FuzzyLogic.Inference.Engines
         /// The de-fuzzifier.
         /// </param>
         public MamdaniInferenceEngine(
-            ITriangularNorm tnorm, 
+            ITriangularNorm tnorm,
             ITriangularConorm tconorm,
-            IDefuzzifier defuzzifier) 
+            IDefuzzifier defuzzifier)
             : base(tnorm, tconorm, defuzzifier)
         {
         }

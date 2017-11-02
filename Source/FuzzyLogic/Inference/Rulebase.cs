@@ -14,9 +14,9 @@ namespace FuzzyLogic.Inference
     using FuzzyLogic.Utility;
 
     /// <summary>
-    /// The <see cref="Rulebase"/> class.
+    /// The sealed <see cref="Rulebase"/> class.
     /// </summary>
-    public class Rulebase
+    public sealed class Rulebase
     {
         private readonly Dictionary<Label, FuzzyRule> rules = new Dictionary<Label, FuzzyRule>();
 

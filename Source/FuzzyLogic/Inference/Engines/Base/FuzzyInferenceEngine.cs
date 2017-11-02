@@ -80,7 +80,7 @@ namespace FuzzyLogic.Inference.Engines.Base
         public IDefuzzifier Defuzzifier { get; }
 
         /// <summary>
-        /// Returns the evaluation of all fuzzy rules in the rulebase.
+        /// Returns the evaluation of all fuzzy rules in the <see cref="Rulebase"/>.
         /// </summary>
         /// <param name="rules">
         /// The fuzzy rules.
