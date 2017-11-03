@@ -6,9 +6,9 @@
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <Authors>Christopher Sellers</Authors>
     <Company></Company>
-    <Version>0.5.0-alpha</Version>
+    <Version>0.5.1-alpha</Version>
     <Description>A library to express fuzzy logic for .NET. Fuzzy set operations, fuzzification with linguistic variables and fuzzy inference currently supported.</Description>
-    <AssemblyVersion>0.5.0.0</AssemblyVersion>
+    <AssemblyVersion>0.5.1.0</AssemblyVersion>
     <Language>C#</Language>
     <Copyright>Copyright ©2017 Christopher Sellers</Copyright>
     <PackageLicenseUrl>https://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
@@ -16,9 +16,9 @@
     <PackageIconUrl>https://raw.githubusercontent.com/cjdsellers/FuzzyLogic/master/FuzzyLogicIcon.ico</PackageIconUrl>
     <RepositoryUrl>https://github.com/cjdsellers/FuzzyLogic</RepositoryUrl>
     <PackageTags>fuzzy logic</PackageTags>
-    <PackageReleaseNotes>Added binary operators. Powerful FuzzyRuleBuilder and ConditionBuilder classes.</PackageReleaseNotes>
+    <PackageReleaseNotes>Powerful FuzzyRuleBuilder and ConditionBuilder classes.</PackageReleaseNotes>
     <Product />
-    <FileVersion>0.5.0.0</FileVersion>
+    <FileVersion>0.5.1.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
