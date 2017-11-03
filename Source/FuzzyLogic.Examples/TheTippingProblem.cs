@@ -27,7 +27,7 @@ namespace FuzzyLogic.Examples
         [InlineData(5, 5, 13)]
         [InlineData(7.5, 7.5, 17.8)]
         [InlineData(10, 10, 25)]
-        internal void RunMandaniInference(double foodInput, double serviceInput, double expected)
+        internal void RunMamdaniInference(double foodInput, double serviceInput, double expected)
         {
             // Define the input and output linguistic variables.
             var foodQuality = new LinguisticVariable(
@@ -57,15 +57,23 @@ namespace FuzzyLogic.Examples
                         new FuzzySet(TipAmount.High, TrapezoidalFunction.CreateWithRightEdge(13, 25))
                     });
 
-            // Define the rules for the fuzzy system.
-            var rule1 = new FuzzyRuleBuilder(TippingProblem.Rule1).If(foodQuality.Is(FoodQuality.Poor))
-                .Or(serviceQuality.Is(ServiceQuality.Poor)).Then(tipAmount.Is(TipAmount.Low)).Build();
+            // Define the rules for the fuzzy inference engine.
+            var rule1 = new FuzzyRuleBuilder(TippingProblem.Rule1)
+                .If(foodQuality.Is(FoodQuality.Poor))
+                .Or(serviceQuality.Is(ServiceQuality.Poor))
+                .Then(tipAmount.Is(TipAmount.Low))
+                .Build();
 
-            var rule2 = new FuzzyRuleBuilder(TippingProblem.Rule2).If(serviceQuality.Is(ServiceQuality.Average))
-                .Then(tipAmount.Is(TipAmount.Medium)).Build();
+            var rule2 = new FuzzyRuleBuilder(TippingProblem.Rule2)
+                .If(serviceQuality.Is(ServiceQuality.Average))
+                .Then(tipAmount.Is(TipAmount.Medium))
+                .Build();
 
-            var rule3 = new FuzzyRuleBuilder(TippingProblem.Rule3).If(foodQuality.Is(FoodQuality.Good))
-                .Or(serviceQuality.Is(ServiceQuality.Good)).Then(tipAmount.Is(TipAmount.High)).Build();
+            var rule3 = new FuzzyRuleBuilder(TippingProblem.Rule3)
+                .If(foodQuality.Is(FoodQuality.Good))
+                .Or(serviceQuality.Is(ServiceQuality.Good))
+                .Then(tipAmount.Is(TipAmount.High))
+                .Build();
 
             // Construct the fuzzy inference engine.
             var tnorm = TriangularNormFactory.MinimumTNorm();
@@ -133,15 +141,23 @@ namespace FuzzyLogic.Examples
                         new FuzzySet(TipAmount.High, TrapezoidalFunction.CreateWithRightEdge(13, 25))
                     });
 
-            // Define the rules for the fuzzy system.
-            var rule1 = new FuzzyRuleBuilder(TippingProblem.Rule1).If(foodQuality.Is(FoodQuality.Poor))
-                .Or(serviceQuality.Is(ServiceQuality.Poor)).Then(tipAmount.Is(TipAmount.Low)).Build();
+            // Define the rules for the fuzzy inference engine.
+            var rule1 = new FuzzyRuleBuilder(TippingProblem.Rule1)
+                .If(foodQuality.Is(FoodQuality.Poor))
+                .Or(serviceQuality.Is(ServiceQuality.Poor))
+                .Then(tipAmount.Is(TipAmount.Low))
+                .Build();
 
-            var rule2 = new FuzzyRuleBuilder(TippingProblem.Rule2).If(serviceQuality.Is(ServiceQuality.Average))
-                .Then(tipAmount.Is(TipAmount.Medium)).Build();
+            var rule2 = new FuzzyRuleBuilder(TippingProblem.Rule2)
+                .If(serviceQuality.Is(ServiceQuality.Average))
+                .Then(tipAmount.Is(TipAmount.Medium))
+                .Build();
 
-            var rule3 = new FuzzyRuleBuilder(TippingProblem.Rule3).If(foodQuality.Is(FoodQuality.Good))
-                .Or(serviceQuality.Is(ServiceQuality.Good)).Then(tipAmount.Is(TipAmount.High)).Build();
+            var rule3 = new FuzzyRuleBuilder(TippingProblem.Rule3)
+                .If(foodQuality.Is(FoodQuality.Good))
+                .Or(serviceQuality.Is(ServiceQuality.Good))
+                .Then(tipAmount.Is(TipAmount.High))
+                .Build();
 
             // Construct the fuzzy inference engine.
             var tnorm = TriangularNormFactory.MinimumTNorm();
