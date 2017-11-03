@@ -116,18 +116,39 @@ namespace FuzzyLogic.Inference
         /// <summary>
         /// Updates the data point for that variable within the database.
         /// </summary>
+        /// <param name="dataPoint">
+        /// The input data point.
+        /// </param>
+        /// <exception cref="ArgumentException">
+        /// Throws an exception if the variable label has not been added to the database.
+        /// </exception>
+        public void UpdateData(DataPoint dataPoint)
+        {
+            Validate.NotNull(dataPoint, nameof(dataPoint));
+            Validate.DictionaryContainsKey(dataPoint.Variable, nameof(dataPoint.Variable), this.variableData);
+
+            this.variableData[dataPoint.Variable] = dataPoint;
+        }
+
+        /// <summary>
+        /// Updates all data points for the variables within the database.
+        /// </summary>
         /// <param name="input">
         /// The input data point.
         /// </param>
         /// <exception cref="ArgumentException">
         /// Throws an exception if the variable label has not been added to the database.
         /// </exception>
-        public void UpdateData(DataPoint input)
+        public void UpdateData(ICollection<DataPoint> input)
         {
-            Validate.NotNull(input, nameof(input));
-            Validate.DictionaryContainsKey(input.Variable, nameof(input.Variable), this.variableData);
+            Validate.CollectionNotNullOrEmpty(input, nameof(input));
 
-            this.variableData[input.Variable] = input;
+            foreach (var datapoint in input)
+            {
+                Validate.DictionaryContainsKey(datapoint.Variable, nameof(datapoint.Variable), this.variableData);
+
+                this.variableData[datapoint.Variable] = datapoint;
+            }
         }
 
         /// <summary>

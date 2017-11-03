@@ -12,6 +12,7 @@ namespace FuzzyLogic.UnitTests.InferenceTests
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using FuzzyLogic.Inference;
+    using FuzzyLogic.TestKit;
     using Xunit;
 
     [SuppressMessage("StyleCop.CSharp.NamingRules", "*", Justification = "Reviewed. Suppression is OK within the Test Suite.")]
@@ -165,6 +166,39 @@ namespace FuzzyLogic.UnitTests.InferenceTests
 
             // Assert
             Assert.Equal(3001, result);
+        }
+
+        [Fact]
+        internal void Update_GivenACollectionOfDataPoints_ThenReturnsExpectedData()
+        {
+            // Arrange
+            var pressure = Label.Create(InputVariable.Pressure);
+            var waterTemp = Label.Create(InputVariable.WaterTemp);
+            var pumpSpeed = Label.Create(InputVariable.PumpSpeed);
+
+            var database = new Database();
+            database.AddVariable(pressure, 3000);
+            database.AddVariable(waterTemp, 25);
+            database.AddVariable(pumpSpeed);
+
+            var dataCollection = new List<DataPoint>
+                           {
+                               new DataPoint(pressure, 3001),
+                               new DataPoint(waterTemp, 24),
+                               new DataPoint(pumpSpeed, 0)
+                           };
+
+            // Act
+            database.UpdateData(dataCollection);
+
+            var result1 = database.GetData(pressure).Value;
+            var result2 = database.GetData(waterTemp).Value;
+            var result3 = database.GetData(pumpSpeed).Value;
+
+            // Assert
+            Assert.Equal(3001, result1);
+            Assert.Equal(24, result2);
+            Assert.Equal(0, result3);
         }
 
         [Fact]

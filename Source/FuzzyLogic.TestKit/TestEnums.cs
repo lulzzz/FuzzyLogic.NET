@@ -26,7 +26,7 @@ namespace FuzzyLogic.TestKit
 
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1602:EnumerationItemsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
-    public enum FanSpeed
+    public enum PumpSpeed
     {
         Unknown = 0,
         Off = 1,
@@ -45,17 +45,62 @@ namespace FuzzyLogic.TestKit
         Rule0 = 0,
         Rule1 = 1,
         Rule2 = 2,
-        Rule3 = 3,
-
+        Rule3 = 3
     }
 
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1602:EnumerationItemsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public enum InputVariable
     {
-        Unknown = 0,
         WaterTemp = 1,
         Pressure = 2,
-        PumpSpeed = 3
+        PumpSpeed = 3,
+
+        FoodQuality = 4,
+        ServiceQuality = 5
+    }
+
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1602:EnumerationItemsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
+    public enum OutputVariable
+    {
+        TipAmount = 0,
+        PumpSpeed = 1
+    }
+
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1602:EnumerationItemsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
+    public enum TippingProblem
+    {
+        Rule1 = 1,
+        Rule2 = 2,
+        Rule3 = 3
+    }
+
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1602:EnumerationItemsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
+    public enum FoodQuality
+    {
+        Poor = 0,
+        Average = 1,
+        Good = 2
+    }
+
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1602:EnumerationItemsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
+    public enum ServiceQuality
+    {
+        Poor = 0,
+        Average = 1,
+        Good = 2
+    }
+
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1602:EnumerationItemsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
+    public enum TipAmount
+    {
+        Low = 0,
+        Medium = 1,
+        High = 2
     }
 }

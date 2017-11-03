@@ -25,16 +25,18 @@ namespace FuzzyLogic.UnitTests.InferenceTests
         {
             // Arrange
             var waterTemp = StubLinguisticVariableFactory.WaterTemp();
+            var pumpSpeed = StubLinguisticVariableFactory.PumpSpeed();
 
             // Act
-            var fuzzyRule = new FuzzyRuleBuilder("Rule1")
-                .If(new ConditionBuilder().If(waterTemp.Is(WaterTemp.Warm)))
-                .Then(waterTemp.Is(WaterTemp.Warm))
+            var fuzzyRule = new FuzzyRuleBuilder(PumpSpeedRule.Rule0)
+                .If(waterTemp.Is(WaterTemp.Warm))
+                .And(waterTemp.Not(WaterTemp.Frozen))
+                .Then(pumpSpeed.Is(PumpSpeed.Moderate))
                 .Build();
 
             // Assert
-            Assert.Equal(Label.Create("Rule1"), fuzzyRule.Label);
-            Assert.Equal(1, fuzzyRule.Conditions.Count);
+            Assert.Equal(Label.Create(PumpSpeedRule.Rule0), fuzzyRule.Label);
+            Assert.Equal(2, fuzzyRule.Conditions.Count);
             Assert.Equal(1, fuzzyRule.Conclusions.Count);
         }
 
@@ -46,16 +48,14 @@ namespace FuzzyLogic.UnitTests.InferenceTests
 
             // Act
             var rule1 = new FuzzyRuleBuilder(PumpSpeedRule.Rule0)
-                .If(new ConditionBuilder()
-                    .If(waterTemp.IsNot(WaterTemp.Cold))
-                    .And(waterTemp.IsNot(WaterTemp.Freezing))
-                    .And(waterTemp.IsNot(WaterTemp.Frozen)))
-                .And(new ConditionBuilder(0.5).If(waterTemp.Is(WaterTemp.Warm)))
-                .Or(new ConditionBuilder(0.5)
-                    .If(waterTemp.IsNot(WaterTemp.Frozen))
-                    .And(waterTemp.IsNot(WaterTemp.Boiling)))
-                .Then(waterTemp.IsNot(WaterTemp.Boiling))
-                .Then(waterTemp.IsNot(WaterTemp.Frozen))
+                .If(ConditionBuilder
+                    .If(waterTemp.Not(WaterTemp.Cold))
+                    .And(waterTemp.Not(WaterTemp.Freezing))
+                    .And(waterTemp.Not(WaterTemp.Frozen)))
+                .And(ConditionBuilder.If(waterTemp.Is(WaterTemp.Warm)))
+                .Or(ConditionBuilder.If(waterTemp.Not(WaterTemp.Frozen)).And(waterTemp.Not(WaterTemp.Boiling)))
+                .Then(waterTemp.Not(WaterTemp.Boiling))
+                .Then(waterTemp.Not(WaterTemp.Frozen))
                 .Build();
 
             // Assert
@@ -64,25 +64,25 @@ namespace FuzzyLogic.UnitTests.InferenceTests
         }
 
         [Fact]
-        internal void ReturnsExpectedFuzzyRule()
+        internal void Build_WithComplexCondition_ReturnsExpectedFuzzyRule()
         {
             // Arrange
             var waterTemp = StubLinguisticVariableFactory.WaterTemp();
 
             // Act
             var rule1 = new FuzzyRuleBuilder("Rule1")
-                .If(new ConditionBuilder()
+                .If(ConditionBuilder
                     .If(waterTemp.Is("cold"))
-                    .And(waterTemp.IsNot("freezing"))
-                    .Or(waterTemp.IsNot("frozen")))
-                .And(new ConditionBuilder(0.8)
+                    .And(waterTemp.Not("freezing"))
+                    .Or(waterTemp.Not("frozen")))
+                .And(ConditionBuilder
                     .If(waterTemp.Is("warm"))
-                    .And(waterTemp.IsNot("hot"))
-                    .Or(waterTemp.IsNot("boiling")))
-                .And(new ConditionBuilder()
+                    .And(waterTemp.Not("hot"))
+                    .Or(waterTemp.Not("boiling")))
+                .And(ConditionBuilder
                     .If(waterTemp.Is("frozen"))
                     .And(waterTemp.Is("warm")))
-                .Then(waterTemp.IsNot("frozen"))
+                .Then(waterTemp.Not("frozen"))
                 .Build();
 
             var dataPoint = new DataPoint(waterTemp.Subject, 20);

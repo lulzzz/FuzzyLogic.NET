@@ -165,11 +165,11 @@ namespace FuzzyLogic.Fuzzification
         /// <returns>
         /// The <see cref="Proposition"/>.
         /// </returns>
-        public Proposition IsNot(Enum state)
+        public Proposition Not(Enum state)
         {
             Validate.NotNull(state, nameof(state));
 
-            return this.IsNot(state
+            return this.Not(state
                 .ToString()
                 .ToLower());
         }
@@ -183,11 +183,11 @@ namespace FuzzyLogic.Fuzzification
         /// <returns>
         /// The <see cref="Proposition"/>.
         /// </returns>
-        public Proposition IsNot(string state)
+        public Proposition Not(string state)
         {
             Validate.NotNull(state, nameof(state));
 
-            return this.IsNot(FuzzyState.Create(state));
+            return this.Not(FuzzyState.Create(state));
         }
 
         /// <summary>
@@ -199,7 +199,7 @@ namespace FuzzyLogic.Fuzzification
         /// <returns>
         /// The <see cref="Proposition"/>.
         /// </returns>
-        public Proposition IsNot(FuzzyState state)
+        public Proposition Not(FuzzyState state)
         {
             return new Proposition(this, LogicOperators.IsNot(), state);
         }

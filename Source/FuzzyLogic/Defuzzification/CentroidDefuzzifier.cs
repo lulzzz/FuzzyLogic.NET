@@ -60,9 +60,7 @@ namespace FuzzyLogic.Defuzzification
             var totalWeight = 0.0;
             var totalMembership = 0.0;
 
-            var points = GetAllFuzzyPoints(fuzzyOutputs);
-
-            foreach (var point in points)
+            foreach (var point in GetAllFuzzyPoints(fuzzyOutputs))
             {
                 var maxMembershipAtPoint = fuzzyOutputs
                     .Select(output => Math.Min(output.OutputFunction.GetMembership(point.X).Value, output.FiringStrength.Value))

@@ -43,9 +43,6 @@ namespace FuzzyLogic.Inference.Engines.Base
             this.Database = new Database();
             this.Rulebase = new Rulebase();
             this.Evaluator = new FuzzyEvaluator(tnorm, tconorm);
-
-            this.TNorm = tnorm;
-            this.TConorm = tconorm;
             this.Defuzzifier = defuzzifier;
         }
 
@@ -62,22 +59,12 @@ namespace FuzzyLogic.Inference.Engines.Base
         /// <summary>
         /// Gets the fuzzy evaluator.
         /// </summary>
-        public FuzzyEvaluator Evaluator { get; }
-
-        /// <summary>
-        /// Gets the t-norm function.
-        /// </summary>
-        public ITriangularNorm TNorm { get; }
-
-        /// <summary>
-        /// Gets the t-conorm function.
-        /// </summary>
-        public ITriangularConorm TConorm { get; }
+        protected FuzzyEvaluator Evaluator { get; }
 
         /// <summary>
         /// Gets the de-fuzzifier.
         /// </summary>
-        public IDefuzzifier Defuzzifier { get; }
+        protected IDefuzzifier Defuzzifier { get; }
 
         /// <summary>
         /// Returns the evaluation of all fuzzy rules in the <see cref="Rulebase"/>.

@@ -46,7 +46,70 @@ namespace FuzzyLogic.Inference
         }
 
         /// <summary>
-        /// Adds a condition to the <see cref="FuzzyRule"/> to be built.
+        /// Adds a <see cref="Condition"/> to the <see cref="FuzzyRule"/> to be built.
+        /// </summary>
+        /// <param name="proposition">
+        /// The proposition.
+        /// </param>
+        /// <returns>
+        /// A <see cref="FuzzyRuleBuilder"/>.
+        /// </returns>
+        public FuzzyRuleBuilder If(Proposition proposition)
+        {
+            Validate.NotNull(proposition, nameof(proposition));
+
+            var condition = ConditionBuilder.If(proposition);
+
+            condition.Connective = LogicOperators.If();
+            this.conditions.Add(condition.Build());
+
+            return this;
+        }
+
+        /// <summary>
+        /// Adds a <see cref="Condition"/> to the <see cref="FuzzyRule"/> to be built.
+        /// </summary>
+        /// <param name="proposition">
+        /// The proposition.
+        /// </param>
+        /// <returns>
+        /// A <see cref="FuzzyRuleBuilder"/>.
+        /// </returns>
+        public FuzzyRuleBuilder And(Proposition proposition)
+        {
+            Validate.NotNull(proposition, nameof(proposition));
+
+            var condition = ConditionBuilder.If(proposition);
+
+            condition.Connective = LogicOperators.And();
+            this.conditions.Add(condition.Build());
+
+            return this;
+        }
+
+        /// <summary>
+        /// Adds a <see cref="Condition"/> to the <see cref="FuzzyRule"/> to be built.
+        /// </summary>
+        /// <param name="proposition">
+        /// The proposition.
+        /// </param>
+        /// <returns>
+        /// A <see cref="FuzzyRuleBuilder"/>.
+        /// </returns>
+        public FuzzyRuleBuilder Or(Proposition proposition)
+        {
+            Validate.NotNull(proposition, nameof(proposition));
+
+            var condition = ConditionBuilder.If(proposition);
+
+            condition.Connective = LogicOperators.Or();
+            this.conditions.Add(condition.Build());
+
+            return this;
+        }
+
+        /// <summary>
+        /// Adds a <see cref="Condition"/> to the <see cref="FuzzyRule"/> to be built.
         /// </summary>
         /// <param name="condition">
         /// The condition to be added.
@@ -65,7 +128,7 @@ namespace FuzzyLogic.Inference
         }
 
         /// <summary>
-        /// Adds a condition to the <see cref="FuzzyRule"/> to be built.
+        /// Adds a <see cref="Condition"/> to the <see cref="FuzzyRule"/> to be built.
         /// </summary>
         /// <param name="condition">
         /// The condition.
@@ -84,7 +147,7 @@ namespace FuzzyLogic.Inference
         }
 
         /// <summary>
-        /// Adds an OR condition to the <see cref="FuzzyRule"/> to be built.
+        /// Adds a <see cref="Condition"/> to the <see cref="FuzzyRule"/> to be built.
         /// </summary>
         /// <param name="condition">
         /// The condition.

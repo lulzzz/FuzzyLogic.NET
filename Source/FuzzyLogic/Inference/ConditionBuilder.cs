@@ -19,19 +19,14 @@ namespace FuzzyLogic.Inference
     public class ConditionBuilder
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ConditionBuilder"/> class.
+        /// Prevents a default instance of the <see cref="ConditionBuilder"/> class from being created.
         /// </summary>
-        /// <param name="weight">
-        /// The weight.
-        /// </param>
         /// <returns>
         /// A <see cref="ConditionBuilder"/>.
         /// </returns>
-        public ConditionBuilder(double weight = 1)
+        private ConditionBuilder()
         {
-            Utility.Validate.NotOutOfRange(weight, nameof(weight), 0, 1);
-
-            this.Weight = UnitInterval.Create(weight);
+            this.Weight = UnitInterval.One();
         }
 
         /// <summary>
@@ -47,28 +42,30 @@ namespace FuzzyLogic.Inference
         /// <summary>
         /// Gets the weight.
         /// </summary>
-        public UnitInterval Weight { get; }
+        public UnitInterval Weight { get; private set; }
 
         /// <summary>
-        /// Adds an 'If' premise to the condition builder.
+        /// The create.
         /// </summary>
         /// <param name="proposition">
         /// The proposition.
         /// </param>
         /// <returns>
-        /// A <see cref="Condition"/>.
+        /// The <see cref="ConditionBuilder"/>.
         /// </returns>
-        public ConditionBuilder If(Proposition proposition)
+        public static ConditionBuilder If(Proposition proposition)
         {
             Utility.Validate.NotNull(proposition, nameof(proposition));
 
-            this.Premises.Add(new Premise(
+            var conditionBuilder = new ConditionBuilder { Connective = LogicOperators.If() };
+
+            conditionBuilder.Premises.Add(new Premise(
                 LogicOperators.If(),
                 proposition.Variable,
                 proposition.Evaluator,
                 proposition.State));
 
-            return this;
+            return conditionBuilder;
         }
 
         /// <summary>
@@ -111,6 +108,24 @@ namespace FuzzyLogic.Inference
                 proposition.Variable,
                 proposition.Evaluator,
                 proposition.State));
+
+            return this;
+        }
+
+        /// <summary>
+        /// The with weight.
+        /// </summary>
+        /// <param name="weight">
+        /// The weight.
+        /// </param>
+        /// <returns>
+        /// The <see cref="ConditionBuilder"/>.
+        /// </returns>
+        public ConditionBuilder WithWeight(double weight)
+        {
+            Utility.Validate.NotOutOfRange(weight, nameof(weight), 0, 1);
+
+            this.Weight = UnitInterval.Create(weight);
 
             return this;
         }

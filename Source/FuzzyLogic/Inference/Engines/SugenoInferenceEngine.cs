@@ -41,12 +41,12 @@ namespace FuzzyLogic.Inference.Engines
         }
 
         /// <summary>
-        /// Returns a list of the outputs of the inference engine.
+        /// Returns a list of the outputs computed from the inference engine.
         /// </summary>
         /// <returns>
         /// A <see cref="IList{DataPoint}"/>.
         /// </returns>
-        public IList<Output> Execute()
+        public IList<Output> Compute()
         {
             var data = this.Database.GetAllDataLabeled();
             var rules = this.Rulebase.GetAllRules();

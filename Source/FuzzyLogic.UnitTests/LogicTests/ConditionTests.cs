@@ -23,13 +23,14 @@ namespace FuzzyLogic.UnitTests.LogicTests
     public class ConditionTests
     {
         [Fact]
-        internal void SetWeight_SetsWeightToExpectedValue()
+        internal void WithWeight_SetsWeightToExpectedValue()
         {
             // Arrange
             var waterTemp = StubLinguisticVariableFactory.WaterTemp();
 
-            var condition = new ConditionBuilder(1.0) { Connective = LogicOperators.If() }
+            var condition = ConditionBuilder
                 .If(waterTemp.Is(WaterTemp.Boiling))
+                .WithWeight(0.5)
                 .Build();
 
             // Act
@@ -45,9 +46,7 @@ namespace FuzzyLogic.UnitTests.LogicTests
             // Arrange
             var waterTemp = StubLinguisticVariableFactory.WaterTemp();
 
-            var condition = new ConditionBuilder(1.0) { Connective = LogicOperators.If() }
-            .If(waterTemp.Is(WaterTemp.Boiling))
-            .Build();
+            var condition = ConditionBuilder.If(waterTemp.Is(WaterTemp.Boiling)).Build();
 
             var dataPoint = new DataPoint(Label.Create(InputVariable.Pressure), 3000);
 
@@ -64,10 +63,10 @@ namespace FuzzyLogic.UnitTests.LogicTests
             // Arrange
             var waterTemp = StubLinguisticVariableFactory.WaterTemp();
 
-            var condition = new ConditionBuilder(1.0) { Connective = LogicOperators.If() }
-                .If(waterTemp.IsNot(WaterTemp.Boiling))
-                .And(waterTemp.IsNot(WaterTemp.Freezing))
-                .And(waterTemp.IsNot(WaterTemp.Frozen))
+            var condition = ConditionBuilder
+                .If(waterTemp.Not(WaterTemp.Boiling))
+                .And(waterTemp.Not(WaterTemp.Freezing))
+                .And(waterTemp.Not(WaterTemp.Frozen))
                 .Build();
 
             // Act

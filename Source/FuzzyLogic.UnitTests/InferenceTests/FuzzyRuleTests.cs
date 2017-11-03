@@ -34,11 +34,11 @@ namespace FuzzyLogic.UnitTests.InferenceTests
         {
             // Arrange
             var waterTemp = StubLinguisticVariableFactory.WaterTemp();
-            var fanSpeed = StubLinguisticVariableFactory.FanSpeed();
+            var fanSpeed = StubLinguisticVariableFactory.PumpSpeed();
 
             var fuzzyRule = new FuzzyRuleBuilder("Rule0")
-                .And(new ConditionBuilder().If(waterTemp.Is(WaterTemp.Frozen)))
-                .Then(fanSpeed.Is(FanSpeed.Off));
+                .And(ConditionBuilder.If(waterTemp.Is(WaterTemp.Frozen)))
+                .Then(fanSpeed.Is(PumpSpeed.Off));
 
             // Act
             // Assert
@@ -52,12 +52,12 @@ namespace FuzzyLogic.UnitTests.InferenceTests
         {
             // Arrange
             var waterTemp = StubLinguisticVariableFactory.WaterTemp();
-            var fanSpeed = StubLinguisticVariableFactory.FanSpeed();
+            var fanSpeed = StubLinguisticVariableFactory.PumpSpeed();
 
             var fuzzyRule = new FuzzyRuleBuilder(PumpSpeedRule.Rule0)
-                .If(new ConditionBuilder().If(waterTemp.Is(WaterTemp.Frozen)))
-                .If(new ConditionBuilder().If(waterTemp.Is(WaterTemp.Boiling)))
-                .Then(fanSpeed.Is(FanSpeed.AtLimit));
+                .If(ConditionBuilder.If(waterTemp.Is(WaterTemp.Frozen)))
+                .If(ConditionBuilder.If(waterTemp.Is(WaterTemp.Boiling)))
+                .Then(fanSpeed.Is(PumpSpeed.AtLimit));
 
             // Act
             // Assert
@@ -71,12 +71,12 @@ namespace FuzzyLogic.UnitTests.InferenceTests
         {
             // Arrange
             var waterTemp = StubLinguisticVariableFactory.WaterTemp();
-            var fanSpeed = StubLinguisticVariableFactory.FanSpeed();
+            var fanSpeed = StubLinguisticVariableFactory.PumpSpeed();
 
             var fuzzyRule = new FuzzyRuleBuilder(PumpSpeedRule.Rule0)
-                .If(new ConditionBuilder().If(waterTemp.Is(WaterTemp.Frozen)))
-                .Or(new ConditionBuilder(0.5).If(waterTemp.Is(WaterTemp.Freezing)))
-                .Then(fanSpeed.Is(FanSpeed.Off))
+                .If(ConditionBuilder.If(waterTemp.Is(WaterTemp.Frozen)))
+                .Or(ConditionBuilder.If(waterTemp.Is(WaterTemp.Freezing)))
+                .Then(fanSpeed.Is(PumpSpeed.Off))
                 .Build();
 
             var dataPoint = new DataPoint(waterTemp.Subject, 0);
@@ -90,7 +90,7 @@ namespace FuzzyLogic.UnitTests.InferenceTests
             Assert.Equal(fanSpeed.Subject, result[0].Subject);
             Assert.Equal(fanSpeed.GetState(0), result[0].State);
             Assert.Equal(UnitInterval.One(), result[0].FiringStrength);
-            Assert.Equal(fanSpeed.GetSet(FanSpeed.Off), result[0].OutputFunction);
+            Assert.Equal(fanSpeed.GetSet(PumpSpeed.Off), result[0].OutputFunction);
         }
     }
 }

@@ -9,6 +9,7 @@
 
 namespace FuzzyLogic.UnitTests.DefuzzificationTests
 {
+    using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using FuzzyLogic.Defuzzification;
@@ -21,6 +22,31 @@ namespace FuzzyLogic.UnitTests.DefuzzificationTests
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "*", Justification = "Reviewed. Suppression is OK within the Test Suite.")]
     public class CentroidDefuzzifierTests
     {
+        [Fact]
+        internal void Defuzzify_WhenSubjectsUnrelated_Throws()
+        {
+            // Arrange
+            var fuzzySet = new FuzzySet("centre", TriangularFunction.Create(-1, 0, 1));
+
+            var fuzzyOutput = new List<FuzzyOutput>
+                                  {
+                                      new FuzzyOutput(
+                                          Label.Create("Subject1"),
+                                          fuzzySet,
+                                          UnitInterval.One()),
+                                      new FuzzyOutput(
+                                          Label.Create("Subject2"),
+                                          fuzzySet,
+                                          UnitInterval.One())
+                                  };
+
+            var centroidDefuzzifier = new CentroidDefuzzifier();
+
+            // Act
+            // Assert
+            Assert.Throws<InvalidOperationException>(() => centroidDefuzzifier.Defuzzify(fuzzyOutput));
+        }
+
         [Fact]
         internal void Defuzzify_WithTriangle_ReturnsExpectedResult()
         {

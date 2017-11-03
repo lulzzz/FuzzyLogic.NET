@@ -44,6 +44,21 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TheTippingProblem.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="xunit">
+      <Version>2.3.1</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FuzzyLogic.TestKit\FuzzyLogic.TestKit.csproj">
+      <Project>{4b87205e-b184-4d69-a41f-e230c8c88482}</Project>
+      <Name>FuzzyLogic.TestKit</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FuzzyLogic\FuzzyLogic.csproj">
+      <Project>{32683B84-4A85-4454-8A8F-D4ACB96CE899}</Project>
+      <Name>FuzzyLogic</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
